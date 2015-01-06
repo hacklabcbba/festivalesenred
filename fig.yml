@@ -1,0 +1,8 @@
+# sudo mkdir -p /srv/fer/mongo-data/db
+mongo:
+  image: dockerfile/mongodb
+  command: "/usr/bin/mongod --noprealloc --smallfiles"
+  ports:
+    - "27017:27017"
+  volumes:
+    - /srv/fer/mongo-data:/data
