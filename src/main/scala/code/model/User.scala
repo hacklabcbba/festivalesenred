@@ -188,3 +188,4 @@ object User extends User with ProtoAuthUserMeta[User] with RogueMetaRecord[User]
 }
 
 case class LoginCredentials(email: String, isRememberMe: Boolean = false)
+
