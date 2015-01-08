@@ -2,10 +2,8 @@ package code
 package model
 package field
 
-import code.lib.RogueMetaRecord
-import code.model.festival.Festival
-import net.liftweb.mongodb.record.{BsonMetaRecord, BsonRecord, MongoRecord}
-import net.liftweb.mongodb.record.field.{LongPk, LongRefField, MongoCaseClassListField}
+import net.liftweb.mongodb.record.{BsonMetaRecord, BsonRecord}
+import net.liftweb.mongodb.record.field.MongoCaseClassListField
 
 /**
  * Created by Nataly on 07/01/2015.

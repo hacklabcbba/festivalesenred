@@ -4,7 +4,7 @@ package festival
 
 import code.lib.RogueMetaRecord
 import net.liftweb.common.Loggable
-import net.liftweb.mongodb.record.{BsonRecord, MongoRecord}
+import net.liftweb.mongodb.record.MongoRecord
 import net.liftweb.mongodb.record.field._
 import net.liftweb.record.field.StringField
 import code.model.field.Field

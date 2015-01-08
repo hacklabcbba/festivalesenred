@@ -1,6 +1,7 @@
-package code.model.festival
+package code
+package model
+package festival
 
-import code.BaseMongoSessionWordSpec
 import code.model.field.{Field, StringDataType}
 
 /**

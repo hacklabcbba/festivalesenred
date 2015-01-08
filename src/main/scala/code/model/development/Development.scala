@@ -1,4 +1,6 @@
-package code.model.development
+package code
+package model
+package development
 
 import code.lib.RogueMetaRecord
 import code.model.festival.Festival

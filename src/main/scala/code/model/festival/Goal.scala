@@ -2,7 +2,6 @@ package code
 package model
 package festival
 
-import code.lib.RogueMetaRecord
 import code.model.field.StringDataType
 import net.liftweb.mongodb.record.{BsonMetaRecord, BsonRecord}
 import net.liftweb.mongodb.record.field.MongoCaseClassListField
