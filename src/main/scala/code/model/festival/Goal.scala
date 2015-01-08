@@ -2,21 +2,19 @@ package code
 package model
 package festival
 
-import net.liftweb.mongodb.record.{MongoMetaRecord, MongoRecord}
-import net.liftweb.mongodb.record.field.{LongRefField, LongPk}
-import net.liftweb.record.field.StringField
+import code.lib.RogueMetaRecord
+import code.model.field.StringDataType
+import net.liftweb.mongodb.record.{BsonMetaRecord, BsonRecord}
+import net.liftweb.mongodb.record.field.MongoCaseClassListField
 
 /**
  * Created by Nataly on 07/01/2015.
  */
-class Goal private() extends MongoRecord[Goal] with LongPk[Goal]{
+class Goal private() extends BsonRecord[Goal]{
 
   override def meta = Goal
 
-  object festivalId extends LongRefField(this, Festival)
-  object description extends StringField(this, 700)
+  object descriptions extends MongoCaseClassListField[Goal, StringDataType](this)
 }
 
-object Goal extends Goal with MongoMetaRecord[Goal] {
-  override def collectionName = "festival.goal"
-}
+object Goal extends Goal with BsonMetaRecord[Goal]

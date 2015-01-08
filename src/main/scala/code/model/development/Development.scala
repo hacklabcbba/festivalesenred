@@ -1,7 +1,8 @@
 package code.model.development
 
+import code.lib.RogueMetaRecord
 import code.model.festival.Festival
-import net.liftweb.mongodb.record.{MongoMetaRecord, MongoRecord}
+import net.liftweb.mongodb.record.MongoRecord
 import net.liftweb.mongodb.record.field.{LongRefField, LongPk}
 import net.liftweb.record.field.StringField
 
@@ -15,4 +16,4 @@ class Development private() extends MongoRecord[Development] with LongPk[Develop
   object festivalId extends LongRefField(this, Festival)
 }
 
-object Development extends Development with MongoMetaRecord[Development]
+object Development extends Development with RogueMetaRecord[Development]

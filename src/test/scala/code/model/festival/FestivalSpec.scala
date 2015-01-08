@@ -1,6 +1,7 @@
 package code.model.festival
 
 import code.BaseMongoSessionWordSpec
+import code.model.field.{Field, StringDataType}
 
 /**
  * Created by Nataly on 08/01/2015.
@@ -9,6 +10,30 @@ class FestivalSpec extends BaseMongoSessionWordSpec{
 
   "Festival" should {
     "create, validate, save, and retrieve properly" in {
+
+
+      var content = StringDataType("Contenido", List("Trabajo físico", "Trabajo de Investigación y Exploración"))
+      var result = StringDataType("RESULTADO", List("Renovar conceptos-ideas acerca de la Danza"))
+
+      var newField = Field.createRecord
+        .listFields(content :: result :: Nil)
+
+      val errsField = newField.validate
+      if (errsField.length > 1) {
+        fail("Validation error: " + errsField.mkString(", "))
+      }
+
+      var goal1 = StringDataType("1.", List("Trabajo de centro, equilibrio y fluir de la energía a través de la respiración, visualización y elongación del cuerpo."))
+      var goal2 = StringDataType("2.", List("Despertar el cuerpo a estímulos y reacciones. Atención, energía ZAT. Estado de alerta."))
+      var goal3 = StringDataType("3.", List("Trabajo guiado para descubrir calidades corporales, atravesando estados que nos planteemos."))
+
+      var goal = Goal.createRecord
+        .descriptions(goal1 :: goal2 :: goal3 :: Nil)
+
+      val errsGoal = goal.validate
+      if(errsGoal.length > 1) {
+        fail("Validation error : " + errsGoal.mkString(", "))
+      }
 
       var newFestival = Festival.createRecord
         .name("TALLER CUERPO PRESENTE Composición Coreográfica")
@@ -23,6 +48,9 @@ class FestivalSpec extends BaseMongoSessionWordSpec{
         "para enriquecer nuestras composiciones coreográficas con el único fin de transformarnos en cuerpos consientes y " +
         "presentes en escena.")
         .proposal("Trabajo físico - Trabajo de Investigación y Exploración - Creación y Composición.")
+        .extraFields(newField)
+        .goals(goal)
+
 
       val errs = newFestival.validate
       if (errs.length > 1) {
