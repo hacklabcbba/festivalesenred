@@ -4,10 +4,7 @@ package festival
 
 import code.model.field.{Field, StringDataType}
 
-/**
- * Created by Nataly on 08/01/2015.
- */
-class FestivalSpec extends BaseMongoSessionWordSpec{
+class FestivalSpec extends BaseMongoSessionWordSpec {
 
   "Festival" should {
     "create, validate, save, and retrieve properly" in {
@@ -17,7 +14,7 @@ class FestivalSpec extends BaseMongoSessionWordSpec{
       var result = StringDataType("RESULTADO", List("Renovar conceptos-ideas acerca de la Danza"))
 
       var newField = Field.createRecord
-        .listFields(content :: result :: Nil)
+        .fieldList(content :: result :: Nil)
 
       val errsField = newField.validate
       if (errsField.length > 1) {

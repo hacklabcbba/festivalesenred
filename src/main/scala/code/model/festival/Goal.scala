@@ -6,10 +6,7 @@ import code.model.field.StringDataType
 import net.liftweb.mongodb.record.{BsonMetaRecord, BsonRecord}
 import net.liftweb.mongodb.record.field.MongoCaseClassListField
 
-/**
- * Created by Nataly on 07/01/2015.
- */
-class Goal private() extends BsonRecord[Goal]{
+class Goal private() extends BsonRecord[Goal] {
 
   override def meta = Goal
 

@@ -47,7 +47,7 @@ object MongoConfig extends Factory with Loggable {
         MongoDB.defineDb(
           defaultId.vend,
           new MongoClient(defaultDbAddress),
-          "fer"
+          defaultDbAddress.getDBName
         )
         logger.info("MongoDB inited: %s".format(defaultDbAddress.toString))
     }
