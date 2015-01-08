@@ -2,6 +2,7 @@ package code
 package model
 package festival
 
+import java.util.Date
 /**
  * Created by Nataly on 07/01/2015.
  */
@@ -9,7 +10,7 @@ trait DataType
 
 case class DateDataType(
   nameField : String,
-  values : Seq[String]) extends DataType
+  values : Seq[Date]) extends DataType
 
 case class StringDataType(
   nameField : String,

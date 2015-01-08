@@ -18,7 +18,6 @@ class Festival private () extends MongoRecord[Festival] with LongPk[Festival]{
   object place extends StringField(this, 700)
   object concept extends StringField(this, 1000)
   object proposal extends StringField(this, 1000)
-  object development extends StringField(this, 1000)
 
 }
 

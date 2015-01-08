@@ -4,7 +4,7 @@ package festival
 
 
 import net.liftweb.mongodb.record.{MongoMetaRecord, MongoRecord}
-import net.liftweb.mongodb.record.field.{MongoCaseClassListField, LongPk}
+import net.liftweb.mongodb.record.field.{LongRefField, MongoCaseClassListField, LongPk}
 
 /**
  * Created by Nataly on 07/01/2015.
@@ -14,6 +14,7 @@ class Field private() extends MongoRecord[Field] with LongPk[Field]{
   override def meta = Field
 
   object listFields extends MongoCaseClassListField[Field, DataType](this)
+  object festivalId extends LongRefField(this, Festival)
 
 }
 
