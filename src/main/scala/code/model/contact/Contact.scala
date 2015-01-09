@@ -3,13 +3,11 @@ package model
 package contact
 
 import code.lib.RogueMetaRecord
+import code.model.field.DataType
 import net.liftweb.mongodb.record.MongoRecord
-import net.liftweb.mongodb.record.field.{BsonRecordField, LongPk}
+import net.liftweb.mongodb.record.field.{MongoCaseClassListField, BsonRecordField, LongPk}
 import net.liftweb.record.field.{EmailField, StringField, EnumNameField}
 
-/**
- * Created by Nataly on 08/01/2015.
- */
 class Contact extends MongoRecord[Contact] with LongPk[Contact]{
   override def meta = Contact
 
@@ -20,7 +18,7 @@ class Contact extends MongoRecord[Contact] with LongPk[Contact]{
   object phone extends BsonRecordField(this, Phone)
   object city extends StringField(this, 500)
   object organization extends StringField(this, 500)
-//  object extraField extends MongoCaseClassListField(Contact, DataType) // la clase esta en otra rama
+  object extraField extends MongoCaseClassListField[Contact, DataType](this)
 
 }
 

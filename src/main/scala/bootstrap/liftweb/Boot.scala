@@ -24,7 +24,7 @@ class Boot extends Loggable {
     logger.info("Run Mode: "+Props.mode.toString)
 
     // init mongodb
-    MongoConfig.init()
+    MongoConfig.init
 
     // init auth-mongo
     MongoAuth.authUserMeta.default.set(User)

@@ -3,16 +3,17 @@ package model
 package contact
 
 import code.model.contact.TypeContact._
+import code.model.field.StringDataType
 
-/**
- * Created by Nataly on 08/01/2015.
- */
 class ContactSpec extends BaseMongoSessionWordSpec {
   "Contact" should {
     "create, validate, save, and retrieve properly" in {
 
+      var number1 = StringDataType("home", List("011 30670900", "(21) 2531-1232"))
+      var number2 = StringDataType("cel", List("(21) 2541-1234"))
+
       val phone = Phone.createRecord
-        .number(60383513)
+        .numbers(number1 :: number2 :: Nil)
 
       val newContact = Contact.createRecord
         .city("Cochabamba")
