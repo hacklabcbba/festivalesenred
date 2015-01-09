@@ -1,12 +1,14 @@
 package code
 package model
-package festival
+package development
 
+import code.model.festival.{Festival, Goal}
 import code.model.field.{Field, StringDataType}
+import code.model.development.RoleType._
 
-class FestivalSpec extends BaseMongoSessionWordSpec {
+class DevelopmentSpec extends BaseMongoSessionWordSpec {
 
-  "Festival" should {
+  "Development" should {
     "create, validate, save, and retrieve properly" in {
 
       val content = StringDataType("Contenido", List("Trabajo físico", "Trabajo de Investigación y Exploración"))
@@ -48,7 +50,6 @@ class FestivalSpec extends BaseMongoSessionWordSpec {
         .extraFields(newField)
         .goals(goal)
 
-
       val errs = newFestival.validate
       if (errs.length > 1) {
         fail("Validation error: "+errs.mkString(", "))
@@ -63,6 +64,25 @@ class FestivalSpec extends BaseMongoSessionWordSpec {
       val festivalFromDb = Festival.find(newFestival.id.get)
       festivalFromDb.isDefined should equal (true)
       festivalFromDb.map(u => u.id.get should equal (newFestival.id.get))
+
+      val newDevelopment = Development.createRecord
+        .name("Jhon Charles")
+        .festival(newFestival.id.get)
+        .role(Responsible)
+
+      val errsDevelopment = newDevelopment.validate
+      if (errsDevelopment.length > 1) {
+        fail("Validation error : " + errsDevelopment.mkString(", "))
+      }
+
+      newDevelopment.validate.length should equal (0)
+
+      newDevelopment.save(false)
+
+      val developFromDb = Development.find(newDevelopment.id.get)
+      developFromDb.isDefined should equal (true)
+      developFromDb.map(u => u.id.get should equal (newDevelopment.id.get))
+
     }
   }
 }
