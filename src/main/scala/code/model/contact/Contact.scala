@@ -8,10 +8,10 @@ import net.liftweb.mongodb.record.MongoRecord
 import net.liftweb.mongodb.record.field.{MongoCaseClassListField, BsonRecordField, LongPk}
 import net.liftweb.record.field.{EmailField, StringField, EnumNameField}
 
-class Contact extends MongoRecord[Contact] with LongPk[Contact]{
+class Contact extends MongoRecord[Contact] with LongPk[Contact] {
   override def meta = Contact
 
-  object typeContact extends EnumNameField(this, TypeContact)
+  object contactType extends EnumNameField(this, ContactType)
   object name extends StringField(this, 500)
   object country extends StringField(this, 500)
   object email extends EmailField(this, 200)
@@ -22,6 +22,6 @@ class Contact extends MongoRecord[Contact] with LongPk[Contact]{
 
 }
 
-object Contact extends Contact with RogueMetaRecord[Contact]{
+object Contact extends Contact with RogueMetaRecord[Contact] {
   override def collectionName = "contact.contacts"
 }

@@ -9,10 +9,10 @@ class FestivalSpec extends BaseMongoSessionWordSpec {
   "Festival" should {
     "create, validate, save, and retrieve properly" in {
 
-      var content = StringDataType("Contenido", List("Trabajo físico", "Trabajo de Investigación y Exploración"))
-      var result = StringDataType("RESULTADO", List("Renovar conceptos-ideas acerca de la Danza"))
+      val content = StringDataType("Contenido", List("Trabajo físico", "Trabajo de Investigación y Exploración"))
+      val result = StringDataType("RESULTADO", List("Renovar conceptos-ideas acerca de la Danza"))
 
-      var newField = Field.createRecord
+      val newField = Field.createRecord
         .fieldList(content :: result :: Nil)
 
       val errsField = newField.validate
@@ -20,11 +20,11 @@ class FestivalSpec extends BaseMongoSessionWordSpec {
         fail("Validation error: " + errsField.mkString(", "))
       }
 
-      var goal1 = StringDataType("1.", List("Trabajo de centro, equilibrio y fluir de la energía a través de la respiración, visualización y elongación del cuerpo."))
-      var goal2 = StringDataType("2.", List("Despertar el cuerpo a estímulos y reacciones. Atención, energía ZAT. Estado de alerta."))
-      var goal3 = StringDataType("3.", List("Trabajo guiado para descubrir calidades corporales, atravesando estados que nos planteemos."))
+      val goal1 = StringDataType("1.", List("Trabajo de centro, equilibrio y fluir de la energía a través de la respiración, visualización y elongación del cuerpo."))
+      val goal2 = StringDataType("2.", List("Despertar el cuerpo a estímulos y reacciones. Atención, energía ZAT. Estado de alerta."))
+      val goal3 = StringDataType("3.", List("Trabajo guiado para descubrir calidades corporales, atravesando estados que nos planteemos."))
 
-      var goal = Goal.createRecord
+      val goal = Goal.createRecord
         .descriptions(goal1 :: goal2 :: goal3 :: Nil)
 
       val errsGoal = goal.validate
@@ -32,7 +32,7 @@ class FestivalSpec extends BaseMongoSessionWordSpec {
         fail("Validation error : " + errsGoal.mkString(", "))
       }
 
-      var newFestival = Festival.createRecord
+      val newFestival = Festival.createRecord
         .name("TALLER CUERPO PRESENTE Composición Coreográfica")
         .description("El objetivo es repensar la mirada del cuerpo como soporte de la danza y hacer propuestas " +
         "coreográficas con un enfoque conceptual y estético, buscando que cada cuerpo encuentre sus necesidades " +

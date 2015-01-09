@@ -2,15 +2,15 @@ package code
 package model
 package contact
 
-import code.model.contact.TypeContact._
+import code.model.contact.ContactType._
 import code.model.field.StringDataType
 
 class ContactSpec extends BaseMongoSessionWordSpec {
   "Contact" should {
     "create, validate, save, and retrieve properly" in {
 
-      var number1 = StringDataType("home", List("011 30670900", "(21) 2531-1232"))
-      var number2 = StringDataType("cel", List("(21) 2541-1234"))
+      val number1 = StringDataType("home", List("011 30670900", "(21) 2531-1232"))
+      val number2 = StringDataType("cel", List("(21) 2541-1234"))
 
       val phone = Phone.createRecord
         .numbers(number1 :: number2 :: Nil)
@@ -22,7 +22,7 @@ class ContactSpec extends BaseMongoSessionWordSpec {
         .name("Nataly Nanda")
         .organization("Genso")
         .phone(phone)
-        .typeContact(Organizador)
+        .contactType(Organizer)
 
       val errs = newContact.validate
       if (errs.length > 1) {

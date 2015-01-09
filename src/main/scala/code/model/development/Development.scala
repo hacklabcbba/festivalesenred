@@ -13,7 +13,7 @@ class Development private() extends MongoRecord[Development] with LongPk[Develop
 
   object name extends StringField(this, 500)
   object festival extends LongRefField(this, Festival)
-  object role extends EnumNameField(this, TypeRole)
+  object role extends EnumNameField(this, RoleType)
 }
 
 object Development extends Development with RogueMetaRecord[Development]
