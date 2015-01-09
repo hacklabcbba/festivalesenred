@@ -5,10 +5,10 @@ package contact
 import code.lib.RogueMetaRecord
 import code.model.field.DataType
 import net.liftweb.mongodb.record.MongoRecord
-import net.liftweb.mongodb.record.field.{MongoCaseClassListField, BsonRecordField, LongPk}
+import net.liftweb.mongodb.record.field.{ObjectIdPk, MongoCaseClassListField, BsonRecordField}
 import net.liftweb.record.field.{EmailField, StringField, EnumNameField}
 
-class Contact extends MongoRecord[Contact] with LongPk[Contact] {
+class Contact extends MongoRecord[Contact] with ObjectIdPk[Contact] {
   override def meta = Contact
 
   object contactType extends EnumNameField(this, ContactType)

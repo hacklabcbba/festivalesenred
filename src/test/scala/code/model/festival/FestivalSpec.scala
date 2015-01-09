@@ -2,13 +2,17 @@ package code
 package model
 package festival
 
+import java.util.Calendar
+import net.liftweb.util.Helpers._
 import code.model.field.{Field, StringDataType}
+import code.model.proposal.Goal
 
 class FestivalSpec extends BaseMongoSessionWordSpec {
 
   "Festival" should {
     "create, validate, save, and retrieve properly" in {
 
+      // otherDescriptions
       val content = StringDataType("Contenido", List("Trabajo físico", "Trabajo de Investigación y Exploración"))
       val result = StringDataType("RESULTADO", List("Renovar conceptos-ideas acerca de la Danza"))
 
@@ -20,6 +24,20 @@ class FestivalSpec extends BaseMongoSessionWordSpec {
         fail("Validation error: " + errsField.mkString(", "))
       }
 
+      val dateFormat : java.text.DateFormat = new java.text.SimpleDateFormat("dd-MM-yyyy")
+//      val date : java.util.Date = tryo {
+//        val calendar = Calendar.getInstance()
+//        calendar.setTime(dateFormat.parse("20-05-2001"))
+//        calendar
+//      }
+
+      //placesAndDates
+      val place1 = Place.createRecord
+        .city("Cochabamba")
+        .country("Bolivia")
+//        .date()
+
+      // goals
       val goal1 = StringDataType("1.", List("Trabajo de centro, equilibrio y fluir de la energía a través de la respiración, visualización y elongación del cuerpo."))
       val goal2 = StringDataType("2.", List("Despertar el cuerpo a estímulos y reacciones. Atención, energía ZAT. Estado de alerta."))
       val goal3 = StringDataType("3.", List("Trabajo guiado para descubrir calidades corporales, atravesando estados que nos planteemos."))
@@ -38,7 +56,7 @@ class FestivalSpec extends BaseMongoSessionWordSpec {
         "coreográficas con un enfoque conceptual y estético, buscando que cada cuerpo encuentre sus necesidades " +
         "expresivas, y reflexione sobre la historicidad de su cuerpo y el contexto actual que lo rodea, con el que " +
         "además va a instaurar un diálogo a través de la Danza.")
-        .place("Bolivia Cochabamba")
+        .placesAndDates("Bolivia Cochabamba")
         .concept("Transportaremos al cuerpo a reconocerse, abrirse y cuestionarse, para generar particularidad en el " +
         "movimiento de cada cuerpo y el desarrollo de la comprensión de lo que necesita decir. El uso de nociones " +
         "básicas de ritmo y dinámica corporal serán explorados, así como nociones espaciales, sonoras y conceptuales, " +

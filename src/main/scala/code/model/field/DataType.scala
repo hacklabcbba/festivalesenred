@@ -20,3 +20,7 @@ case class IntDataType(
   nameField : Int,
   values : Seq[String]
 ) extends DataType
+
+case class ListStringDataType(
+  values : Seq[String]
+) extends DataType

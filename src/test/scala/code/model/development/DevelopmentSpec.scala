@@ -2,9 +2,10 @@ package code
 package model
 package development
 
-import code.model.festival.{Festival, Goal}
+import code.model.festival.Festival
 import code.model.field.{Field, StringDataType}
 import code.model.development.RoleType._
+import code.model.proposal.Goal
 
 class DevelopmentSpec extends BaseMongoSessionWordSpec {
 
