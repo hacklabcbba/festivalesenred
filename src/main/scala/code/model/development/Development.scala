@@ -13,7 +13,7 @@ class Development private() extends MongoRecord[Development] with ObjectIdPk[Dev
   override def meta = Development
 
   object name extends StringField(this, 500)
-  object festival extends LongRefField(this, Festival)
+  object festival extends ObjectIdRefField(this, Festival)
   object role extends EnumNameField(this, RoleType)
   object contact extends ObjectIdRefField(this, Contact)
 }
