@@ -17,6 +17,10 @@ case class StringDataType(
 ) extends DataType
 
 case class IntDataType(
-  nameField : Int,
+  nameField : String,
+  values : Seq[Int]
+) extends DataType
+
+case class ListStringDataType(
   values : Seq[String]
 ) extends DataType

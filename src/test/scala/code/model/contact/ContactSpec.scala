@@ -3,6 +3,7 @@ package model
 package contact
 
 import code.model.contact.ContactType._
+import code.model.festival.Place
 import code.model.field.StringDataType
 
 class ContactSpec extends BaseMongoSessionWordSpec {
@@ -15,14 +16,17 @@ class ContactSpec extends BaseMongoSessionWordSpec {
       val phone = Phone.createRecord
         .numbers(number1 :: number2 :: Nil)
 
-      val newContact = Contact.createRecord
+      val place = Place.createRecord
         .city("Cochabamba")
         .country("Bolivia")
+
+      val newContact = Contact.createRecord
         .email("nataly@genso.com.bo")
         .name("Nataly Nanda")
         .organization("Genso")
         .phone(phone)
         .contactType(Organizer)
+        .place(place)
 
       val errs = newContact.validate
       if (errs.length > 1) {
