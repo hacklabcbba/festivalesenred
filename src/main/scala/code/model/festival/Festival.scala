@@ -3,6 +3,7 @@ package model
 package festival
 
 import code.lib.RogueMetaRecord
+import code.model.institution.Institution
 import code.model.proposal.Proposal
 import net.liftweb.common.Loggable
 import net.liftweb.mongodb.record.MongoRecord
@@ -16,14 +17,14 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
 
   object name extends StringField(this, 500)
   object description extends StringField(this, 700)
-  object placesAndDates extends MongoListField[Festival, Place](this)
+  object places extends MongoListField[Festival, Place](this)
   object concept extends StringField(this, 1000)
   object proposal extends BsonRecordField(this, Proposal)
   object startDate extends DateField(this)
   object endDate extends DateField(this)
   object numberEditions extends IntField(this)
-  object organizersInstitutions extends MongoCaseClassField[Festival, ListStringDataType](this)
-  object alliances extends MongoCaseClassField[Festival, ListStringDataType](this)
+  object institutions extends MongoListField[Festival, Institution](this)
+  object alliances extends MongoListField[Festival, Institution](this)
   object otherDescriptions extends BsonRecordField(this, Field) {
     override def optional_? = true
   }

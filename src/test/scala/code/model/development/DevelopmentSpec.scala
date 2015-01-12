@@ -7,6 +7,7 @@ import java.util.Calendar
 import code.model.festival.{Place, Festival}
 import code.model.field.{ListStringDataType, Field, StringDataType}
 import code.model.development.RoleType._
+import code.model.institution.Institution
 import code.model.proposal.ScopeType._
 import code.model.proposal._
 import net.liftweb.common.Box
@@ -110,7 +111,10 @@ class DevelopmentSpec extends BaseMongoSessionWordSpec {
       proposal1.validate.length should equal (0)
 
       //List of organizations
-      val listInstitutions = ListStringDataType(List("La Usina Cultura", "VIDANZA"))
+      val institution1 = Institution.createRecord
+        .name("La Usina Cultura")
+      val institution2 = Institution.createRecord
+        .name("VIDANZA")
 
       //List alliances
       val alliancesDT = ListStringDataType(List("VIDANZA", "TELARTES", "EL GANGOCHO", "GOBIERNO MUNICIPAL"))
@@ -121,7 +125,7 @@ class DevelopmentSpec extends BaseMongoSessionWordSpec {
         "coreográficas con un enfoque conceptual y estético, buscando que cada cuerpo encuentre sus necesidades " +
         "expresivas, y reflexione sobre la historicidad de su cuerpo y el contexto actual que lo rodea, con el que " +
         "además va a instaurar un diálogo a través de la Danza.")
-        .placesAndDates(place1 :: place2 :: Nil)
+        .places(place1 :: place2 :: Nil)
         .concept("Transportaremos al cuerpo a reconocerse, abrirse y cuestionarse, para generar particularidad en el " +
         "movimiento de cada cuerpo y el desarrollo de la comprensión de lo que necesita decir. El uso de nociones " +
         "básicas de ritmo y dinámica corporal serán explorados, así como nociones espaciales, sonoras y conceptuales, " +
@@ -132,8 +136,8 @@ class DevelopmentSpec extends BaseMongoSessionWordSpec {
         .startDate(date)
         .endDate(date)
         .numberEditions(3)
-        .organizersInstitutions(listInstitutions)
-        .alliances(alliancesDT)
+        .institutions(institution1 :: institution2 :: Nil)
+        .alliances(institution1 :: Nil)
 
 
       val errs = newFestival.validate
