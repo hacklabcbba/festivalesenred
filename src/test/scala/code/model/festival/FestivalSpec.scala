@@ -106,7 +106,6 @@ class FestivalSpec extends BaseMongoSessionWordSpec {
         .schedules(newSchedule)
         .budgets(newBudget)
 
-
       val errsProposal = proposal1.validate
       if (errsProposal.length > 1) {
         fail("Validation error: "+errsProposal.mkString(", "))
