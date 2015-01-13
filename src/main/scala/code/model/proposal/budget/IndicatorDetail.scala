@@ -1,6 +1,4 @@
-package code
-package model
-package proposal
+package code.model.proposal.budget
 
 import net.liftweb.mongodb.record.{BsonMetaRecord, BsonRecord}
 import net.liftweb.record.field.{DecimalField, StringField}

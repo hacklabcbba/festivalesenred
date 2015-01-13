@@ -1,6 +1,4 @@
-package code
-package model
-package proposal
+package code.model.proposal.budget
 
 import net.liftweb.mongodb.record.field.BsonRecordField
 import net.liftweb.mongodb.record.{BsonMetaRecord, BsonRecord}
@@ -13,6 +11,7 @@ class Budget private () extends BsonRecord[Budget] {
   //Description how can obtain the budget for the festival
   object description extends StringField(this, 1000)
   object indicator extends BsonRecordField(this, Indicator)
+  object viability extends BsonRecordField(this, Viability)
 }
 
 object Budget extends Budget with BsonMetaRecord[Budget]
