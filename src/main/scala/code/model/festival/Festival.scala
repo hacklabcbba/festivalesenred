@@ -10,6 +10,7 @@ import net.liftweb.mongodb.record.MongoRecord
 import net.liftweb.mongodb.record.field._
 import net.liftweb.record.field.{StringField, IntField}
 import code.model.field.{ListStringDataType, Field}
+import code.model.link.Link
 
 class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival] {
 
@@ -25,6 +26,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   object numberEditions extends IntField(this)
   object institutions extends MongoListField[Festival, Institution](this)
   object alliances extends MongoListField[Festival, Institution](this)
+  object links extends MongoListField[Festival, Link](this)
   object otherDescriptions extends BsonRecordField(this, Field) {
     override def optional_? = true
   }
