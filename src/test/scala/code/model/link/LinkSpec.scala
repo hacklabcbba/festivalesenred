@@ -8,7 +8,7 @@ import code.model.field.StringDataType
 
 class LinkSpec extends BaseMongoSessionWordSpec {
 
-  "Festival" should {
+  "Link" should {
     "create, validate, save, and retrieve properly" in {
 
       // Development
