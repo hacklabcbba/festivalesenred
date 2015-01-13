@@ -1,4 +1,7 @@
-package code.model.proposal.budget
+package code
+package model
+package proposal
+package budget
 
 import net.liftweb.mongodb.record.field.BsonRecordField
 import net.liftweb.mongodb.record.{BsonMetaRecord, BsonRecord}
