@@ -11,6 +11,7 @@ import code.model.proposal.ScopeType._
 import code.model.proposal.budget._
 import net.liftweb.common.Box
 import net.liftweb.util.Helpers._
+import code.model.proposal.ActivityType._
 
 class ProposalSpec extends BaseMongoSessionWordSpec {
 
@@ -70,6 +71,8 @@ class ProposalSpec extends BaseMongoSessionWordSpec {
 
       val newSchedule = Schedule.createRecord
         .activities(activity1 :: Nil)
+        .activityType(Internal)
+        .nameSchedule("Protocol")
 
       // create Indicator
 
@@ -152,7 +155,7 @@ class ProposalSpec extends BaseMongoSessionWordSpec {
       val proposal1 = Proposal.createRecord
         .participants(participant1)
         .goals(goal)
-        .schedules(newSchedule)
+        .schedules(newSchedule :: Nil)
         .budgets(newBudget)
 
       val errsProposal = proposal1.validate

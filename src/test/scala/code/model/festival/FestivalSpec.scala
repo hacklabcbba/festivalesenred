@@ -104,7 +104,7 @@ class FestivalSpec extends BaseMongoSessionWordSpec {
       val proposal1 = Proposal.createRecord
         .participants(participant1)
         .goals(goal)
-        .schedules(newSchedule)
+        .schedules(newSchedule :: Nil)
         .budgets(newBudget)
 
       val errsProposal = proposal1.validate

@@ -13,6 +13,7 @@ import code.model.proposal._
 import code.model.proposal.budget.Budget
 import net.liftweb.common.Box
 import net.liftweb.util.Helpers._
+import code.model.proposal.ActivityType._
 
 class DevelopmentSpec extends BaseMongoSessionWordSpec {
 
@@ -90,6 +91,8 @@ class DevelopmentSpec extends BaseMongoSessionWordSpec {
 
       val newSchedule = Schedule.createRecord
         .activities(activity1 :: Nil)
+        .activityType(External)
+        .nameSchedule("Schedule")
 
       // for create bugdets
       val newBudget = Budget.createRecord
@@ -100,7 +103,7 @@ class DevelopmentSpec extends BaseMongoSessionWordSpec {
       val proposal1 = Proposal.createRecord
         .participants(participant1)
         .goals(goal)
-        .schedules(newSchedule)
+        .schedules(newSchedule :: Nil)
         .budgets(newBudget)
 
 

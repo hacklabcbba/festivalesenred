@@ -5,7 +5,7 @@ package proposal
 import code.model.development.Development
 import net.liftweb.mongodb.record.field.{MongoListField, DateField}
 import net.liftweb.mongodb.record.{BsonMetaRecord, BsonRecord}
-import net.liftweb.record.field.StringField
+import net.liftweb.record.field.{EnumNameField, StringField}
 
 class Activity private() extends BsonRecord[Activity] {
   override def meta = Activity
@@ -18,6 +18,7 @@ class Activity private() extends BsonRecord[Activity] {
   object date extends DateField(this)
   //who is the responsible or responsibles
   object responsibles extends MongoListField[Activity, Development](this)
+
 }
 
 object Activity extends Activity with BsonMetaRecord[Activity]
