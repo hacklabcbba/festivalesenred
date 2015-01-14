@@ -8,6 +8,7 @@ import code.model.development.Development
 import code.model.development.RoleType._
 import code.model.field.StringDataType
 import code.model.proposal.ScopeType._
+import code.model.proposal.budget._
 import net.liftweb.common.Box
 import net.liftweb.util.Helpers._
 
@@ -94,11 +95,59 @@ class ProposalSpec extends BaseMongoSessionWordSpec {
         .nameGroup("Por sector")
         .detailIndicator(indicatorDetail1 :: indicatorDetail2 :: Nil)
 
+      // Viability
+
+      val inputDetail1 = InputDetail.createRecord
+        .description("Projeto Juntxs")
+        .input(0.00)
+        .responsible(newDevelopment :: Nil)
+
+      val inputDetail2 = InputDetail.createRecord
+        .description("Projeto Fora do Eixo (Fund Ford)")
+        .input(226000.00)
+        .responsible(newDevelopment :: Nil)
+
+      val input = Input.createRecord
+        .listInput(inputDetail1 :: inputDetail2 :: Nil)
+        .nameGroupInput("Input")
+        .subTotal(226000.00)
+
+      val outputDetail1 = OutputDetail.createRecord
+        .description("Passagem Buenos Aires (Federico Anfibia)")
+        .output(1526.81)
+        .responsible(newDevelopment :: Nil)
+        .supplier("BoA + Gol + Tam")
+
+      val outputDetail2 = OutputDetail.createRecord
+        .description("Passagem Córdoba (Julieta Castro)")
+        .output(1385.82)
+        .responsible(newDevelopment :: Nil)
+        .supplier("BoA + Gol + Tam")
+
+      val outputDetail3 = OutputDetail.createRecord
+        .description("Passagem Córdoba (só ida) TERESA")
+        .output(766.78)
+        .responsible(newDevelopment :: Nil)
+        .supplier("Emirates")
+
+      val output = Output.createRecord
+        .listOutput(outputDetail1 :: outputDetail2 :: outputDetail3 :: Nil)
+        .nameGroupOutput("LAB NINJA COPA (cancelado)")
+        .subTotal(3679.41)
+
+      val viability = Viability.createRecord
+        .input(input ::  Nil)
+        .output(output :: Nil)
+        .totalInput(226000.00)
+        .totalOutput(3679.41)
+        .residue(222320.59)
+
       // for create bugdets
       val newBudget = Budget.createRecord
         .description("Autogestión anual: Cada año busca recursos en cooperación internacional, en Ministerio de Culturas" +
         " y Municipio: Hivos. Goethe Institut, Alianza Francesa y Ministerio apoyaron sus primeras versiones.")
         .indicator(newIndicator)
+        .viability(viability)
 
       val proposal1 = Proposal.createRecord
         .participants(participant1)

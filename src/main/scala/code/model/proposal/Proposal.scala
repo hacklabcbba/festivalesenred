@@ -3,6 +3,7 @@ package model
 package proposal
 
 import code.model.field.Field
+import code.model.proposal.budget.Budget
 import net.liftweb.mongodb.record.field.BsonRecordField
 import net.liftweb.mongodb.record.{BsonMetaRecord, BsonRecord}
 

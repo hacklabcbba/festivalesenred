@@ -10,6 +10,7 @@ import code.model.development.RoleType._
 import code.model.institution.Institution
 import code.model.proposal.ScopeType._
 import code.model.proposal._
+import code.model.proposal.budget.Budget
 import net.liftweb.common.Box
 import net.liftweb.util.Helpers._
 
