@@ -7,7 +7,7 @@ import net.liftweb.mongodb.record.field.MongoCaseClassField
 import net.liftweb.mongodb.record.{BsonMetaRecord, BsonRecord}
 import net.liftweb.record.field.{StringField, EnumNameField}
 
-class Document private () extends BsonRecord[Document] {
+class Document private() extends BsonRecord[Document] {
 
   override def meta = Document
 

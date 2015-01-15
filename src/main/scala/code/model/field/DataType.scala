@@ -3,6 +3,7 @@ package model
 package field
 
 import java.util.Date
+import com.mongodb.gridfs._
 
 trait DataType
 
@@ -23,4 +24,8 @@ case class IntDataType(
 
 case class ListStringDataType(
   values : Seq[String]
+) extends DataType
+
+case class ListGridFsType(
+  values : Seq[GridFS]
 ) extends DataType
