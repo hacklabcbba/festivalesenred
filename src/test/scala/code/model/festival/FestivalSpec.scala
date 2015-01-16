@@ -87,7 +87,7 @@ class FestivalSpec extends BaseMongoSessionWordSpec {
 
       //Activity
       val activity1 = Activity.createRecord
-        .date(date)
+        .place(place2)
         .description("Espectáculos")
         .name("Activity1")
         .responsibles(newDevelopment :: Nil)

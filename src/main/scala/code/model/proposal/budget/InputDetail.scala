@@ -20,6 +20,9 @@ class InputDetail private () extends BsonRecord[InputDetail] {
   object negotiation extends StringField(this, 1000)
   object supplier extends StringField(this, 500)
   object responsible extends MongoListField[InputDetail, Development](this)
+  object hourInput extends IntField(this)
+  object anticipatedValuePlaned extends DecimalField(this, 0)
+  object observation extends StringField(this, 500)
 }
 
 object InputDetail extends InputDetail with BsonMetaRecord[InputDetail]

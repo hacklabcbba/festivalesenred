@@ -84,7 +84,7 @@ class DevelopmentSpec extends BaseMongoSessionWordSpec {
 
       //Activity
       val activity1 = Activity.createRecord
-        .date(date)
+        .place(place1)
         .description("Espectáculos")
         .name("Activity1")
         .responsibles(newDevelopment :: Nil)

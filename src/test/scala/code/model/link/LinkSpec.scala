@@ -35,6 +35,7 @@ class LinkSpec extends BaseMongoSessionWordSpec {
         .product("Relatoria Imersion Cultura de Red")
         .responsible(development1 :: development2 :: Nil)
         .link(link1 :: Nil)
+        .means("Google Docs")
 
       val link = Link.createRecord
         .nameGroup("General")

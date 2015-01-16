@@ -6,6 +6,7 @@ import java.util.Calendar
 
 import code.model.development.Development
 import code.model.development.RoleType._
+import code.model.festival.Place
 import code.model.field.StringDataType
 import code.model.proposal.ScopeType._
 import code.model.proposal.budget._
@@ -62,9 +63,14 @@ class ProposalSpec extends BaseMongoSessionWordSpec {
         fail("Validation error : " + errsDevelopment.mkString(", "))
       }
 
+      val place2 = Place.createRecord
+        .city("Oruro")
+        .country("Bolivia")
+        .date(date)
+
       //Activity
       val activity1 = Activity.createRecord
-        .date(date)
+        .place(place2)
         .description("Espectáculos")
         .name("Activity1")
         .responsibles(newDevelopment :: Nil)

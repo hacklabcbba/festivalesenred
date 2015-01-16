@@ -5,6 +5,7 @@ package contact
 import code.model.contact.ContactType._
 import code.model.festival.Place
 import code.model.field.StringDataType
+import code.model.institution.Institution
 
 class ContactSpec extends BaseMongoSessionWordSpec {
   "Contact" should {
@@ -20,10 +21,14 @@ class ContactSpec extends BaseMongoSessionWordSpec {
         .city("Cochabamba")
         .country("Bolivia")
 
+      //List of organizations
+      val institution1 = Institution.createRecord
+        .name("La Usina Cultura")
+
       val newContact = Contact.createRecord
         .email("nataly@genso.com.bo")
         .name("Nataly Nanda")
-        .organization("Genso")
+        .organization(Institution)
         .phone(phone)
         .contactType(Organizer)
         .place(place)
