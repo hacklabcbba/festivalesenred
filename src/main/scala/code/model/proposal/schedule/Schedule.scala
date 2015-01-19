@@ -1,4 +1,7 @@
-package code.model.proposal.schedule
+package code
+package model
+package proposal
+package schedule
 
 import code.model.field.Field
 import net.liftweb.mongodb.record.field.{BsonRecordField, MongoListField}
