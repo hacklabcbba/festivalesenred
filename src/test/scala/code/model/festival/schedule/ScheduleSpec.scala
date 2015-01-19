@@ -49,12 +49,23 @@ class ScheduleSpec extends BaseMongoSessionWordSpec {
         .total(100.00)
 
       //Activity
-      val activity1 = Activity.createRecord
+      val city1 = City.createRecord
+        .country("Bolivia")
+        .nameCity("Cochabamba")
+
+
+      city1.save(true)
+
+      val place = Place.createRecord
+        .cityId(city1.id.get)
         .date(date)
+
+      val activity1 = Activity.createRecord
         .description("Espectáculos")
         .name("Activity1")
         .responsibles(newDevelopment :: Nil)
         .spending(spending :: Nil)
+        .place(place)
 
       val newSchedule = Schedule.createRecord
         .activities(activity1 :: Nil)

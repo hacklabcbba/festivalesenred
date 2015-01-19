@@ -3,8 +3,9 @@ package model
 package contact
 
 import code.model.contact.ContactType._
-import code.model.festival.Place
+import code.model.festival.{Place, City}
 import code.model.field.StringDataType
+import code.model.institution.Institution
 
 class ContactSpec extends BaseMongoSessionWordSpec {
   "Contact" should {
@@ -16,14 +17,25 @@ class ContactSpec extends BaseMongoSessionWordSpec {
       val phone = Phone.createRecord
         .numbers(number1 :: number2 :: Nil)
 
-      val place = Place.createRecord
-        .city("Cochabamba")
+      val city1 = City.createRecord
         .country("Bolivia")
+        .nameCity("Cochabamba")
+
+      city1.save(true)
+
+      val place = Place.createRecord
+        .cityId(city1.id.get)
+
+      //List of organizations
+      val institution1 = Institution.createRecord
+        .name("La Usina Cultura")
+
+      institution1.save(true)
 
       val newContact = Contact.createRecord
         .email("nataly@genso.com.bo")
         .name("Nataly Nanda")
-        .organization("Genso")
+        .organization(institution1.id.get)
         .phone(phone)
         .contactType(Organizer)
         .place(place)

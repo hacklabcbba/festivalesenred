@@ -15,6 +15,7 @@ class LinkDetail private() extends BsonRecord[LinkDetail] {
   object product extends StringField(this, 500)
   object function extends StringField(this, 500)
   object observation extends StringField(this, 800)
+  object means extends StringField(this, 500)
   object responsible extends MongoListField[LinkDetail, Development](this)
   object link extends MongoCaseClassListField[LinkDetail, StringDataType](this)
 

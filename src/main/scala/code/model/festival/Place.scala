@@ -2,16 +2,14 @@ package code
 package model
 package festival
 
-import net.liftweb.mongodb.record.field.DateField
+import net.liftweb.mongodb.record.field.{ObjectIdRefField, DateField}
 import net.liftweb.mongodb.record.{BsonMetaRecord, BsonRecord}
-import net.liftweb.record.field.StringField
 
 class Place extends BsonRecord[Place] {
 
   override def meta = Place
 
-  object country extends StringField(this, 500)
-  object city extends StringField(this, 500)
+  object cityId extends ObjectIdRefField(this, City)
   object date extends DateField(this)
 }
 

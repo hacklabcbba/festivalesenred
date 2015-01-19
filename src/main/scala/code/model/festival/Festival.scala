@@ -27,6 +27,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   object institutions extends MongoListField[Festival, Institution](this)
   object alliances extends MongoListField[Festival, Institution](this)
   object links extends MongoListField[Festival, Link](this)
+  object observation extends StringField(this, 1000)
   object otherDescriptions extends BsonRecordField(this, Field) {
     override def optional_? = true
   }
