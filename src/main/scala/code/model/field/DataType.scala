@@ -22,6 +22,11 @@ case class IntDataType(
   values : Seq[Int]
 ) extends DataType
 
+case class DecimalDataType(
+  nameField : String,
+  values : Seq[BigDecimal]
+) extends DataType
+
 case class ListStringDataType(
   values : Seq[String]
 ) extends DataType
