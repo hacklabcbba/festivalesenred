@@ -11,9 +11,10 @@ import code.model.institution.Institution
 import code.model.proposal.ScopeType._
 import code.model.proposal._
 import code.model.proposal.budget.Budget
+import code.model.proposal.schedule.{Schedule, Activity, ActivityType}
 import net.liftweb.common.Box
 import net.liftweb.util.Helpers._
-import code.model.proposal.ActivityType._
+import ActivityType._
 
 class DevelopmentSpec extends BaseMongoSessionWordSpec {
 

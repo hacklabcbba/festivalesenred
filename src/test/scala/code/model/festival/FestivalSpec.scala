@@ -7,6 +7,7 @@ import code.model.development.Development
 import code.model.development.RoleType._
 import code.model.institution.Institution
 import code.model.proposal.budget.Budget
+import code.model.proposal.schedule.{Schedule, Activity}
 import net.liftweb.util.Helpers._
 import code.model.field.{ListStringDataType, Field, StringDataType}
 import code.model.proposal._

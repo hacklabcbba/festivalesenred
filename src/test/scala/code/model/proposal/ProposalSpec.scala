@@ -10,9 +10,10 @@ import code.model.festival.{City, Place}
 import code.model.field.StringDataType
 import code.model.proposal.ScopeType._
 import code.model.proposal.budget._
+import code.model.proposal.schedule.{Schedule, Activity, ActivityType}
 import net.liftweb.common.Box
 import net.liftweb.util.Helpers._
-import code.model.proposal.ActivityType._
+import ActivityType._
 
 class ProposalSpec extends BaseMongoSessionWordSpec {
 
