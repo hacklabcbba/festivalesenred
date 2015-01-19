@@ -1,11 +1,9 @@
-package code
-package model
-package proposal
+package code.model.proposal.schedule
 
 import code.model.development.Development
-import net.liftweb.mongodb.record.field.{MongoListField, DateField}
+import net.liftweb.mongodb.record.field.{DateField, MongoListField}
 import net.liftweb.mongodb.record.{BsonMetaRecord, BsonRecord}
-import net.liftweb.record.field.{EnumNameField, StringField}
+import net.liftweb.record.field.{EnumNameField, IntField, StringField}
 
 class Activity private() extends BsonRecord[Activity] {
   override def meta = Activity
@@ -18,6 +16,12 @@ class Activity private() extends BsonRecord[Activity] {
   object date extends DateField(this)
   //who is the responsible or responsibles
   object responsibles extends MongoListField[Activity, Development](this)
+  // Quantity in hours implemented
+  object hours extends IntField(this, 0)
+  // State for a activity
+  object state extends EnumNameField(this, StateActivityType)
+  //spendings
+  object spending extends MongoListField[Activity, Spending](this)
 
 }
 

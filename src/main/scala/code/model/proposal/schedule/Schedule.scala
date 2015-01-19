@@ -1,11 +1,9 @@
-package code
-package model
-package proposal
+package code.model.proposal.schedule
 
 import code.model.field.Field
 import net.liftweb.mongodb.record.field.{BsonRecordField, MongoListField}
 import net.liftweb.mongodb.record.{BsonMetaRecord, BsonRecord}
-import net.liftweb.record.field.{StringField, EnumNameField}
+import net.liftweb.record.field.{EnumNameField, StringField}
 
 class Schedule private () extends BsonRecord[Schedule] {
 

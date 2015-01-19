@@ -1,6 +1,4 @@
-package code
-package model
-package proposal
+package code.model.proposal.schedule
 
 object ActivityType extends Enumeration {
 

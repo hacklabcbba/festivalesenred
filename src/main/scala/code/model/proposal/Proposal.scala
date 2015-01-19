@@ -4,6 +4,7 @@ package proposal
 
 import code.model.field.Field
 import code.model.proposal.budget.Budget
+import code.model.proposal.schedule.Schedule
 import net.liftweb.mongodb.record.field.{MongoListField, BsonRecordField}
 import net.liftweb.mongodb.record.{BsonMetaRecord, BsonRecord}
 
