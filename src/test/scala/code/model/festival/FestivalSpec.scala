@@ -38,14 +38,24 @@ class FestivalSpec extends BaseMongoSessionWordSpec {
       }
 
       //placesAndDates
-      val place1 = Place.createRecord
-        .city("Cochabamba")
+      val city1 = City.createRecord
         .country("Bolivia")
+        .nameCity("Cochabamba")
+
+      city1.save(true)
+
+      val city2 = City.createRecord
+        .country("Bolivia")
+        .nameCity("Santa Cruz")
+
+      city2.save(true)
+
+      val place1 = Place.createRecord
+        .cityId(city1.id.get)
         .date(date)
 
       val place2 = Place.createRecord
-        .city("Oruro")
-        .country("Bolivia")
+        .cityId(city2.id.get)
         .date(date)
 
       // for create a proposal

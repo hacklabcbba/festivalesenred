@@ -7,7 +7,7 @@ import code.model.festival.Place
 import code.model.field.DataType
 import code.model.institution.Institution
 import net.liftweb.mongodb.record.MongoRecord
-import net.liftweb.mongodb.record.field.{ObjectIdPk, MongoCaseClassListField, BsonRecordField}
+import net.liftweb.mongodb.record.field.{ObjectIdRefField, ObjectIdPk, MongoCaseClassListField, BsonRecordField}
 import net.liftweb.record.field.{EmailField, StringField, EnumNameField}
 
 class Contact extends MongoRecord[Contact] with ObjectIdPk[Contact] {
@@ -18,7 +18,7 @@ class Contact extends MongoRecord[Contact] with ObjectIdPk[Contact] {
   object email extends EmailField(this, 200)
   object phone extends BsonRecordField(this, Phone)
   object place extends BsonRecordField(this, Place)
-  object organization extends BsonRecordField(this, Institution)
+  object organization extends ObjectIdRefField[Contact, Institution](this, Institution)
   object extraField extends MongoCaseClassListField[Contact, DataType](this)
 
 }
