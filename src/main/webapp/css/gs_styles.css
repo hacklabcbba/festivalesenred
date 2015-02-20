@@ -1,0 +1,301 @@
+/*------------------------------------*\
+* Company: Genso, Iniciativas Web
+* Project: FER
+* Version: 1.0
+* Autor: Pedroq
+* Reviser: -
+\*------------------------------------*/
+
+
+
+/*------------------------------------*\
+    $TABLE OF CONTENTS
+\*------------------------------------*/
+/*
+* RESET
+* ELEMENTS
+* FONT-FACE
+* GENERAL CLASSES
+* HEADER
+* BODY
+* BODY SUBSECTIONS
+* FOOTER
+* COMPONENTS
+* ALERTS
+*/
+
+
+/*------------------------------------*\
+    $RESET
+\*------------------------------------*/
+body {
+  font-family: 'alte_haas_groteskregular';
+}
+
+
+/*------------------------------------*\
+    $ELEMENTS
+\*------------------------------------*/
+
+
+
+/*------------------------------------*\
+    $FONT-FACE
+\*------------------------------------*/
+
+@font-face {
+  font-family: 'alte_haas_groteskregular';
+  src: url('../fonts/AlteHaasGroteskRegular-webfont.eot');
+  src: url('../fonts/AlteHaasGroteskRegular-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/AlteHaasGroteskRegular-webfont.woff2') format('woff2'),
+       url('../fonts/AlteHaasGroteskRegular-webfont.woff') format('woff'),
+       url('../fonts/AlteHaasGroteskRegular-webfont.ttf') format('truetype'),
+       url('../fonts/AlteHaasGroteskRegular-webfont.svg#alte_haas_groteskregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+
+/*------------------------------------*\
+    $GENERAL CLASSES
+\*------------------------------------*/
+.top-bar,
+.top-bar-section ul li,
+.top-bar-section li:not(.has-form) a:not(.button) {
+	background-color: #EAEAEA;
+}
+.top-bar {
+	height: auto;
+}
+.button.secondary,
+.button.secondary {
+	font-weight: bold;
+}
+input[type="text"], 
+input[type="password"], 
+input[type="date"], 
+input[type="datetime"], 
+input[type="datetime-local"], input[type="month"], 
+input[type="week"], 
+input[type="email"], 
+input[type="number"], 
+input[type="search"], 
+input[type="tel"], 
+input[type="time"], 
+input[type="url"], 
+input[type="color"] {
+	height: 20px;
+	padding: 2px;
+	border: 2px solid #1A1A1A;
+	box-shadow: 0 0px 2px #bbb inset
+}
+/*------------------------------------*\
+    $HEADER
+\*------------------------------------*/
+
+.title-area {
+	background-color: #fff;
+	padding: 7px 0;
+	width: 180px;
+	text-align: center;
+}
+.top-bar .name {
+	height: auto;
+}
+.top-bar-section {
+	padding: 15px 15px 0 0;
+	overflow: hidden;
+}
+.top-bar-section li:not(.has-form) a:not(.button),
+.top-bar-section ul li > a.button,
+.top-bar-section ul li > a.button.secondary,
+.right-off-canvas-menu .accordion a ,
+.right-off-canvas-menu h3  {
+	text-transform: uppercase;
+	font-weight: bold;
+}
+.top-bar-section li:not(.has-form) a:not(.button) {
+	color: #333;
+  font-family: 'alte_haas_groteskregular';
+  font-size: 12px;
+}
+.top-bar-section li:not(.has-form) a:hover:not(.button) {
+	background-color: transparent;
+	color: #bbb;
+}
+.top-bar-section ul li > a.button,
+.top-bar-section ul li > a.button.secondary  {
+	font-size: 12px
+}
+.top-bar-section ul li > a.button {
+	background-color: #1A1A1A;
+}
+.top-bar-section ul li > a.button.secondary {
+	background-color: #EAEAEA;
+	border: 1px solid #1A1A1A;
+}
+
+
+/*------------------------------------*\
+    $LEFT
+\*------------------------------------*/
+.off-canvas-wrap {
+	height: 88vh;
+}
+.inner-wrap {
+	height: 100vh;
+}
+
+/*------------------------------------*\
+    $RIGHT
+\*------------------------------------*/
+
+.gs-right-btn {
+	background-color: #fff;
+	padding: 5px;
+  position: absolute;
+  right: -16px;
+  top: 30px;
+	-moz-transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+}
+.gs-open {
+  background-color: #ffffff;
+  border: 2px solid #1a1a1a;
+  font-size: 10px;
+  padding: 2px;
+  text-transform: uppercase;
+  color: #333;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.right-off-canvas-menu {
+	background-color: rgba(255, 255, 255, 0.7);
+}
+.move-left .exit-off-canvas {
+	box-shadow: none;
+}
+.right-off-canvas-menu h2 {
+	font-size: 22px;
+}
+.right-off-canvas-menu h2:before {
+  content: "";
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  margin: -4px 9px;
+  background: url(../img/flecha.png);
+  background-repeat: no-repeat;
+}
+.right-off-canvas-menu .accordion .row label,
+.right-off-canvas-menu .accordion .row label input {
+	font-size: 12px;
+	font-weight: bold;
+}
+.gs-canvas-list .row .columns {
+	padding-left: 35px;
+}
+.right-off-canvas-menu .accordion {
+	margin: 0;
+	padding: 15px;
+}
+.accordion .accordion-navigation > .content, 
+.accordion dd > .content {
+	padding: 0;
+}
+.right-off-canvas-menu .accordion li a {
+	font-size: 12px;
+	padding: 2px 15px;
+	background-color: transparent;
+}
+.right-off-canvas-menu .accordion li a:before,
+.right-off-canvas-menu .accordion li.active a:before  {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin: 0 3px 0 0;
+  background-repeat: no-repeat;
+}
+.right-off-canvas-menu .accordion li a:before {
+  background: url(../img/caret.png);
+}
+.right-off-canvas-menu .accordion li.active a:before {
+  background: url(../img/caret_active.png);
+}
+.right-off-canvas-menu .accordion #panel2a {
+	margin-left: 1.25rem;
+}
+.right-off-canvas-menu .accordion #panel3a {
+	padding-left: 25px;
+	padding-right: 15px;
+}
+.gs-canvas-list {
+	margin: 0;
+}
+.gs-canvas-list li {
+	font-size: 12px;
+	color: #333;
+	padding: 5px 0;
+	border: none;
+	list-style: none;
+}
+.gs-canvas-list li:hover {
+	background-color: transparent;
+}
+.label.round {
+	border-radius: 100%;
+	width: 17px;
+	height: 17px;
+	vertical-align: bottom;
+	line-height: 1.4;
+	padding: 0;
+	text-transform: uppercase;
+}
+.label.round.red {
+	background-color: #F3462A;
+}
+.label.round.green {
+	background-color: #00A888;
+}
+.label.round.blue {
+	background-color: #0684C5;
+}
+.label.round.purple {
+	background-color: #722273;
+}
+
+input[type="checkbox"] {
+    display:none;
+}
+input[type="checkbox"] + label {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin: 0 10px;
+  vertical-align: middle;
+  background-image: url(../img/disable.png);
+  background-position: left top;
+  background-repeat: no-repeat;
+  cursor:pointer;
+}
+input[type="checkbox"]:checked + label {
+  background-image: url(../img/enable.png);
+  background-position: top 0;
+  background-repeat: no-repeat;
+}
+.gs-btn {
+	height: 35px;
+	padding: 0;
+	background-color: #fff;
+	border: 1px solid #333;
+	color: #333;
+}
+
+/*------------------------------------*\
+    $ACCORDION
+\*------------------------------------*/

@@ -1,20 +1,138 @@
-<div data-lift="surround?with=base-wrap;at=content">
-  <lift:head>
-    <title data-lift="Menu.title">fer: %*%</title>
-  </lift:head>
-  <div class="main-content">
-    <div data-lift="Notices"></div>
-    <div class="jumbotron">
-      <div class="inner">
-        <h1>fer</h1>
-        <p>
-          <span data-lift="HelloWorld">
-          Welcome to your Lift app at <span id="time">Time goes here</span>
-          </span>
-        </p>
-        <p><span data-lift="Menu.item?name=About;donthide=true;linktoself=true;a:class=btn primary large">Learn More &raquo;</span></p>
-      </div>
-    </div>
-  </div>
-  <span data-lift="embed?what=/templates-hidden/parts/footer"></span>
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foundation | Welcome</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="css/gs_styles.css" />
+    <script src="js/vendor/modernizr.js"></script>
+  </head>
+  <body>
+  
+
+
+  <nav role="navigation" data-topbar="" class="top-bar">
+	  <ul class="title-area">
+	    <li class="name"><h1><a href="#"><img src="img/logo.png"></a></h1></li>
+	    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+	  </ul>
+  
+		<section class="top-bar-section">
+
+	    <ul class="left">
+				<li><a href="">Festivales</a></li>
+				<li><a href="">Calendario</a></li>
+				<li><a href="">FAQ</a></li>
+	    </ul>
+
+	    <ul class="right">
+	      <li><a class="button secondary" href="#">Iniciar Sesion</a></li>
+	      <li><a class="button" href="#">Registrarse</a></li>
+	    </ul>
+	  </section>
+  </nav>
+
+<div class="off-canvas-wrap" data-offcanvas>
+   <div class="inner-wrap">
+      <div class="gs-right-btn">
+      	<a class="right-off-canvas-toggle right gs-open" href="#" >Buscar</a> <!-- Off Canvas Menu -->
+      </div> 
+      <aside class="right-off-canvas-menu">
+      	<h2>Tipos Festivales</h2>
+      	<!-- start accordion -->
+				<ul class="accordion" data-accordion>
+					<!-- accordion one -->
+				  <li class="accordion-navigation">
+				    <a href="#panel1a">Categorías</a>
+				    <div id="panel1a" class="content active">
+							<ul class="gs-canvas-list">
+								<li><span class="round red label">A</span> <input type='checkbox' id="ch1" /><label for="ch1"></label> Danza</li>
+								<li><span class="round green label">A</span> <input type='checkbox' id="ch2" /><label for="ch2"></label> Danza</li>
+								<li><span class="round purple label">A</span> <input type='checkbox' id="ch3" /><label for="ch3"></label> Danza</li>
+								<li><span class="round red label">A</span> <input type='checkbox' id="ch4" /><label for="ch4"></label> Danza</li>
+								<li><span class="round blue label">T</span> <input type='checkbox' id="ch5" /><label for="ch5"></label> Danza</li>
+								<li><span class="round red label">t</span> <input type='checkbox' id="ch6" /><label for="ch6"></label> Danza</li>
+								<li><span class="round purple label">A</span> <input type='checkbox' id="ch7" /><label for="ch7"></label> Danza</li>
+								<li><span class="round green label">A</span> <input type='checkbox' id="ch8" /><label for="ch8"></label> Danza</li>
+								<div class="row">
+							    <div class="columns">
+							      <label>Otros
+							        <input type="text" placeholder="" />
+							      </label>
+							    </div>
+							  </div>
+							</ul>
+				    </div>
+				  </li>
+
+				  <!-- accordion two -->
+				  <li class="accordion-navigation">
+				    <a href="#panel2a">Ciudad</a>
+				    <div id="panel2a" class="content active">
+							<div class="row">
+						    <div class="columns">
+						      <label>
+						        <input type="text" placeholder="" />
+						      </label>
+						    </div>
+						  </div>
+								<div class="row">
+							    <div class="columns">
+							      <label>
+							        <input type="text" placeholder="" />
+							      </label>
+							    </div>
+							  </div>
+				    </div>
+				  </li>
+
+				  <!-- accordion three -->
+				  <li class="accordion-navigation">
+				    <a href="#panel3a">Fechas</a>
+				    <div id="panel3a" class="content active">
+						  <div class="row">
+						    <div class="small-9">
+						      <div class="row">
+						        <div class="small-3 columns">
+						          <label for="right-label" class="right">De</label>
+						        </div>
+						        <div class="small-8 columns">
+						          <input type="text" id="right-label" placeholder="">
+						        </div>
+						      </div>
+						      <div class="row">
+						        <div class="small-3 columns">
+						          <label for="right-label" class="right">Hasta</label>
+						        </div>
+						        <div class="small-8 columns">
+						          <input type="text" id="right-label" placeholder="">
+						        </div>
+						      </div>
+						    </div>
+						  </div>
+						  <div class="row">
+						  	<button class="button expand gs-btn">Buscar</button>
+						  </div>
+				    </div>
+				  </li>
+
+				</ul>
+				<!-- end accordion -->
+      </aside>
+      <section>
+      	<!-- map --> 
+	      <img src="img/map.png" style="width:100%">
+	      <a class="exit-off-canvas"></a> 
+      </section>
+
+   </div>
 </div>
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
+</html>
