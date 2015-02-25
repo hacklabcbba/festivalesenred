@@ -1,67 +1,68 @@
-<div data-lift="surround?with=default;at=content">
-  <div data-lift="Notices"></div>
-  <div class="row">
-    <form data-lift="Form.ajax?class=form-horizontal">
-      <span lift="UserLogin">
-        <fieldset>
-          <div class="form-group">
-            <label class="control-label" for="email"></label>
-            <div class="controls">
-              <p><strong>Enter your email address:</strong></p>
-              <input class="form-control" maxlength="254" id="id_email" size="32" name="email" type="text" value="" />
-              <span data-alertid="id_email_err" form-alert=""></span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label"></label>
-            <div class="controls">
-              <p><strong>Do you have a fer password?</strong></p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label"></label>
-            <div class="controls">
-              <input id="no_password" /> <span>No, help me log in.</span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label"></label>
-            <div class="controls">
-              <input id="yes_password" /> <span>Yes, I have a <strong>password</strong>:</span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label"></label>
-            <div class="controls">
-              <input class="form-control" id="id_password" />
-              <span data-alertid="id_password_err" form-alert=""></span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label"></label>
-            <div class="controls">
-              <label class="checkbox">
-                <input class="xlarge" name="remember" />
-                Remember me when I come back later.
-              </label>
-            </div>
-          </div>
-        </fieldset>
-        <div class="form-actions">
-          <div class="actions">
-            <input id="id_submit" />
-            <input type="submit" class="btn btn-primary" value="Submit"></input>
-            <span lift="Menu.item?name=Home;a:class=btn btn-default">Cancel</span>
-          </div>
-        </div>
-      </span>
-    </form>
-  </div>
-  <tail>
-    <script>
-    $(document).ready(function() {
-      App.views.user.Login.init();
-    });
-    </script>
-  </tail>
-</div>
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="css/gs_styles.css" />
+    <link rel="stylesheet" href="css/foundation-icons.css" />
+    <link rel="stylesheet" href="/css/ol.css" />
+    <script src="/js/vendor/modernizr.js"></script>
+  </head>
+  <body class="login register">
+  
+	<div class="large-4 large-centered columns">
+	  <div class="gs-login-box text-center">
+	  <h2>Log In</h2>
+	  <h3>Encantados de verte de nuevo.</h3>
+		  <div class="row">
+			  <div class="large-12  columns">
+			    <form>
+						<div class="row collapse">
+						  <div class="large-12 columns">
+						  	<i class="fi-torso"></i>
+						    <input type="text" placeholder="Dirección de correo electrónico">
+						  </div>
+						</div>
+						<div class="row collapse">
+						  <div class="large-12 columns">
+						  	<i class="fi-lock"></i>
+						    <input type="text" placeholder="Contraseña">
+						  </div>
+						</div>
+						<div class="row collapse">
+						  <div class="large-12 columns">
+						  	<a class="button gs-login-btn large-12 columns" href="#">Iniciar Sesión</a>
+						  </div>
+						</div>
+
+						<!-- SOCIAL -->
+						<div class="row collapse">
+							<div class="large-12 colummns">
+								<div class="gs-social">O a través de</div>
+								<span class="gs-line"></span>
+							</div>
+						</div>
+						<div class="row collapse">
+							<div class="large-12 colummns">
+								<a class="button gs-social-btn gs-facebook-btn large-12 columns" href="#">Iniciar sesión con Facebook</a>
+							</div>
+						</div>
+						<div class="row collapse">
+							<div class="large-5 left colummns">
+								<a class="button gs-social-btn gs-twitter-btn large-12 columns" href="#">twitter</a>
+							</div>
+							<div class="large-5 right colummns">
+								<a class="button gs-social-btn gs-google-plus-btn large-12 columns" href="#">google+</a>
+							</div>
+						</div>
+			    </form>
+			  </div>
+			</div>
+		</div>
+	</div>
+	
+
+	</body>
+</html>
