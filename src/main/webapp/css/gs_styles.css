@@ -142,10 +142,11 @@ input[type="color"] {
 .top-bar-section ul li > a.button.secondary {
 	background-color: #EAEAEA;
 	border: 1px solid #1A1A1A;
+	color: #333;
 }
 .top-bar-section ul li > a.button.secondary:hover,
 .top-bar-section ul li > a.button.secondary:focus {
-	background-color: #ddd
+	background-color: #ddd;
 }
 
 
@@ -176,13 +177,13 @@ input[type="color"] {
 	-o-transform: rotate(-90deg);
 	transform: rotate(-90deg);
 }
-.gs-open {
+.gs-right-btn .gs-open {
   background-color: #ffffff;
   border: 2px solid #1a1a1a;
   font-size: 10px;
   padding: 2px;
   text-transform: uppercase;
-  color: #333 !important;
+  color: #333;
   font-weight: bold;
   letter-spacing: 1px;
 }
