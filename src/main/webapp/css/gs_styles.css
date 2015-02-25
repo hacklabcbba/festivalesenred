@@ -72,7 +72,7 @@ body {
 .button.secondary {
 	font-weight: bold;
 }
-input[type="text"], 
+/*input[type="text"], 
 input[type="password"], 
 input[type="date"], 
 input[type="datetime"], 
@@ -89,7 +89,7 @@ input[type="color"] {
 	padding: 2px;
 	border: 2px solid #1A1A1A;
 	box-shadow: 0 0px 2px #bbb inset
-}
+}*/
 /*------------------------------------*\
     $HEADER
 \*------------------------------------*/
@@ -210,6 +210,12 @@ input[type="color"] {
 	font-size: 12px;
 	font-weight: bold;
 }
+.right-off-canvas-menu .accordion input {
+	height: 20px;
+	padding: 2px;
+	border: 2px solid #1A1A1A;
+	box-shadow: 0 0px 2px #bbb inset 
+}
 .gs-canvas-list .row .columns {
 	padding-left: 35px;
 }
@@ -309,7 +315,12 @@ input[type="checkbox"]:checked + label {
 	border: 1px solid #333;
 	color: #333;
 }
-
+.gs-btn:hover,
+.gs-btn:focus {
+	background-color: #ddd;
+	color: #333;
+	border: 1px solid #bbb
+}
 
 
 /*------------------------------------*\
@@ -348,3 +359,91 @@ input[type="checkbox"]:checked + label {
 #popup {
 	cursor: pointer;
 }
+
+
+/*------------------------------------*\
+    $REGISTER
+\*------------------------------------*/
+
+body.register {
+	background-color: #b5b5b5
+}
+.gs-login-box {
+	color: #fff;
+	padding: 15px;
+}
+.gs-login-box h2,
+.gs-login-box h3 {
+	color: #fff;
+}
+.gs-login-box h3 {
+	font-size: 18px;
+	margin-bottom: 30px;
+}
+.gs-login-box input,
+.gs-login-box span.prefix  {
+	padding-left: 35px;
+}
+.gs-login-box input {
+	height: 47px;	
+}
+.gs-login-box span.prefix {
+	background-color: #fff;
+	border-right: none;
+}
+.gs-login-box i.fi-torso,
+.gs-login-box i.fi-mail,
+.gs-login-box i.fi-lock {
+  color: #bbbbbb;
+  left: 0;
+  padding: 12px 15px;
+  position: absolute;
+}
+.gs-login-box .gs-login-btn,
+.gs-login-box .gs-social-btn {
+  height: 47px;
+  padding: 13px;
+  border: 1px solid transparent;
+}
+.gs-login-box .gs-login-btn {
+	background-color: #1a1a1a;
+}
+.gs-login-box .gs-facebook-btn {
+	background-color: #3a589d;
+}
+.gs-login-box .gs-twitter-btn {
+	background-color: #00a7e1;
+}
+.gs-login-box .gs-google-plus-btn {
+	background-color: #e53e30;
+}
+.gs-login-box .gs-login-btn:hover,
+.gs-login-box .gs-login-btn:focus,
+.gs-login-box .gs-social-btn:hover,
+.gs-login-box .gs-social-btn:focus {
+	opacity: 0.9;
+	box-shadow: 0 0 10px -5px #333333 inset;
+	border: 1px solid #ddd
+}
+.gs-login-box .row.collapse {
+	position: relative;
+}
+.gs-login-box .gs-line {
+	position: absolute;;
+	width: 100%;
+	background-color: #fff;
+	height: 1px;
+	left: 0;
+	right: 0;
+	top: 12px;
+}
+.gs-login-box .gs-social {
+  background-color: #b5b5b5;
+  margin: 0 auto;
+  position: relative;
+  width: 35%;
+  z-index: 2;
+  margin-bottom: 15px;
+}
+.gs-login-box
+.gs-login-box
