@@ -128,12 +128,25 @@ input[type="color"] {
 .top-bar-section ul li > a.button.secondary  {
 	font-size: 12px
 }
+.gs-open:hover,
+.gs-open:focus {
+	background-color: rgba(0,0,0, 0.2);
+}
 .top-bar-section ul li > a.button {
 	background-color: #1A1A1A;
+}
+.top-bar-section ul li > a.button:hover,
+.top-bar-section ul li > a.button:focus {
+	background-color: rgba(0,0,0,0.7);
 }
 .top-bar-section ul li > a.button.secondary {
 	background-color: #EAEAEA;
 	border: 1px solid #1A1A1A;
+	color: #333;
+}
+.top-bar-section ul li > a.button.secondary:hover,
+.top-bar-section ul li > a.button.secondary:focus {
+	background-color: #ddd;
 }
 
 
@@ -146,6 +159,7 @@ input[type="color"] {
 .inner-wrap {
 	height: 100vh;
 }
+
 
 /*------------------------------------*\
     $RIGHT
@@ -163,7 +177,7 @@ input[type="color"] {
 	-o-transform: rotate(-90deg);
 	transform: rotate(-90deg);
 }
-.gs-open {
+.gs-right-btn .gs-open {
   background-color: #ffffff;
   border: 2px solid #1a1a1a;
   font-size: 10px;
@@ -296,10 +310,11 @@ input[type="checkbox"]:checked + label {
 	color: #333;
 }
 
+
+
 /*------------------------------------*\
     $ACCORDION
 \*------------------------------------*/
-
 
 #map {
   height: 100%; width: 95%;
