@@ -195,7 +195,7 @@ object User extends User with ProtoAuthUserMeta[User] with RogueMetaRecord[User]
         val user = User
           .createRecord
           .name(name)
-            .verified(true)
+          .verified(true)
           .email(authInfo.email)
           .password(Helpers.nextFuncName)
           .save(true)

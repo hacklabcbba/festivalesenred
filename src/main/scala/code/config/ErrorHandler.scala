@@ -6,6 +6,7 @@ import model.User
 import net.liftweb._
 import common.{Loggable, MDC}
 import http.{Factory, LiftRules, RedirectResponse, Req, S, XhtmlResponse}
+import omniauth.Omniauth
 import util.Props
 
 object ErrorHandler extends Factory with Loggable {
@@ -15,6 +16,7 @@ object ErrorHandler extends Factory with Loggable {
   def init(): Unit = {
     LiftRules.exceptionHandler.prepend {
       case (Props.RunModes.Development, r, e) =>
+        println(Omniauth.currentAuth)
         logException(r, e)
         XhtmlResponse(
           (<html><body>Exception occured while processing {r.uri}<pre>{showException(e)}</pre></body></html>),

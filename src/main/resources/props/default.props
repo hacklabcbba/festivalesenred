@@ -4,9 +4,13 @@ mail.smtp.pass=
 
 mongo.default.port=27017
 
-omniauth.facebooksecret=b9e37551784e4f17217304e4090d1517
 omniauth.facebookkey=790115987729160
+omniauth.facebooksecret=b9e37551784e4f17217304e4090d1517
 omniauth.baseurl=http://localhost:8080/
 omniauth.successurl=/loginsuccess
-omniauth.failureurl=/loginerror
+omniauth.failureurl=/error
 omniauth.facebookpermissions=email,read_stream
+omniauth.googlekey=420201921299-ulpteu9no5b0bve1qlv1st7vt0m2rl4u.apps.googleusercontent.com
+omniauth.googlesecret=5qXOuleXJddB5lXszFHnq1Mk
+omniauth.twitterkey=eHnuXIkAIiVxWRrAFV9QuDTlQ
+omniauth.twittersecret=x0l5NDVnPUQ8enJ7lqgtH4XqwLC4xdXhP2PNeYtUWaFdAwlrII
