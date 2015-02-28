@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!doctype html>
 <html class="no-js" lang="en">
   <head>
@@ -15,7 +16,7 @@
 
   <nav role="navigation" data-topbar="" class="top-bar">
 	  <ul class="title-area">
-	    <li class="name"><h1><a href="#"><img src="img/logo.png"></a></h1></li>
+	    <li class="name"><h1><a href="#"><img src="img/logo_festivalesenred.png"></a></h1></li>
 	    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
 	  </ul>
   
@@ -35,6 +36,9 @@
   </nav>
 
 <div class="off-canvas-wrap" data-offcanvas>
+=======
+<div class="off-canvas-wrap" data-offcanvas data-lift="surround?with=base-wrap;at=content" id="content">
+>>>>>>> 2828122b570e19ed55104a32acb69c5110bdb998
    <div class="inner-wrap">
       <div class="gs-right-btn">
       	<a class="right-off-canvas-toggle right gs-open" href="#" >Buscar</a> <!-- Off Canvas Menu -->
@@ -133,117 +137,3 @@
 
    </div>
 </div>
-
-  	<script src="/js/script.js"></script>
-    <script src="/js/foundation.min.js"></script>
-    <script>
-      $(document).foundation();
-    </script>
-	<script>
-	var iconFeature = new ol.Feature({
-	  geometry: new ol.geom.Point([-7354864, -1889219]),
-	  name: 'Festival 1'
-	});
-
-	var iconFeature2 = new ol.Feature({
-	  geometry: new ol.geom.Point([-7654865, -1889233]),
-	  name: 'Festival 2'
-	});
-
-	var iconStyle = new ol.style.Style({
-	  image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
-		anchor: [0.5, 46],
-		anchorXUnits: 'fraction',
-		anchorYUnits: 'pixels',
-		opacity: 0.75,
-		src: '/img/marker-icon.png'
-	  }))
-	});
-
-
-	iconFeature.setStyle(iconStyle);
-	iconFeature2.setStyle(iconStyle);
-
-	var vectorSource = new ol.source.Vector({
-	  features: [iconFeature, iconFeature2]
-	});
-
-	var vectorLayer = new ol.layer.Vector({
-	  source: vectorSource
-	});
-
-	var projection = ol.proj.get('EPSG:900913');
-	var projectionExtent = projection.getExtent();
-	var size = ol.extent.getWidth(projectionExtent) / 256;
-	var resolutions = new Array(26);
-	var matrixIds = new Array(26);
-	for (var z = 0; z < 26; ++z) {
-	  // generate resolutions and matrixIds arrays for this WMTS
-	  resolutions[z] = size / Math.pow(2, z);
-	  matrixIds[z] = 'EPSG:900913:' + z;
-	}
-
-	var map = new ol.Map({
-	   layers: [
-		 new ol.layer.Tile({
-			source: new ol.source.OSM()
-		 }),
-		 vectorLayer
-	   ],
-	   renderer: 'canvas',
-	   target: document.getElementById('map'),
-	   view: new ol.View({
-		 center: [-7354864, -1889219],
-		 zoom: 5
-	   })
-	});
-
-	//Añadimos un control de zoom
-
-	map.addControl(new ol.control.ZoomSlider());
-
-	var element = document.getElementById('popup');
-
-	var popup = new ol.Overlay({
-	  element: element,
-	  positioning: 'bottom-center',
-	  stopEvent: false
-	});
-	map.addOverlay(popup);
-
-	// display popup on click
-	map.on('click', function(evt) {
-	  var feature = map.forEachFeatureAtPixel(evt.pixel,
-		  function(feature, layer) {
-			return feature;
-		  });
-	  if (feature) {
-		var geometry = feature.getGeometry();
-		var coord = geometry.getCoordinates();
-		popup.setPosition(coord);
-		$(element).popover('destroy');
-		$(element).popover({
-		  'placement': 'top',
-		  'html': true,
-		  'content': feature.get('name')
-		});
-		$(element).popover('show');
-	  } else {
-		$(element).popover('destroy');
-	  }
-	});
-
-	map.on('pointermove', function(e) {
-	  if (e.dragging) {
-		$(element).popover('destroy');
-		return;
-	  }
-	  var pixel = map.getEventPixel(e.originalEvent);
-	  var hit = map.hasFeatureAtPixel(pixel);
-	  map.getTarget().style.cursor = hit ? 'pointer' : '';
-	});
-
-
-  	</script>
-</body>
-</html>
