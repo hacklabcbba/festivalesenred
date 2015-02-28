@@ -2,6 +2,7 @@ package code
 package model
 
 import lib.RogueMetaRecord
+import omniauth.AuthInfo
 
 import org.bson.types.ObjectId
 import org.joda.time.DateTime
@@ -11,7 +12,7 @@ import common._
 import http.{StringField => _, BooleanField => _, _}
 import mongodb.record.field._
 import record.field._
-import util.FieldContainer
+import net.liftweb.util.{Helpers, FieldContainer}
 
 import net.liftmodules.mongoauth._
 import net.liftmodules.mongoauth.field._
@@ -185,6 +186,25 @@ object User extends User with ProtoAuthUserMeta[User] with RogueMetaRecord[User]
   // used during login process
   object loginCredentials extends SessionVar[LoginCredentials](LoginCredentials(""))
   object regUser extends SessionVar[User](createRecord.email(loginCredentials.is.email))
+
+  //Omnitauth login
+  def loginWithOmniauth(authInfo: AuthInfo): Box[User] = {
+    val name = authInfo.name
+    authInfo.email.flatMap(User.findByEmail(_)) match {
+      case None =>
+        val user = User
+          .createRecord
+          .name(name)
+            .verified(true)
+          .email(authInfo.email)
+          .password(Helpers.nextFuncName)
+          .save(true)
+        logUserIn(user, true)
+        Full(user)
+      case other => other
+    }
+
+  }
 }
 
 case class LoginCredentials(email: String, isRememberMe: Boolean = false)

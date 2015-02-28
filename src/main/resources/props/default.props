@@ -3,3 +3,10 @@ mail.smtp.user=
 mail.smtp.pass=
 
 mongo.default.port=27017
+
+omniauth.facebooksecret=b9e37551784e4f17217304e4090d1517
+omniauth.facebookkey=790115987729160
+omniauth.baseurl=http://localhost:8080/
+omniauth.successurl=/loginsuccess
+omniauth.failureurl=/loginerror
+omniauth.facebookpermissions=email,read_stream
