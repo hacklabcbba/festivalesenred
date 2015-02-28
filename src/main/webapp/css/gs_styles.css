@@ -65,7 +65,14 @@ p {
 a {
 	color: #FF6600;
   font-family: 'alte_haas_groteskregular';
-  font-size: 14px;
+
+}
+
+p a:hover {
+	color: #FF6600;
+  font-family: 'alte_haas_groteskregular';
+  text-decoration:underline;
+
 }
 
 h1 {
