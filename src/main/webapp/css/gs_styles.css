@@ -348,7 +348,7 @@ input[type="checkbox"]:checked + label {
     $REGISTER
 \*------------------------------------*/
 
-body.register {
+div.register {
 	background-color: #b5b5b5
 }
 .gs-login-box {
