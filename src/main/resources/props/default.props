@@ -6,7 +6,8 @@ mongo.default.port=27017
 
 omniauth.facebookkey=790115987729160
 omniauth.facebooksecret=b9e37551784e4f17217304e4090d1517
-omniauth.baseurl=http://127.0.0.1:8080/
+# twitter omniauth.baseurl=http://127.0.0.1:8080/
+omniauth.baseurl=http://localhost:8080/
 omniauth.successurl=/loginsuccess
 omniauth.failureurl=/error
 omniauth.facebookpermissions=email,read_stream
