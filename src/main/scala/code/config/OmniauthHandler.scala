@@ -25,6 +25,11 @@ object OmniauthHandler extends RestHelper with Loggable {
         RedirectResponse(Site.account.url)
       }
     }
+    case "loginerror" :: Nil Get request => {
+      println(Omniauth)
+      println(request)
+      RedirectResponse("/")
+    }
   }
 
 }
