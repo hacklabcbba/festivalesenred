@@ -104,6 +104,14 @@ h4 {
  
 }
 
+h5 {
+	color: #666;
+  font-family: 'alte_haas_groteskregular';
+  font-size: 12px;
+  font-weight:bold;  
+ 
+}
+
 
 
 /*------------------------------------*\
@@ -125,17 +133,27 @@ h4 {
 .info{
 	padding-left: 90px;
 	padding-top: 10px;
+	padding-bottom: 35px;
 	}
 
 .imginfo{
-	padding-right: 30px;
+	padding-right: 25px;
 	}
 
 .imgfer {
 	
 	padding-right: 5px;
 	margin-top: 2px;
+	horizontal-align: top;
+	vertical-align: middle;
 	}
+
+img.middle {
+   vertical-align: left;
+	margin-right: 5px;
+	margin-top: 10px;
+}
+
 	
 .textfer{
 	margin-top: -30px;
@@ -144,9 +162,16 @@ h4 {
 
 
 .left{
-    float: left;
+   float: left;
 	width:200px;
 }
+
+.leftitem{
+   float: left;
+	width: 50px;
+	margin-right: 50px;
+}
+
 .right{
     float: right;
 	width:200px;
@@ -157,9 +182,30 @@ h4 {
 	display:inline-block;
 }
 
-.sobre{
-	width:500px;
+.sobreleft{
+	width:435px;
 	float:left;
+	margin-right: 15px;
+	}
+	
+.sobre{
+	width:435px;
+	margin-right: 25px;
+	}
+	
+
+.three{
+	width:250px;
+	float:left;
+	margin-right: 25px;
+	text-align:left;
+	margin-top: 50px;
+	}
+
+.titlebanner{
+	height:40px;
+	font-weight:bold;
+	font-size: 17px;
 	}
 
 /*------------------------------------*\
