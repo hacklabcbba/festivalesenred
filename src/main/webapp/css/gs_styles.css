@@ -96,6 +96,16 @@ h3 {
  
 }
 
+h4 {
+	color: #666;
+  font-family: 'alte_haas_groteskregular';
+  font-size: 14px;
+  font-weight:bold;  
+ 
+}
+
+
+
 /*------------------------------------*\
     $GENERAL CLASSES
 \*------------------------------------*/
@@ -119,6 +129,37 @@ h3 {
 
 .imginfo{
 	padding-right: 30px;
+	}
+
+.imgfer {
+	
+	padding-right: 5px;
+	margin-top: 2px;
+	}
+	
+.textfer{
+	margin-top: -30px;
+	padding-left: 15px;
+	}
+
+
+.left{
+    float: left;
+	width:200px;
+}
+.right{
+    float: right;
+	width:200px;
+	}
+	
+.center{
+	width:200px;
+	display:inline-block;
+}
+
+.sobre{
+	width:500px;
+	float:left;
 	}
 
 /*------------------------------------*\
