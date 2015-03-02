@@ -275,9 +275,9 @@ img.middle {
 .gs-right-btn {
 	background-color: #FF6161;
 	padding: 5px;
-  position: absolute;
-  right: -16px;
-  top: 30px;
+  	position: absolute;
+  	right: -60px;
+  	top: 30px;
 	-moz-transform: rotate(-90deg);
 	-webkit-transform: rotate(-90deg);
 	-ms-transform: rotate(-90deg);
