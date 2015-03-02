@@ -1,5 +1,16 @@
 package code
 
+import code.config.MongoConfig
+import code.model._
+import code.model.contact._
+import code.model.development._
+import code.model.document._
+import code.model.festival._
+import code.model.field._
+import code.model.institution._
+import code.model.link._
+import code.model.proposal._
+import net.liftweb.mongodb.record.MongoMetaRecord
 import org.scalatest._
 
 import net.liftweb._
@@ -8,8 +19,9 @@ import http._
 import mongodb._
 import util._
 import util.Helpers.randomString
+import scala.collection.JavaConverters._
 
-import com.mongodb.{MongoClient, ServerAddress}
+import com.mongodb.{BasicDBObject, MongoClient, ServerAddress}
 
 // The sole mongo object for testing
 object TestMongo {
@@ -20,53 +32,58 @@ object TestMongo {
 }
 
 /**
-  * Creates a `ConnectionIdentifier` and database named after the class.
-  * Therefore, each Suite class shares the same database.
-  * Database is dropped after all tests have been run in the suite.
-  */
+ * Creates a `ConnectionIdentifier` and database named after the class.
+ * Therefore, each Suite class shares the same database.
+ * Database is dropped after all tests have been run in the suite.
+ */
 trait MongoBeforeAndAfterAll extends BeforeAndAfterAll {
   this: Suite =>
 
-  lazy val dbName = "fer_test_"+this.getClass.getName
-    .replace(".", "_")
-    .toLowerCase
+  lazy val dbName = Props.get("mongo.default.name", "verbal-test")
 
   def debug = false // db won't be dropped if this is true
 
-  lazy val identifier = new ConnectionIdentifier {
-    val jndiName = dbName
+  lazy val identifier = {
+    MongoConfig.init()
+    MongoConfig.defaultId.vend
   }
 
   override def beforeAll(configMap: ConfigMap) {
     // define the db
-    MongoDB.defineDb(identifier, TestMongo.mongo, dbName)
+    MongoConfig.init()
   }
 
   override def afterAll(configMap: ConfigMap) {
-    if (!debug) { dropDb() }
+    if (!debug) { destroyDb() }
   }
 
-  protected def dropDb(): Unit = MongoDB.use(identifier) { db => db.dropDatabase }
+  lazy val collections: List[MongoMetaRecord[_]] =
+    List(Contact, Development, City, Festival, Institution, Link)
+
+  def destroyDb(): Unit = {
+    collections.foreach(_ bulkDelete_!! new BasicDBObject)
+  }
 }
 
 /**
-  * Basic Mongo suite for running Mongo tests.
-  */
+ * Basic Mongo suite for running Mongo tests.
+ */
 trait MongoSuite extends SuiteMixin with MongoBeforeAndAfterAll {
   this: Suite =>
 
   def mongoIdentifier: StackableMaker[ConnectionIdentifier]
 
   abstract override def withFixture(test: NoArgTest) = {
-    mongoIdentifier.doWith(identifier) {
+    MongoConfig.init()
+    mongoIdentifier.doWith(MongoConfig.defaultId.vend) {
       super.withFixture(test)
     }
   }
 }
 
 /**
-  * Mongo suite running within a LiftSession.
-  */
+ * Mongo suite running within a LiftSession.
+ */
 trait MongoSessionSuite extends SuiteMixin with MongoBeforeAndAfterAll {
   this: Suite =>
 
@@ -77,7 +94,8 @@ trait MongoSessionSuite extends SuiteMixin with MongoBeforeAndAfterAll {
 
   abstract override def withFixture(test: NoArgTest) = {
     S.initIfUninitted(session) {
-      mongoIdentifier.doWith(identifier) {
+      MongoConfig.init()
+      mongoIdentifier.doWith(MongoConfig.defaultId.vend) {
         super.withFixture(test)
       }
     }

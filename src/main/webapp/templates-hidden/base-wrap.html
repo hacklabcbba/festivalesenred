@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Foundation | Welcome</title>
   <link rel="stylesheet" href="/css/foundation.css" />
+  <link rel="stylesheet" href="/css/fullcalendar.min.css" />
   <link rel="stylesheet" href="/css/gs_styles.css" />
   <link rel="stylesheet" href="/css/ol.css" />
   <script src="/js/vendor/modernizr.js"></script>
@@ -15,23 +16,28 @@
 
 <nav role="navigation" data-topbar="" class="top-bar">
   <ul class="title-area">
-    <li class="name"><h1><a href="/"><img src="img/logo_festivalesenred.png"></a></h1></li>
+    <li class="name"><h1><a href="/"><img src="/img/logo_festivalesenred.png"></a></h1></li>
     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
   </ul>
 
   <section class="top-bar-section">
 
     <ul class="left">
+<<<<<<< HEAD
       <li><a href="que_es.html">Info</a></li>
       <li><a href="/festivales.html">Festivales</a></li>
+=======
+      <li><a href="/que_es">Info</a></li>
+      <li><a href="/">Festivales</a></li>
+>>>>>>> 00193d0b7a1b7af899ba69edbd8451e0d50dd9c6
       <li><a href="/calendar">Calendario</a></li>
       <li><a href="/faq">FAQ</a></li>
-      <li><a href="en_red.html">En red</a></li>
+      <li><a href="/en_red">En red</a></li>
 
     </ul>
 
     <ul class="right">
-          <li style="margin-top:-3px;"><a href="http://www.telartes.org.bo" target="_blank">Una propuesta de<img src="../img/telartes.png"/></a></li>
+          <li style="margin-top:-3px;"><a href="http://www.telartes.org.bo" target="_blank">Una propuesta de<img src="/img/telartes.png"/></a></li>
       <li><a class="button secondary" href="/login">Iniciar Sesion</a></li>
       <li><a class="button" href="/register">Registrarse</a></li>
     </ul>
@@ -44,9 +50,11 @@
 
 <script src="/js/script.js"></script>
 <script src="/js/foundation.min.js"></script>
+<script src="/js/vendor/moment.min.js"></script>
+<script src="/js/vendor/fullcalendar.min.js"></script>
 <script>
-      $(document).foundation();
-    </script>
+  $(document).foundation();
+</script>
 <script>
 	var iconFeature = new ol.Feature({
 	  geometry: new ol.geom.Point([-7354864, -1889219]),
@@ -153,5 +161,79 @@
 
 
   	</script>
+	<script>
+
+        $(document).ready(function() {
+
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,basicWeek,basicDay'
+                },
+                defaultDate: '2015-02-12',
+                editable: true,
+                eventLimit: true, // allow "more" link when too many events
+                events: [
+                    {
+                        title: 'All Day Event',
+                        start: '2015-02-01'
+                    },
+                    {
+                        title: 'Long Event',
+                        start: '2015-02-07',
+                        end: '2015-02-10'
+                    },
+                    {
+                        id: 999,
+                        title: 'Repeating Event',
+                        start: '2015-02-09T16:00:00'
+                    },
+                    {
+                        id: 999,
+                        title: 'Repeating Event',
+                        start: '2015-02-16T16:00:00'
+                    },
+                    {
+                        title: 'Conference',
+                        start: '2015-02-11',
+                        end: '2015-02-13'
+                    },
+                    {
+                        title: 'Meeting',
+                        start: '2015-02-12T10:30:00',
+                        end: '2015-02-12T12:30:00'
+                    },
+                    {
+                        title: 'Lunch',
+                        start: '2015-02-12T12:00:00'
+                    },
+                    {
+                        title: 'Meeting',
+                        start: '2015-02-12T14:30:00'
+                    },
+                    {
+                        title: 'Happy Hour',
+                        start: '2015-02-12T17:30:00'
+                    },
+                    {
+                        title: 'Dinner',
+                        start: '2015-02-12T20:00:00'
+                    },
+                    {
+                        title: 'Birthday Party',
+                        start: '2015-02-13T07:00:00'
+                    },
+                    {
+                        title: 'Click for Google',
+                        url: 'http://google.com/',
+                        start: '2015-02-28'
+                    }
+                ]
+            });
+
+        });
+
+    </script>
 </body>
 </html>

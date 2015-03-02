@@ -18,7 +18,16 @@ object OmniauthHandler extends RestHelper with Loggable {
 
   serve {
     case "loginsuccess" :: Nil Get request => {
-      Omniauth.currentAuth.foreach(User.loginWithOmniauth(_))
+      val res = Omniauth.currentAuth.flatMap(User.loginWithOmniauth(_))
+      for {
+        user <- res
+      } yield {
+        RedirectResponse(Site.account.url)
+      }
+    }
+    case "loginerror" :: Nil Get request => {
+      println(Omniauth)
+      println(request)
       RedirectResponse("/")
     }
   }

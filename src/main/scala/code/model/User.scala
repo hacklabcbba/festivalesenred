@@ -54,6 +54,12 @@ class User private () extends ProtoAuthUser[User] with ObjectIdPk[User] {
       super.validations
   }
 
+  object snUsername extends OptionalStringField(this, 64) {
+    override def displayName = "Sn Username"
+
+    override def shouldDisplay_? = false
+  }
+
   /*
    * FieldContainers for various LiftScreeens.
    */
@@ -82,6 +88,7 @@ object User extends User with ProtoAuthUserMeta[User] with RogueMetaRecord[User]
 
   def findByEmail(in: String): Box[User] = find(email.name, in)
   def findByUsername(in: String): Box[User] = find(username.name, in)
+  def findBySnUsername(in: String): Box[User] = find(snUsername.name, in)
 
   def findByStringId(id: String): Box[User] =
     if (ObjectId.isValid(id)) find(new ObjectId(id))
@@ -187,20 +194,42 @@ object User extends User with ProtoAuthUserMeta[User] with RogueMetaRecord[User]
   object loginCredentials extends SessionVar[LoginCredentials](LoginCredentials(""))
   object regUser extends SessionVar[User](createRecord.email(loginCredentials.is.email))
 
+
   //Omnitauth login
   def loginWithOmniauth(authInfo: AuthInfo): Box[User] = {
     val name = authInfo.name
+    println(authInfo)
+    Empty
     authInfo.email.flatMap(User.findByEmail(_)) match {
-      case None =>
+      case None if authInfo.provider != "twitter" =>
         val user = User
           .createRecord
           .name(name)
+          .username(s"${authInfo.provider}_${authInfo.nickName getOrElse authInfo.uid}")
           .verified(true)
-          .email(authInfo.email)
+          .email(authInfo.email getOrElse s"${authInfo.provider}_${authInfo.nickName getOrElse authInfo.uid}")
           .password(Helpers.nextFuncName)
           .save(true)
         logUserIn(user, true)
         Full(user)
+      case None =>
+        User.findBySnUsername(s"${authInfo.provider}_${authInfo.nickName getOrElse authInfo.uid}") match {
+          case x@Full(user) =>
+            logUserIn(user, true)
+            x
+          case _ =>
+            val user = User
+              .createRecord
+              .name(name)
+              .snUsername(s"${authInfo.provider}_${authInfo.nickName getOrElse authInfo.uid}")
+              .username(s"${authInfo.provider}_${authInfo.nickName getOrElse authInfo.uid}")
+              .verified(true)
+              .email(authInfo.email getOrElse s"${authInfo.provider}_${authInfo.nickName getOrElse authInfo.uid}")
+              .password(Helpers.nextFuncName)
+              .save(true)
+            logUserIn(user, true)
+            Full(user)
+        }
       case other => other
     }
 
