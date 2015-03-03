@@ -43,6 +43,7 @@ object Site extends Locs {
   val editProfile = MenuLoc(Menu("EditProfile", "Profile") / "settings" / "profile" >> SettingsGroup >> RequireLoggedIn)
   val register = MenuLoc(Menu.i("Register") / "register" >> RequireNotLoggedIn)
   val enRed = MenuLoc(Menu("EnRed", "En Red") / "en_red" )
+  val festivales = MenuLoc(Menu("Festivales", "Festivales") / "festivales" )
   val queEs = MenuLoc(Menu("Quees", "Que es?") / "que_es" )
   val calendar = MenuLoc(Menu("Calendar", "Calendario") / "calendar" )
 
@@ -58,6 +59,7 @@ object Site extends Locs {
     editProfile.menu,
     enRed.menu,
     queEs.menu,
+    festivales.menu,
     calendar.menu,
     Menu.i("Error") / "error" >> Hidden,
     Menu.i("404") / "404" >> Hidden,
