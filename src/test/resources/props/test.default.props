@@ -1,0 +1,5 @@
+mongo.default.port=45021
+mongo.default.host=ds045021.mongolab.com
+mongo.default.name=verbalid-test
+mongo.default.user=verbalidadmin
+mongo.default.pwd=Verbal@1

@@ -56,6 +56,84 @@ body {
 
 }
 
+p {
+	color: #666;
+  font-family: 'alte_haas_groteskregular';
+  font-size: 13px;
+}
+
+a {
+	color: #FF6600;
+  font-family: 'alte_haas_groteskregular';
+
+}
+
+p a:hover {
+	color: #FF6600;
+  font-family: 'alte_haas_groteskregular';
+  text-decoration:underline;
+
+}
+
+h1 {
+	color: #333;
+  font-family: 'alte_haas_groteskregular';
+  font-size: 35px;
+  font-weight:bold;
+}
+
+h2 {
+	color: #666;
+  font-family: 'alte_haas_groteskregular';
+  font-size: 25px;
+  font-weight:bold;
+}
+
+h3 {
+	color: #666;
+  font-family: 'alte_haas_groteskregular';
+  font-size: 16px;
+ 
+}
+
+h3 a {
+	color: #FF6600;
+ 
+}
+
+h3 a:hover {
+	color: #FF6600;
+  text-decoration:underline;
+ 
+}
+
+h4 {
+	color: #666;
+  font-family: 'alte_haas_groteskregular';
+  font-size: 14px;
+  font-weight:bold;  
+ 
+}
+
+h5 {
+	color: #666;
+  font-family: 'alte_haas_groteskregular';
+  font-size: 12px;
+  font-weight:bold;  
+ 
+}
+
+h5 a {
+	color: #FF6600;
+ 
+}
+
+h5 a:hover {
+	color: #FF6600;
+  text-decoration:underline;
+ 
+}
+
 
 /*------------------------------------*\
     $GENERAL CLASSES
@@ -72,6 +150,91 @@ body {
 .button.secondary {
 	font-weight: bold;
 }
+
+.info{
+	padding-left: 90px;
+	padding-top: 10px;
+	padding-bottom: 90px;
+	}
+
+.imginfo{
+	padding-right: 25px;
+	}
+
+.imgfer {
+	
+	padding-right: 5px;
+	margin-top: 2px;
+	horizontal-align: top;
+	vertical-align: middle;
+	}
+
+img.middle {
+   vertical-align: left;
+	margin-right: 5px;
+	margin-top: 10px;
+}
+
+img.centre {
+   vertical-align: left;
+	margin-right: 5px;
+	margin-top: -4px;
+}
+
+	
+.textfer{
+	margin-top: -30px;
+	padding-left: 15px;
+	}
+
+
+.left{
+   float: left;
+	width:200px;
+}
+
+.leftitem{
+   float: left;
+	width: 50px;
+	margin-right: 50px;
+}
+
+.right{
+    float: right;
+	width:200px;
+	}
+	
+.center{
+	width:200px;
+	display:inline-block;
+	text-align:left;
+}
+
+.sobreleft{
+	width:435px;
+	float:left;
+	margin-right: 15px;
+	}
+	
+.sobre{
+	width:435px;
+	margin-right: 25px;
+	}
+	
+
+.three{
+	width:250px;
+	float:left;
+	margin-right: 25px;
+	text-align:left;
+	margin-top: 50px;
+	}
+
+.titlebanner{
+	height:40px;
+	font-weight:bold;
+	font-size: 17px;
+	}
 
 /*------------------------------------*\
     $HEADER
@@ -134,26 +297,15 @@ body {
 
 
 /*------------------------------------*\
-    $LEFT
-\*------------------------------------*/
-.off-canvas-wrap {
-	height: 88vh;
-}
-.inner-wrap {
-	height: 100vh;
-}
-
-
-/*------------------------------------*\
     $RIGHT
 \*------------------------------------*/
 
 .gs-right-btn {
-	background-color: #fff;
+	background-color: #FF6161;
 	padding: 5px;
-  position: absolute;
-  right: -16px;
-  top: 30px;
+  	position: absolute;
+  	right: -60px;
+  	top: 30px;
 	-moz-transform: rotate(-90deg);
 	-webkit-transform: rotate(-90deg);
 	-ms-transform: rotate(-90deg);
@@ -163,7 +315,7 @@ body {
 .gs-right-btn .gs-open {
   background-color: #ffffff;
   border: 2px solid #1a1a1a;
-  font-size: 10px;
+  font-size: 15px;
   padding: 2px;
   text-transform: uppercase;
   color: #333;
@@ -204,7 +356,7 @@ body {
 }
 .right-off-canvas-menu .accordion {
 	margin: 0;
-	padding: 15px;
+	padding: 10px;
 }
 .accordion .accordion-navigation > .content, 
 .accordion dd > .content {
@@ -242,11 +394,24 @@ body {
 }
 .gs-canvas-list li {
 	font-size: 12px;
+	font-weight:bold;
 	color: #333;
-	padding: 5px 0;
+	padding: 1px 0;
 	border: none;
 	list-style: none;
 }
+
+
+.gs-canvas-list li ul li {
+	font-size: 10px;
+	color: #999;
+	padding: 1px 0px;
+	margin-top:-4px;
+	margin-left:36px;
+	border: none;
+	list-style: none;
+}
+
 .gs-canvas-list li:hover {
 	background-color: transparent;
 }
@@ -348,16 +513,23 @@ input[type="checkbox"]:checked + label {
     $REGISTER
 \*------------------------------------*/
 
-body.register {
-	background-color: #b5b5b5
+div.register {
+	background-color: #FBFBFB
 }
+
+div.info {
+	background-color: #FBFBFB;
+	padding-right: 130px;
+	text-align:justify;
+}
+
 .gs-login-box {
 	color: #fff;
 	padding: 15px;
 }
 .gs-login-box h2,
 .gs-login-box h3 {
-	color: #fff;
+	color: #666;
 }
 .gs-login-box h3 {
 	font-size: 18px;
@@ -421,12 +593,13 @@ body.register {
 	top: 12px;
 }
 .gs-login-box .gs-social {
-  background-color: #b5b5b5;
+  background-color: #FBFBFB;
   margin: 0 auto;
   position: relative;
   width: 35%;
   z-index: 2;
   margin-bottom: 15px;
+  color:#666;
 }
 .gs-login-box
 .gs-login-box

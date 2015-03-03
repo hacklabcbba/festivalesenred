@@ -1,5 +1,7 @@
 package bootstrap.liftweb
 
+import omniauth.Omniauth
+
 import scala.xml.{Null, UnprefixedAttribute}
 import javax.mail.internet.MimeMessage
 
@@ -14,6 +16,7 @@ import code.model.User
 
 import net.liftmodules.extras.{Gravatar, LiftExtras}
 import net.liftmodules.mongoauth.MongoAuth
+import omniauth.lib._
 
 /**
  * A class that's instantiated early and run.  It allows the application
@@ -57,6 +60,9 @@ class Boot extends Loggable {
     // Error handler
     ErrorHandler.init
 
+    // Omniauth handler
+    OmniauthHandler.init
+
     // 404 handler
     LiftRules.uriNotFound.prepend(NamedPF("404handler") {
       case (req, failure) =>
@@ -79,6 +85,9 @@ class Boot extends Loggable {
 
     // don't include the liftAjax.js code. It's served statically.
     LiftRules.autoIncludeAjaxCalc.default.set(() => () => (session: LiftSession) => false)
+
+    //init
+    Omniauth.init
 
     // Mailer
     Mailer.devModeSend.default.set((m: MimeMessage) => logger.info("Dev mode message:\n" + prettyPrintMime(m)))
