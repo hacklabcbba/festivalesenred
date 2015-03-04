@@ -21,7 +21,7 @@
 
 			<div class="fs-form-wrap" id="fs-form-wrap">
 				<div class="fs-title">
-					<h1>Datos Generales del Festival</h1>
+					<h1>Registrar un Festival</h1>
 				</div>
 				<form id="myform" class="fs-form fs-form-full" autocomplete="off">
 					<ol class="fs-fields">
@@ -29,47 +29,54 @@
 							<label class="fs-field-label fs-anim-upper">Nombre del Festival</label>
 							<input class="fs-anim-lower" type="text" placeholder=""/>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Responsable</label>
 							<input class="fs-anim-lower" type="text" placeholder=""/>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Dirección de la Producción</label>
 							<input class="fs-anim-lower" type="text" placeholder=""/>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Ciudad / País</label>
 							<p class="fs-anim-lower">Texto predictivo para seleccionar la ciudad o ciudades donde se realiza (tiene que ir como el anteior con la opción "Seleccionar otra ciudad")</p>
 							<input class="fs-anim-lower" type="text" placeholder=""/>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Lugares donde se desarrolla el Festival </label>
 							<p class="fs-anim-lower">Aquí incluiremos un mapa dinámico desde donde colocar un punto en él y que saque la dirección automáticamente. Además incluir un link "Otro lugar" ya que un festival puede tener varias localizaciones.</p>
 							<input class="fs-anim-lower" type="text" placeholder=""/>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Fechas</label>
 							<p class="fs-anim-lower">Son fechas aproximadas (de... a...)</p>
-							<input class="fs-anim-lower" type="date" placeholder=""/>
+							<input class="fs-anim-lower" type="date"/>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Duración</label>
 							<p class="fs-anim-lower">Son fechas aproximadas (de... a...)</p>
-							<input class="fs-anim-lower" type="time" placeholder=""/>
+							<input class="fs-anim-lower" type="time"/>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Convocatoria (archivo a subirse)</label>
 							<p class="fs-anim-lower">Especificar fechas con un calendario</p>
-							<div class="gs-file fs-anim-upper">
+							<div class="gs-file fs-anim-lower">
 									<button class="button secondary round">Subir</button>
-									<input class="fs-anim-lower" type="file" placeholder=""/>
+									<input type="file"/>
 							</div>
-
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">En qué área actúa?</label>
 							<p class="fs-anim-lower">Especificar fechas con un calendario</p>
-							<div class="gs-checkbox fs-anim-upper">
+							<div class="gs-checkbox fs-anim-lower">
 								<label>
 								Artes Escénicas (Ej. Teatro, Danza, Performance, Circo, Títeres, etc...)
 								<input type="checkbox">
@@ -107,44 +114,52 @@
 								<input type="checkbox">
 								</label>
 
-								<label>Otro
+								<label>Otro:
 								<input type="text">
 								</label>
 							</div>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Sitio Web</label>
 							<p class="fs-anim-lower">en caso no tengas escribe NO TENGO</p>
 							<input class="fs-anim-lower" type="text" placeholder=""   />
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Email del/la responsable</label>
 							<input class="fs-anim-lower" type="text" placeholder=""   />
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Email de contacto del/la responsable de comunicación o prensa</label>
 							<input class="fs-anim-lower" type="text" placeholder=""   />
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Página en Facebook</label>
 							<p class="fs-anim-lower">en caso no tengas escribe NO TENGO</p>
 							<input class="fs-anim-lower" type="text" placeholder=""   />
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Twitter</label>
 							<p class="fs-anim-lower">en caso no tengas escribe NO TENGO</p>
 							<input class="fs-anim-lower" type="text" placeholder=""   />
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Skype</label>
 							<p class="fs-anim-lower">en caso no tengas escribe NO TENGO</p>
 							<input class="fs-anim-lower" type="text" placeholder=""   />
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Espacios donde se realiza</label>
-							<p>Informe donde acostumbras a realizar las acciones de tu festival</p>
-							<div class="gs-checkbox fs-anim-upper">
-								<label>Teatros
+							<p class="fs-anim-lower">Informe donde acostumbras a realizar las acciones de tu festival</p>
+							<div class="gs-checkbox fs-anim-lower">
+								<label>
+								Teatros
 								<input type="checkbox">
 								</label>
 								
@@ -192,15 +207,16 @@
 								<input type="checkbox">
 								</label>
 
-								<label>Otro
-								<input type="text"   >
+								<label>Otro:
+								<input type="text">
 								</label>
 							</div>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Equipamientos que posees</label>
 							<p class="fs-anim-lower">Informa con que equipamientos propios cuentas para realizar el festival, haz clic en las opciones y especifica en el ítem "otros"</p>
-							<div class="gs-checkbox fs-anim-upper">
+							<div class="gs-checkbox fs-anim-lower">
 								<label>Estructuras escénicas móviles (Tarimas, piso, paneles)
 								<input type="checkbox">
 								</label>
@@ -246,15 +262,17 @@
 								</label>
 							</div>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">De la categoria seleccionada de equipamiento con el que cuentas especifica en detalle</label>
 							<p class="fs-anim-lower">(especificar el tipo, marca, cantidad,etc.)</p>
-							<input class="fs-anim-lower" type="checkbox" placeholder=""   />
+							<input class="fs-anim-lower" type="text" placeholder=""   />
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">¿Cuantas personas componen el equipo y que funciones cumplen?</label>
 							<p class="fs-anim-lower">Informa el número de personas aumentar una columna para numero que actuan regularmente junto a tu colectivo o grupo y en que funciones se desempeñan, inclusive sin son varias funciones por persona</p>
-							<div class="gs-checkbox fs-anim-upper">
+							<div class="gs-checkbox fs-anim-lower">
 								<label>Permanentes
 								<input type="checkbox">
 								</label>
@@ -268,35 +286,39 @@
 								</label>
 
 								<label>Voluntarios
-								<input type="text">
+								<input type="checkbox">
 								</label>
 							</div>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Breve histórico / presentación</label>
 							<p class="fs-anim-lower">Informa el número de personas aumentar una columna para numero que actuan regularmente junto a tu colectivo o grupo y en que funciones se desempeñan, inclusive sin son varias funciones por persona</p>
-							<textarea class="fs-anim-lower" placeholder=""/></textarea>
+							<textarea class="fs-anim-lower" placeholder=""></textarea>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">¿Cuantas ediciones del festival se han realizado y en que años?</label>
 							<p class="fs-anim-lower">Informa cuantas ediciones fueron realizadas y en que años mismo si no han sido sucesivos Ej: Festival del Sol - 5 ediciones 2004 -2006- 2009 - 2010 - 2013. Elegir varias fechas, sólo MES y AÑO. Si es consecutivo "Desde...".</p>
-							<input class="fs-anim-lower" type="date" placeholder=""/>
+							<input class="fs-anim-lower" type="date"/>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">¿Realizas intercambio de servicios, productos o conocimiento con otras organizaciones? En caso que tu respuesta sea Si, por favor especifica</label>
 							<p class="fs-anim-lower">A través de trueques, fondos y/o otros</p>
 							<div class="gs-radio fs-anim-lower">
 								<label>Si
-								<input type="radio" name="pokemon" value="poke" placeholder="">
+								<input type="radio" name="pokemon" value="poke">
 								</label>
 								<label>No
-								<input type="radio" name="pokemon" value="mon" placeholder="">
+								<input type="radio" name="pokemon" value="mon">
 								</label>
 							</div>
 						</li>
+
 						<li>
-							<label class="fs-field-label fs-anim-upper">Especifíca. </label>
-							<div class="gs-checkbox fs-anim-upper">
+							<label class="fs-field-label fs-anim-upper">Especifica.</label>
+							<div class="gs-checkbox fs-anim-lower">
 								<label>Trueque
 								<input type="checkbox">
 								</label>
@@ -313,26 +335,28 @@
 								<input type="checkbox">
 								</label>
 
-								<label>Otro
+								<label>Otro:
 								<input type="text">
 								</label>
 							</div>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">¿Desarrollas alguna acción de formación?</label>
 							<p class="fs-anim-lower">Debates, talleres, conferencias y/o otros</p>
 							<div class="gs-radio fs-anim-lower">
 								<label>Si
-								<input type="radio" name="digimon" value="digi" placeholder="">
+								<input type="radio" name="digimon" value="digi">
 								</label>
 								<label>No
-								<input type="radio" name="digimon" value="mon" placeholder="">
+								<input type="radio" name="digimon" value="mon">
 								</label>
 							</div>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Caso sí, ¿cual(es)? </label>
-							<div class="gs-checkbox fs-anim-upper">
+							<div class="gs-checkbox fs-anim-lower">
 								<label>Mesas de dialogo
 								<input type="checkbox">
 								</label>
@@ -358,9 +382,10 @@
 								</label>
 							</div>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">¿Especificar que herramientas de comunicación utilizas?  </label>
-							<div class="gs-checkbox fs-anim-upper">
+							<div class="gs-checkbox fs-anim-lower">
 								<label>Televisión
 								<input type="checkbox">
 								</label>
@@ -418,17 +443,19 @@
 								</label>
 							</div>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">¿Tienes alguna alianza con instituciones públicas?</label>
 							<div class="gs-radio fs-anim-lower">
 								<label>Si
-								<input type="radio" name="digimon" value="digi" placeholder="">
+								<input type="radio" name="digimon" value="digi">
 								</label>
 								<label>No
-								<input type="radio" name="digimon" value="mon" placeholder="">
+								<input type="radio" name="digimon" value="mon">
 								</label>
 							</div>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Caso sí, ¿Qué tipo de alianza? </label>
 							<p class="fs-anim-lower">Caso no tenga escriba NO TENGO</p>
@@ -450,21 +477,23 @@
 								</label>
 							</div>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">¿Tienes alguna alianza con alguna entidad privada?</label>
 							<div class="gs-radio fs-anim-lower">
 								<label>Si
-								<input type="radio" name="digimon" value="digi" placeholder="">
+								<input type="radio" name="digimon" value="digi">
 								</label>
 								<label>No
-								<input type="radio" name="digimon" value="mon" placeholder="">
+								<input type="radio" name="digimon" value="mon">
 								</label>
 							</div>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Caso sí, ¿Qué tipo de alianza? </label>
 							<p class="fs-anim-lower">Caso no tenga escriba NO TENGO</p>
-							<div class="gs-checkbox fs-anim-upper">
+							<div class="gs-checkbox fs-anim-lower">
 								<label>Convenio
 								<input type="checkbox">
 								</label>
@@ -482,21 +511,23 @@
 								</label>
 							</div>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">¿Posees alguna alianza con otras organizaciones de la Sociedad Civil?</label>
 							<div class="gs-radio fs-anim-lower">
 								<label>Si
-								<input type="radio" name="digimon" value="digi" placeholder="">
+								<input type="radio" name="digimon" value="digi">
 								</label>
 								<label>No
-								<input type="radio" name="digimon" value="mon" placeholder="">
+								<input type="radio" name="digimon" value="mon">
 								</label>
 							</div>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Caso sí, ¿Qué tipo de alianza? </label>
 							<p class="fs-anim-lower">Caso no tenga escriba NO TENGO</p>
-							<div class="gs-checkbox fs-anim-upper">
+							<div class="gs-checkbox fs-anim-lower">
 								<label>Convenio
 								<input type="checkbox">
 								</label>
@@ -514,62 +545,68 @@
 								</label>
 							</div>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">¿Participa de alguna red?</label>
 							<div class="gs-radio fs-anim-lower">
 								<label>Si
-								<input type="radio" name="digimon" value="digi" placeholder="">
+								<input type="radio" name="digimon" value="digi">
 								</label>
 								<label>No
-								<input type="radio" name="digimon" value="mon" placeholder="">
+								<input type="radio" name="digimon" value="mon">
 								</label>
 							</div>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Caso sí, ¿Cual(es)?</label>
 							<p class="fs-anim-lower">Caso no tengas escribe NO TENGO. Que sea texto predictivo con lo que otros hayan añadido previamente.</p>
-							<textarea class="fs-anim-lower" placeholder=""/></textarea>
+							<textarea class="fs-anim-lower" placeholder=""></textarea>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">A partir de que presupuesto mínimo realizas el festival (Obligatorio)</label>
 							<div class="gs-radio fs-anim-lower">
 								<label>0 - 1000 Bs.
-								<input type="radio" name="digimon" value="di" placeholder="">
+								<input type="radio" name="digimon" value="di">
 								</label>
 								<label>1000 - 5000 Bs.
-								<input type="radio" name="digimon" value="gi" placeholder="">
+								<input type="radio" name="digimon" value="gi">
 								</label>
 								<label>5000 - 10000 Bs.
-								<input type="radio" name="digimon" value="mon" placeholder="">
+								<input type="radio" name="digimon" value="mon">
 								</label>
 								<label>10000 - 25000 Bs.
-								<input type="radio" name="digimon" value="vs" placeholder="">
+								<input type="radio" name="digimon" value="vs">
 								</label>
 								<label>25000 - 50000 Bs.
-								<input type="radio" name="digimon" value="po" placeholder="">
+								<input type="radio" name="digimon" value="po">
 								</label>
 								<label>50000 - 100000 Bs.
-								<input type="radio" name="digimon" value="ke" placeholder="">
+								<input type="radio" name="digimon" value="ke">
 								</label>
 								<label>+ de 100000 Bs.
-								<input type="radio" name="digimon" value="monn" placeholder="">
+								<input type="radio" name="digimon" value="monn">
 								</label>
 							</div>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Cual es el costo monetario que utilizas para realizar el festival (Opcional)</label>
 							<p class="fs-anim-lower">Especifica el monto real en moneda que utilizas para la producción de tu festival</p>
-							<textarea class="fs-anim-lower" placeholder=""/></textarea>
+							<textarea class="fs-anim-lower" placeholder=""></textarea>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Cual el monto en economía colaborativa (Opcional)</label>
 							<p class="fs-anim-lower">Haz un estimativo de los movimientos que se realizan a partir de intercambio, donaciones voluntariados etc.</p>
-							<textarea class="fs-anim-lower" placeholder=""/></textarea>
+							<textarea class="fs-anim-lower" placeholder=""></textarea>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Cual es el tiempo de duración de gestión del Festival ? </label>
 							<p class="fs-anim-lower">Especifica en los tiempos: Desde inicio de gestión, planificación, duración del Festival y el Cierre</p>
-							<div class="gs-checkbox fs-anim-upper">
+							<div class="gs-checkbox fs-anim-lower">
 								<label>1 semana
 								<input type="checkbox">
 								</label>
@@ -595,11 +632,13 @@
 								</label>
 							</div>
 						</li>
+
 						<li>
 							<label class="fs-field-label fs-anim-upper">Palabras Claves, Etiquetas, HashTags</label>
 							<p class="fs-anim-lower">Haz un estimativo de los movimientos que se realizan a partir de intercambio, donaciones voluntariados etc.</p>
-							<textarea class="fs-anim-lower" placeholder=""/></textarea>
+							<textarea class="fs-anim-lower" placeholder=""></textarea>
 						</li>
+
 					</ol><!-- /fs-fields -->
 					<button class="fs-submit" type="submit">Enviar Formulario</button>
 				</form><!-- /fs-form -->
