@@ -46,7 +46,7 @@ object Site extends Locs {
   val festivales = MenuLoc(Menu("Festivales", "Festivales") / "festivales" )
   val queEs = MenuLoc(Menu("Quees", "Que es?") / "que_es" )
   val calendar = MenuLoc(Menu("Calendar", "Calendario") / "calendar" )
-  val registerFest = MenuLoc(Menu("RegFest", "Registro de Festival") / "register_fest" )
+  val registerFest = MenuLoc(Menu("RegFest", "Registro de Festival") / "regfest" )
 
   private def menus = List(
     home.menu,
