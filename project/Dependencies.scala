@@ -14,7 +14,7 @@ object Dependencies {
   def container(deps: ModuleID*): Seq[ModuleID] = deps map (_ % "container")
 
   object Ver {
-    val lift = "2.6-RC1"
+    val lift = "2.6.1"
     val lift_edition = "2.6"
     val jetty = "9.2.2.v20140723"
   }
