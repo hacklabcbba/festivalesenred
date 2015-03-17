@@ -5,7 +5,7 @@ package festival
 import code.lib.RogueMetaRecord
 import code.model.institution.Institution
 import code.model.proposal.Proposal
-import net.liftweb.common.Loggable
+import net.liftweb.common.{Full, Box, Loggable}
 import net.liftweb.mongodb.record.MongoRecord
 import net.liftweb.mongodb.record.field._
 import net.liftweb.record.field._
@@ -137,6 +137,12 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
 
 object Festival extends Festival with RogueMetaRecord[Festival] with Loggable {
   override def collectionName = "festival.festivals"
+  def findOrNew(in: String): Box[Festival] = in match {
+    case "new" =>
+      Full(Festival.createRecord)
+    case _ =>
+      find(in)
+  }
 }
 
 

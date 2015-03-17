@@ -1,11 +1,12 @@
 package code
 package config
 
+import code.model.festival.Festival
 import model.User
 
 import net.liftweb._
 import common._
-import http.S
+import net.liftweb.http.{Templates, S}
 import omniauth.Omniauth
 import sitemap._
 import sitemap.Loc._
@@ -47,6 +48,11 @@ object Site extends Locs {
   val queEs = MenuLoc(Menu("Quees", "Que es?") / "que_es" )
   val calendar = MenuLoc(Menu("Calendar", "Calendario") / "calendar" )
   val registerFest = MenuLoc(Menu("RegFest", "Registro de Festival") / "regfest" )
+  lazy val festival = Menu.param[Festival]("Festival", "Festival",
+    Festival.findOrNew _,
+    _.name.get
+  ) / "festival" / * >> TemplateBox(() => Templates("festival" :: Nil))
+
 
   private def menus = List(
     home.menu,
@@ -63,6 +69,7 @@ object Site extends Locs {
     festivales.menu,
     calendar.menu,
     registerFest.menu,
+    festival,
     Menu.i("Error") / "error" >> Hidden,
     Menu.i("404") / "404" >> Hidden,
     Menu.i("Throw") / "throw"  >> EarlyResponse(() => throw new Exception("This is only a test."))
