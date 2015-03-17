@@ -46,6 +46,7 @@ object Site extends Locs {
   val festivales = MenuLoc(Menu("Festivales", "Festivales") / "festivales" )
   val queEs = MenuLoc(Menu("Quees", "Que es?") / "que_es" )
   val calendar = MenuLoc(Menu("Calendar", "Calendario") / "calendar" )
+  val registerFest = MenuLoc(Menu("RegFest", "Registro de Festival") / "register_fest" )
 
   private def menus = List(
     home.menu,
@@ -61,6 +62,7 @@ object Site extends Locs {
     queEs.menu,
     festivales.menu,
     calendar.menu,
+    registerFest.menu,
     Menu.i("Error") / "error" >> Hidden,
     Menu.i("404") / "404" >> Hidden,
     Menu.i("Throw") / "throw"  >> EarlyResponse(() => throw new Exception("This is only a test."))
