@@ -1,7 +1,7 @@
 package code
 package util
 
-import code.model.festival.{Area, City}
+import code.model.festival._
 import net.liftweb.record.field.Countries
 
 object DataSeed {
@@ -31,6 +31,67 @@ object DataSeed {
         .description("Ej. Literatura, Poesía, etc...").save(true)
       Area.createRecord.name("Música")
         .description("Ej. Rock, Pop, Barroco, Clásica,etc...").save(true)
+    }
+    if (Space.count == 0) {
+      Space.createRecord.name("Teatros").save(true)
+      Space.createRecord.name("Escuelas").save(true)
+      Space.createRecord.name("Asociaciones").save(true)
+      Space.createRecord.name("Museos").save(true)
+      Space.createRecord.name("Bibliotecas").save(true)
+      Space.createRecord.name("Centros Sociales").save(true)
+      Space.createRecord.name("Bares y Restaurantes").save(true)
+      Space.createRecord.name("Centros Culturales").save(true)
+      Space.createRecord.name("Plazas").save(true)
+      Space.createRecord.name("Calles").save(true)
+      Space.createRecord.name("Espacios Alternativos").save(true)
+      Space.createRecord.name("Salas o salones").save(true)
+    }
+    if (PublicKind.count == 0) {
+      PublicKind.createRecord.name("Infantil").save(true)
+      PublicKind.createRecord.name("Juvenil").save(true)
+      PublicKind.createRecord.name("Adulto").save(true)
+      PublicKind.createRecord.name("Adulto Mayor").save(true)
+      PublicKind.createRecord.name("Todos").save(true)
+    }
+    if (ServiceExchange.count == 0) {
+      ServiceExchange.createRecord.name("Trueque").save(true)
+      ServiceExchange.createRecord.name("Fondo").save(true)
+      ServiceExchange.createRecord.name("Servicios / Recursos Humanos").save(true)
+      ServiceExchange.createRecord.name("Colaboración").save(true)
+    }
+    if (CommunicationTool.count == 0) {
+      CommunicationTool.createRecord.name("Televisión").save(true)
+      CommunicationTool.createRecord.name("Diarios y revistas").save(true)
+      CommunicationTool.createRecord.name("Radio").save(true)
+      CommunicationTool.createRecord.name("Facebook").save(true)
+      CommunicationTool.createRecord.name("Twitter").save(true)
+      CommunicationTool.createRecord.name("Web / Blog").save(true)
+      CommunicationTool.createRecord.name("Afiches").save(true)
+      CommunicationTool.createRecord.name("Volantes (Flyers)").save(true)
+      CommunicationTool.createRecord.name("Fancines").save(true)
+      CommunicationTool.createRecord.name("Perifoneo (Movilidad con parlantes o megáfono)").save(true)
+      CommunicationTool.createRecord.name("e-mailing (Voletin electronico, newsletter...)").save(true)
+      CommunicationTool.createRecord.name("Pasacalles/banners").save(true)
+      CommunicationTool.createRecord.name("Actividad en espacio público").save(true)
+    }
+    if (TrainingActivity.count == 0) {
+      TrainingActivity.createRecord.name("Mesas de dialogo").save(true)
+      TrainingActivity.createRecord.name("Talleres y/o Cursos").save(true)
+      TrainingActivity.createRecord.name("Conferencias").save(true)
+      TrainingActivity.createRecord.name("Simposios, seminarios").save(true)
+      TrainingActivity.createRecord.name("Intercambio de experiencias").save(true)
+      TrainingActivity.createRecord.name("Laboratorios").save(true)
+    }
+    if (Partnership.count == 0) {
+      Partnership.createRecord.name("Convenio").kind(PartnershipKind.Public).save(true)
+      Partnership.createRecord.name("Auspicio").kind(PartnershipKind.Public).save(true)
+      Partnership.createRecord.name("Colaboración").kind(PartnershipKind.Public).save(true)
+      Partnership.createRecord.name("Convenio").kind(PartnershipKind.Private).save(true)
+      Partnership.createRecord.name("Auspicio").kind(PartnershipKind.Private).save(true)
+      Partnership.createRecord.name("Colaboración").kind(PartnershipKind.Private).save(true)
+      Partnership.createRecord.name("Convenio").kind(PartnershipKind.CivilSociety).save(true)
+      Partnership.createRecord.name("Auspicio").kind(PartnershipKind.CivilSociety).save(true)
+      Partnership.createRecord.name("Colaboración").kind(PartnershipKind.CivilSociety).save(true)
     }
   }
 
