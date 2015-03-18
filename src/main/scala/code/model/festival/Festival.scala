@@ -3,7 +3,7 @@ package model
 package festival
 
 import code.lib.RogueMetaRecord
-import code.lib.field.ComboBoxField
+import code.lib.field.{DatepickerField, ComboBoxField}
 import code.model.institution.Institution
 import code.model.proposal.Proposal
 import net.liftmodules.combobox.ComboItem
@@ -35,10 +35,10 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   object places extends BsonRecordListField(this, Place) {
     override def displayName = "Lugares donde se desarrolla el Festival"
   }//ToDo map
-  object begins extends DateField(this) {
+  object begins extends DatepickerField(this) {
     override def displayName = "Fecha inicial"
   }//ToDo dates
-  object ends extends DateField(this) {
+  object ends extends DatepickerField(this) {
     override def displayName = "Fecha final"
   }
   object duration extends EnumNameField(this, FestivalDuration) {
