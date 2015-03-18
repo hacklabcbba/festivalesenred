@@ -43,4 +43,5 @@ object Dependencies {
   // Misc
   val logback = "ch.qos.logback" % "logback-classic" % "1.1.2"
   val scalatest = "org.scalatest" %% "scalatest" % "2.2.1"
+  val combobox = "net.liftmodules" %% "combobox" % "2.6"
 }

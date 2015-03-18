@@ -136,24 +136,12 @@ class FestivalSpec extends BaseMongoSessionWordSpec {
 
       val newFestival = Festival.createRecord
         .name("TALLER CUERPO PRESENTE Composición Coreográfica")
-        .description("El objetivo es repensar la mirada del cuerpo como soporte de la danza y hacer propuestas " +
+        .presentation("El objetivo es repensar la mirada del cuerpo como soporte de la danza y hacer propuestas " +
         "coreográficas con un enfoque conceptual y estético, buscando que cada cuerpo encuentre sus necesidades " +
         "expresivas, y reflexione sobre la historicidad de su cuerpo y el contexto actual que lo rodea, con el que " +
         "además va a instaurar un diálogo a través de la Danza.")
-        .places(place1 :: place2 :: Nil)
-        .concept("Transportaremos al cuerpo a reconocerse, abrirse y cuestionarse, para generar particularidad en el " +
-        "movimiento de cada cuerpo y el desarrollo de la comprensión de lo que necesita decir. El uso de nociones " +
-        "básicas de ritmo y dinámica corporal serán explorados, así como nociones espaciales, sonoras y conceptuales, " +
-        "para enriquecer nuestras composiciones coreográficas con el único fin de transformarnos en cuerpos consientes y " +
-        "presentes en escena.")
-        .proposal(proposal1)
-        .otherDescriptions(newField)
-        .startDate(date)
-        .endDate(date)
-        .numberEditions(3)
-        .institutions(institution1 :: institution2 :: Nil)
-        .alliances(institution1 :: Nil)
-
+        .begins(date)
+        .ends(date)
 
       val errs = newFestival.validate
       if (errs.length > 1) {

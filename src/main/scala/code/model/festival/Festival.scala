@@ -3,8 +3,10 @@ package model
 package festival
 
 import code.lib.RogueMetaRecord
+import code.lib.field.ComboBoxField
 import code.model.institution.Institution
 import code.model.proposal.Proposal
+import net.liftmodules.combobox.ComboItem
 import net.liftweb.common.{Full, Box, Loggable}
 import net.liftweb.mongodb.record.MongoRecord
 import net.liftweb.mongodb.record.field._
@@ -25,7 +27,9 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   object productionManagement extends StringField(this, 300) {
     override def displayName = "Dirección de la Producción"
   }
-  object city extends ObjectIdRefListField(this, City) {
+  object city extends ComboBoxField(this, City) {
+    def toString(in: City) = s"${in.name.get}/${in.country.get}"
+    val placeholder = "Seleccione las ciudades donde se realizara el festival"
     override def displayName = "Ciudad"
   }
   object places extends BsonRecordListField(this, Place) {
@@ -43,7 +47,9 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   object call extends BinaryField(this) {
     override def displayName = "Convocatoria"
   }
-  object area extends ObjectIdRefField(this, Area) {
+  object areas extends ComboBoxField(this, Area) {
+    def toString(in: Area) = s"${in.name.get}(${in.description.get})"
+    val placeholder = ""
     override def displayName = "¿En qué área actúa?"
   }
   object website extends StringField(this, 500) {
@@ -137,6 +143,13 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
 
 object Festival extends Festival with RogueMetaRecord[Festival] with Loggable {
   override def collectionName = "festival.festivals"
+  override def fieldOrder = List(
+    name, responsible, productionManagement, city, places, begins, ends, duration, call, areas, website,
+    responsibleEmail, pressResponsibleEmail, facebookPage, twitter, skype, spaces, equipment, numberOfAttendees,
+    publicKind, staff, presentation, numberEditions, serviceExchange, trainingActivity, communicationTools,
+    publicInstitutionPartnerships, privateInstitutionPartnerships, civilOrganizationPartnerships, networking,
+    minimalBudget, budget, collaborativeEconomyBudget, managementDuration, tags
+  )
   def findOrNew(in: String): Box[Festival] = in match {
     case "new" =>
       Full(Festival.createRecord)

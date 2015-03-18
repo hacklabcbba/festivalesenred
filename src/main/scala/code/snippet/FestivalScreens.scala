@@ -8,7 +8,7 @@ import net.liftweb.http.S
 import net.liftweb.util.FieldContainer
 import net.liftweb.util.Helpers._
 
-object FestivalSnippet extends BaseScreen {
+object FestivalScreen extends BaseScreen {
 
   addFields(() => new FieldContainer {def allFields = Site.festival.currentValue.map(_.fields()) openOr Nil})
 

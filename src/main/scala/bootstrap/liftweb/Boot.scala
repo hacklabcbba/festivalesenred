@@ -1,5 +1,7 @@
 package bootstrap.liftweb
 
+import code.util.DataSeed
+import net.liftmodules.combobox.ComboBox
 import omniauth.Omniauth
 
 import scala.xml.{Null, UnprefixedAttribute}
@@ -28,6 +30,8 @@ class Boot extends Loggable {
 
     // init mongodb
     MongoConfig.init
+
+    DataSeed.run
 
     // init auth-mongo
     MongoAuth.authUserMeta.default.set(User)
@@ -88,6 +92,8 @@ class Boot extends Loggable {
 
     //init
     Omniauth.init
+
+    ComboBox.init()
 
     // Mailer
     Mailer.devModeSend.default.set((m: MimeMessage) => logger.info("Dev mode message:\n" + prettyPrintMime(m)))
