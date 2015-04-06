@@ -3,7 +3,7 @@ package model
 package festival
 
 import code.lib.RogueMetaRecord
-import code.lib.field.{OpenComboBoxField, DatepickerField, ComboBoxField}
+import code.lib.field.{CustomStringField, OpenComboBoxField, DatepickerField, ComboBoxField}
 import code.model.institution.Institution
 import code.model.proposal.Proposal
 import net.liftmodules.combobox.ComboItem
@@ -20,13 +20,13 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
 
   override def meta = Festival
 
-  object name extends StringField(this, 500) {
+  object name extends CustomStringField(this, 500) {
     override def displayName = "Nombre del Festival"
   }
-  object responsible extends StringField(this, 300) {
+  object responsible extends CustomStringField(this, 300) {
     override def displayName = "Responsable del Festival"
   }
-  object productionManagement extends StringField(this, 300) {
+  object productionManagement extends CustomStringField(this, 300) {
     override def displayName = "Dirección de la Producción"
   }
   object city extends ComboBoxField(this, City) {
@@ -59,7 +59,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
     }
     override def helpAsHtml = Full(<span>Elije 1 o mas opciones</span>)
   }
-  object website extends StringField(this, 500) {
+  object website extends CustomStringField(this, 500) {
     override def displayName = "Sitio web"
   }
   object responsibleEmail extends EmailField(this, 128) {
@@ -68,15 +68,15 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   object pressResponsibleEmail extends EmailField(this, 128) {
     override def displayName = "Email de contacto del/la responsable de comunicación o prensa"
   }
-  object facebookPage extends StringField(this, 500) {
+  object facebookPage extends CustomStringField(this, 500) {
     override def displayName = "Página en facebook"
     override def optional_? = true
   }
-  object twitter extends StringField(this, 500) {
+  object twitter extends CustomStringField(this, 500) {
     override def displayName = "Twitter"
     override def optional_? = true
   }
-  object skype extends StringField(this, 128) {
+  object skype extends CustomStringField(this, 128) {
     override def displayName = "Skype"
     override def optional_? = true
   }
@@ -123,7 +123,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   }
   object serviceExchange extends OpenComboBoxField(this, ServiceExchange) {
     def toString(in: ServiceExchange) = s"${in.name.get}"
-    val placeholder = ""
+    val placeholder = "Seleccione uno o más valores"
     override def beforeSave() {
       super.beforeSave
       this.set(this.get ++ this.tempItems.map(s => ServiceExchange.createRecord.name(s.text).save(true).id.get))
@@ -134,7 +134,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   }
   object trainingActivity extends OpenComboBoxField(this, TrainingActivity) {
     def toString(in: TrainingActivity) = s"${in.name.get}"
-    val placeholder = ""
+    val placeholder = "Seleccione uno o más valores"
     override def beforeSave() {
       super.beforeSave
       this.set(this.get ++ this.tempItems.map(s => TrainingActivity.createRecord.name(s.text).save(true).id.get))
@@ -145,7 +145,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   }
   object communicationTools extends OpenComboBoxField(this, CommunicationTool) {
     def toString(in: CommunicationTool) = s"${in.name.get}"
-    val placeholder = ""
+    val placeholder = "Seleccione uno o más valores"
     override def beforeSave() {
       super.beforeSave
       this.set(this.get ++ this.tempItems.map(s => CommunicationTool.createRecord.name(s.text).save(true).id.get))
@@ -154,7 +154,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   }
   object publicInstitutionPartnerships extends OpenComboBoxField(this, Partnership) {
     def toString(in: Partnership) = s"${in.name.get}"
-    val placeholder = ""
+    val placeholder = "Seleccione uno o más valores"
     override def options =
       Partnership.where(_.kind eqs PartnershipKind.Public).fetch().map(s => s.id.get -> toString(s))
     override def beforeSave() {
@@ -170,7 +170,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   }
   object privateInstitutionPartnerships extends OpenComboBoxField(this, Partnership) {
     def toString(in: Partnership) = s"${in.name.get}"
-    val placeholder = ""
+    val placeholder = "Seleccione uno o más valores"
     override def options =
       Partnership.where(_.kind eqs PartnershipKind.Private).fetch().map(s => s.id.get -> toString(s))
     override def beforeSave() {
@@ -186,7 +186,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   }
   object civilOrganizationPartnerships extends OpenComboBoxField(this, Partnership) {
     def toString(in: Partnership) = s"${in.name.get}"
-    val placeholder = ""
+    val placeholder = "Seleccione uno o más valores"
     override def options =
       Partnership.where(_.kind eqs PartnershipKind.CivilSociety).fetch().map(s => s.id.get -> toString(s))
     override def beforeSave() {
@@ -202,7 +202,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   }
   object networking extends OpenComboBoxField(this, Network) {
     def toString(in: Network) = s"${in.name.get}"
-    val placeholder = ""
+    val placeholder = "Seleccione uno o más valores"
     override def beforeSave() {
       super.beforeSave
       this.set(
@@ -232,7 +232,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
     override def displayName = "Cual es el tiempo de duración de gestión del Festival?"
     override def helpAsHtml = Full(<span>Especifica en los tiempos: Desde inicio de gestión, planificación, duración del Festival y el Cierre</span>)
   }
-  object tags extends StringField(this, 1000) {
+  object tags extends CustomStringField(this, 1000) {
     override def displayName = "Palabras Claves, Etiquetas, HashTags"
   }
 

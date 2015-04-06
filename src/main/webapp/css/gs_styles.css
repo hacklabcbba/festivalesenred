@@ -610,3 +610,35 @@ div.info {
     $REGISTER FEST
 \*------------------------------------*/
 
+
+/*--------------*\
+NEW FORM
+\*------------------------------------*/
+.form fieldset {
+   border: 0;
+   background-color: #FBFBFB;
+}
+
+.form fieldset legend {
+   background-color: #FBFBFB;
+   color: #f1bd09;
+   text-align: center;
+   font-size: 2em;
+}
+.form h1 {
+   color: #7a7a7a;
+   text-align:center;
+}
+
+.form input, .form select, .form textarea, .form label, .form .select2-container-multi .select2-choices {
+   color: #cacac8;
+   background: transparent;
+   border: 0px;
+   outline: none;
+   -webkit-box-shadow: none;
+   -moz-box-shadow: none;
+   box-shadow: none;
+   outline: none;
+   text-align: center;
+   font-size:1.3em;
+}

@@ -1,4 +1,34 @@
-<div class="info" data-lift="surround?with=base-wrap;at=content">
-    <div data-lift="FestivalScreen" data-name='form'></div>
+<div class="info form" data-lift="surround?with=base-wrap;at=content">
+    <h1>INGRESA TU FESTIVAL</h1>
+    <form data-lift="form.ajax">
+        <div data-lift="FestivalForm">
+            <fieldset>
+                <legend>DATOS GENERALES</legend>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <input data-name="general-data" type="text" placeholder="Nombre del Festival" />
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>SOBRE LA ORGANIZACIÓN</legend>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <input data-name="about-data" type="text" placeholder="Nombre del Festival" />
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-actions">
+                <div class="actions">
+                    <button data-name="submit" type="submit" tabindex="1" class="btn btn-primary">
+                        Guardar
+                    </button>
+                    <button data-name="cancel" tabindex="1" class="btn btn-default">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
