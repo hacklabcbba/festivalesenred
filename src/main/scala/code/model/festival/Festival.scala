@@ -16,6 +16,8 @@ import code.model.field.{ListStringDataType, Field}
 import code.model.link.Link
 import com.foursquare.rogue.LiftRogue._
 
+import scala.xml.{Text, NodeSeq}
+
 class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival] {
 
   override def meta = Festival
@@ -36,6 +38,11 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   }
   object places extends BsonRecordListField(this, Place) {
     override def displayName = "Lugares donde se desarrolla el Festival"
+    override def toForm = Full(
+      value.foldLeft(NodeSeq.Empty){ case (node, place) => {
+        node ++ Text(place.name.get) ++ Text(place.date.get.toString)
+      }} ++ <label><a href="#"><i class="fa fa-search-plus"></i> Agregar Lugar</a></label>
+    )
   }
   object begins extends DatepickerField(this) {
     override def displayName = "Fecha inicial"
