@@ -3,6 +3,7 @@ package config
 
 import code.model.festival.Festival
 import model.User
+import net.liftmodules.mongoauth.model.Role
 
 import net.liftweb._
 import common._
@@ -16,6 +17,7 @@ import net.liftmodules.mongoauth.Locs
 object MenuGroups {
   val SettingsGroup = LocGroup("settings")
   val TopBarGroup = LocGroup("topbar")
+  val UserGroup = LocGroup("usertopbar")
 }
 
 /*
@@ -30,7 +32,7 @@ object Site extends Locs {
   import MenuGroups._
 
   // locations (menu entries)
-  val home = MenuLoc(Menu.i("Home") / "index" >> TopBarGroup)
+  val home = MenuLoc(Menu.i("Inicio") / "index" >> TopBarGroup)
   val loginToken = MenuLoc(buildLoginTokenMenu)
   val logout = MenuLoc(buildLogoutMenu)
   private val profileParamMenu = Menu.param[User]("User", "Profile",
@@ -42,21 +44,20 @@ object Site extends Locs {
   val password = MenuLoc(Menu.i("Password") / "settings" / "password" >> RequireLoggedIn >> SettingsGroup)
   val account = MenuLoc(Menu.i("Account") / "settings" / "account" >> SettingsGroup >> RequireLoggedIn)
   val editProfile = MenuLoc(Menu("EditProfile", "Profile") / "settings" / "profile" >> SettingsGroup >> RequireLoggedIn)
-  val register = MenuLoc(Menu.i("Register") / "register" >> RequireNotLoggedIn)
-  val enRed = MenuLoc(Menu("EnRed", "En Red") / "en_red" )
-  val festivales = MenuLoc(Menu("Festivales", "Festivales") / "festivales" )
-  val queEs = MenuLoc(Menu("Quees", "Que es?") / "que_es" )
-  val calendar = MenuLoc(Menu("Calendar", "Calendario") / "calendar" )
-  val registerFest = MenuLoc(Menu("RegFest", "Registro de Festival") / "regfest" )
+  val register = MenuLoc(Menu.i("Registrarse") / "register" >> RequireNotLoggedIn >> UserGroup)
+  val enRed = MenuLoc(Menu("EnRed", "En Red") / "en_red" >> TopBarGroup)
+  val adminFestivales = MenuLoc(Menu("Admin Festivales", "Admin Festivales") / "admin" / "festivales" >> RequireLoggedIn >> TopBarGroup)
+  val queEs = MenuLoc(Menu("Quees", "Que es?") / "que_es" >> TopBarGroup)
+  val calendar = MenuLoc(Menu("Calendar", "Calendario") / "calendar" >> TopBarGroup)
   lazy val festival = Menu.param[Festival]("Festival", "Festival",
     Festival.findOrNew _,
     _.name.get
-  ) / "festival" / * >> TemplateBox(() => Templates("festival" :: Nil))
+  ) / "festival" / * >> TemplateBox(() => Templates("festival" :: Nil)) >> RequireLoggedIn
 
 
   private def menus = List(
     home.menu,
-    Menu.i("Login") / "login" >> RequireNotLoggedIn,
+    Menu.i("Iniciar Sesion") / "login" >> RequireNotLoggedIn >> UserGroup,
     register.menu,
     loginToken.menu,
     logout.menu,
@@ -66,9 +67,8 @@ object Site extends Locs {
     editProfile.menu,
     enRed.menu,
     queEs.menu,
-    festivales.menu,
+    adminFestivales.menu,
     calendar.menu,
-    registerFest.menu,
     festival,
     Menu.i("Error") / "error" >> Hidden,
     Menu.i("404") / "404" >> Hidden,

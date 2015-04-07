@@ -8,6 +8,7 @@ import code.model.institution.Institution
 import code.model.proposal.Proposal
 import net.liftmodules.combobox.ComboItem
 import net.liftweb.common.{Full, Box, Loggable}
+import net.liftweb.http.{S, RedirectWithState, RedirectState}
 import net.liftweb.mongodb.record.MongoRecord
 import net.liftweb.mongodb.record.field._
 import net.liftweb.record.LifecycleCallbacks
@@ -15,6 +16,7 @@ import net.liftweb.record.field._
 import code.model.field.{ListStringDataType, Field}
 import code.model.link.Link
 import com.foursquare.rogue.LiftRogue._
+import net.liftweb.sitemap.Loc.If
 
 import scala.xml.{Text, NodeSeq}
 
@@ -24,6 +26,10 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
 
   object name extends CustomStringField(this, 500) {
     override def displayName = "Nombre del Festival"
+  }
+  object owner extends ObjectIdRefField(this, User) {
+    override def shouldDisplay_? = false
+    override def valueBox = User.currentUser.map(_.id.get)
   }
   object responsible extends CustomStringField(this, 300) {
     override def displayName = "Responsable del Festival"
@@ -37,11 +43,11 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
     override def displayName = "Ciudad"
   }
   object places extends BsonRecordListField(this, Place) {
-    override def displayName = "Lugares donde se desarrolla el Festival"
+    override def displayName = "Espacio donde se desarrolla el Festival"
     override def toForm = Full(
       value.foldLeft(NodeSeq.Empty){ case (node, place) => {
         node ++ Text(place.name.get) ++ Text(place.date.get.toString)
-      }} ++ <label><a href="#"><i class="fa fa-search-plus"></i> Agregar Lugar</a></label>
+      }} ++ <label><a href="#"><i class="fa fa-search-plus"></i> Agregar Espacio</a></label>
     )
   }
   object begins extends DatepickerField(this) {
@@ -260,6 +266,7 @@ object Festival extends Festival with RogueMetaRecord[Festival] with Loggable {
     case _ =>
       find(in)
   }
+
 }
 
 
