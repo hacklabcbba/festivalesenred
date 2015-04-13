@@ -7,6 +7,7 @@ import code.lib.field.{CustomStringField, OpenComboBoxField, DatepickerField, Co
 import code.model.institution.Institution
 import code.model.proposal.Proposal
 import net.liftmodules.combobox.ComboItem
+import net.liftmodules.mongoauth.model.Role
 import net.liftweb.common.{Full, Box, Loggable}
 import net.liftweb.http.{S, RedirectWithState, RedirectState}
 import net.liftweb.mongodb.record.MongoRecord
@@ -265,6 +266,13 @@ object Festival extends Festival with RogueMetaRecord[Festival] with Loggable {
       Full(Festival.createRecord)
     case _ =>
       find(in)
+  }
+
+  def findAllByUser(owner: User): List[Festival] = {
+    if (User.hasRole("admin"))
+      Festival.findAll
+    else
+      Festival.where(_.owner eqs owner.id.get).fetch()
   }
 
 }

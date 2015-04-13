@@ -49,8 +49,13 @@ object Site extends Locs {
   val adminFestivales = MenuLoc(Menu("Admin Festivales", "Admin Festivales") / "admin" / "festivales" >> RequireLoggedIn >> TopBarGroup)
   val queEs = MenuLoc(Menu("Quees", "Que es?") / "que_es" >> TopBarGroup)
   val calendar = MenuLoc(Menu("Calendar", "Calendario") / "calendar" >> TopBarGroup)
-  lazy val festival = Menu.param[Festival]("Festival", "Festival",
+  lazy val festivalEdit = Menu.param[Festival]("Formulario Festival", "Formulario Festival",
     Festival.findOrNew _,
+    _.name.get
+  ) / "festival-form" / * >> TemplateBox(() => Templates("festival-form" :: Nil)) >> RequireLoggedIn
+
+  lazy val festival = Menu.param[Festival]("Festival", "Festival",
+    Festival.find _,
     _.name.get
   ) / "festival" / * >> TemplateBox(() => Templates("festival" :: Nil)) >> RequireLoggedIn
 
@@ -69,6 +74,7 @@ object Site extends Locs {
     queEs.menu,
     adminFestivales.menu,
     calendar.menu,
+    festivalEdit,
     festival,
     Menu.i("Error") / "error" >> Hidden,
     Menu.i("404") / "404" >> Hidden,

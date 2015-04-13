@@ -2,6 +2,8 @@ package code
 package snippet
 
 import code.config.Site
+import code.model.User
+import code.model.festival.Festival
 import net.liftmodules.extras.SnippetHelper
 import net.liftweb.common._
 import net.liftweb.http.js.JsCmds.{RedirectTo, Noop}
@@ -12,10 +14,10 @@ import net.liftweb.util.Helpers._
 
 object FestivalScreen extends BaseScreen {
 
-  addFields(() => new FieldContainer {def allFields = Site.festival.currentValue.map(_.fields()) openOr Nil})
+  addFields(() => new FieldContainer {def allFields = Site.festivalEdit.currentValue.map(_.fields()) openOr Nil})
 
   def finish() {
-    Site.festival.currentValue.flatMap(s => tryo(s.save(true))) match {
+    Site.festivalEdit.currentValue.flatMap(s => tryo(s.save(true))) match {
       case Empty => S.warning("Empty save")
       case Failure(msg, _, _) => S.error(msg)
       case Full(_) => S.notice("Festival saved")
@@ -27,15 +29,15 @@ object FestivalScreen extends BaseScreen {
 object FestivalForm extends SnippetHelper {
   def render: CssSel = {
     for {
-      inst <- Site.festival.currentValue ?~ "Opción no válida"
+      inst <- Site.festivalEdit.currentValue ?~ "Opción no válida"
     } yield ({
-      val generalDataFields = Site.festival.currentValue.dmap[List[Field[_, _]]](Nil)(s =>
+      val generalDataFields = Site.festivalEdit.currentValue.dmap[List[Field[_, _]]](Nil)(s =>
         List(
           s.name, s.responsible, s.productionManagement, s.city, s.places, s.begins, s.ends, s.duration, s.call, s.areas,
           s.website, s.responsibleEmail, s.pressResponsibleEmail, s.facebookPage, s.twitter, s.skype, s.spaces, s.equipment,
           s.numberOfAttendees, s.publicKind
         ))
-      val aboutFields = Site.festival.currentValue.dmap[List[Field[_, _]]](Nil)(s =>
+      val aboutFields = Site.festivalEdit.currentValue.dmap[List[Field[_, _]]](Nil)(s =>
         List(
           s.staff, s.presentation, s.numberEditions, s.serviceExchange, s.trainingActivity, s.communicationTools,
           s.publicInstitutionPartnerships, s.privateInstitutionPartnerships, s.civilOrganizationPartnerships,
@@ -52,6 +54,23 @@ object FestivalForm extends SnippetHelper {
           S.error(errors)
           Noop
       })
+    }): CssSel
+  }
+}
+
+object FestivalesSnippet extends SnippetHelper {
+  def render: CssSel = {
+    for {
+      user <- User.currentUser
+    } yield ({
+      "data-name=row" #> Festival.findAllByUser(user).map(festival => {
+        "data-name=name" #> festival.name.get &
+        "data-name=owner" #> festival.owner.obj.dmap("")(_.name.get) &
+        "data-name=responsible" #> festival.responsible.get &
+        "data-name=city" #> festival.city.objs.map(_.name.get).mkString(",") &
+        "data-name=edit [href]" #> Site.festivalEdit.calcHref(festival)
+      }) &
+      "data-name=add [href]" #> (Site.festivalEdit.calcHref(Festival.createRecord) + "new")
     }): CssSel
   }
 }
