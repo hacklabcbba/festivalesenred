@@ -2,6 +2,7 @@ package code
 package lib
 package field
 
+import java.text.SimpleDateFormat
 import java.util.Date
 
 import net.liftweb.common.Full
@@ -15,15 +16,19 @@ import Helpers._
 class DatepickerField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
   extends DateField[OwnerType](rec) {
 
+  protected val dateFormat = new SimpleDateFormat("mm/dd/yyyy")
+
+  protected def parse(s: String) = tryo(dateFormat.parse(s))
+
   private def elem =
-    S.fmapFunc(S.SFuncHolder(this.setFromAny(_))){funcName => {
-      <div class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+    S.fmapFunc(S.SFuncHolder(s=> this.setBox(parse(s)))){funcName => {
+      <div class="input-append date" data-date="12-02-2012" data-date-format="mm/dd/yyyy">
         <input class="span2"
                size="16"
                id={uniqueFieldId openOr nextFuncName}
                type="text"
                name={funcName}
-               value={valueBox.map(v => formats.dateFormat.format(v)) openOr ""}
+               value={valueBox.map(v => dateFormat.format(v)) openOr ""}
                tabindex={tabIndex.toString}
         />
           <span class="add-on"><i class="fa fa-th"></i></span>
@@ -34,5 +39,7 @@ class DatepickerField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
     S.appendJs(Run(s"$$('#${uniqueFieldId openOr nextFuncName}').fdatepicker();"))
     Full(elem)
   }
+
+  override def toString = dateFormat.format(this.value)
 
 }

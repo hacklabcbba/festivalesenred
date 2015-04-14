@@ -51,7 +51,7 @@ object Site extends Locs {
   val calendar = MenuLoc(Menu("Calendar", "Calendario") / "calendar" >> TopBarGroup)
   lazy val festivalEdit = Menu.param[Festival]("Formulario Festival", "Formulario Festival",
     Festival.findOrNew _,
-    _.name.get
+    _.id.get.toString
   ) / "festival-form" / * >> TemplateBox(() => Templates("festival-form" :: Nil)) >> RequireLoggedIn
 
   lazy val festival = Menu.param[Festival]("Festival", "Festival",

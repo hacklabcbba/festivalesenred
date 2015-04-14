@@ -33,7 +33,7 @@ object FestivalForm extends SnippetHelper {
     } yield ({
       val generalDataFields = Site.festivalEdit.currentValue.dmap[List[Field[_, _]]](Nil)(s =>
         List(
-          s.name, s.responsible, s.productionManagement, s.city, s.places, s.begins, s.ends, s.duration, s.call, s.areas,
+          s.name, s.responsible, s.productionManagement, s.city, s.places, s.begins, s.ends, s.durationType, s.call, s.areas,
           s.website, s.responsibleEmail, s.pressResponsibleEmail, s.facebookPage, s.twitter, s.skype, s.spaces, s.equipment,
           s.numberOfAttendees, s.publicKind
         ))
@@ -43,8 +43,14 @@ object FestivalForm extends SnippetHelper {
           s.publicInstitutionPartnerships, s.privateInstitutionPartnerships, s.civilOrganizationPartnerships,
           s.networking, s.minimalBudget, s.budget, s.collaborativeEconomyBudget, s.managementDuration, s.tags
         ))
-      "data-name=general-data" #> generalDataFields.map(_.toForm) &
-      "data-name=about-data" #> aboutFields.map(_.toForm) &
+      "data-name=general-data" #> generalDataFields.map(field => {
+        "span" #> field.displayName &
+        "data-name=general-data-field" #> field.toForm
+      }) &
+      "data-name=about-data" #> aboutFields.map(field => {
+        "span" #> field.displayName &
+        "data-name=about-data-field" #> field.toForm
+      }) &
       "data-name=cancel [onclick]" #>  SHtml.ajaxInvoke(() => RedirectTo("/")) &
       "data-name=submit" #> SHtml.ajaxOnSubmit(() => inst.validate match {
         case Nil =>
@@ -63,11 +69,11 @@ object FestivalesSnippet extends SnippetHelper {
     for {
       user <- User.currentUser
     } yield ({
-      "data-name=row" #> Festival.findAllByUser(user).map(festival => {
-        "data-name=name" #> festival.name.get &
-        "data-name=owner" #> festival.owner.obj.dmap("")(_.name.get) &
-        "data-name=responsible" #> festival.responsible.get &
-        "data-name=city" #> festival.city.objs.map(_.name.get).mkString(",") &
+      "data-name=row *" #> Festival.findAllByUser(user).map(festival => {
+        "data-name=name *" #> festival.name.get &
+        "data-name=owner *" #> festival.owner.obj.dmap("")(_.name.get) &
+        "data-name=responsible *" #> festival.responsible.get &
+        "data-name=city *" #> festival.city.objs.map(_.name.get).mkString(",") &
         "data-name=edit [href]" #> Site.festivalEdit.calcHref(festival)
       }) &
       "data-name=add [href]" #> (Site.festivalEdit.calcHref(Festival.createRecord) + "new")

@@ -93,6 +93,31 @@ object DataSeed {
       Partnership.createRecord.name("Auspicio").kind(PartnershipKind.CivilSociety).save(true)
       Partnership.createRecord.name("Colaboración").kind(PartnershipKind.CivilSociety).save(true)
     }
+    if (Space.count == 0) {
+      Space.createRecord.name("Teatros").save(true)
+      Space.createRecord.name("Escuelas").save(true)
+      Space.createRecord.name("Asociaciones").save(true)
+      Space.createRecord.name("Museos").save(true)
+      Space.createRecord.name("Bibliotecas").save(true)
+      Space.createRecord.name("Centros Sociales").save(true)
+      Space.createRecord.name("Bares y Restaurantes").save(true)
+      Space.createRecord.name("Centros Culturales").save(true)
+      Space.createRecord.name("Plazas").save(true)
+      Space.createRecord.name("Calles").save(true)
+      Space.createRecord.name("Espacios Alternativos").save(true)
+      Space.createRecord.name("Salas o salones").save(true)
+    }
+    if (EquipmentDetail.count == 0) {
+      EquipmentDetail.createRecord.name("Estructuras escénicas móviles (Tarimas, piso, paneles)").save(true)
+      EquipmentDetail.createRecord.name("Equipo de sonido (consolas, parlantes, micrófonos, pedestales, etc)").save(true)
+      EquipmentDetail.createRecord.name("Equipo de luces (especifica)").save(true)
+      EquipmentDetail.createRecord.name("Data show").save(true)
+      EquipmentDetail.createRecord.name("Pantallas").save(true)
+      EquipmentDetail.createRecord.name("Cámaras").save(true)
+      EquipmentDetail.createRecord.name("Cámaras (fotográfica o/y de filmación especificar)").save(true)
+      EquipmentDetail.createRecord.name("Computadoras").save(true)
+      EquipmentDetail.createRecord.name("Instrumentos de comunicación (intercomunicadores, radios, etc)").save(true)
+    }
   }
 
 }

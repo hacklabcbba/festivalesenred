@@ -9,15 +9,19 @@ import code.model.proposal.Proposal
 import net.liftmodules.combobox.ComboItem
 import net.liftmodules.mongoauth.model.Role
 import net.liftweb.common.{Full, Box, Loggable}
-import net.liftweb.http.{S, RedirectWithState, RedirectState}
+import net.liftweb.http._
+import net.liftweb.http.js.JsCmds.Run
 import net.liftweb.mongodb.record.MongoRecord
 import net.liftweb.mongodb.record.field._
 import net.liftweb.record.LifecycleCallbacks
+import net.liftweb.record.field.IntField
 import net.liftweb.record.field._
 import code.model.field.{ListStringDataType, Field}
 import code.model.link.Link
 import com.foursquare.rogue.LiftRogue._
 import net.liftweb.sitemap.Loc.If
+import net.liftweb.util.Helpers
+import Helpers._
 
 import scala.xml.{Text, NodeSeq}
 
@@ -57,8 +61,19 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   object ends extends DatepickerField(this) {
     override def displayName = "Fecha final"
   }
-  object duration extends EnumNameField(this, FestivalDuration) {
+
+  object duration extends IntField(this, 1) {
+    override def shouldDisplay_? = false
+  }
+
+  object durationType extends EnumNameField(this, FestivalDuration) {
     override def displayName = "Duración"
+    override def toForm = {
+      for {
+        f1 <- duration.toForm
+        f2 <- super.toForm
+      } yield f1 ++ f2
+    }
   }
   object call extends BinaryField(this) {
     override def displayName = "Convocatoria"
@@ -134,6 +149,68 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   object numberEditions extends BsonRecordListField(this, FestivalEdition) {
     override def displayName = "¿Cuantas ediciones del festival se han realizado y en que años?"
     override def helpAsHtml = Full(<span>Informa cuantas ediciones fueron realizadas y en que años mismo si no han sido sucesivos Ej: Festival del Sol - 5 ediciones 2004 -2006- 2009 - 2010 - 2013. Elegir varias fechas, sólo MES y AÑO. Si es consecutivo "Desde...".</span>)
+    override def toForm = Full(
+      css.apply(template)
+    )
+
+    def css = {
+      "#editions" #> SHtml.idMemoize(body => {
+        "data-name=editions" #> <ol>{value.foldLeft(NodeSeq.Empty){ case (node, edition) => {
+          node ++ <li>{(edition.name.get ++ " - " ++ edition.date.toString) ++ <br/>
+        }</li>}}}</ol> &
+        "data-name=modal" #> dialogHtml(body, this.owner)
+      })
+    }
+
+    def template = {
+      <div id="editions">
+        <span data-name="editions"></span>
+        <label><a href="#!" data-reveal-id="edition-dialog"><i class="fa fa-search-plus"></i> Agregar Edición</a></label>
+        <span data-name="modal"></span>
+      </div>
+    }
+
+    def dialogHtml(body: IdMemoizeTransform, festival: Festival) = {
+      val edition: FestivalEdition = FestivalEdition.createRecord
+      val addEdition = SHtml.ajaxInvoke(() => {
+        festival.numberEditions.set(festival.numberEditions.get ++ List(edition))
+        body.setHtml() & Run("$('#edition-dialog').foundation('reveal', 'close');")
+      })
+
+      <div id="edition-dialog" class="reveal-modal" data-reveal="" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+        <h2 id="modalTitle">Agregar Edición</h2>
+          <form data-lift="form.ajax">
+            <div class="row">
+              <div class="large-12 columns" >
+                <label> <span>{edition.name.displayName}</span>
+                  {edition.name.toForm openOr NodeSeq.Empty}
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-12 columns" >
+                <label> <span>{edition.date.displayName}</span>
+                  {edition.date.toForm openOr NodeSeq.Empty}
+                </label>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="actions">
+                <button data-name="submit" onclick={addEdition._2.toJsCmd} tabindex="1" class="btn btn-primary">
+                  Agregar
+                </button>
+              </div>
+            </div>
+          </form>
+          <a class="close-reveal-modal" aria-label="Cerrar">&#215;</a>
+      </div>
+    }
+
+    private def showDialog(body: IdMemoizeTransform) = {
+      val fe = FestivalEdition.createRecord.name(Helpers.nextFuncName)
+      set(this.value ++ List(fe))
+      body.setHtml()
+    }
   }
   object serviceExchange extends OpenComboBoxField(this, ServiceExchange) {
     def toString(in: ServiceExchange) = s"${in.name.get}"
@@ -217,7 +294,8 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   object networking extends OpenComboBoxField(this, Network) {
     def toString(in: Network) = s"${in.name.get}"
     val placeholder = "Seleccione uno o más valores"
-    override def beforeSave() {
+    override def beforeValidation(): Unit = {
+      println("VALUES:"+ this.tempItems)
       super.beforeSave
       this.set(
         this.get ++ this.tempItems.map(
