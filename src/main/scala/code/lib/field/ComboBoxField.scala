@@ -2,6 +2,7 @@ package code
 package lib
 package field
 
+import dispatch.classic.json.JsFalse
 import net.liftmodules.combobox.{ComboBox, ComboItem}
 import net.liftweb.common.{Full, Box}
 import net.liftweb.http.SHtml
@@ -48,3 +49,36 @@ abstract class ComboBoxField[OwnerType <: BsonRecord[OwnerType], RefType <: Mong
 
   override def toForm: Box[NodeSeq] = Full(elem)
 }
+
+abstract class SingleComboBoxField[OwnerType <: BsonRecord[OwnerType], RefType <: MongoRecord[RefType] with ObjectIdPk[RefType]](
+rec: OwnerType, override val refMeta: MongoMetaRecord[RefType]) extends ObjectIdRefListField[OwnerType, RefType](rec, refMeta) {
+
+  val placeholder: String
+
+  def toString(in: RefType): String
+
+  override def options = refMeta.findAll.map(s => s.id.get -> toString(s))
+  def items = options.map(c => ComboItem(c._1.toString, c._2))
+  def selectedItems = objs.map(s => ComboItem(s.id.get.toString, toString(s)))
+
+  val comboBoxOptions = List(
+    "placeholder" -> Str(placeholder),
+    "width" -> Str("100%")
+  )
+
+  def onSearching(term: String): List[ComboItem] = {
+    items.filter(_.text.contains(term))
+  }
+
+  def onItemsSelected(items: List[ComboItem]): JsCmd = {
+    setFromAny(items.flatMap(s => AsObjectId.asObjectId(s.id)))
+    Noop
+  }
+
+  private def elem = {
+    ComboBox(Nil, onSearching _, onItemsSelected _, false, comboBoxOptions).comboBox
+  }
+
+  override def toForm: Box[NodeSeq] = Full(elem)
+}
+

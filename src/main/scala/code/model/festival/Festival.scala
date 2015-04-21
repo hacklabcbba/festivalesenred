@@ -48,12 +48,83 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
     override def displayName = "Ciudad"
   }
   object places extends BsonRecordListField(this, Place) {
-    override def displayName = "Espacio donde se desarrolla el Festival"
+    override def displayName = "Lugar donde se desarrolla el Festival"
     override def toForm = Full(
-      value.foldLeft(NodeSeq.Empty){ case (node, place) => {
-        node ++ Text(place.name.get) ++ Text(place.date.get.toString)
-      }} ++ <label><a href="#"><i class="fa fa-search-plus"></i> Agregar Espacio</a></label>
+      css.apply(template)
     )
+
+    def css = {
+      "#places" #> SHtml.idMemoize(body => {
+        "data-name=places" #> <ol>{value.foldLeft(NodeSeq.Empty){ case (node, edition) => {
+          node ++ <li>{(edition.name.get ++ " - " ++ edition.date.toString) ++ <br/>
+            }</li>}}}</ol> &
+          "data-name=modal" #> dialogHtml(body, this.owner)
+      })
+    }
+
+    def template = {
+      <div id="places">
+        <span data-name="places"></span>
+        <label><a href="#!" data-reveal-id="place-dialog"><i class="fa fa-search-plus"></i> Agregar Lugar</a></label>
+        <span data-name="modal"></span>
+      </div>
+    }
+
+    def dialogHtml(body: IdMemoizeTransform, festival: Festival) = {
+      val place: Place = Place.createRecord
+      val addPlace = SHtml.ajaxInvoke(() => {
+        festival.places.set(festival.places.get ++ List(place))
+        body.setHtml() & Run("$('#place-dialog').foundation('reveal', 'close');")
+      })
+
+      <div id="place-dialog" class="reveal-modal" data-reveal="" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+        <h2 id="modalTitle">Agregar Lugar</h2>
+        <form data-lift="form.ajax">
+          <div class="row">
+            <div class="large-12 columns" >
+              <label> <span>{place.name.displayName}</span>
+                {place.name.toForm openOr NodeSeq.Empty}
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-12 columns" >
+              <label> <span>{place.date.displayName}</span>
+                {place.date.toForm openOr NodeSeq.Empty}
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-12 columns" >
+              <label> <span>{place.city.displayName}</span>
+                {place.city.toForm openOr NodeSeq.Empty}
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-12 columns" >
+              <label> <span>{place.geoLatLng.displayName}</span>
+                {place.geoLatLng.toForm openOr NodeSeq.Empty}
+              </label>
+            </div>
+          </div>
+          <div class="form-actions">
+            <div class="actions">
+              <button data-name="submit" onclick={addPlace._2.toJsCmd} tabindex="1" class="btn btn-primary">
+                Agregar
+              </button>
+            </div>
+          </div>
+        </form>
+        <a class="close-reveal-modal" aria-label="Cerrar">&#215;</a>
+      </div>
+    }
+
+    private def showDialog(body: IdMemoizeTransform) = {
+      val place = Place.createRecord.name(Helpers.nextFuncName)
+      set(this.value ++ List(place))
+      body.setHtml()
+    }
   }
   object begins extends DatepickerField(this) {
     override def displayName = "Fecha inicial"
