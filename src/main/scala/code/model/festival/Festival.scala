@@ -3,7 +3,7 @@ package model
 package festival
 
 import code.lib.RogueMetaRecord
-import code.lib.field.{CustomStringField, OpenComboBoxField, DatepickerField, ComboBoxField}
+import code.lib.field._
 import code.model.institution.Institution
 import code.model.proposal.Proposal
 import net.liftmodules.combobox.ComboItem
@@ -143,7 +143,16 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
       for {
         f1 <- duration.toForm
         f2 <- super.toForm
-      } yield f1 ++ f2
+      } yield {
+        <div class="row collapse">
+          <div class="small-6 large-6 columns">
+            {f1}
+          </div>
+          <div class="small-6 large-6 columns">
+            {f2}
+          </div>
+        </div>
+      }
     }
   }
   object call extends BinaryField(this) {
@@ -159,7 +168,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
     }
     override def helpAsHtml = Full(<span>Elije 1 o mas opciones</span>)
   }
-  object website extends CustomStringField(this, 500) {
+  object website extends LinkField(this, 500) {
     override def displayName = "Sitio web"
   }
   object responsibleEmail extends EmailField(this, 128) {
@@ -168,11 +177,11 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   object pressResponsibleEmail extends EmailField(this, 128) {
     override def displayName = "Email de contacto del/la responsable de comunicación o prensa"
   }
-  object facebookPage extends CustomStringField(this, 500) {
-    override def displayName = "Página en facebook"
+  object facebookPage extends FacebookField(this, 500) {
+    override def displayName = "Nombre de usuario en facebook"
     override def optional_? = true
   }
-  object twitter extends CustomStringField(this, 500) {
+  object twitter extends TwitterField(this, 500) {
     override def displayName = "Twitter"
     override def optional_? = true
   }
@@ -377,25 +386,23 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
     override def displayName = "¿Participa de alguna red?"
     override def optional_? = true
   }
-  object minimalBudget extends DecimalField(this, 0) {
+  object minimalBudget extends AmountField(this) {
     override def displayName = "A partir de que presupuesto mínimo realizas el festival"
     override def helpAsHtml = Full(<span>Especifica un monto mínimo en moneda</span>)
   }
-  object budget extends DecimalField(this, 0) {
+  object budget extends AmountField(this) {
     override def displayName = "Cual es el costo monetario que utilizas para realizar el festival"
-    override def optional_? = true
     override def helpAsHtml = Full(<span>Especifica el monto real en moneda que utilizas para la producción de tu festival</span>)
   }
-  object collaborativeEconomyBudget extends DecimalField(this, 0) {
+  object collaborativeEconomyBudget extends AmountField(this) {
     override def displayName = "Cual el monto en economía colaborativa"
-    override def optional_? = true
     override def helpAsHtml = Full(<span>Haz un estimativo de los movimientos que se realizan a partir de intercambio, donaciones voluntariados etc.</span>)
   }
   object managementDuration extends EnumNameField(this, ManagementDuration) {
     override def displayName = "Cual es el tiempo de duración de gestión del Festival?"
     override def helpAsHtml = Full(<span>Especifica en los tiempos: Desde inicio de gestión, planificación, duración del Festival y el Cierre</span>)
   }
-  object tags extends CustomStringField(this, 1000) {
+  object tags extends TagField(this) {
     override def displayName = "Palabras Claves, Etiquetas, HashTags"
   }
 
@@ -446,6 +453,7 @@ object NumberOfAttendees extends Enumeration {
 
 object ManagementDuration extends Enumeration {
   type PublicKind = Value
+  val OneDay = Value("1 día")
   val OneWeek = Value("1 semana")
   val OneMonth = Value("1 mes")
   val SeveralMonths = Value("Varios meses")

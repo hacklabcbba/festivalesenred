@@ -118,6 +118,12 @@ object DataSeed {
       EquipmentDetail.createRecord.name("Computadoras").save(true)
       EquipmentDetail.createRecord.name("Instrumentos de comunicación (intercomunicadores, radios, etc)").save(true)
     }
+
+    if (Currency.count == 0) {
+      Currency.createRecord.code("Bs.").name("Bolivianos").save(true)
+      Currency.createRecord.code("$us").name("Dólares").save(true)
+      Currency.createRecord.code("EU").name("Euros").save(true)
+    }
   }
 
 }
