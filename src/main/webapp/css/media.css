@@ -1,0 +1,65 @@
+// Small screens
+@media only screen { } /* Define mobile styles */
+
+@media only screen and (max-width: 40em) {
+	.title-area {
+		width: auto;
+	}
+	.top-bar-section ul li, 
+	.top-bar.expanded .title-area,
+	.top-bar .title-area {
+		background-color: #EAEAEA;
+	}
+	.top-bar {
+		height: 77px;
+		box-shadow: 0 5px 9px -6px #bbb;
+		border-bottom: 1px solid #ccc;
+	}
+	.top-bar.expanded .title-area {
+		border-bottom: 1px solid #ccc;
+	}
+	.top-bar .toggle-topbar.menu-icon a span::after {
+		box-shadow: 0 0 0 1px #333, 0 7px 0 1px #333, 0 14px 0 1px #333;
+	}
+	.top-bar .toggle-topbar.menu-icon a {
+		color: #333;
+	}
+	.top-bar .title-area {
+		text-align: left;
+		padding: 0;;
+	}
+	.top-bar .name {
+		height: auto;
+	}
+	.top-bar-section {
+		padding-top: 0;
+	}
+	.top-bar-section .left li:not(.has-form) a:not(.button), 
+	.top-bar-section .left li:not(.has-form) span,
+	.top-bar-section .right li:not(.has-form) a:not(.button),
+	.top-bar-section .rihgt li:not(.has-form) span {
+		padding: 5px;
+	}
+	.top-bar-section .right li:not(.has-form) {
+		margin-bottom: 5px;;
+	}
+
+} /* max-width 640px, mobile-only styles, use when QAing mobile issues */
+
+// Medium screens
+@media only screen and (min-width: 40.063em) { } /* min-width 641px, medium screens */
+
+@media only screen and (min-width: 40.063em) and (max-width: 64em) { } /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
+
+// Large screens
+@media only screen and (min-width: 64.063em) { } /* min-width 1025px, large screens */
+
+@media only screen and (min-width: 64.063em) and (max-width: 90em) { } /* min-width 1025px and max-width 1440px, use when QAing large screen-only issues */
+
+// XLarge screens
+@media only screen and (min-width: 90.063em) { } /* min-width 1441px, xlarge screens */
+
+@media only screen and (min-width: 90.063em) and (max-width: 120em) { } /* min-width 1441px and max-width 1920px, use when QAing xlarge screen-only issues */
+
+// XXLarge screens
+@media only screen and (min-width: 120.063em) { } /* min-width 1921px, xxlarge screens */
