@@ -155,9 +155,26 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
       }
     }
   }
-  object call extends BinaryField(this) {
+  object call extends FileField(this) {
     override def displayName = "Convocatoria"
   }
+
+  object logo extends FileField(this) {
+    override def displayName = "Logo"
+  }
+
+  object photo1 extends FileField(this) {
+    override def displayName = "Foto 1"
+  }
+
+  object photo2 extends FileField(this) {
+    override def displayName = "Foto 2"
+  }
+
+  object photo3 extends FileField(this) {
+    override def displayName = "Foto 3"
+  }
+
   object areas extends OpenComboBoxField(this, Area) {
     def toString(in: Area) = s"${in.name.get}${if (in.description.get.isEmpty) "" else s"(${in.description.get})"}"
     val placeholder = ""
@@ -411,9 +428,9 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
 object Festival extends Festival with RogueMetaRecord[Festival] with Loggable {
   override def collectionName = "festival.festivals"
   override def fieldOrder = List(
-    name, responsible, productionManagement, city, places, begins, ends, duration, call, areas, website,
+    logo, name, responsible, productionManagement, city, places, begins, ends, duration, call, areas, website,
     responsibleEmail, pressResponsibleEmail, facebookPage, twitter, skype, spaces, equipment, numberOfAttendees,
-    publicKind, staff, presentation, numberEditions, serviceExchange, trainingActivity, communicationTools,
+    publicKind, photo1, photo2, photo3, staff, presentation, numberEditions, serviceExchange, trainingActivity, communicationTools,
     publicInstitutionPartnerships, privateInstitutionPartnerships, civilOrganizationPartnerships, networking,
     minimalBudget, budget, collaborativeEconomyBudget, managementDuration, tags
   )

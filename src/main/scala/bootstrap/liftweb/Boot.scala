@@ -95,6 +95,8 @@ class Boot extends Loggable {
 
     ComboBox.init()
 
+    LiftRules.dispatch.append(code.rest.AjaxFileUpload)
+
     // Mailer
     Mailer.devModeSend.default.set((m: MimeMessage) => logger.info("Dev mode message:\n" + prettyPrintMime(m)))
     Mailer.testModeSend.default.set((m: MimeMessage) => logger.info("Test mode message:\n" + prettyPrintMime(m)))

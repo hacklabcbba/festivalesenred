@@ -33,9 +33,9 @@ object FestivalForm extends SnippetHelper {
     } yield ({
       val generalDataFields = Site.festivalEdit.currentValue.dmap[List[Field[_, _]]](Nil)(s =>
         List(
-          s.name, s.responsible, s.productionManagement, s.city, s.places, s.begins, s.ends, s.durationType, s.call, s.areas,
+          s.logo, s.name, s.responsible, s.productionManagement, s.city, s.places, s.begins, s.ends, s.durationType, s.call, s.areas,
           s.website, s.responsibleEmail, s.pressResponsibleEmail, s.facebookPage, s.twitter, s.skype, s.spaces, s.equipment,
-          s.numberOfAttendees, s.publicKind
+          s.numberOfAttendees, s.publicKind, s.photo1, s.photo2, s.photo3
         ))
       val aboutFields = Site.festivalEdit.currentValue.dmap[List[Field[_, _]]](Nil)(s =>
         List(
@@ -54,6 +54,7 @@ object FestivalForm extends SnippetHelper {
       "data-name=cancel [onclick]" #>  SHtml.ajaxInvoke(() => RedirectTo("/")) &
       "data-name=submit" #> SHtml.ajaxOnSubmit(() => inst.validate match {
         case Nil =>
+          println("BEFORE SAVE:" + inst)
           inst.save(true)
           RedirectTo("/", () => S.notice("Festival guardado"))
         case errors =>
@@ -76,7 +77,7 @@ object FestivalesSnippet extends SnippetHelper {
         "data-name=city *" #> festival.city.objs.map(_.name.get).mkString(",") &
         "data-name=edit [href]" #> Site.festivalEdit.calcHref(festival)
       }) &
-      "data-name=add [href]" #> (Site.festivalEdit.calcHref(Festival.createRecord) + "new")
+      "data-name=add [href]" #> "/festival-form/new"
     }): CssSel
   }
 }
