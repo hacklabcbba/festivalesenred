@@ -1,0 +1,153 @@
+
+@media only screen { } /* Define mobile styles */
+
+
+
+/* max-width 640px */
+@media only screen and (max-width: 40em) {
+	.title-area {
+		width: auto;
+	}
+	.top-bar-section ul > li, 
+	.top-bar.expanded .title-area,
+	.top-bar .title-area {
+		background-color: #EAEAEA;
+	}
+	.top-bar {
+		height: 77px;
+		box-shadow: 0 5px 9px -6px #bbb;
+		border-bottom: 1px solid #ccc;
+		padding: 0;
+		position: relative;
+		z-index: 1;
+	}
+	.top-bar.expanded .title-area {
+		border-bottom: 1px solid #ccc;
+	}
+	.top-bar .toggle-topbar.menu-icon a > span::after {
+		box-shadow: 0 0 0 1px #333, 0 7px 0 1px #333, 0 14px 0 1px #333;
+	}
+	.top-bar .toggle-topbar.menu-icon a {
+		color: #333;
+	}
+	.top-bar .title-area {
+		text-align: left;
+		padding: 0;;
+	}
+	.top-bar .name {
+		height: auto;
+		background-color: #EAEAEA;
+	}
+	.top-bar-section {
+		padding-top: 0;
+	}
+	.top-bar .top-bar-section ul > li > a,
+	.top-bar .top-bar-section ul > li > span {
+		padding: 7px 15px;
+		line-height: normal;
+	}
+	.top-bar .top-bar-section ul.left > li:hover > a,
+	.top-bar .top-bar-section ul.left > li > span {
+		background-color: #e1e1e1 !important;
+		opacity: 1;
+	}
+	.top-bar .top-bar-section ul.left > li > span::after {
+		display: none;
+	}
+	.top-bar .top-bar-section ul.right,
+	.top-bar .top-bar-section ul.right:nth-child(2) > li:last-child  {
+		margin-top: 5px!important;
+		margin-bottom: 5px;;
+	}
+	.top-bar .top-bar-section ul.right:nth-child(2) {
+		padding: 0 15px;
+	}
+	.top-bar .top-bar-section ul.right:nth-child(2) > li > a, 
+	.top-bar .top-bar-section ul.right:nth-child(2) > li > span {
+		padding: 10px;
+	}
+	.gs-login-box .gs-social {
+			width: 100%;
+	}
+	.right.telardes {
+		display: block;
+	}
+	.right.telardes .telardes-label {
+		display: none;
+	}
+} 
+
+
+
+
+/* min-width 641px, medium screens */
+@media only screen and (min-width: 40.063em) { 
+
+} 
+
+
+
+/*max-width 1024px*/ 
+@media only screen and  (max-width: 64em) { 
+	.top-bar .top-bar-section ul.right:last-child > li > a{
+		padding: 0;
+	}
+	#content div.info h1 {
+		font-size: 23px;
+		text-align: left;
+	}
+	#content div.info {
+		padding: 15px;
+	}
+	div.info {
+		padding: 0;
+	}
+} 
+
+
+
+/* min-width 641px and max-width 1024px */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+	.top-bar-section {
+		position: static;
+	}
+	.top-bar .top-bar-section ul.left > li > a, 
+	.top-bar .top-bar-section ul.left > li > span {
+		padding: 0 0.7em;
+		font-size: 0.7em;
+	}
+	.right.telardes {
+		display: block;
+	}
+	.right.telardes .telardes-label {
+		display: none;
+	}
+} 
+@media only screen and (min-width: 40.063em) and (max-width: 832px) {
+	.right.telardes {
+		display: none;
+	}
+}
+
+
+/* min-width 1025px, large screens */
+@media only screen and (min-width: 64.063em) { 
+	.right.telardes {
+		display: block;
+	}
+} 
+
+
+
+
+@media only screen and (min-width: 64.063em) and (max-width: 90em) { 
+
+} /* min-width 1025px and max-width 1440px, use when QAing large screen-only issues */
+
+/*// XLarge screens*/
+@media only screen and (min-width: 90.063em) { } /* min-width 1441px, xlarge screens */
+
+@media only screen and (min-width: 90.063em) and (max-width: 120em) { } /* min-width 1441px and max-width 1920px, use when QAing xlarge screen-only issues */
+
+/*// XXLarge screens*/
+@media only screen and (min-width: 120.063em) { } /* min-width 1921px, xxlarge screens 

@@ -138,14 +138,7 @@ h5 a:hover {
 /*------------------------------------*\
     $GENERAL CLASSES
 \*------------------------------------*/
-.top-bar,
-.top-bar-section ul li,
-.top-bar-section li:not(.has-form) a:not(.button) {
-	background-color: #EAEAEA;
-}
-.top-bar {
-	height: auto;
-}
+
 .button.secondary,
 .button.secondary {
 	font-weight: bold;
@@ -186,36 +179,21 @@ img.centre {
 	margin-top: -30px;
 	padding-left: 15px;
 	}
-
-
-.left{
-   float: left;
-	width:200px;
-}
-
 .leftitem{
    float: left;
 	width: 50px;
 	margin-right: 50px;
 }
-
-.right{
-    float: right;
-	width:200px;
-	}
-	
 .center{
 	width:200px;
 	display:inline-block;
 	text-align:left;
 }
-
 .sobreleft{
 	width:435px;
 	float:left;
 	margin-right: 15px;
 	}
-	
 .sobre{
 	width:435px;
 	margin-right: 25px;
@@ -239,60 +217,89 @@ img.centre {
 /*------------------------------------*\
     $HEADER
 \*------------------------------------*/
-
-.title-area {
-	background-color: #fff;
-	padding: 7px 0;
-	width: 180px;
-	text-align: center;
+.top-bar {
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0 0 3px -1px #bbb;
+  position: relative;
+  z-index: 2;
 }
+.top-bar,
 .top-bar .name {
 	height: auto;
 }
-.top-bar-section {
-	padding: 15px 15px 0 0;
-	overflow: hidden;
+.top-bar .name {
+	background-color: #fff;
 }
-.top-bar-section li:not(.has-form) a:not(.button),
-.top-bar-section ul li > a.button,
-.top-bar-section ul li > a.button.secondary,
-.right-off-canvas-menu .accordion a ,
-.right-off-canvas-menu h3  {
+.top-bar,
+.top-bar .top-bar-section ul > li,
+.top-bar .top-bar-section ul > li a,
+.top-bar .top-bar-section ul > li:hover > a {
+	background-color: #eee !important;
+	color: #333;
+}
+.top-bar .top-bar-section ul > li > a,
+.top-bar .top-bar-section ul > li > span {
 	text-transform: uppercase;
 	font-weight: bold;
-}
-.top-bar-section li:not(.has-form) a:not(.button) {
-	color: #333;
   font-family: 'alte_haas_groteskregular';
   font-size: 12px;
+  line-height: 2.8125rem;
+  width: 100%;
+  padding: 0 0.9375rem;
+  display: inline-block;
 }
-.top-bar-section li:not(.has-form) a:hover:not(.button) {
-	background-color: transparent;
-	color: #bbb;
+.top-bar .top-bar-section ul > li:hover > a {
+	opacity: 0.7;
 }
-.top-bar-section ul li > a.button,
-.top-bar-section ul li > a.button.secondary  {
-	font-size: 12px
+.top-bar .top-bar-section ul > li {
+	position: relative;
 }
-.gs-open:hover,
-.gs-open:focus {
-	background-color: rgba(0,0,0, 0.2);
+.top-bar .top-bar-section ul.left > li > span:after {
+  border-bottom: 2px solid #666;
+  bottom: 8px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  width: 60%;
+  margin: 0 auto;
 }
-.top-bar-section ul li > a.button {
-	background-color: #1A1A1A;
+.top-bar .top-bar-section {
+	overflow: hidden;
 }
-.top-bar-section ul li > a.button:hover,
-.top-bar-section ul li > a.button:focus {
-	background-color: rgba(0,0,0,0.7);
+.top-bar .top-bar-section ul.right,
+.top-bar .top-bar-section ul.left {
+	margin-top: 17px;
 }
-.top-bar-section ul li > a.button.secondary {
-	background-color: #EAEAEA;
-	border: 1px solid #1A1A1A;
-	color: #333;
+.top-bar .top-bar-section ul.right:nth-child(2) {
+	margin-top: 25px;
+	padding-right: 15px;
 }
-.top-bar-section ul li > a.button.secondary:hover,
-.top-bar-section ul li > a.button.secondary:focus {
-	background-color: #ddd;
+.top-bar .top-bar-section ul.right:nth-child(2) > li,
+.top-bar .top-bar-section ul.right:nth-child(2) > li > a,
+.top-bar .top-bar-section ul.right:nth-child(2) > li > span {
+	line-height: normal;
+}
+.top-bar .top-bar-section ul.right:nth-child(2) > li:first-child {
+	margin-right: -1px;
+}
+.top-bar .top-bar-section ul.right:nth-child(2) > li:first-child > a {
+	box-shadow: 0 0 2px 0 #999 inset;
+}
+.top-bar .top-bar-section ul.right:nth-child(2) > li > a,
+.top-bar .top-bar-section ul.right:nth-child(2) > li > span {
+	padding: 5px 10px;
+	border: 1px solid #333;
+}
+.top-bar .top-bar-section ul.right:nth-child(2) > li:last-child > a,
+.top-bar .top-bar-section ul.right:nth-child(2) > li:last-child > span {
+	background-color: #333 !important;
+	color: #fff !important;
+}
+
+body.f-topbar-fixed {
+	padding-top: 75px;
+	overflow: hidden;
 }
 
 
@@ -301,26 +308,28 @@ img.centre {
 \*------------------------------------*/
 
 .gs-right-btn {
-	background-color: #FF6161;
+	background-color: #fff;
 	padding: 5px;
-  	position: absolute;
-  	right: -60px;
-  	top: 30px;
+	position: absolute;
+	right: -23px;
+	top: 70px;
 	-moz-transform: rotate(-90deg);
 	-webkit-transform: rotate(-90deg);
 	-ms-transform: rotate(-90deg);
 	-o-transform: rotate(-90deg);
 	transform: rotate(-90deg);
+	z-index: 1;
 }
-.gs-right-btn .gs-open {
+.gs-right-btn a.gs-open {
   background-color: #ffffff;
   border: 2px solid #1a1a1a;
-  font-size: 15px;
-  padding: 2px;
+  font-size: 13px;
+  padding: 5px;
   text-transform: uppercase;
   color: #333;
   font-weight: bold;
   letter-spacing: 1px;
+  width: auto;
 }
 .right-off-canvas-menu {
 	background-color: rgba(255, 255, 255, 0.7);
@@ -344,6 +353,7 @@ img.centre {
 .right-off-canvas-menu .accordion .row label input {
 	font-size: 12px;
 	font-weight: bold;
+	text-align: left;
 }
 .right-off-canvas-menu .accordion input {
 	height: 20px;
@@ -364,6 +374,7 @@ img.centre {
 }
 .right-off-canvas-menu .accordion li a {
 	font-size: 12px;
+	font-weight: bold;
 	padding: 2px 15px;
 	background-color: transparent;
 }
@@ -385,9 +396,10 @@ img.centre {
 .right-off-canvas-menu .accordion #panel2a {
 	margin-left: 1.25rem;
 }
-.right-off-canvas-menu .accordion #panel3a {
+.right-off-canvas-menu .accordion li.accordion-navigation div.content {
 	padding-left: 25px;
 	padding-right: 15px;
+	padding-top: 15px;
 }
 .gs-canvas-list {
 	margin: 0;
@@ -420,9 +432,11 @@ img.centre {
 	width: 17px;
 	height: 17px;
 	vertical-align: bottom;
-	line-height: 1.4;
-	padding: 0;
+	line-height: 1.8;
+	margin-bottom: -2px;
+	padding: 0px;
 	text-transform: uppercase;
+	font-size: 9px;
 }
 .label.round.red {
 	background-color: #F3462A;
@@ -475,9 +489,6 @@ input[type="checkbox"]:checked + label {
     $ACCORDION
 \*------------------------------------*/
 
-#map {
-  height: 100%; width: 95%;
-}
 
 .popover {
 	position: absolute;
@@ -514,7 +525,7 @@ input[type="checkbox"]:checked + label {
 \*------------------------------------*/
 
 div.register {
-	background-color: #FBFBFB
+	background-color: #FBFBFB;
 }
 
 div.info {
