@@ -217,81 +217,88 @@ img.centre {
 /*------------------------------------*\
     $HEADER
 \*------------------------------------*/
-.top-bar,
-.top-bar-section,
-.top-bar-section ul li,
-.top-bar.expanded .title-area,
-.top-bar-section li:not(.has-form) a:not(.button) {
-	background-color: #EAEAEA;
-	line-height: normal;
-}
-.title-area {
-	background-color: #fff;
-	padding: 7px 0;
-	width: 180px;
-	text-align: center;
-}
 .top-bar {
-	height: auto;
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0 0 3px -1px #bbb;
+  position: relative;
+  z-index: 2;
 }
+.top-bar,
 .top-bar .name {
 	height: auto;
 }
-.top-bar-section {
-	padding: 23px 15px 23px;
-	overflow: hidden;
+.top-bar .name {
+	background-color: #fff;
 }
-.top-bar-section li:not(.has-form) a:not(.button),
-.top-bar-section ul li > a.button,
-.top-bar-section ul li > a.button.secondary,
-.right-off-canvas-menu .accordion a ,
-.right-off-canvas-menu h3,
-.top-bar-section li:not(.has-form) span  {
+.top-bar,
+.top-bar .top-bar-section ul > li,
+.top-bar .top-bar-section ul > li a,
+.top-bar .top-bar-section ul > li:hover > a {
+	background-color: #eee !important;
+	color: #333;
+}
+.top-bar .top-bar-section ul > li > a,
+.top-bar .top-bar-section ul > li > span {
 	text-transform: uppercase;
 	font-weight: bold;
-}
-.top-bar-section li:not(.has-form) a:not(.button),
-.top-bar-section li:not(.has-form) span {
-	color: #333;
-	display: inline-block;
-	line-height: normal;
-	padding: 0 15px;
   font-family: 'alte_haas_groteskregular';
   font-size: 12px;
+  line-height: 2.8125rem;
+  width: 100%;
+  padding: 0 0.9375rem;
+  display: inline-block;
 }
-.top-bar-section li:not(.has-form) a:hover:not(.button) {
-	background-color: transparent;
-	color: #999;
-	transition: none;
+.top-bar .top-bar-section ul > li:hover > a {
+	opacity: 0.7;
 }
-.top-bar-section ul li > a{
-	font-size: 12px;
+.top-bar .top-bar-section ul > li {
+	position: relative;
 }
-.top-bar-section .right li:not(.has-form) a:not(.button) {
+.top-bar .top-bar-section ul.left > li > span:after {
+  border-bottom: 2px solid #666;
+  bottom: 8px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  width: 60%;
+  margin: 0 auto;
+}
+.top-bar .top-bar-section {
+	overflow: hidden;
+}
+.top-bar .top-bar-section ul.right,
+.top-bar .top-bar-section ul.left {
+	margin-top: 17px;
+}
+.top-bar .top-bar-section ul.right:nth-child(2) {
+	margin-top: 25px;
+	padding-right: 15px;
+}
+.top-bar .top-bar-section ul.right:nth-child(2) > li,
+.top-bar .top-bar-section ul.right:nth-child(2) > li > a,
+.top-bar .top-bar-section ul.right:nth-child(2) > li > span {
 	line-height: normal;
 }
-.top-bar-section ul li > a[href="/register"] {
-	background-color: #1A1A1A !important;
-	color: white !important;
-	border: 1px solid transparent;
-	padding: 5px 10px !important;
+.top-bar .top-bar-section ul.right:nth-child(2) > li:first-child {
+	margin-right: -1px;
 }
-.top-bar-section ul li > a[href="/register"]:hover,
-.top-bar-section ul li > a[href="/register"]:focus {
-	background-color: rgba(0,0,0,0.7) !important;
+.top-bar .top-bar-section ul.right:nth-child(2) > li:first-child > a {
+	box-shadow: 0 0 2px 0 #999 inset;
 }
-.top-bar-section ul li > a[href="/login"] {
-	background-color: #EAEAEA;
-	border: 1px solid #1A1A1A !important;
-	color: #333;
-	padding: 5px 10px !important;
+.top-bar .top-bar-section ul.right:nth-child(2) > li > a,
+.top-bar .top-bar-section ul.right:nth-child(2) > li > span {
+	padding: 5px 10px;
+	border: 1px solid #333;
 }
-.top-bar-section ul li > a[href="/login"]:hover,
-.top-bar-section ul li > a[href="/login"]:focus {
-	background-color: #ddd !important;
+.top-bar .top-bar-section ul.right:nth-child(2) > li:last-child > a,
+.top-bar .top-bar-section ul.right:nth-child(2) > li:last-child > span {
+	background-color: #333 !important;
+	color: #fff !important;
 }
+
 body.f-topbar-fixed {
-	padding-top: 77px;
+	padding-top: 75px;
 	overflow: hidden;
 }
 
@@ -518,7 +525,7 @@ input[type="checkbox"]:checked + label {
 \*------------------------------------*/
 
 div.register {
-	background-color: #FBFBFB
+	background-color: #FBFBFB;
 }
 
 div.info {
