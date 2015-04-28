@@ -658,3 +658,6 @@ NEW FORM
 label {
   text-align: left;
 }
+
+.reveal-modal-bg{position:fixed;}
+.reveal-modal{position:fixed;}

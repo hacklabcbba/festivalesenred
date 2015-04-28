@@ -16,7 +16,9 @@ import Helpers._
 class DatepickerField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
   extends DateField[OwnerType](rec) {
 
-  protected val dateFormat = new SimpleDateFormat("mm/dd/yyyy")
+  protected val dateFormat = new SimpleDateFormat("MM/dd/yyyy")
+
+  val dateFieldId = nextFuncName
 
   protected def parse(s: String) = tryo(dateFormat.parse(s))
 
@@ -25,7 +27,7 @@ class DatepickerField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
       <div class="input-append date" data-date="12-02-2012" data-date-format="mm/dd/yyyy">
         <input class="span2"
                size="16"
-               id={uniqueFieldId openOr nextFuncName}
+               id={dateFieldId}
                type="text"
                name={funcName}
                value={valueBox.map(v => dateFormat.format(v)) openOr ""}
@@ -36,7 +38,7 @@ class DatepickerField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
     }}
 
   override def toForm = {
-    S.appendJs(Run(s"$$('#${uniqueFieldId openOr nextFuncName}').fdatepicker();"))
+    S.appendJs(Run(s"$$('#${dateFieldId}').fdatepicker();"))
     Full(elem)
   }
 

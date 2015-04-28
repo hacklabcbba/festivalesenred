@@ -56,9 +56,12 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
 
     def css = {
       "#places" #> SHtml.idMemoize(body => {
-        "data-name=places" #> <ol>{value.foldLeft(NodeSeq.Empty){ case (node, edition) => {
-          node ++ <li>{(edition.name.get ++ " - " ++ edition.date.toString) ++ <br/>
-            } <a href="#!" data-name="edit" onclick={SHtml.ajaxInvoke(() => dialogHtml(body, owner))}><i class="fa fa-edit"></i></a></li>}}}</ol> &
+        "data-name=places" #> <ol>{value.foldLeft(NodeSeq.Empty){ case (node, place) => {
+          node ++ <li>
+            {(place.name.get ++ " - " ++ place.date.toString)}
+            <a href="#!" data-name="edit" onclick={SHtml.ajaxInvoke(() => dialogHtml(body, owner, place, false)).toJsCmd}><i class="fa fa-edit"></i></a>
+            <a href="#!" data-name="remove" onclick={SHtml.ajaxInvoke(() => deletePlace(body, owner, place)).toJsCmd}><i class="fa fa-trash"></i></a>
+          </li>}}}</ol> &
         "data-name=dialog-link [onclick]" #> SHtml.ajaxInvoke(() => dialogHtml(body, owner))
       })
     }
@@ -70,14 +73,19 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
       </div>
     }
 
-    def dialogHtml(body: IdMemoizeTransform, festival: Festival, place: Place = Place.createRecord): JsCmd = {
+    def deletePlace(body: IdMemoizeTransform, festival: Festival, place: Place): JsCmd = {
+      festival.places.set(festival.places.get.filter(p => p != place))
+      body.setHtml()
+    }
+
+    def dialogHtml(body: IdMemoizeTransform, festival: Festival, place: Place = Place.createRecord, isNew: Boolean = true): JsCmd = {
       val modalId = nextFuncName
-      val addPlace = SHtml.ajaxInvoke(() => {
-        festival.places.set(festival.places.get ++ List(place))
+      val addPlace = () => {
+        if (isNew) festival.places.set(festival.places.get ++ List(place))
         body.setHtml() &
         Run(s"$$('#${modalId}').foundation('reveal', 'close');") &
         Run(s"$$('#${modalId}').remove();")
-      })
+      }
 
 
       val html =
@@ -114,7 +122,8 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
           </div>
           <div class="form-actions">
             <div class="actions">
-              <button data-name="submit" onclick={addPlace._2.toJsCmd} tabindex="1" class="btn btn-primary">
+              {SHtml.hidden(addPlace)}
+              <button type="submit" tabindex="1" class="btn btn-primary">
                 Agregar
               </button>
             </div>
@@ -244,7 +253,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
     override def displayName = "Breve histórico / presentación"
     override def helpAsHtml = Full(<span>Cuenta sobre la trayectoria del festival (máximo de 300 caracteres)</span>)
   }
-  object numberEditions extends BsonRecordListField(this, FestivalEdition) {
+  object numberEditions extends BsonRecordListField(this, FestivalEdition) with HtmlFixer {
     override def displayName = "¿Cuantas ediciones del festival se han realizado y en que años?"
     override def helpAsHtml = Full(<span>Informa cuantas ediciones fueron realizadas y en que años mismo si no han sido sucesivos Ej: Festival del Sol - 5 ediciones 2004 -2006- 2009 - 2010 - 2013. Elegir varias fechas, sólo MES y AÑO. Si es consecutivo "Desde...".</span>)
     override def toForm = Full(
@@ -254,29 +263,39 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
     def css = {
       "#editions" #> SHtml.idMemoize(body => {
         "data-name=editions" #> <ol>{value.foldLeft(NodeSeq.Empty){ case (node, edition) => {
-          node ++ <li>{(edition.name.get ++ " - " ++ edition.date.toString) ++ <br/>
-        }</li>}}}</ol> &
-        "data-name=modal" #> dialogHtml(body, this.owner)
+          node ++ <li>
+            {(edition.name.get ++ " - " ++ edition.date.toString)}
+            <a href="#!" data-name="edit" onclick={SHtml.ajaxInvoke(() => dialogHtml(body, owner, edition, false)).toJsCmd}><i class="fa fa-edit"></i></a>
+            <a href="#!" data-name="remove" onclick={SHtml.ajaxInvoke(() => deleteEdition(body, owner, edition)).toJsCmd}><i class="fa fa-trash"></i></a>
+          </li>}}}</ol> &
+          "data-name=dialog-link [onclick]" #> SHtml.ajaxInvoke(() => dialogHtml(body, owner))
       })
     }
 
     def template = {
       <div id="editions">
-        <span data-name="editions"></span>
-        <label><a href="#!" data-reveal-id="edition-dialog"><i class="fa fa-search-plus"></i> Agregar Edición</a></label>
-        <span data-name="modal"></span>
+        <span data-name="places"></span>
+        <label><a data-name="dialog-link" href="#!" data-reveal-id="place-dialog"><i class="fa fa-search-plus"></i> Agregar Lugar</a></label>
       </div>
     }
 
-    def dialogHtml(body: IdMemoizeTransform, festival: Festival) = {
-      val edition: FestivalEdition = FestivalEdition.createRecord
-      val addEdition = SHtml.ajaxInvoke(() => {
-        festival.numberEditions.set(festival.numberEditions.get ++ List(edition))
-        body.setHtml() & Run("$('#edition-dialog').foundation('reveal', 'close');")
-      })
+    def deleteEdition(body: IdMemoizeTransform, festival: Festival, edition: FestivalEdition): JsCmd = {
+      festival.numberEditions.set(festival.numberEditions.get.filter(p => p != edition))
+      body.setHtml()
+    }
 
-      <div id="edition-dialog" class="reveal-modal" data-reveal="" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-        <h2 id="modalTitle">Agregar Edición</h2>
+    def dialogHtml(body: IdMemoizeTransform, festival: Festival, edition: FestivalEdition = FestivalEdition.createRecord, isNew: Boolean = true): JsCmd = {
+      val modalId = nextFuncName
+      val addEdition = () => {
+        if (isNew) festival.numberEditions.set(festival.numberEditions.get ++ List(edition))
+        body.setHtml() &
+          Run(s"$$('#${modalId}').foundation('reveal', 'close');") &
+          Run(s"$$('#${modalId}').remove();")
+      }
+
+      val html =
+        <div id={modalId} class="reveal-modal" data-reveal="" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+          <h2 id="modalTitle">Agregar Lugar</h2>
           <form data-lift="form.ajax">
             <div class="row">
               <div class="large-12 columns" >
@@ -294,20 +313,18 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
             </div>
             <div class="form-actions">
               <div class="actions">
-                <button data-name="submit" onclick={addEdition._2.toJsCmd} tabindex="1" class="btn btn-primary">
+                {SHtml.hidden(addEdition)}
+                <button type="submit" tabindex="1" class="btn btn-primary">
                   Agregar
                 </button>
               </div>
             </div>
           </form>
           <a class="close-reveal-modal" aria-label="Cerrar">&#215;</a>
-      </div>
-    }
+        </div>
 
-    private def showDialog(body: IdMemoizeTransform) = {
-      val fe = FestivalEdition.createRecord.name(Helpers.nextFuncName)
-      set(this.value ++ List(fe))
-      body.setHtml()
+      val (xml, js) = fixHtmlAndJs("modal", html)
+      Run("$(" + xml + ").foundation('reveal', 'open');")
     }
   }
   object serviceExchange extends OpenComboBoxField(this, ServiceExchange) {
