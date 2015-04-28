@@ -58,7 +58,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
       "#places" #> SHtml.idMemoize(body => {
         "data-name=places" #> <ol>{value.foldLeft(NodeSeq.Empty){ case (node, edition) => {
           node ++ <li>{(edition.name.get ++ " - " ++ edition.date.toString) ++ <br/>
-            } <a href="#!" data-name="edit" onclick={SHtml.ajaxInvoke(() => dialogHtml(body, owner)}><i class="fa fa-edit"></i></a></li>}}}</ol> &
+            } <a href="#!" data-name="edit" onclick={SHtml.ajaxInvoke(() => dialogHtml(body, owner))}><i class="fa fa-edit"></i></a></li>}}}</ol> &
         "data-name=dialog-link [onclick]" #> SHtml.ajaxInvoke(() => dialogHtml(body, owner))
       })
     }
