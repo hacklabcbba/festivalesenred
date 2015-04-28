@@ -10,6 +10,7 @@ import net.liftmodules.combobox.ComboItem
 import net.liftmodules.mongoauth.model.Role
 import net.liftweb.common.{Full, Box, Loggable}
 import net.liftweb.http._
+import net.liftweb.http.js.{HtmlFixer, JsCmd}
 import net.liftweb.http.js.JsCmds.Run
 import net.liftweb.mongodb.record.MongoRecord
 import net.liftweb.mongodb.record.field._
@@ -47,7 +48,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
     val placeholder = "Seleccione las ciudades donde se realizara el festival"
     override def displayName = "Ciudad"
   }
-  object places extends BsonRecordListField(this, Place) {
+  object places extends BsonRecordListField(this, Place) with HtmlFixer {
     override def displayName = "Lugar donde se desarrolla el Festival"
     override def toForm = Full(
       css.apply(template)
@@ -57,27 +58,30 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
       "#places" #> SHtml.idMemoize(body => {
         "data-name=places" #> <ol>{value.foldLeft(NodeSeq.Empty){ case (node, edition) => {
           node ++ <li>{(edition.name.get ++ " - " ++ edition.date.toString) ++ <br/>
-            }</li>}}}</ol> &
-          "data-name=modal" #> dialogHtml(body, this.owner)
+            } <a href="#!" data-name="edit" onclick={SHtml.ajaxInvoke(() => dialogHtml(body, owner)}><i class="fa fa-edit"></i></a></li>}}}</ol> &
+        "data-name=dialog-link [onclick]" #> SHtml.ajaxInvoke(() => dialogHtml(body, owner))
       })
     }
 
     def template = {
       <div id="places">
         <span data-name="places"></span>
-        <label><a href="#!" data-reveal-id="place-dialog"><i class="fa fa-search-plus"></i> Agregar Lugar</a></label>
-        <span data-name="modal"></span>
+        <label><a data-name="dialog-link" href="#!" data-reveal-id="place-dialog"><i class="fa fa-search-plus"></i> Agregar Lugar</a></label>
       </div>
     }
 
-    def dialogHtml(body: IdMemoizeTransform, festival: Festival) = {
-      val place: Place = Place.createRecord
+    def dialogHtml(body: IdMemoizeTransform, festival: Festival, place: Place = Place.createRecord): JsCmd = {
+      val modalId = nextFuncName
       val addPlace = SHtml.ajaxInvoke(() => {
         festival.places.set(festival.places.get ++ List(place))
-        body.setHtml() & Run("$('#place-dialog').foundation('reveal', 'close');")
+        body.setHtml() &
+        Run(s"$$('#${modalId}').foundation('reveal', 'close');") &
+        Run(s"$$('#${modalId}').remove();")
       })
 
-      <div id="place-dialog" class="reveal-modal" data-reveal="" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+
+      val html =
+      <div id={modalId} class="reveal-modal" data-reveal="" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
         <h2 id="modalTitle">Agregar Lugar</h2>
         <form data-lift="form.ajax">
           <div class="row">
@@ -118,12 +122,9 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
         </form>
         <a class="close-reveal-modal" aria-label="Cerrar">&#215;</a>
       </div>
-    }
 
-    private def showDialog(body: IdMemoizeTransform) = {
-      val place = Place.createRecord.name(Helpers.nextFuncName)
-      set(this.value ++ List(place))
-      body.setHtml()
+      val (xml, js) = fixHtmlAndJs("modal", html)
+      Run("$(" + xml + ").foundation('reveal', 'open');")
     }
   }
   object begins extends DatepickerField(this) {
