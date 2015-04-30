@@ -3,7 +3,7 @@ package snippet
 
 import code.config.Site
 import code.model.{FileRecord, User}
-import code.model.festival.Festival
+import code.model.festival.{EquipmentDetail, Festival}
 import net.liftmodules.extras.SnippetHelper
 import net.liftweb.common._
 import net.liftweb.http.js.JsCmds.{RedirectTo, Noop}
@@ -139,7 +139,26 @@ object FestivalView extends SnippetHelper {
       "data-name=photo3" #> (item.photo3.get match {
         case p: FileRecord => <img src={"/service/images/"+ p.fileId.get} />
         case _ => <br />
-      })
+      }) &
+      "data-name=presentation *" #> item.presentation &
+      "data-name=equipments " #> item.equipment.objs.map({d =>
+        "data-name=equipment *" #> <h5>{d.name}</h5>
+      }) &
+      "data-name=serviceExchanges" #> item.serviceExchange.objs.map({s =>
+        "data-name=serviceExchange *" #> <h5>{s.name}</h5>
+      }) &
+      "data-name=trainingActivities" #> item.trainingActivity.objs.map({t =>
+        "data-name=trainingActivity *" #> <h5>{t.name}</h5>
+      }) &
+      "data-name=communicationTools" #> item.communicationTools.objs.map({c =>
+        "data-name=communicationTool *" #> <h5>{c.name}</h5>
+      }) &
+      "data-name=networkings" #> item.networking.objs.map({n =>
+        "data-name=networking *" #> <h5>{n.name}</h5>
+      }) &
+      "data-name=minimalBudget" #> (item.minimalBudget.get.amount.get +" "+ item.minimalBudget.get.currency.obj.get.toString) &
+      "data-name=budget" #> (item.budget.get.amount.get + " "+ item.budget.get.currency.obj.get.toString) &
+      "data-name=collaborativeEconomyBudget" #> (item.collaborativeEconomyBudget.get.amount.get + " "+ item.collaborativeEconomyBudget.get.currency.obj.get.toString)
     }: CssSel
   }
 }
