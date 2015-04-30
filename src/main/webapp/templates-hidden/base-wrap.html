@@ -45,8 +45,10 @@
 
 <script src="/js/foundation.min.js"></script>
 <script src="/js/vendor/moment.min.js"></script>
-<script src="/js/vendor/fullcalendar.min.js"></script>
+<script src="/js/vendor/fullcalendar/fullcalendar.min.js"></script>
+<script src="/js/vendor/fullcalendar/lang/es.js"></script>
 <script src="/js/foundation-datepicker.js"></script>
+
 <script>
   $(document).foundation();
 </script>
@@ -159,17 +161,23 @@
 	<script>
 
         $(document).ready(function() {
-
+            var serviceUrl = '/service'
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev,next today',
                     center: 'title',
                     right: 'month,basicWeek,basicDay'
                 },
-                defaultDate: '2015-02-12',
+                defaultDate: (new Date).toDateString(),
                 editable: true,
+                lang: "es",
                 eventLimit: true, // allow "more" link when too many events
-                events: [
+                eventRender: function (event, element) {
+                    //element.find('.fc-event-inner').append("<p>" + event.description + "</p>");
+                    element.attr('href', event.url);
+
+                },
+                /*events: [
                     {
                         title: 'All Day Event',
                         start: '2015-02-01'
@@ -224,7 +232,8 @@
                         url: 'http://google.com/',
                         start: '2015-02-28'
                     }
-                ]
+                ],*/
+                events: '/api/feeds'
             });
 
         });

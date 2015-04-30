@@ -56,8 +56,8 @@ object Site extends Locs {
 
   lazy val festival = Menu.param[Festival]("Festival", "Festival",
     Festival.find _,
-    _.name.get
-  ) / "festival" / * >> TemplateBox(() => Templates("festival" :: Nil)) >> RequireLoggedIn
+    _.id.get.toString
+  ) / "festival" / * >> TemplateBox(() => Templates("festival" :: Nil))
 
 
   private def menus = List(
