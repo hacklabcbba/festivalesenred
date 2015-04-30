@@ -2,7 +2,7 @@ package code
 package snippet
 
 import code.config.Site
-import code.model.User
+import code.model.{FileRecord, User}
 import code.model.festival.Festival
 import net.liftmodules.extras.SnippetHelper
 import net.liftweb.common._
@@ -23,7 +23,6 @@ object FestivalScreen extends BaseScreen {
       case Full(_) => S.notice("Festival saved")
     }
   }
-
 }
 
 object FestivalForm extends SnippetHelper {
@@ -79,5 +78,68 @@ object FestivalesSnippet extends SnippetHelper {
       }) &
       "data-name=add [href]" #> "/festival-form/new"
     }): CssSel
+  }
+}
+
+object FestivalView extends SnippetHelper {
+  def render: CssSel = {
+    for {
+      item <- Site.festival.currentValue ?~ "Opción no válida"
+    } yield {
+      val generalDataFields = Site.festivalEdit.currentValue.dmap[List[Field[_, _]]](Nil)(s =>
+        List(
+          s.logo, s.name, s.responsible, s.productionManagement, s.city, s.places, s.begins, s.ends, s.durationType, s.call, s.areas,
+          s.website, s.responsibleEmail, s.pressResponsibleEmail, s.facebookPage, s.twitter, s.skype, s.spaces, s.equipment,
+          s.numberOfAttendees, s.publicKind, s.photo1, s.photo2, s.photo3
+        ))
+      val aboutFields = Site.festivalEdit.currentValue.dmap[List[Field[_, _]]](Nil)(s =>
+        List(
+          s.staff, s.presentation, s.numberEditions, s.serviceExchange, s.trainingActivity, s.communicationTools,
+          s.publicInstitutionPartnerships, s.privateInstitutionPartnerships, s.civilOrganizationPartnerships,
+          s.networking, s.minimalBudget, s.budget, s.collaborativeEconomyBudget, s.managementDuration, s.tags
+        ))
+
+      "data-name=title *+" #> item.name &
+      "data-name=dates *+" #> ("De: "+ item.begins.toString +" Al: "+item.ends.toString )&
+      "data-name=website *" #> item.website &
+      "data-name=website [href]" #> item.website &
+      "data-name=facebook [href]" #> item.facebookPage &
+      "data-name=facebook *" #> item.facebookPage &
+      "data-name=twitter [href]" #> item.twitter &
+      "data-name=twitter *" #> item.twitter &
+      "data-name=responsible *" #> item.responsible &
+      "data-name=responsibleEmail" #> item.responsibleEmail &
+      "data-name=responsiblePress *" #> "" &
+      "data-name=responsiblePressEmail *" #> item.pressResponsibleEmail &
+      "data-name=productionManagement *" #> item.productionManagement &
+      "data-name=productionManagementEmail *" #> "" &
+      "data-name=tags *" #> item.tags.get.map( t =>
+        "data-name=tag *" #> t.tag.get
+      ) &
+      "data-name=photo1-link [href]" #> (item.photo1.get match {
+        case p: FileRecord => "/service/images/"+ p.fileId.get
+        case _ => "#"
+      }) &
+      "data-name=photo1" #> (item.photo1.get match {
+        case p: FileRecord => <img src={"/service/images/"+ p.fileId.get} />
+        case _ => <br />
+      }) &
+        "data-name=photo2-link [href]" #> (item.photo2.get match {
+          case p: FileRecord => "/service/images/"+ p.fileId.get
+          case _ => "#"
+        }) &
+      "data-name=photo2" #> (item.photo2.get match {
+        case p: FileRecord => <img src={"/service/images/"+ p.fileId.get} />
+        case _ => <br />
+      }) &
+        "data-name=photo3-link [href]" #> (item.photo3.get match {
+          case p: FileRecord => "/service/images/"+ p.fileId.get
+          case _ => "#"
+        }) &
+      "data-name=photo3" #> (item.photo3.get match {
+        case p: FileRecord => <img src={"/service/images/"+ p.fileId.get} />
+        case _ => <br />
+      })
+    }: CssSel
   }
 }

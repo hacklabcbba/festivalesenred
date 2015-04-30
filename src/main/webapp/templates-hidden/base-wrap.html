@@ -12,12 +12,15 @@
   <link rel="stylesheet" href="/css/foundation-datepicker.css" />
   <link rel="stylesheet" href="/css/tagmanager.css" />
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link href="/css/vendor/lightbox2/lightbox.css" rel="stylesheet" />
+
   <script src="/js/vendor/modernizr.js"></script>
   <script src="/js/script.js"></script>
   <script src="/js/tagmanager.js"></script>
   <script src="/js/vendor/jquery.ui.widget.js"></script>
   <script src="/js/jquery.iframe-transport.js"></script>
   <script src="/js/jquery.fileupload.js"></script>
+  <script src="/js/vendor/lightbox2/lightbox.min.js"></script>
 </head>
 <body>
 
@@ -161,7 +164,7 @@
 	<script>
 
         $(document).ready(function() {
-            var serviceUrl = '/service'
+
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev,next today',
@@ -171,68 +174,11 @@
                 defaultDate: (new Date).toDateString(),
                 editable: true,
                 lang: "es",
-                eventLimit: true, // allow "more" link when too many events
+                eventLimit: true,
                 eventRender: function (event, element) {
-                    //element.find('.fc-event-inner').append("<p>" + event.description + "</p>");
                     element.attr('href', event.url);
 
                 },
-                /*events: [
-                    {
-                        title: 'All Day Event',
-                        start: '2015-02-01'
-                    },
-                    {
-                        title: 'Long Event',
-                        start: '2015-02-07',
-                        end: '2015-02-10'
-                    },
-                    {
-                        id: 999,
-                        title: 'Repeating Event',
-                        start: '2015-02-09T16:00:00'
-                    },
-                    {
-                        id: 999,
-                        title: 'Repeating Event',
-                        start: '2015-02-16T16:00:00'
-                    },
-                    {
-                        title: 'Conference',
-                        start: '2015-02-11',
-                        end: '2015-02-13'
-                    },
-                    {
-                        title: 'Meeting',
-                        start: '2015-02-12T10:30:00',
-                        end: '2015-02-12T12:30:00'
-                    },
-                    {
-                        title: 'Lunch',
-                        start: '2015-02-12T12:00:00'
-                    },
-                    {
-                        title: 'Meeting',
-                        start: '2015-02-12T14:30:00'
-                    },
-                    {
-                        title: 'Happy Hour',
-                        start: '2015-02-12T17:30:00'
-                    },
-                    {
-                        title: 'Dinner',
-                        start: '2015-02-12T20:00:00'
-                    },
-                    {
-                        title: 'Birthday Party',
-                        start: '2015-02-13T07:00:00'
-                    },
-                    {
-                        title: 'Click for Google',
-                        url: 'http://google.com/',
-                        start: '2015-02-28'
-                    }
-                ],*/
                 events: '/api/feeds'
             });
 

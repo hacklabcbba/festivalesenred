@@ -3,10 +3,8 @@ package config
 
 import code.model.festival.Festival
 import model.User
-import net.liftmodules.mongoauth.model.Role
 
 import net.liftweb._
-import common._
 import net.liftweb.http.{Templates, S}
 import omniauth.Omniauth
 import sitemap._
