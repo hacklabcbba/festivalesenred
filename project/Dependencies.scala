@@ -44,4 +44,5 @@ object Dependencies {
   val logback = "ch.qos.logback" % "logback-classic" % "1.1.2"
   val scalatest = "org.scalatest" %% "scalatest" % "2.2.1"
   val combobox = "net.liftmodules" %% "combobox" % "2.6"
+  val imaging = "net.liftmodules" % "imaging_2.6_2.10" % "1.3"
 }

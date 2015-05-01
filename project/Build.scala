@@ -21,7 +21,8 @@ object LiftProjectBuild extends Build {
         rogueCore,
         rogueLift,
         rogueIndex,
-        combobox
+        combobox,
+        imaging
       ) ++
       test(scalatest) ++
       container(jettyWebapp)
