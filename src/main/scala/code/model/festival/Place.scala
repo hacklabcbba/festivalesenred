@@ -2,15 +2,19 @@ package code
 package model
 package festival
 
+import code.config.Site
 import code.lib.field.{SingleComboBoxField, DatepickerField}
 import com.foursquare.rogue.LatLong
 import net.liftweb.common.Full
 import net.liftweb.http.S
 import net.liftweb.http.js.JsCmds.Run
+import net.liftweb.json.JsonAST.{JObject, JValue}
 import net.liftweb.mongodb.record.field.{MongoCaseClassField, ObjectIdRefField, DateField}
 import net.liftweb.mongodb.record.{BsonMetaRecord, BsonRecord}
 import net.liftweb.record.field.StringField
 import net.liftweb.util.Helpers
+import net.liftweb.json._
+import net.liftweb.json.JsonDSL._
 
 class Place extends BsonRecord[Place] {
 
@@ -29,6 +33,12 @@ class Place extends BsonRecord[Place] {
   }
   object geoLatLng extends MongoCaseClassField[Place, LatLong](this) {
     override def displayName = "Ubicación"
+		override def toString =  this.get match {
+			case ll: LatLong =>
+				s"{lat: ${this.get.lat}, long:${this.get.long}}"
+			case _ =>
+				""
+		}
 
     lazy val mapId = Helpers.nextFuncName
 
@@ -153,4 +163,9 @@ class Place extends BsonRecord[Place] {
   }
 }
 
-object Place extends Place with BsonMetaRecord[Place]
+object Place extends Place with BsonMetaRecord[Place] {
+	def asJValue(inst: Place, festival: Festival): JObject = {
+		("url" -> Site.festival.calcHref(festival)) ~
+		super.asJValue(inst)
+	}
+}

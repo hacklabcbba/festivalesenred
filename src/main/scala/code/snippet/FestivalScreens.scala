@@ -54,6 +54,7 @@ object FestivalForm extends SnippetHelper {
       "data-name=submit" #> SHtml.ajaxOnSubmit(() => inst.validate match {
         case Nil =>
           println("BEFORE SAVE:" + inst)
+          inst.places
           inst.save(true)
           RedirectTo("/", () => S.notice("Festival guardado"))
         case errors =>

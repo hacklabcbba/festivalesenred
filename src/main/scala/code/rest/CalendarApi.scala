@@ -34,9 +34,6 @@ object CalendarApi extends RestHelper {
       val festivales = Festival.where(_.places.subfield(_.date) between (d1.toDate, d2.toDate)).fetch()
       println("places: ", festivales)
       val placesJsonList = festivales.flatMap(
-        //f => f.get.places.map ( (f: Festival, p: Place) => ("title" -> p.name ) ~ ("start" -> p.date ) )
-        //f => f.get.places.subfield(_.date).map ( (f: Festival, p: Place) => ("title" -> p.name ) ~ ("start" -> p.date ) )
-        //f => f.places.subfield(_.date).map ( (f: Festival, p: Place) => ("title" -> p.name ) ~ ("start" -> p.date ) )
         f => f.places.get.map(
           (p: Place) =>
             ("id" -> f.id.toString()) ~
@@ -44,6 +41,16 @@ object CalendarApi extends RestHelper {
             ("start" -> p.date.toString) ~
             ("url" -> Site.festival.calcHref(f))
         )
+      )
+      response(placesJsonList)
+    }
+
+    case "api" :: "localizations" :: Nil Get req => {
+
+      val festivales = Festival.fetch()
+      println("places: ", festivales)
+      val placesJsonList =  "locs" -> festivales.flatMap(
+        f => f.places.get.map(Place.asJValue(_, f))
       )
       response(placesJsonList)
     }

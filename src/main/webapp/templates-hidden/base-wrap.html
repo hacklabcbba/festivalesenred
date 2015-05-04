@@ -23,7 +23,11 @@
   <script src="/js/vendor/lightbox2/lightbox.min.js"></script>
 
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<style>
+		#map { height: 580px; }
+	</style>
 </head>
+
 <body>
 
 
@@ -54,9 +58,13 @@
 <script src="/js/vendor/fullcalendar/lang/es.js"></script>
 <script src="/js/foundation-datepicker.js"></script>
 
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
 <script>
   $(document).foundation();
 </script>
+
 <script>
 	var iconFeature = new ol.Feature({
 	  geometry: new ol.geom.Point([-7354864, -1889219]),
@@ -162,8 +170,46 @@
 	});
 
 
+	$.ajax({url: "api/localizations",
+		dataType: "json",
+		success: function(response){
+			console.log("server response:", response);
+			$.each(response.locs, function(i,e){
+				if (e.latLong){
+					vectorSource.add( new ol.Feature({
+						name: e.title,
+						geometry: new ol.geom.Point([e.latLong.lat, e.latLong.long])
+					}));
+				}
+			});
+		}
+	});
   	</script>
+
+
+
 	<script>
+		/*
+		var map = L.map('map').setView([-7354864, -1889219], 5);
+		//L.tileLayer(MB_URL, {attribution: MB_ATTR, id: 'examples.map-i875mjb7'}).addTo(map);
+
+		L.marker([51.5, -0.09]).addTo(map)
+				.bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
+
+		L.circle([51.508, -0.11], 500, {
+			color: 'red',
+			fillColor: '#f03',
+			fillOpacity: 0.5
+		}).addTo(map).bindPopup("I am a circle.");
+
+		L.polygon([
+			[51.509, -0.08],
+			[51.503, -0.06],
+			[51.51, -0.047]
+		]).addTo(map).bindPopup("I am a polygon.");
+		console.log(map);
+		*/
+
 
         $(document).ready(function() {
 
