@@ -66,18 +66,9 @@
 </script>
 
 <script>
-	var iconFeature = new ol.Feature({
-	  geometry: new ol.geom.Point([-7354864, -1889219]),
-	  name: 'Festival 1'
-	});
-
-	var iconFeature2 = new ol.Feature({
-	  geometry: new ol.geom.Point([-7654865, -1889233]),
-	  name: 'Festival 2'
-	});
 
 	var iconStyle = new ol.style.Style({
-	  image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+	  image: new ol.style.Icon(({
 		anchor: [0.5, 46],
 		anchorXUnits: 'fraction',
 		anchorYUnits: 'pixels',
@@ -87,13 +78,7 @@
 	});
 
 
-	iconFeature.setStyle(iconStyle);
-	iconFeature2.setStyle(iconStyle);
-
-	var vectorSource = new ol.source.Vector({
-	  features: [iconFeature, iconFeature2]
-	});
-
+	var vectorSource = new ol.source.Vector();
 	var vectorLayer = new ol.layer.Vector({
 	  source: vectorSource
 	});
@@ -139,24 +124,26 @@
 
 	// display popup on click
 	map.on('click', function(evt) {
-	  var feature = map.forEachFeatureAtPixel(evt.pixel,
-		  function(feature, layer) {
-			return feature;
-		  });
-	  if (feature) {
-		var geometry = feature.getGeometry();
-		var coord = geometry.getCoordinates();
-		popup.setPosition(coord);
-		$(element).popover('destroy');
-		$(element).popover({
-		  'placement': 'top',
-		  'html': true,
-		  'content': feature.get('name')
-		});
-		$(element).popover('show');
-	  } else {
-		$(element).popover('destroy');
-	  }
+		console.log("click en el map", evt);
+
+	  	map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
+				//return feature;
+			  	if (feature) {
+					var geometry = feature.getGeometry();
+				  	var coord = geometry.getCoordinates();
+				  	popup.setPosition(coord);
+				  	$(element).popover('destroy');
+				  	$(element).popover({
+						placement: 'top',
+					  	html: true,
+					  	content: feature.get('name')
+				  	});
+				  	$(element).popover('show');
+			  	} else {
+					$(element).popover('destroy');
+			  	}
+		  	});
+
 	});
 
 	map.on('pointermove', function(e) {
@@ -175,11 +162,16 @@
 		success: function(response){
 			console.log("server response:", response);
 			$.each(response.locs, function(i,e){
-				if (e.latLong){
-					vectorSource.add( new ol.Feature({
-						name: e.title,
-						geometry: new ol.geom.Point([e.latLong.lat, e.latLong.long])
-					}));
+				if (e.geoLatLng){
+					console.log(e.geoLatLng);
+					var marker = new ol.Feature({
+						name: e.name + "<br/ ><a href='"+ e.url+"'>Detalles</a>",
+						geometry: new ol.geom.Point([e.geoLatLng.lat, e.geoLatLng.long]),
+						style: iconStyle
+					});
+					marker.setStyle(iconStyle);
+					marker.on('click', function(){ console.log('over')}, marker);
+					vectorSource.addFeature (marker);
 				}
 			});
 		}

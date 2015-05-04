@@ -4,6 +4,7 @@ package snippet
 import code.config.Site
 import code.model.{FileRecord, User}
 import code.model.festival.{EquipmentDetail, Festival}
+import com.foursquare.rogue.LatLong
 import net.liftmodules.extras.SnippetHelper
 import net.liftweb.common._
 import net.liftweb.http.js.JsCmds.{RedirectTo, Noop}
@@ -54,7 +55,7 @@ object FestivalForm extends SnippetHelper {
       "data-name=submit" #> SHtml.ajaxOnSubmit(() => inst.validate match {
         case Nil =>
           println("BEFORE SAVE:" + inst)
-          inst.places
+          inst.places.get.map(p => p.geoLatLng.set(new LatLong(-7354864, -1889219 )))
           inst.save(true)
           RedirectTo("/", () => S.notice("Festival guardado"))
         case errors =>

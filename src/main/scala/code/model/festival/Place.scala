@@ -35,7 +35,7 @@ class Place extends BsonRecord[Place] {
     override def displayName = "Ubicación"
 		override def toString =  this.get match {
 			case ll: LatLong =>
-				s"{lat: ${this.get.lat}, long:${this.get.long}}"
+				s"{lat: ${ll.lat}, long:${ll.long}}"
 			case _ =>
 				""
 		}
