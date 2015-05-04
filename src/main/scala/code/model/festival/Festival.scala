@@ -83,8 +83,11 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
       val addPlace = () => {
         if (isNew) festival.places.set(festival.places.get ++ List(place))
         body.setHtml() &
-        Run(s"$$('#${modalId}').foundation('reveal', 'close');") &
-        Run(s"$$('#${modalId}').remove();")
+        Run(s"jQuery(document).ready(function(){" +
+          s"$$('#${modalId}').foundation('reveal', 'close');" +
+          s"$$('#${modalId}').remove();"+
+          s" })")
+        //Run(s"$$('#${modalId}').remove();")
       }
 
 

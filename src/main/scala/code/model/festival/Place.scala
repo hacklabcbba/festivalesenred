@@ -33,17 +33,13 @@ class Place extends BsonRecord[Place] {
   }
   object geoLatLng extends MongoCaseClassField[Place, LatLong](this) {
     override def displayName = "Ubicación"
-		override def toString =  this.get match {
-			case ll: LatLong =>
-				s"{lat: ${ll.lat}, long:${ll.long}}"
-			case _ =>
-				""
-		}
 
     lazy val mapId = Helpers.nextFuncName
 
     def script = Run(
       """
+         console.log("volvio a generar!: ", $('#""" + mapId + """'))
+
         var iconFeature = new ol.Feature({
         	  geometry: new ol.geom.Point([-7354864, -1889219]),
         	  name: 'Festival 1'
@@ -148,7 +144,11 @@ class Place extends BsonRecord[Place] {
         	});
           $('#""" + mapId + """').data('map', map);
           $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
-            $('#""" + mapId + """').data('map').updateSize();
+          	if ( $('#""" + mapId + """').data('map') ){
+            	$('#""" + mapId + """').data('map').updateSize();
+						}else{
+            	console.log('map in data no exist')
+						}
           });
       """.stripMargin
     )
