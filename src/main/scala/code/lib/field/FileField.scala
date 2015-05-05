@@ -32,7 +32,6 @@ class FileField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
   private var deletedIds: List[String] = List()
 
   override def afterSave = {
-    println("after Save ejecturado")
     deleteFiles()
   }
 

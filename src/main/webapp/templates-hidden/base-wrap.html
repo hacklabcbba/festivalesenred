@@ -58,149 +58,8 @@
 <script src="/js/vendor/fullcalendar/lang/es.js"></script>
 <script src="/js/foundation-datepicker.js"></script>
 
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
-<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-
 <script>
-
-	var iconStyle = new ol.style.Style({
-	  image: new ol.style.Icon(({
-		anchor: [0.5, 46],
-		anchorXUnits: 'fraction',
-		anchorYUnits: 'pixels',
-		opacity: 0.75,
-		src: '/img/marker-icon.png'
-	  }))
-	});
-
-
-	var vectorSource = new ol.source.Vector();
-	var vectorLayer = new ol.layer.Vector({
-	  source: vectorSource
-	});
-
-	var projection = ol.proj.get('EPSG:900913');
-	var projectionExtent = projection.getExtent();
-	var size = ol.extent.getWidth(projectionExtent) / 256;
-	var resolutions = new Array(26);
-	var matrixIds = new Array(26);
-	for (var z = 0; z < 26; ++z) {
-	  // generate resolutions and matrixIds arrays for this WMTS
-	  resolutions[z] = size / Math.pow(2, z);
-	  matrixIds[z] = 'EPSG:900913:' + z;
-	}
-
-	var map = new ol.Map({
-	   layers: [
-		 new ol.layer.Tile({
-			source: new ol.source.OSM()
-		 }),
-		 vectorLayer
-	   ],
-	   renderer: 'canvas',
-	   target: document.getElementById('map'),
-	   view: new ol.View({
-		 center: [-7354864, -1889219],
-		 zoom: 5
-	   })
-	});
-
-	//Añadimos un control de zoom
-
-	map.addControl(new ol.control.ZoomSlider());
-
-	var element = document.getElementById('popup');
-
-	var popup = new ol.Overlay({
-	  element: element,
-	  positioning: 'bottom-center',
-	  stopEvent: false
-	});
-	map.addOverlay(popup);
-
-	// display popup on click
-	map.on('click', function(evt) {
-		console.log("click en el map", evt);
-
-	  	map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
-				//return feature;
-			  	if (feature) {
-					var geometry = feature.getGeometry();
-				  	var coord = geometry.getCoordinates();
-				  	popup.setPosition(coord);
-				  	$(element).popover('destroy');
-				  	$(element).popover({
-						placement: 'top',
-					  	html: true,
-					  	content: feature.get('name')
-				  	});
-				  	$(element).popover('show');
-			  	} else {
-					$(element).popover('destroy');
-			  	}
-		  	});
-
-	});
-
-	map.on('pointermove', function(e) {
-	  if (e.dragging) {
-		$(element).popover('destroy');
-		return;
-	  }
-	  var pixel = map.getEventPixel(e.originalEvent);
-	  var hit = map.hasFeatureAtPixel(pixel);
-	  map.getTarget().style.cursor = hit ? 'pointer' : '';
-	});
-
-
-	$.ajax({url: "/api/localizations",
-		dataType: "json",
-		success: function(response){
-			console.log("server response:", response);
-			$.each(response.locs, function(i,e){
-				if (e.geoLatLng){
-					console.log(e.geoLatLng);
-					var marker = new ol.Feature({
-						name: e.name + "<br/ ><a href='"+ e.url+"'>Detalles</a>",
-						geometry: new ol.geom.Point([e.geoLatLng.lat, e.geoLatLng.long]),
-						style: iconStyle
-					});
-					marker.setStyle(iconStyle);
-					marker.on('click', function(){ console.log('over')}, marker);
-					vectorSource.addFeature (marker);
-				}
-			});
-		}
-	});
-  	</script>
-
-
-
-<script>
-		/*
-		var map = L.map('map').setView([-7354864, -1889219], 5);
-		//L.tileLayer(MB_URL, {attribution: MB_ATTR, id: 'examples.map-i875mjb7'}).addTo(map);
-
-		L.marker([51.5, -0.09]).addTo(map)
-				.bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
-
-		L.circle([51.508, -0.11], 500, {
-			color: 'red',
-			fillColor: '#f03',
-			fillOpacity: 0.5
-		}).addTo(map).bindPopup("I am a circle.");
-
-		L.polygon([
-			[51.509, -0.08],
-			[51.503, -0.06],
-			[51.51, -0.047]
-		]).addTo(map).bindPopup("I am a polygon.");
-		console.log(map);
-		*/
-
-
-        $(document).ready(function() {
-
+        $(document).ready(function(){
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev,next today',
@@ -213,17 +72,14 @@
                 eventLimit: true,
                 eventRender: function (event, element) {
                     element.attr('href', event.url);
-
                 },
                 events: '/api/feeds'
             });
-
         });
-
-    </script>
-
+</script>
 <script>
 	$(document).foundation();
 </script>
+
 </body>
 </html>

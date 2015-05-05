@@ -58,7 +58,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
       "#places" #> SHtml.idMemoize(body => {
         "data-name=places" #> <ol>{value.foldLeft(NodeSeq.Empty){ case (node, place) => {
           node ++ <li>
-            {(place.name.get ++ " - " ++ place.date.toString)}
+            {place.name.get ++ " - " ++ place.date.toString}
             <a href="#!" data-name="edit" onclick={SHtml.ajaxInvoke(() => dialogHtml(body, owner, place, false)).toJsCmd}><i class="fa fa-edit"></i></a>
             <a href="#!" data-name="remove" onclick={SHtml.ajaxInvoke(() => deletePlace(body, owner, place)).toJsCmd}><i class="fa fa-trash"></i></a>
           </li>}}}</ol> &
@@ -71,6 +71,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
         <span data-name="places"></span>
         <label><a data-name="dialog-link" href="#!" data-reveal-id="place-dialog"><i class="fa fa-search-plus"></i> Agregar Lugar</a></label>
       </div>
+      <hr />
     }
 
     def deletePlace(body: IdMemoizeTransform, festival: Festival, place: Place): JsCmd = {
@@ -83,13 +84,9 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
       val addPlace = () => {
         if (isNew) festival.places.set(festival.places.get ++ List(place))
         body.setHtml() &
-        Run(s"jQuery(document).ready(function(){" +
-          s"$$('#${modalId}').foundation('reveal', 'close');" +
-          s"$$('#${modalId}').remove();"+
-          s" })")
-        //Run(s"$$('#${modalId}').remove();")
+          Run(s"$$('#${modalId}').foundation('reveal', 'close');") &
+          Run(s"$$('#${modalId}').remove();")
       }
-
 
       val html =
       <div id={modalId} class="reveal-modal" data-reveal="" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
