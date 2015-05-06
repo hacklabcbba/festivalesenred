@@ -49,30 +49,55 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
     override def displayName = "Ciudad"
   }
   object places extends BsonRecordListField(this, Place) with HtmlFixer {
-    override def displayName = "Lugar donde se desarrolla el Festival"
+    override def displayName = ""
+    def title = "Lugar donde se desarrolla el Festival"
     override def toForm = Full(
       css.apply(template)
     )
 
     def css = {
       "#places" #> SHtml.idMemoize(body => {
-        "data-name=places" #> <ol>{value.foldLeft(NodeSeq.Empty){ case (node, place) => {
-          node ++ <li>
-            {place.name.get ++ " - " ++ place.date.toString}
-            <a href="#!" data-name="edit" onclick={SHtml.ajaxInvoke(() => dialogHtml(body, owner, place, false)).toJsCmd}><i class="fa fa-edit"></i></a>
-            <a href="#!" data-name="remove" onclick={SHtml.ajaxInvoke(() => deletePlace(body, owner, place)).toJsCmd}><i class="fa fa-trash"></i></a>
-          </li>}}}</ol> &
-        "data-name=dialog-link [onclick]" #> SHtml.ajaxInvoke(() => dialogHtml(body, owner))
+      ".title" #> title &
+      "tbody *" #> {
+        "tr " #> value.map( p => {
+          "data-name=date *" #> p.date.toString &
+          "data-name=name *" #> p.name.get &
+          "data-name=edit [onclick]" #> SHtml.ajaxInvoke(() => dialogHtml(body, owner, p, false)) &
+          "data-name=remove [onclick]" #> SHtml.ajaxInvoke(() => deletePlace(body, owner, p))
+          })
+      } &
+      "data-name=add-link [onclick]" #> SHtml.ajaxInvoke(() => dialogHtml(body, owner))
       })
     }
 
+
     def template = {
-      <div id="places">
-        <span data-name="places"></span>
-        <label><a data-name="dialog-link" href="#!" data-reveal-id="place-dialog"><i class="fa fa-search-plus"></i> Agregar Lugar</a></label>
+      <br />
+      <div id="places" class="panel panel-default">
+
+        <div class="panel-heading title"></div>
+        <table class="table table-hover table-condensed">
+        <thead>
+          <tr><th>Fecha</th><th>Lugar</th><th>&nbsp;</th></tr>
+        </thead>
+          <tbody data-name="places">
+            <tr><td data-name="date"></td>
+                <td data-name="name"></td>
+                <td><a href="#!" data-name="edit" onclick="#"><i class="fa fa-edit"></i></a>
+                  &nbsp; <a href="#!" data-name="remove" onclick="#"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+          </tbody>
+          <tfoot>
+          <tr>
+            <td>
+              <button data-name="add-link" href="#!" data-reveal-id="place-dialog" type="button" class="btn btn-primary btn-xs"><i class="fa fa-search-plus"></i> Agregar lugar</button></td>
+          </tr>
+          </tfoot>
+        </table>
       </div>
-      <hr />
     }
+
 
     def deletePlace(body: IdMemoizeTransform, festival: Festival, place: Place): JsCmd = {
       festival.places.set(festival.places.get.filter(p => p != place))
@@ -86,7 +111,8 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
         body.setHtml() &
           Run(s"$$('#${modalId}').foundation('reveal', 'close');") &
           Run(s"$$('#${modalId}').remove();")
-      }
+     }
+
 
       val html =
       <div id={modalId} class="reveal-modal" data-reveal="" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">

@@ -283,7 +283,8 @@ class Place extends BsonRecord[Place] {
 			val node =
 				<div>
 					<div id={mapId} style="height:200px;width:100%;"></div>
-					{SHtml.hidden(s => setLatLong(s), compactRender(this.asJValue), "id" -> "latLongField")}
+					{/*SHtml.hidden(s => setLatLong(s), compactRender(this.asJValue), "id" -> "latLongField")*/}
+					{SHtml.hidden(s => setLatLong(s), "{}", "id" -> "latLongField")}
 				</div>
 			Full(node)
     }

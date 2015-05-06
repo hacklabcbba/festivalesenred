@@ -30,7 +30,7 @@ object FestivalForm extends SnippetHelper {
   def render: CssSel = {
     for {
       inst <- Site.festivalEdit.currentValue ?~ "Opción no válida"
-    } yield ({
+    } yield {
       val generalDataFields = Site.festivalEdit.currentValue.dmap[List[Field[_, _]]](Nil)(s =>
         List(
           s.logo, s.name, s.responsible, s.productionManagement, s.city, s.places, s.begins, s.ends, s.durationType, s.call, s.areas,
@@ -60,7 +60,7 @@ object FestivalForm extends SnippetHelper {
           S.error(errors)
           Noop
       })
-    }): CssSel
+    }: CssSel
   }
 }
 
