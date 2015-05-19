@@ -45,7 +45,7 @@ object Site extends Locs {
   val register = MenuLoc(Menu.i("Registrarse") / "register" >> RequireNotLoggedIn >> UserGroup)
   val enRed = MenuLoc(Menu("EnRed", "En Red") / "en_red" >> TopBarGroup)
   val adminFestivales = MenuLoc(Menu("Admin Festivales", "Admin Festivales") / "admin" / "festivales" >> RequireLoggedIn >> TopBarGroup)
-  val queEs = MenuLoc(Menu("Quees", "Que es?") / "que_es" >> TopBarGroup)
+  val queEs = MenuLoc(Menu("Quees", "¿Qué es?") / "que_es" >> TopBarGroup)
   val calendar = MenuLoc(Menu("Calendar", "Calendario") / "calendar" >> TopBarGroup)
   lazy val festivalEdit = Menu.param[Festival]("Formulario Festival", "Formulario Festival",
     Festival.findOrNew _,
