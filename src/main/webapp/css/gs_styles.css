@@ -291,10 +291,10 @@ img.centre {
 	padding: 5px 10px;
 	border: 1px solid #333;
 }
-.top-bar .top-bar-section ul.right:nth-child(2) > li:last-child > a,
-.top-bar .top-bar-section ul.right:nth-child(2) > li:last-child > span {
-	background-color: #333 !important;
-	color: #fff !important;
+.top-bar .top-bar-section ul.right:nth-child(2) > li:nth-child(2) > a,
+.top-bar .top-bar-section ul.right:nth-child(2) > li:nth-child(2) > span {
+	background-color: #333!important;
+	color: #fff;
 }
 
 body.f-topbar-fixed {

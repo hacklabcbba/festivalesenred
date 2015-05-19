@@ -39,12 +39,15 @@ object Site extends Locs {
   ) / "user" >> Loc.CalcValue(() => User.currentUser)
   lazy val profileLoc = profileParamMenu.toLoc
 
-  val password = MenuLoc(Menu.i("Password") / "settings" / "password" >> RequireLoggedIn >> SettingsGroup)
-  val account = MenuLoc(Menu.i("Account") / "settings" / "account" >> SettingsGroup >> RequireLoggedIn)
-  val editProfile = MenuLoc(Menu("EditProfile", "Profile") / "settings" / "profile" >> SettingsGroup >> RequireLoggedIn)
+  val password = MenuLoc(Menu.i("Password") / "settings" / "password" >> RequireLoggedIn )
+  val account = MenuLoc(Menu.i("Account") / "settings" / "account" >> RequireLoggedIn)
+  val editProfile = MenuLoc(Menu("EditProfile", "Profile") / "settings" / "profile" >> RequireLoggedIn )
   val register = MenuLoc(Menu.i("Registrarse") / "register" >> RequireNotLoggedIn >> UserGroup)
   val enRed = MenuLoc(Menu("EnRed", "En Red") / "en_red" >> TopBarGroup)
-  val adminFestivales = MenuLoc(Menu("Admin Festivales", "Admin Festivales") / "admin" / "festivales" >> RequireLoggedIn >> TopBarGroup)
+  val misFestivales = MenuLoc(Menu("Mis Festivales", "Mis Festivales") / "admin" / "festivales" >> RequireLoggedIn >> SettingsGroup)
+  val myAccount = MenuLoc(Menu.i("Mi Cuenta") / "myaccount" >> RequireLoggedIn >> SettingsGroup submenus(
+    account.menu, password.menu, editProfile.menu, profileParamMenu
+  ))
   val queEs = MenuLoc(Menu("Quees", "¿Qué es?") / "que_es" >> TopBarGroup)
   val calendar = MenuLoc(Menu("Calendar", "Calendario") / "calendar" >> TopBarGroup)
   lazy val festivalEdit = Menu.param[Festival]("Formulario Festival", "Formulario Festival",
@@ -63,17 +66,14 @@ object Site extends Locs {
     Menu.i("Iniciar Sesion") / "login" >> RequireNotLoggedIn >> UserGroup,
     register.menu,
     loginToken.menu,
-    logout.menu,
-    profileParamMenu,
-    account.menu,
-    password.menu,
-    editProfile.menu,
     enRed.menu,
     queEs.menu,
-    adminFestivales.menu,
     calendar.menu,
     festivalEdit,
     festival,
+    myAccount.menu,
+    misFestivales.menu,
+    Menu.i("logout") / "logout" >> RequireLoggedIn >> SettingsGroup,
     Menu.i("Error") / "error" >> Hidden,
     Menu.i("404") / "404" >> Hidden,
     Menu.i("Throw") / "throw"  >> EarlyResponse(() => throw new Exception("This is only a test."))
