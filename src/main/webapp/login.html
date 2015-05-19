@@ -4,24 +4,25 @@
 	  <div class="gs-login-box text-center">
 	  <h2>Inicia sesión</h2>
 	  <h3>Encantados de verte de nuevo.</h3>
-		  <div class="row">
+		  <div class="row" data-lift="UserLogin">
 			  <div class="large-12  columns">
-				<form>
+				<form data-lift="form.ajax">
 						<div class="row collapse">
 						  <div class="large-12 columns">
 							<i class="fi-torso"></i>
-							<input type="text" placeholder="Dirección de correo electrónico">
+							<input id="id_email" name="email" type="text" placeholder="Dirección de correo electrónico">
 						  </div>
 						</div>
 						<div class="row collapse">
 						  <div class="large-12 columns">
 							<i class="fi-lock"></i>
-							<input type="text" placeholder="Contraseña">
+							<input id="id_password" name="password" type="password" placeholder="Contraseña">
 						  </div>
 						</div>
 						<div class="row collapse">
 						  <div class="large-12 columns">
-							<a class="button gs-login-btn large-12 columns" href="#">Iniciar Sesión</a>
+                            <input type="hidden" id="id_submit">
+							<button type="submit"  class="button gs-login-btn large-12 columns">Iniciar Sesión</button>
 						  </div>
 						</div>
 

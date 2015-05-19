@@ -102,13 +102,8 @@ object UserLogin extends Loggable {
   def render = {
     // form vars
     var password = ""
-    var hasPassword = false
+    val hasPassword = true
     var remember = User.loginCredentials.is.isRememberMe
-
-    val radios = SHtml.radioElem[Boolean](
-      Seq(false, true),
-      Full(hasPassword)
-    )(it => it.foreach(hasPassword = _))
 
     def doSubmit(): JsCmd = {
       S.param("email").map(e => {
@@ -116,7 +111,7 @@ object UserLogin extends Loggable {
         // save the email and remember entered in the session var
         User.loginCredentials(LoginCredentials(email, remember))
 
-        if (hasPassword && email.length > 0 && password.length > 0) {
+        if (email.length > 0 && password.length > 0) {
           User.findByEmail(email) match {
             case Full(user) if (user.password.isMatch(password)) =>
               logger.debug("pwd matched")
@@ -166,9 +161,6 @@ object UserLogin extends Loggable {
 
     "#id_email [value]" #> User.loginCredentials.is.email &
     "#id_password" #> SHtml.password(password, password = _) &
-    "#no_password" #> radios(0) &
-    "#yes_password" #> radios(1) &
-    "name=remember" #> SHtml.checkbox(remember, remember = _) &
     "#id_submit" #> SHtml.hidden(doSubmit)
   }
 }
@@ -196,5 +188,43 @@ object UserTopbar {
         <a href="/login" class="btn btn-default navbar-btn navbar-right">Sign In</a>
       case _ => NodeSeq.Empty
     }
+  }
+}
+
+object UserRegister extends Loggable {
+
+  def render = {
+    var name = ""
+    var username = ""
+    var email = ""
+    var password = ""
+
+    def doSubmit(): JsCmd = {
+      val user = User.createRecord
+      user.name(name)
+      user.username(username)
+      user.email(email)
+      user.password(password)
+      user.password.hashIt
+      user.verified(true)
+      user.validate match {
+        case Nil =>
+          user.saveBox match {
+            case Empty => S.warning("Empty save")
+            case Failure(msg, _, _) => S.error(msg)
+            case Full(u) =>
+              User.logUserIn(u, true)
+              RedirectTo(LoginRedirect.openOr(Site.home.url), () => S.notice("Thanks for signing up!"))
+          }
+        case errors =>
+          S.error(errors)
+      }
+    }
+
+    "#id_name" #> SHtml.text(name, name = _) &
+    "#id_username" #> SHtml.text(username, username = _) &
+    "#id_email" #> SHtml.text(email, email = _) &
+    "#id_password" #> SHtml.password(password, password = _) &
+    "#id_submit" #> SHtml.hidden(doSubmit)
   }
 }

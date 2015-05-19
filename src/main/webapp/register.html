@@ -3,30 +3,37 @@
 	  <div class="gs-login-box text-center">
 	  <h2>Únete</h2>
 	  <h3>Regístrate y suma tu Festival</h3>
-		  <div class="row">
+          <div class="row" data-lift="UserRegister">
 			  <div class="large-12  columns">
-				<form>
+				<form data-lift="form.ajax">
+                        <div class="row collapse">
+                            <div class="large-12 columns">
+                                <i class="fi-torso"></i>
+                                <input id="id_username" type="text" placeholder="Nombre de usuario">
+                            </div>
+                        </div>
 						<div class="row collapse">
 						  <div class="large-12 columns">
 							<i class="fi-torso"></i>
-							<input type="text" placeholder="Nombre completo">
+							<input id="id_name" type="text" placeholder="Nombre completo">
 						  </div>
 						</div>
 						<div class="row collapse">
 						  <div class="large-12 columns">
 							<i class="fi-mail"></i>
-							<input type="text" placeholder="Correo electrónico">
+							<input id="id_email" type="text" placeholder="Correo electrónico">
 						  </div>
 						</div>
 						<div class="row collapse">
 						  <div class="large-12 columns">
 							<i class="fi-lock"></i>
-							<input type="text" placeholder="Contraseña">
+							<input id="id_password" type="text" placeholder="Contraseña">
 						  </div>
 						</div>
 						<div class="row collapse">
 						  <div class="large-12 columns">
-							<a class="button gs-login-btn large-12 columns" href="#">Registrarse</a>
+                            <input type="hidden" id="id_submit">
+                            <button type="submit"  class="button gs-login-btn large-12 columns">Registrarse</button>
 						  </div>
 						</div>
 
