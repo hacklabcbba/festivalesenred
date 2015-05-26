@@ -82,6 +82,13 @@ object FestivalesSnippet extends SnippetHelper {
 }
 
 object FestivalView extends SnippetHelper {
+
+  def title: CssSel = {
+    for {
+      item <- Site.festival.currentValue ?~ "Opción no válida"
+    } yield ("title -*" #> item.name): CssSel
+  }
+
   def render: CssSel = {
     for {
       item <- Site.festival.currentValue ?~ "Opción no válida"
