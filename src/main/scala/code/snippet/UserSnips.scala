@@ -84,7 +84,7 @@ object ProfileLocUser extends UserSnippet {
   def profile(html: NodeSeq): NodeSeq = serve(html) { user =>
     val editLink: NodeSeq =
       if (User.currentUser.filter(_.id.get == user.id.get).isDefined)
-        <a href={Site.editProfile.url} class="btn btn-info"><i class="icon-edit icon-white"></i> Edit Your Profile</a>
+        <a href={Site.editProfile.url} class="button gs-login-btn large-4 columns"><i class="icon-edit icon-white"></i> Edit Your Profile</a>
       else
         NodeSeq.Empty
 
@@ -93,7 +93,7 @@ object ProfileLocUser extends UserSnippet {
     "#id_location *" #> user.location.get &
     "#id_whencreated" #> df.format(user.whenCreated.toDate).toString &
     "#id_bio *" #> user.bio.get &
-    "#id_editlink *" #> editLink
+    "#id_editlink" #> editLink
   }
 }
 

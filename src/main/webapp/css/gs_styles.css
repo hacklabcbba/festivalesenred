@@ -660,3 +660,7 @@ label {
 }
 
 reveal-modal-bg{position:fixed;} .reveal-modal{position:fixed;}
+
+a.button.gs-login-btn.large-4 columns {
+  color: #FFF;
+}
