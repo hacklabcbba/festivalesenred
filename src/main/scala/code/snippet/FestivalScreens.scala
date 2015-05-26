@@ -10,11 +10,10 @@ import net.liftweb.common._
 import net.liftweb.http.js.JsCmds.{RedirectTo, Noop}
 import net.liftweb.http.{SHtml, S}
 import net.liftweb.record.Field
-import net.liftweb.util.{Mailer, CssSel, FieldContainer}
+import net.liftweb.util._
 import net.liftweb.util.Helpers._
 
 import scala.xml.Text
-import net.liftweb.util.Mailer
 import net.liftweb.util.Mailer._
 
 
@@ -65,7 +64,15 @@ object FestivalForm extends SnippetHelper {
         case Nil =>
           val isNew = Festival.find(inst.id.get).isEmpty
           inst.save(true)
-          Mailer.sendMail()
+          if (isNew) {
+            Mailer.sendMail(
+              From(Props.get("mail.smtp.user", "")),
+              Subject("Se creo un nuevo festival"),
+              To(Props.get("mail.smtp.user", "")),
+              PlainMailBodyType(s"Se creo un nuevo festival http://festivalesenred.telartes.org.bo${Site.festivalEdit.calcHref(inst)}")
+            )
+          }
+
           RedirectTo("/", () => S.notice("Festival guardado"))
         case errors =>
           errors.foreach(err => S.error(err.field.uniqueFieldId openOr nextFuncName, err.msg))

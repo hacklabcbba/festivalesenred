@@ -1,5 +1,7 @@
 package bootstrap.liftweb
 
+import javax.mail.{PasswordAuthentication, Authenticator}
+
 import code.lib.FoundationHtmlHandler
 import code.util.DataSeed
 import net.liftmodules.combobox.ComboBox
@@ -100,6 +102,14 @@ class Boot extends Loggable {
 
     LiftRules.dispatch.append(code.rest.AjaxFileUpload)
     LiftRules.dispatch.append(code.rest.CalendarApi)
+
+    Mailer.authenticator = for {
+      user <- Props.get("mail.smtp.user")
+      pass <- Props.get("mail.smtp.pass")
+    } yield new Authenticator {
+        override def getPasswordAuthentication =
+          new PasswordAuthentication(user,pass)
+      }
 
     // Mailer
     Mailer.devModeSend.default.set((m: MimeMessage) => logger.info("Dev mode message:\n" + prettyPrintMime(m)))

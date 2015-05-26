@@ -9,7 +9,8 @@ import scala.xml._
 import net.liftweb._
 import common._
 import http.{LiftScreen, S}
-import util.FieldError
+import net.liftweb.util.{Props, Mailer, FieldError}
+import Mailer._
 import util.Helpers._
 
 import net.liftmodules.extras.Gravatar
@@ -133,6 +134,12 @@ object RegisterScreen extends BaseRegisterScreen with BasePasswordScreen {
       case Empty => S.warning("Empty save")
       case Failure(msg, _, _) => S.error(msg)
       case Full(u) =>
+        Mailer.sendMail(
+          From(Props.get("mail.smtp.user", "")),
+          Subject("Por favor verifique su cuenta"),
+          To(Props.get("mail.smtp.user", "")),
+          PlainMailBodyType(s"Por favor haga click en el siguiente enlace oara verificar su cuenta http://festivalesenred.telartes.org.bo${Site.profileLoc.calcHref(u)}")
+        )
         User.logUserIn(u, true)
         if (rememberMe) User.createExtSession(u.id.get)
         S.notice("Thanks for signing up!")
