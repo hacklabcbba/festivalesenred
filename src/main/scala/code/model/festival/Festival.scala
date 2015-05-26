@@ -499,6 +499,7 @@ object FestivalDuration extends Enumeration {
   type ContactType = Value
   val Hours = Value("Horas")
   val Days = Value("Dias")
+  val Weeks = Value("Semanas")
   val Months = Value("Meses")
   val Years = Value("Años")
 }
