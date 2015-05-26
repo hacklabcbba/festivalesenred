@@ -12,8 +12,10 @@ import net.liftweb.json._
 import net.liftweb.json.JsonDSL._
 
 import com.foursquare.rogue.LiftRogue._
-import org.joda.time.{DateTime, DateTimeZone}
+import net.liftweb.util.Helpers
+import org.joda.time._
 import org.joda.time.format._
+import Helpers._
 
 object CalendarApi extends RestHelper {
 
@@ -29,20 +31,24 @@ object CalendarApi extends RestHelper {
       val d1 = formatter parseDateTime S.param("start").getOrElse(DateTime.now().toString)
       val d2 = formatter parseDateTime S.param("end").getOrElse(DateTime.now().toString)
 
-      println("parametros: ", d1, d2)
+      val festivales = Festival
+        .or(
+          _.where(_.begins between (d1.toDate, d2.toDate)),
+          _.where(_.ends between (d1.toDate, d2.toDate))
+        ).fetch
 
-      val festivales = Festival.where(_.places.subfield(_.date) between (d1.toDate, d2.toDate)).fetch()
-      println("places: ", festivales)
-      val placesJsonList = festivales.flatMap(
-        f => f.places.get.map(
-          (p: Place) =>
-            ("id" -> f.id.toString()) ~
-            ("title" -> f.name.asJValue) ~
-            ("start" -> p.date.toString) ~
-            ("url" -> Site.festival.calcHref(f))
-        )
+      val jsonList = festivales.map(
+        f => {
+         
+          ("id" -> f.id.toString()) ~
+          ("title" -> f.name.asJValue) ~
+          ("start" -> f.begins.toString) ~
+          ("end" -> f.ends.toString) ~
+          ("url" -> Site.festival.calcHref(f))
+        }
       )
-      response(placesJsonList)
+
+      response(jsonList)
     }
 
     case "api" :: "localizations" :: Nil Get req => {
