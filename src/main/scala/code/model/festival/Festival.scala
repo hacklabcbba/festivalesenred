@@ -301,7 +301,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
     def template = {
       <div id="editions">
         <span data-name="places"></span>
-        <label><a data-name="dialog-link" href="#!" data-reveal-id="place-dialog"><i class="fa fa-search-plus"></i> Agregar Lugar</a></label>
+        <label><a data-name="dialog-link" href="#!" data-reveal-id="place-dialog"><i class="fa fa-search-plus"></i> Agregar Edición</a></label>
       </div>
     }
 
@@ -321,7 +321,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
 
       val html =
         <div id={modalId} class="reveal-modal" data-reveal="" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-          <h2 id="modalTitle">Agregar Lugar</h2>
+          <h2 id="modalTitle">Agregar Edición</h2>
           <form data-lift="form.ajax">
             <div class="row">
               <div class="large-12 columns" >
@@ -429,7 +429,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
         )
       )
     }
-    override def displayName = "¿Tienes alguna alianza con alguna entidad privada?"
+    override def displayName = "¿Tienes alguna alianza con una organización social?"
     override def optional_? = true
   }
   object networking extends OpenComboBoxField(this, Network) {
