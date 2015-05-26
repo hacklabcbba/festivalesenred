@@ -39,7 +39,7 @@ object CalendarApi extends RestHelper {
 
       val jsonList = festivales.map(
         f => {
-         
+
           ("id" -> f.id.toString()) ~
           ("title" -> f.name.asJValue) ~
           ("start" -> f.begins.toString) ~

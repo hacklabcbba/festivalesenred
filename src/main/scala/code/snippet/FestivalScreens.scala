@@ -10,10 +10,13 @@ import net.liftweb.common._
 import net.liftweb.http.js.JsCmds.{RedirectTo, Noop}
 import net.liftweb.http.{SHtml, S}
 import net.liftweb.record.Field
-import net.liftweb.util.{CssSel, FieldContainer}
+import net.liftweb.util.{Mailer, CssSel, FieldContainer}
 import net.liftweb.util.Helpers._
 
 import scala.xml.Text
+import net.liftweb.util.Mailer
+import net.liftweb.util.Mailer._
+
 
 object FestivalScreen extends BaseScreen {
 
@@ -60,7 +63,9 @@ object FestivalForm extends SnippetHelper {
       "data-name=cancel [onclick]" #>  SHtml.ajaxInvoke(() => RedirectTo("/")) &
       "data-name=submit" #> SHtml.ajaxOnSubmit(() => inst.validate match {
         case Nil =>
+          val isNew = Festival.find(inst.id.get).isEmpty
           inst.save(true)
+          Mailer.sendMail()
           RedirectTo("/", () => S.notice("Festival guardado"))
         case errors =>
           errors.foreach(err => S.error(err.field.uniqueFieldId openOr nextFuncName, err.msg))
