@@ -1,5 +1,6 @@
 package bootstrap.liftweb
 
+import code.lib.FoundationHtmlHandler
 import code.util.DataSeed
 import net.liftmodules.combobox.ComboBox
 import omniauth.Omniauth
@@ -85,7 +86,9 @@ class Boot extends Loggable {
     LiftRules.early.append(_.setCharacterEncoding("UTF-8"))
 
     // Init Extras
+    LiftExtras.noticeHtmlHandler.default.set(FoundationHtmlHandler)
     LiftExtras.init()
+
 
     // don't include the liftAjax.js code. It's served statically.
     LiftRules.autoIncludeAjaxCalc.default.set(() => () => (session: LiftSession) => false)

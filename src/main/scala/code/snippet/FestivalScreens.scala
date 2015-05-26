@@ -13,6 +13,8 @@ import net.liftweb.record.Field
 import net.liftweb.util.{CssSel, FieldContainer}
 import net.liftweb.util.Helpers._
 
+import scala.xml.Text
+
 object FestivalScreen extends BaseScreen {
 
   addFields(() => new FieldContainer {def allFields = Site.festivalEdit.currentValue.map(_.fields()) openOr Nil})
@@ -44,12 +46,16 @@ object FestivalForm extends SnippetHelper {
           s.networking, s.minimalBudget, s.budget, s.collaborativeEconomyBudget, s.managementDuration, s.tags
         ))
       "data-name=general-data" #> generalDataFields.map(field => {
-        "span" #> field.displayName &
-        "data-name=general-data-field" #> field.toForm
+        ".control-label [for]" #> field.uniqueFieldId.openOr(nextFuncName) &
+        "data-name=label" #> field.displayName &
+        "data-name=general-data-field" #> field.toForm &
+        "data-alertid=ajaxerr [data-alertid]" #> field.uniqueFieldId.openOr(nextFuncName)
       }) &
       "data-name=about-data" #> aboutFields.map(field => {
-        "span" #> field.displayName &
-        "data-name=about-data-field" #> field.toForm
+        ".control-label [for]" #> field.uniqueFieldId.openOr(nextFuncName) &
+        "data-name=label" #> field.displayName &
+        "data-name=about-data-field" #> field.toForm &
+        "data-alertid=ajaxerr [data-alertid]" #> field.uniqueFieldId.openOr(nextFuncName)
       }) &
       "data-name=cancel [onclick]" #>  SHtml.ajaxInvoke(() => RedirectTo("/")) &
       "data-name=submit" #> SHtml.ajaxOnSubmit(() => inst.validate match {
@@ -57,7 +63,7 @@ object FestivalForm extends SnippetHelper {
           inst.save(true)
           RedirectTo("/", () => S.notice("Festival guardado"))
         case errors =>
-          S.error(errors)
+          errors.foreach(err => S.error(err.field.uniqueFieldId openOr nextFuncName, err.msg))
           Noop
       })
     }: CssSel

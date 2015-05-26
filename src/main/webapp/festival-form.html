@@ -8,19 +8,24 @@
             <fieldset>
                 <legend>DATOS GENERALES</legend>
                 <div class="row">
-                    <div class="large-12 columns" data-name="general-data">
-                        <label> <span>Input Label</span></label>
-                        <input data-name="general-data-field" type="text"  />
+                    <div class="large-12 columns form-group" data-name="general-data">
+                        <label class="control-label"><span data-name="label">Input Label</span></label>
+                        <div class="controls">
+                            <input data-name="general-data-field" type="text"  />
+                            <span data-alertid="ajaxerr" form-alert=""></span>
+                        </div>
                     </div>
                 </div>
             </fieldset>
             <fieldset>
                 <legend>SOBRE LA ORGANIZACIÓN</legend>
                 <div class="row">
-                    <div class="large-12 columns" data-name="about-data">
-                        <label><span>Input Label</span>
+                    <div class="large-12 columns form-group" data-name="about-data">
+                        <label class="control-label"><span data-name="label">Input Label</span></label>
+                        <div class="controls">
                             <input data-name="about-data-field" type="text"  />
-                        </label>
+                            <span data-alertid="ajaxerr" form-alert=""></span>
+                        </div>
                     </div>
                 </div>
             </fieldset>
