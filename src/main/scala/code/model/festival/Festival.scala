@@ -37,6 +37,10 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
     override def shouldDisplay_? = false
     override def valueBox = User.currentUser.map(_.id.get)
   }
+  object status extends EnumNameField(this, FestivalStatus) {
+    override def displayName = "Estado"
+    override def shouldDisplay_? = User.currentUser.dmap(false)(u => false)
+  }
   object responsible extends CustomStringField(this, 300) {
     override def displayName = "Responsable del Festival"
   }
@@ -521,4 +525,11 @@ object ManagementDuration extends Enumeration {
   val SeveralMonths = Value("Varios meses")
   val OneYear = Value("Un año")
   val MoreThanOneYear = Value("Más de 1 año")
+}
+
+object FestivalStatus extends Enumeration {
+  type FestivalStatus = Value
+  val Draft = Value("Borrador")
+  val Approved = Value("Aprobado")
+  val Archived = Value("Archivado")
 }

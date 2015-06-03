@@ -124,23 +124,44 @@ object FestivalView extends SnippetHelper {
           s.networking, s.minimalBudget, s.budget, s.collaborativeEconomyBudget, s.managementDuration, s.tags
         ))
 
-      "data-name=title *+" #> item.name &
-      "data-name=dates *+" #> ("De: "+ item.begins.toString +" Al: "+item.ends.toString )&
-      "data-name=website *" #> item.website &
-      "data-name=website [href]" #> item.website &
-      "data-name=facebook [href]" #> item.facebookPage &
-      "data-name=facebook *" #> item.facebookPage &
-      "data-name=twitter [href]" #> item.twitter &
-      "data-name=twitter *" #> item.twitter &
-      "data-name=responsible *" #> item.responsible &
-      "data-name=responsibleEmail" #> item.responsibleEmail &
-      "data-name=responsiblePress *" #> "" &
-      "data-name=responsiblePressEmail *" #> item.pressResponsibleEmail &
-      "data-name=productionManagement *" #> item.productionManagement &
-      "data-name=productionManagementEmail *" #> "" &
-      "data-name=tags *" #> item.tags.get.map( t =>
-        "data-name=tag *" #> t.tag.get
-      ) &
+      "data-name=title *+" #> item.name.get &
+      "data-name=dates *+" #> (item.begins +" al " + item.ends)&
+      "data-name=place" #> item.productionManagement.get &
+      "data-name=cities" #> item.city.objs.map(_.name.get).mkString(",") &
+      "data-name=duration" #> (item.duration.get + " " + item.durationType.get) &
+      "data-name=website *" #> item.website.get &
+      "data-name=website [href]" #> item.website.get &
+      "data-name=facebook [href]" #> item.facebookPage.get &
+      "data-name=facebook *" #> item.facebookPage.get &
+      "data-name=twitter [href]" #> item.twitter.get &
+      "data-name=skype *" #> item.twitter.get &
+      "data-name=skype [href]" #> item.skype.get &
+      "data-name=twitter *" #> item.skype.get &
+      "data-name=responsible *" #> item.responsible.get &
+      "data-name=responsibleEmail" #> item.responsibleEmail.get &
+      "data-name=areas *" #> item.areas.objs.map(_.name.get) &
+      "data-name=tags *" #> item.tags.get.map(_.tag.get) &
+      "data-name=description *" #> item.presentation.get &
+      "data-name=equipment *" #> item.equipment.objs.map(_.name.get) &
+      "data-name=item-exchange *" #> item.serviceExchange.objs.map(_.name.get) &
+      "data-name=item-training *" #> item.trainingActivity.objs.map(_.name.get) &
+      "data-name=item-tools *" #> item.communicationTools.objs.map(_.name.get) &
+      "data-name=item-public" #> item.publicInstitutionPartnerships.objs.map(_.name.get).mkString(", ") &
+      "data-name=item-private" #> item.privateInstitutionPartnerships.objs.map(_.name.get).mkString(", ") &
+      "data-name=item-civil" #> item.civilOrganizationPartnerships.objs.map(_.name.get).mkString(", ") &
+      "data-name=item-tools" #> item.communicationTools.objs.map(_.name.get).mkString(", ") &
+      "data-name=item-networking" #> item.networking.objs.map(_.name.get).mkString(", ") &
+      "data-name=minimal-budget *" #> item.minimalBudget.toString &
+      "data-name=budget *" #> item.budget.toString &
+      "data-name=colaborative-budget *" #> item.collaborativeEconomyBudget.toString &
+      "data-name=logo-link [href]" #> (item.logo.get match {
+        case p: FileRecord => "/service/images/"+ p.fileId.get
+        case _ => "#"
+      }) &
+      "data-name=logo" #> (item.logo.get match {
+        case p: FileRecord => <img src={"/service/images/"+ p.fileId.get} />
+        case _ => <br />
+      }) &
       "data-name=photo1-link [href]" #> (item.photo1.get match {
         case p: FileRecord => "/service/images/"+ p.fileId.get
         case _ => "#"
@@ -164,26 +185,7 @@ object FestivalView extends SnippetHelper {
       "data-name=photo3" #> (item.photo3.get match {
         case p: FileRecord => <img src={"/service/images/"+ p.fileId.get} />
         case _ => <br />
-      }) &
-      "data-name=presentation *" #> item.presentation &
-      "data-name=equipments " #> item.equipment.objs.map({d =>
-        "data-name=equipment *" #> <h5>{d.name}</h5>
-      }) &
-      "data-name=serviceExchanges" #> item.serviceExchange.objs.map({s =>
-        "data-name=serviceExchange *" #> <h5>{s.name}</h5>
-      }) &
-      "data-name=trainingActivities" #> item.trainingActivity.objs.map({t =>
-        "data-name=trainingActivity *" #> <h5>{t.name}</h5>
-      }) &
-      "data-name=communicationTools" #> item.communicationTools.objs.map({c =>
-        "data-name=communicationTool *" #> <h5>{c.name}</h5>
-      }) &
-      "data-name=networkings" #> item.networking.objs.map({n =>
-        "data-name=networking *" #> <h5>{n.name}</h5>
-      }) &
-      "data-name=minimalBudget" #> (item.minimalBudget.get.amount.get +" "+ item.minimalBudget.get.currency.obj.get.toString) &
-      "data-name=budget" #> (item.budget.get.amount.get + " "+ item.budget.get.currency.obj.get.toString) &
-      "data-name=collaborativeEconomyBudget" #> (item.collaborativeEconomyBudget.get.amount.get + " "+ item.collaborativeEconomyBudget.get.currency.obj.get.toString)
+      })
     }: CssSel
   }
 }

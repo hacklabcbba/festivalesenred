@@ -3,287 +3,182 @@
         <title data-lift="FestivalView.title">| Festivales en Red | Telartes</title>
     </lift:head>
 
-<div class="info" data-lift="FestivalView">
-<h3><img src="/img/icons/flecha1.png" class="centre" /> <a href="#">VOLVER</a> </h3>
-<h1 data-name="title"><img src="/img/festivales/martadero.png" class=imginfo" align="left" /></h1>
-<h3 data-name="dates"><img src="/img/icons/fecha.png" align="left" class=imgfer" />Fechas: </h3>
-<h3><img src="/img/icons/web.png" align="left" class=imgfer" /> Web: <a href="#" data-name="website"></a></h3>
-<h3><img src="/img/icons/facebook.png" align="left" class=imgfer" /> Facebook: <a href="#" data-name="facebook"></a></h3>
-<h3><img src="/img/icons/twitter.png" align="left" class=imgfer" />twitter: <a href="#" data-name="twitter"></a></h3>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+    <div class="info" data-lift="FestivalView">
+        <div class="row">
+            <div class="small-12 large-6 medium-6 columns">
+                <h1 data-name="title"></h1>
+                <h3 data-name="dates"><i class="fa fa-calendar"></i> Fechas: </h3>
+                <h3><i class="fa fa-link"></i> Web: <a href="#" data-name="website"></a></h3>
+                <h3><i class="fa fa-facebook-official"></i> Facebook: <a href="#" data-name="facebook"></a></h3>
+                <h3><i class="fa fa-twitter"></i> Twitter: <a href="#" data-name="twitter"></a></h3>
+                <h3><i class="fa fa-skype"></i> Skype: <a href="#" data-name="skype"></a></h3>
+                <h3><i class="fa fa-map-marker"></i> Lugar: <span data-name="place"></span></h3>
+                <h3><i class="fa fa-map-marker"></i> Ciudades: <span data-name="cities"></span></h3>
+                <h3><i class="fa fa-map-marker"></i> Duración: <span data-name="duration"></span></h3>
+                <h3><i class="fa fa-user"></i> Responsable: <span data-name="responsible"></span></h3>
+                <h3><i class="fa fa-envelope-o"></i> Email: <span data-name="responsibleEmail"></span></h3>
+            </div>
+            <div class="small-12 large-6 medium-6 columns">
+                <div class="row">
+                    <img src="/img/festivales/martadero.png" class=imginfo" align="left" data-name="logo" />
+                </div>
+                <div class="row">
+                    <div class="small-12 large-12 medium-12 columns">Areas:</div>
+                    <div class="small-12 large-12 medium-12 columns"><span class="tm-tag tm-tag-info tm-tag-01" data-name="areas"></span></div>
+                    <div class="small-12 large-12 medium-12 columns">Palabras clave:</div>
+                    <div class="small-12 large-12 medium-12 columns"><span class="tm-tag tm-tag-info tm-tag-01" data-name="tags"></span></div>
+                </div>
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="small-12 large-4 medium-4 columns">
+                <img src="/img/festivales/martadero.png" class=imginfo" align="left" data-name="photo1" />
+            </div>
+            <div class="small-12 large-4 medium-4 columns">
+                <img src="/img/festivales/martadero.png" class=imginfo" align="left" data-name="photo2" />
+            </div>
+            <div class="small-12 large-4 medium-4 columns">
+                <img src="/img/festivales/martadero.png" class=imginfo" align="left" data-name="photo3" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 large-12 medium-12 columns">
+                <h2>Sobre el Festival</h2>
+                <p data-name="description">AAAAA</p>
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="small-12 large-12 medium-12 columns">
+                <h2>Equipamientos que posee</h2>
+                <div class="row">
+                    <div class="small-12 medium-4 large-4 columns" data-name="equipment">Equip1</div>
+                    <div class="small-12 medium-4 large-4 columns" data-name="equipment">Equip1</div>
+                </div>
+            </div>
+        </div>
 
-<div class="left">
+        <div class="row">
+            <div class="small-12 large-12 medium-12 columns">
+                <h2>Equipo técnico</h2>
+                <div class="row">
+                    <div class="small-12 medium-4 large-4 columns" data-name="people">
+                        <ul class="no-bullet">
+                            <li data-name="name"><i class="fa fa-user"></i> Nombre</li>
+                            <li data-name="role"><i class="fa fa-wrench"></i> Funcion</li>
+                            <li data-name="email"><i class="fa fa-envelope-o"></i> Mail</li>
+                            <li data-name="cellphone"><i class="fa fa-mobile-phone"></i>  Celular</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<h5><img src="/img/icons/cuadro_marcado.png" align="left" class=imgfer" />RESPONSABLE:</h5>
-<br>
- <p class="textfer"><span data-name="responsible">Juan Jose Olivera</span><br>
-   <a data-name="responsibleEmail" href="#">xdxdxd@gmail.com</a><br>
-  666 66 66</p>
-</div>
+        <div class="row">
+            <div class="small-12 medium-12 large-12 columns">
+                <h2>Espacios donde se realiza</h2>
+                <div class="row">
+                    <div class="small-12 medium-12 large-12 columns" data-name="places">
+                        <img src="/img/festivales/osm.png" width="400" height="201" class=imginfo" align="left" />
+                    </div>
+                </div>
 
-<div class="left">
+            </div>
 
-<h5><img src="/img/icons/cuadro_marcado.png" align="left" class=imgfer" />PRENSA:</h5>
-<br>
- <p class="textfer"><span data-name="responsiblePress">Daniel Cotillas</span><br>
-   <a href="#" data-name="responsiblePressEmail">xdxdxd@gmail.com</a><br>
-  666 66 66</p>
+        </div>
 
-</div>
+        <div class="row">
+            <div class="small-12 medium-4 large-4 columns">
+                <i class="fa fa-arrows-h"></i>
+                <h2>Intercambios</h2>
+                <div class="row">
+                    <div class="small-12 medium-12 large-12 columns" data-name="item-exchange">
+                        item
+                    </div>
+                </div>
+            </div>
 
-<div class="left">
+            <div class="small-12 medium-4 large-4 columns">
+                <i class="fa fa-book"></i>
+                <h2>Formación</h2>
+                <div class="row">
+                    <div class="small-12 medium-12 large-12 columns" data-name="item-training">
+                        item
+                    </div>
+                </div>
+            </div>
 
-<h5><img src="/img/icons/cuadro_marcado.png" align="left" class=imgfer" />PROGRAMACIÓN:</h5>
-<br>
- <p class="textfer" data-name="productionManagement">Pepito Piscinas<br>
-   <a href="#"  data-name="productionManagementEmail">xdxdxd@gmail.com</a><br>
-  666 66 66</p>
+            <div class="small-12 medium-4 large-4 columns" data-name="tools">
+                <i class="fa fa-wechat"></i>
+                <h2>Herramientas de comunicación</h2>
+                <div class="row">
+                    <div class="small-12 medium-12 large-12 columns" data-name="item-tools">
+                        item
+                    </div>
+                </div>
+            </div>
+        </div>
 
-</div>
+        <div class="row">
+            <div class="small-12 medium-6 large-6 columns">
+                <i class="fa fa-home"></i>
+                <h2>Alianzas</h2>
+                <div class="row">
+                    <div class="small-12 medium-12 large-12 columns">
+                        Pública: <span data-name="item-public"></span>
+                    </div>
+                    <div class="small-12 medium-12 large-12 columns">
+                        Privada: <span data-name="item-private"></span>
+                    </div>
+                    <div class="small-12 medium-12 large-12 columns">
+                        Organizaciones de la sociedad civil: <span data-name="item-civil"></span>
+                    </div>
+                </div>
+            </div>
 
-<div class="center">
+            <div class="small-12 medium-6 large-6 columns">
+                <i class="fa fa-users"></i>
+                <h2>Redes</h2>
+                <div class="row">
+                    <div class="small-12 medium-12 large-12 columns" data-name="item-tools">
+                        item
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<h5><img src="/img/icons/cuadro_marcado.png" align="left" class=imgfer" />PALABRAS CLAVE:</h5>
-<br>
- <p class="textfer" data-name="tags">
-     #<a data-name="tag" href="#">Musica</a>
- </p>
-</div>
-<br>
-<h2><img src="/img/icons/flecha1.png" class="centre" />ESPACIOS DONDE SE REALIZA</h2>
-<img src="/img/festivales/osm.png" width="400" height="201" class=imginfo" align="left" />
-<img src="/img/festivales/osm.png" width="400" class=imginfo" align="center" />
+        <div class="row">
+            <div class="small-12 medium-4 large-4 columns">
+                <i class="fa fa-calculator"></i>
+                <h2>Presupuesto mínimo</h2>
+                <div class="row">
+                    <div class="small-12 medium-12 large-12 columns" data-name="minimal-budget">
+                        item
+                    </div>
+                </div>
+            </div>
 
+            <div class="small-12 medium-4 large-4 columns">
+                <i class="fa fa-usd"></i>
+                <h2>Costo monetario</h2>
+                <div class="row">
+                    <div class="small-12 medium-12 large-12 columns" data-name="budget">
+                        item
+                    </div>
+                </div>
+            </div>
 
-
-<br><br><br>
-<h2><img src="/img/icons/flecha1.png" class="centre" />SOBRE EL FESTIVAL </h2>
-
-<div class="sobreleft" data-name="presentation">
-<p>Quiere la boca exhausta vid, kiwi, piña y fugaz jamón. Fabio me exige, sin tapujos, que añada cerveza al whisky. Jovencillo emponzoñado de whisky, ¡qué figurota exhibes! La cigüeña tocaba cada vez mejor el saxofón y el búho pedía kiwi y queso. El jefe buscó el éxtasis en un imprevisto baño de whisky y gozó como un duque. Exhíbanse politiquillos zafios, con orejas kilométricas y uñas de gavilán.</p>
-<p>El cadáver de Wamba, rey godo de España, fue exhumado y trasladado en una caja de zinc que pesó un kilo. El pingüino Wenceslao hizo kilómetros bajo exhaustiva lluvia y frío, añoraba a su querido cachorro. El veloz murciélago hindú comía feliz cardillo y kiwi. La cigüeña tocaba el saxofón detrás del palenque de paja. Quiere la boca exhausta vid, kiwi, piña y fugaz jamón. Fabio me exige, sin tapujos, que añada cerveza al whisky.</p>
-<p>Jovencillo emponzoñado de whisky, ¡qué figurota exhibes! La cigüeña tocaba cada vez mejor el saxofón y el búho pedía kiwi y queso. El jefe buscó el éxtasis en un imprevisto baño de whisky y gozó como un duque. Exhíbanse politiquillos zafios, con orejas kilométricas y uñas de gavilán. El cadáver de Wamba, rey godo de España, fue exhumado y trasladado en una caja de zinc que pesó un kilo.</p>
-<p>El pingüino Wenceslao hizo kilómetros bajo exhaustiva lluvia y frío, añoraba a su querido cachorro. El veloz murciélago hindú comía feliz cardillo y kiwi. La cigüeña tocaba el saxofón detrás del palenque de paja. Quiere la boca exhausta vid, kiwi, piña y fugaz jamón. Fabio me exige, sin tapujos, que añada cerveza al whisky. Jovencillo emponzoñado de whisky, ¡qué figurota exhibes! La cigüeña tocaba cada vez mejor el saxofón y el búho pedía kiwi y queso.</p>
-</div>
-
-<a href="#" data-lightbox="images-gallery" data-title="" data-name="photo1-link">
-<img src="/img/festivales/martadero.png" width="350" height="177" class=imginfo" data-name="photo1" />
-</a>
-<br><br>
-<a href="#" data-lightbox="images-gallery" data-title="" data-name="photo2-link">
-<img src="/img/festivales/martadero.png" width="350" height="177" class=imginfo" data-name="photo2" />
-</a>
-<br><br>
-<a href="#" data-lightbox="images-gallery" data-title="" data-name="photo3-link">
-<img src="/img/festivales/martadero.png" width="350" height="177" class=imginfo" data-name="photo3" />
-</a>
-<br>
-
-
-
-<br><br><br>
-<h2><img src="/img/icons/flecha1.png" class="centre" />EQUIPAMIENTOS</h2>
-
-    <div class="left" data-name="equipments">
-    <h5 data-name="equipment"><img src="/img/icons/cuadro_marcado.png" align="left" class=imgfer" /></h5>
-    </div>
-
-<br><br><br>
-<h2><img src="/img/icons/flecha1.png" class="centre" />EQUIPO TÉCNICO</h2>
-
-
-<div class="left">
-<h5><img src="/img/icons/nombre.png" align="left" class=imgfer" /> Daniel Cotillas</h5>
-<h5><img src="/img/icons/funcion.png" align="left" class=imgfer" />Montaje</h5>
-</div>
-
-<div class="left">
-<h5><img src="/img/icons/nombre.png" align="left" class=imgfer" />Nombre:</h5>
-<h5><img src="/img/icons/funcion.png" align="left" class=imgfer" />Función:</h5>
-</div>
-
-<div class="left">
-<h5><img src="/img/icons/nombre.png" align="left" class=imgfer" />Nombre:</h5>
-<h5><img src="/img/icons/funcion.png" align="left" class=imgfer" />Función:</h5>
-</div>
-
-<div class="center">
-<h5><img src="/img/icons/nombre.png" align="left" class=imgfer" />Nombre:</h5>
-<h5><img src="/img/icons/funcion.png" align="left" class=imgfer" />Función:</h5>
-</div>
-
-<br><br>
-
-<div class="left">
-<h5><img src="/img/icons/nombre.png" align="left" class=imgfer" />Nombre:</h5>
-<h5><img src="/img/icons/funcion.png" align="left" class=imgfer" />Función:</h5>
-</div>
-
-<div class="left">
-<h5><img src="/img/icons/nombre.png" align="left" class=imgfer" />Nombre:</h5>
-<h5><img src="/img/icons/funcion.png" align="left" class=imgfer" />Función:</h5>
-</div>
-
-<div class="left">
-<h5><img src="/img/icons/nombre.png" align="left" class=imgfer" />Nombre:</h5>
-<h5><img src="/img/icons/funcion.png" align="left" class=imgfer" />Función:</h5>
-</div>
-
-<div class="center">
-<h5><img src="/img/icons/nombre.png" align="left" class=imgfer" />Nombre:</h5>
-<h5><img src="/img/icons/funcion.png" align="left" class=imgfer" />Función:</h5>
-</div>
-
-
-
-
-
-
-
-<div class="three">
-
-<img src="/img/icons/intercambio.png" class="middle" />
-<h3 class="titlebanner">INTERCAMBIO DE SERVICIOS</h3>
-
-    <div data-name="serviceExchanges">
-        <div class="leftitem" data-name="serviceExchange">
-            <h5 data-name="serviceExchange"></h5>
+            <div class="small-12 medium-4 large-4 columns">
+                <i class="fa fa-bitcoin"></i>
+                <h2>Costo economía colaborativa</h2>
+                <div class="row">
+                    <div class="small-12 medium-12 large-12 columns" data-name="colaborative-budget">
+                        item
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-
-<div class="three">
-<img src="/img/icons/formacion.png" class="middle" />
-<h3 class="titlebanner">FORMACIÓN</h3>
-
-<div data-name="trainingActivities">
-    <div class="leftitem" data-name="trainingActivity">
-    <h5>GESTIÓN</h5>
-    </div>
-</div>
-</div>
-
-
-<div class="three">
-<img src="/img/icons/comunicacion.png" class="middle" />
-<h3 class="titlebanner">COMUNICACIÓN</h3>
-
-    <div data-name="communicationTools">
-        <div class="leftitem" data-name="communicationTool">
-            <h5>GESTIÓN</h5>
-        </div>
-    </div>
-</div>
-
-
-
-
-<div class="three">
-<img src="/img/icons/alianzas.png" class="middle" />
-<h3 class="titlebanner">ALIANZAS</h3>
-
-<div class="leftitem">
-<h5>GESTIÓN</h5>
-</div>
-
-<div class="leftitem">
-<h5>GESTIÓN</h5>
-</div>
-
-<div class="leftitem">
-<h5>GESTIÓN</h5>
-</div>
-
-<div class="leftitem">
-<h5>GESTIÓN</h5>
-</div>
-
-
-</div>
-
-
-
-<div class="three">
-<img src="/img/icons/auspicio.png" class="middle" />
-<h3 class="titlebanner">AUSPICIO</h3>
-
-<div class="leftitem">
-<h5>GESTIÓN</h5>
-</div>
-
-<div class="leftitem">
-<h5>GESTIÓN</h5>
-</div>
-
-<div class="leftitem">
-<h5>GESTIÓN</h5>
-</div>
-
-<div class="leftitem">
-<h5>GESTIÓN</h5>
-</div>
-
-
-</div>
-
-
-<div class="three">
-<img src="/img/icons/participacion.png" class="middle" />
-<h3 class="titlebanner">PARTICIPACIÓN EN REDES</h3>
-
-    <div data-name="networkings">
-        <div class="leftitem" data-name="networking">
-            <h5 data-name="serviceExchange"></h5>
-        </div>
-    </div>
-
-
-</div>
-
-
-
-
-
-
-<div class="three">
-<img src="/img/icons/presupuesto.png" class="middle" />
-<h3 class="titlebanner">PRESUPUESTO MÍNIMO</h3>
-
-<div class="leftitem" data-name="minimalBudget">
-<h5>GESTIÓN</h5>
-</div>
-</div>
-
-
-
-<div class="three">
-<img src="/img/icons/costomonetario.png" class="middle" />
-<h3 class="titlebanner">COSTO MONETARIO</h3>
-
-<div class="leftitem" data-name="budget">
-<h5>GESTIÓN</h5>
-</div>
-</div>
-
-
-<div class="three">
-<img src="/img/icons/economicacolaborativa.png" class="middle" />
-<h3 class="titlebanner">COSTO ECONOMÍA COLABORATIVA</h3>
-
-<div class="leftitem" data-name="collaborativeEconomyBudget">
-<h5>GESTIÓN</h5>
-</div>
-
-</div>
-
-
-
-
-
-</div>
-</div>
 </div>
 

@@ -23,4 +23,6 @@ class AmountField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType) extends Bs
       </div>
     }
   }
+
+  override def toString = value.amount.get + " " + value.currency.obj.dmap("")(_.code.get)
 }
