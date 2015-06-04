@@ -120,21 +120,21 @@ object UserLogin extends Loggable {
               else ExtSession.deleteExtCookie()
               RedirectTo(LoginRedirect.openOr(Site.home.url))
             case _ =>
-              S.error("Invalid credentials")
+              S.notice("Invalid credentials")
               Noop
           }
         }
         else if (hasPassword && email.length <= 0 && password.length > 0) {
-          S.error("id_email_err", "Please enter an email")
+          S.notice("id_email_err", "Please enter an email")
           Noop
         }
         else if (hasPassword && password.length <= 0 && email.length > 0) {
-          S.error("id_password_err", "Please enter a password")
+          S.notice("id_password_err", "Please enter a password")
           Noop
         }
         else if (hasPassword) {
-          S.error("id_email_err", "Please enter an email")
-          S.error("id_password_err", "Please enter a password")
+          S.notice("id_email_err", "Please enter an email")
+          S.notice("id_password_err", "Please enter a password")
           Noop
         }
         else if (email.length > 0) {
@@ -150,11 +150,11 @@ object UserLogin extends Loggable {
           }
         }
         else {
-          S.error("id_email_err", "Please enter an email address")
+          S.notice("id_email_err", "Please enter an email address")
           Noop
         }
       }) openOr {
-        S.error("id_email_err", "Please enter an email address")
+        S.notice("id_email_err", "Please enter an email address")
         Noop
       }
     }
@@ -217,7 +217,7 @@ object UserRegister extends Loggable {
               RedirectTo(LoginRedirect.openOr(Site.home.url), () => S.notice("Thanks for signing up!"))
           }
         case errors =>
-          S.error(errors)
+          errors.foreach(e => S.notice(e.msg))
       }
     }
 

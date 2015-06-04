@@ -5,12 +5,13 @@ import code.model.festival.Festival
 import model.User
 
 import net.liftweb._
+import net.liftweb.common.Full
 import net.liftweb.http.{Templates, S}
 import omniauth.Omniauth
 import sitemap._
 import sitemap.Loc._
 
-import net.liftmodules.mongoauth.Locs
+import net.liftmodules.mongoauth.{MongoAuth, Locs}
 
 object MenuGroups {
   val SettingsGroup = LocGroup("settings")
@@ -29,10 +30,23 @@ case class MenuLoc(menu: Menu) {
 object Site extends Locs {
   import MenuGroups._
 
+  override def buildLogoutMenu = Menu(Loc(
+    "Salir",
+    MongoAuth.logoutUrl.vend.split("/").filter(_.length > 0).toList,
+    S.?("Salir"), logoutLocParams
+  ))
+
+  protected override def logoutLocParams = RequireLoggedIn :: SettingsGroup ::
+    EarlyResponse(() => {
+      if (MongoAuth.authUserMeta.vend.isLoggedIn) { MongoAuth.authUserMeta.vend.logUserOut() }
+      Full(RedirectToIndexWithCookies)
+    }) :: Nil
+
+
   // locations (menu entries)
   val home = MenuLoc(Menu.i("Inicio") / "index" >> TopBarGroup)
   val loginToken = MenuLoc(buildLoginTokenMenu)
-  val logout = MenuLoc(buildLogoutMenu)
+  val logout = MenuLoc(buildLogoutMenu )
   private val profileParamMenu = Menu.param[User]("User", "Profile",
     User.findByUsername _,
     _.username.get
@@ -73,7 +87,7 @@ object Site extends Locs {
     festival,
     myAccount.menu,
     misFestivales.menu,
-    Menu.i("logout") / "logout" >> RequireLoggedIn >> SettingsGroup,
+    logout.menu,
     Menu.i("Error") / "error" >> Hidden,
     Menu.i("404") / "404" >> Hidden,
     Menu.i("Throw") / "throw"  >> EarlyResponse(() => throw new Exception("This is only a test."))
