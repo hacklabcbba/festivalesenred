@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="/img/favico.png" type="image/x-icon"/>
   <link rel="stylesheet" href="/css/foundation.css" />
   <link rel="stylesheet" href="/css/fullcalendar.min.css" />
   <link rel="stylesheet" href="/css/gs_styles.css" />
@@ -23,7 +24,12 @@
 
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<style>
-		#map { height: 552px; }
+		#map {
+            height: -moz-calc(100% - (20px + 30px));
+            height: -webkit-calc(100% - (20px + 30px));
+            height: calc(100% - (20px + 30px));
+            display:block
+        }
 	</style>
 </head>
 
@@ -57,11 +63,11 @@
 <footer>
     <div>
         <div class="small-12 medium-6 large-6 columns small">
-            &nbsp;&nbsp; <img src="/img/cc_sa.png" alt="CC"/> Festivales En Red está bajo la licencia <a href="http://www.gnu.org/licenses/gpl.html">GNU GPLv3</a>
+            &nbsp;&nbsp; <img src="/img/cc_sa.png" alt="CC"/> Festivales En Red está bajo la licencia <a target="_blank" href="http://www.gnu.org/licenses/gpl.html">GNU GPLv3</a>
         </div>
         <div class="small-12 medium-6 large-6 columns text-right">
-            <a href="https://github.com/hacklabcbba/festivalesenred"><i class="fa fa-github"></i></a> &nbsp;
-            <a href="http://hacklabcbba.org"><img src="/img/hacklabcbba.png"  alt="HackLab Cochabamba"/></a>
+            <a target="_blank" href="https://github.com/hacklabcbba/festivalesenred"><i class="fa fa-github"></i></a> &nbsp;
+            <a target="_blank" href="http://hacklabcbba.org"><img src="/img/hacklabcbba.png"  alt="HackLab Cochabamba"/></a>
         </div>
     </div>
 </footer>

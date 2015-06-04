@@ -308,21 +308,13 @@ body.f-topbar-fixed {
 \*------------------------------------*/
 
 .gs-right-btn {
-	background-color: #fff;
 	padding: 5px;
 	position: absolute;
-	right: -23px;
+	right: -10px;
 	top: 70px;
-	-moz-transform: rotate(-90deg);
-	-webkit-transform: rotate(-90deg);
-	-ms-transform: rotate(-90deg);
-	-o-transform: rotate(-90deg);
-	transform: rotate(-90deg);
 	z-index: 1;
 }
 .gs-right-btn a.gs-open {
-  background-color: #ffffff;
-  border: 2px solid #1a1a1a;
   font-size: 13px;
   padding: 5px;
   text-transform: uppercase;

@@ -496,6 +496,10 @@ object Festival extends Festival with RogueMetaRecord[Festival] with Loggable {
       Festival.where(_.owner eqs owner.id.get).fetch()
   }
 
+  def findAllByPage(itemsPerPage: Int, page: Int): List[Festival] = {
+    Festival.paginate(itemsPerPage).setPage(page).fetch()
+  }
+
 }
 
 

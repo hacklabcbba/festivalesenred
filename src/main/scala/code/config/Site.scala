@@ -63,6 +63,7 @@ object Site extends Locs {
     account.menu, password.menu, editProfile.menu, profileParamMenu
   ))
   val queEs = MenuLoc(Menu("Quees", "¿Qué es?") / "que_es" >> TopBarGroup)
+  val festivales = MenuLoc(Menu("Festivales", "Festivales") / "festivales" >> TopBarGroup)
   val calendar = MenuLoc(Menu("Calendar", "Calendario") / "calendar" >> TopBarGroup)
   lazy val festivalEdit = Menu.param[Festival]("Formulario Festival", "Formulario Festival",
     Festival.findOrNew _,
@@ -80,8 +81,8 @@ object Site extends Locs {
     Menu.i("Iniciar Sesion") / "login" >> RequireNotLoggedIn >> UserGroup,
     register.menu,
     loginToken.menu,
-    enRed.menu,
     queEs.menu,
+    festivales.menu,
     calendar.menu,
     festivalEdit,
     festival,
