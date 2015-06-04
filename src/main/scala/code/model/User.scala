@@ -199,7 +199,6 @@ object User extends User with ProtoAuthUserMeta[User] with RogueMetaRecord[User]
   def loginWithOmniauth(authInfo: AuthInfo): Box[User] = {
     val name = authInfo.name
     println(authInfo)
-    Empty
     authInfo.email.flatMap(User.findByEmail(_)) match {
       case None if authInfo.provider != "twitter" =>
         val user = User
@@ -230,7 +229,9 @@ object User extends User with ProtoAuthUserMeta[User] with RogueMetaRecord[User]
             logUserIn(user, true)
             Full(user)
         }
-      case other => other
+      case Some(user) =>
+        logUserIn(user)
+        Full(user)
     }
 
   }

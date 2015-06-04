@@ -54,7 +54,6 @@ object CalendarApi extends RestHelper {
     case "api" :: "localizations" :: Nil Get req => {
 
       val festivales = Festival.fetch()
-      println("places: ", festivales)
       val placesJsonList =  "locs" -> festivales.flatMap(
         f => f.places.get.map(Place.asJValue(_, f))
       )

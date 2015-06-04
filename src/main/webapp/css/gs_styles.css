@@ -668,3 +668,24 @@ a.button.gs-login-btn.large-4 columns {
 .text-danger {
   color: #f04124;
 }
+
+footer {
+  background: #3d4a4a;
+  height: 26px;
+  color: #FFF;
+  padding:2px;
+}
+
+footer .small {
+  padding:2px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+footer a{
+  color: #FFF;
+}
+
+body {
+  height: auto;
+}
