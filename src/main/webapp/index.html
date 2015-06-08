@@ -248,7 +248,7 @@
 					if (e.geoLatLng){
 						console.log(e.geoLatLng);
 						var marker = new ol.Feature({
-							name: e.name + "<br/ ><a href='"+ e.url+"'>Detalles</a>",
+							name: e.festivalName + "<br/ ><a href='"+ e.url+"'>Detalles</a>",
 							geometry: new ol.geom.Point([e.geoLatLng.lat, e.geoLatLng.long]),
 							style: iconStyle
 						});

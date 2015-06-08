@@ -101,7 +101,7 @@ class Boot extends Loggable {
     ComboBox.init()
 
     LiftRules.dispatch.append(code.rest.AjaxFileUpload)
-    LiftRules.dispatch.append(code.rest.CalendarApi)
+    LiftRules.dispatch.append(code.rest.FestivalApi)
 
     Mailer.authenticator = for {
       user <- Props.get("mail.smtp.user")

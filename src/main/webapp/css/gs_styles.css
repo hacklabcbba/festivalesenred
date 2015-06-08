@@ -681,3 +681,10 @@ footer a{
 body {
   height: auto;
 }
+
+
+.popover-content {
+  padding: 10px;
+  font-size: 13px;
+  width: 96px;
+}

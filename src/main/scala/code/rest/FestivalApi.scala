@@ -17,7 +17,7 @@ import org.joda.time._
 import org.joda.time.format._
 import Helpers._
 
-object CalendarApi extends RestHelper {
+object FestivalApi extends RestHelper {
 
   serve {
 

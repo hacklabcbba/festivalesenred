@@ -301,6 +301,7 @@ class Place extends BsonRecord[Place] {
 
 object Place extends Place with BsonMetaRecord[Place] {
 	def asJValue(inst: Place, festival: Festival): JObject = {
+    ("festivalName" -> festival.name.asJValue) ~
 		("url" -> Site.festival.calcHref(festival)) ~
 		super.asJValue(inst)
 	}

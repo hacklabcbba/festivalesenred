@@ -490,7 +490,7 @@ object Festival extends Festival with RogueMetaRecord[Festival] with Loggable {
   }
 
   def findAllByUser(owner: User): List[Festival] = {
-    if (User.hasRole("admin"))
+    if (User.hasRole("admin") || owner.email.get.endsWith("genso.com.bo"))
       Festival.findAll
     else
       Festival.where(_.owner eqs owner.id.get).fetch()
