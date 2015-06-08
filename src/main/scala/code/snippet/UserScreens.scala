@@ -46,22 +46,22 @@ sealed trait BasePasswordScreen {
   def pwdMaxLength: Int = 32
 
   val passwordField = password(pwdName, "", trim,
-    valMinLen(pwdMinLength, "Password must be at least "+pwdMinLength+" characters"),
-    valMaxLen(pwdMaxLength, "Password must be "+pwdMaxLength+" characters or less"),
+    valMinLen(pwdMinLength, "La contraseña debe tener al menos "+pwdMinLength+" caracteres"),
+    valMaxLen(pwdMaxLength, "La contraseña debe tener "+pwdMaxLength+" caracteres o menos"),
     "tabindex" -> "1"
   )
-  val confirmPasswordField = password("Confirm Password", "", trim, "tabindex" -> "1")
+  val confirmPasswordField = password("Confirmar contraseña", "", trim, "tabindex" -> "1")
 
   def passwordsMustMatch(): Errors = {
     if (passwordField.is != confirmPasswordField.is)
-      List(FieldError(confirmPasswordField, "Passwords must match"))
+      List(FieldError(confirmPasswordField, "Las contraseñas deben ser iguales"))
     else Nil
   }
 }
 
 
 object PasswordScreen extends BaseCurrentUserScreen with BasePasswordScreen {
-  override def pwdName = "New Password"
+  override def pwdName = "Nueva contraseña"
   override def validations = passwordsMustMatch _ :: super.validations
 
   def finish() {
@@ -70,7 +70,7 @@ object PasswordScreen extends BaseCurrentUserScreen with BasePasswordScreen {
     userVar.is.saveBox match {
       case Empty => S.warning("Empty save")
       case Failure(msg, _, _) => S.error(msg)
-      case Full(_) => S.notice("New password saved")
+      case Full(_) => S.notice("Nueva contraseña guardada")
     }
   }
 }
@@ -85,14 +85,14 @@ object ProfileScreen extends BaseCurrentUserScreen {
         {Gravatar.imgTag(userVar.is.email.get, 60)}
       </div>
       <div class="gravatar">
-        <h4>Change your avatar at <a href="http://gravatar.com" target="_blank">Gravatar.com</a></h4>
+        <h4>Cambia tu avatar en <a href="http://gravatar.com" target="_blank">Gravatar.com</a></h4>
         <p>
-          We're using {userVar.is.email.get}. It may take time for changes made on gravatar.com to appear on our site.
+          Estamos usando {userVar.is.email.get}. Puede tomar un tiempo hasta que los cambios realizados en gravatar.com aparezcan en nuestro sitio.
         </p>
       </div>
     </span>
 
-  val gravatar = displayOnly("Picture", gravatarHtml)
+  val gravatar = displayOnly("Imágen", gravatarHtml)
 
   addFields(() => userVar.is.profileScreenFields)
 
@@ -100,7 +100,7 @@ object ProfileScreen extends BaseCurrentUserScreen {
     userVar.is.saveBox match {
       case Empty => S.warning("Empty save")
       case Failure(msg, _, _) => S.error(msg)
-      case Full(_) => S.notice("Profile settings saved")
+      case Full(_) => S.notice("Configuración de perfil actualizada")
     }
   }
 }
@@ -119,7 +119,7 @@ object RegisterScreen extends BaseRegisterScreen with BasePasswordScreen {
   override def validations = passwordsMustMatch _ :: super.validations
 
   val rememberMe = builder("", User.loginCredentials.is.isRememberMe, ("tabindex" -> "1"))
-    .help(Text("Remember me when I come back later."))
+    .help(Text("Recordarme."))
     .make
 
   override def localSetup {

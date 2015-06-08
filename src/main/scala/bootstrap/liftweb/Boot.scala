@@ -1,10 +1,12 @@
 package bootstrap.liftweb
 
+import java.util.Locale
 import javax.mail.{PasswordAuthentication, Authenticator}
 
 import code.lib.FoundationHtmlHandler
 import code.util.DataSeed
 import net.liftmodules.combobox.ComboBox
+import net.liftweb.http.provider.HTTPRequest
 import omniauth.Omniauth
 
 import scala.xml.{Null, UnprefixedAttribute}
@@ -90,6 +92,8 @@ class Boot extends Loggable {
     // Init Extras
     LiftExtras.noticeHtmlHandler.default.set(FoundationHtmlHandler)
     LiftExtras.init()
+
+    LiftRules.localeCalculator = (request: Box[HTTPRequest]) => new Locale("es")
 
 
     // don't include the liftAjax.js code. It's served statically.
