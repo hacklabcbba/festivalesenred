@@ -44,4 +44,15 @@ class DatepickerField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
 
   override def toString = dateFormat.format(this.value)
 
+  val dayFormat = new SimpleDateFormat("EEEE d")
+
+  val monthFormat = new SimpleDateFormat("MMMM")
+
+  val yearFormat = new SimpleDateFormat("yyyy")
+
+
+  def literalDate = {
+    dayFormat.format(value) + " de " + monthFormat.format(value) + " del " + yearFormat.format(value)
+  }
+
 }

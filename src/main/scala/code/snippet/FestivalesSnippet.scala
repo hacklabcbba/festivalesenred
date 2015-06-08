@@ -1,6 +1,9 @@
 package code
 package snippet
 
+import java.text.SimpleDateFormat
+import java.util.Date
+
 import code.config.Site
 import code.model.{FileRecord, User}
 import code.model.festival._
@@ -67,7 +70,8 @@ object FestivalesSnippet extends SnippetHelper with PaginatorSnippet[Festival] {
       "data-name=festival-link [href]" #> Site.festival.calcHref(festival) &
       "data-name=name" #> festival.name.get &
       "data-name=cities *" #> festival.city.objs.map(_.name.get).mkString(", ") &
-      "data-name=dates *" #> (festival.begins + " al " + festival.ends)
+      "data-name=begins *" #> festival.begins.literalDate &
+      "data-name=ends *" #> festival.ends.literalDate
     })
   }
 }
@@ -98,7 +102,8 @@ object FestivalView extends SnippetHelper {
         ))
 
       "data-name=title *+" #> item.name.get &
-        "data-name=dates *+" #> (item.begins +" al " + item.ends)&
+        "data-name=begins *+" #> item.begins.literalDate &
+        "data-name=ends *+" #> item.ends.literalDate &
         "data-name=place" #> item.productionManagement.get &
         "data-name=cities" #> item.city.objs.map(_.name.get).mkString(",") &
         "data-name=duration" #> (item.duration.get + " " + item.durationType.get) &
