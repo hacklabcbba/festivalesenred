@@ -35,12 +35,13 @@ object FestivalForm extends SnippetHelper {
     for {
       inst <- Site.festivalEdit.currentValue ?~ "Opción no válida"
     } yield {
-      val generalDataFields = Site.festivalEdit.currentValue.dmap[List[Field[_, _]]](Nil)(s =>
+      val generalDataFields = Site.festivalEdit.currentValue.dmap[List[Field[_, _]]](Nil)(s => {
         List(
           s.logo, s.name, s.responsible, s.productionManagement, s.city, s.places, s.begins, s.ends, s.durationType, s.call, s.areas,
           s.website, s.responsibleEmail, s.pressResponsibleEmail, s.facebookPage, s.twitter, s.skype, s.spaces, s.equipment,
           s.numberOfAttendees, s.publicKind, s.photo1, s.photo2, s.photo3
-        ))
+        ) ++ (if (User.hasRole("admin") || User.currentUser.dmap(false)(_.email.get.endsWith("genso.com.bo"))) List(s.status) else Nil)
+      })
       val aboutFields = Site.festivalEdit.currentValue.dmap[List[Field[_, _]]](Nil)(s =>
         List(
           s.staff, s.presentation, s.numberEditions, s.serviceExchange, s.trainingActivity, s.communicationTools,

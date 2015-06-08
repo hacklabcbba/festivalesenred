@@ -3,6 +3,7 @@ package model
 package festival
 
 import code.lib.RogueMetaRecord
+import net.liftweb.common.Box
 import net.liftweb.mongodb.record.MongoRecord
 import net.liftweb.mongodb.record.field.ObjectIdPk
 import net.liftweb.record.field.StringField
@@ -15,4 +16,6 @@ class CommunicationTool private() extends MongoRecord[CommunicationTool] with Ob
 
 }
 
-object CommunicationTool extends CommunicationTool with RogueMetaRecord[CommunicationTool]
+object CommunicationTool extends CommunicationTool with RogueMetaRecord[CommunicationTool] {
+  def findByName(name: String): Box[CommunicationTool] = CommunicationTool.where(_.name eqs name).fetch().headOption
+}

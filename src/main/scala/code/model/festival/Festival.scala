@@ -500,6 +500,39 @@ object Festival extends Festival with RogueMetaRecord[Festival] with Loggable {
     Festival.paginate(itemsPerPage).setPage(page).fetch()
   }
 
+  private def filterQry(area: Box[Area], tag: Box[String], equipment: Box[EquipmentDetail],
+                        service: Box[ServiceExchange], training: Box[TrainingActivity], communication: Box[CommunicationTool],
+                        partnership: Box[Partnership], networking: Box[Network]) = {
+    Festival
+      .where(_.status neqs FestivalStatus.Draft)
+      .andOpt(area)(_.areas contains _.id.get)
+      .andOpt(tag)(_.tags.subfield(_.tag) contains _)
+      .andOpt(equipment)(_.equipment contains _.id.get)
+      .andOpt(service)(_.serviceExchange contains _.id.get)
+      .andOpt(training)(_.trainingActivity contains _.id.get)
+      .andOpt(communication)(_.communicationTools contains _.id.get)
+      .andOpt(partnership)(_.civilOrganizationPartnerships contains _.id.get)
+      .andOpt(networking)(_.networking contains _.id.get)
+      .orderAsc(_.status).andDesc(_.begins)
+  }
+
+  def findAllFilteredByPage(
+                     itemsPerPage: Int, page: Int, area: Box[Area], tag: Box[String], equipment: Box[EquipmentDetail],
+                     service: Box[ServiceExchange], training: Box[TrainingActivity], communication: Box[CommunicationTool],
+                     partnership: Box[Partnership], networking: Box[Network]): List[Festival] = {
+    filterQry(area, tag, equipment, service, training, communication, partnership, networking)
+      .paginate(itemsPerPage)
+      .setPage(page)
+      .fetch()
+  }
+
+  def countFiltered(
+                     area: Box[Area], tag: Box[String], equipment: Box[EquipmentDetail],
+                     service: Box[ServiceExchange], training: Box[TrainingActivity], communication: Box[CommunicationTool],
+                     partnership: Box[Partnership], networking: Box[Network]): Long = {
+    filterQry(area, tag, equipment, service, training, communication, partnership, networking).count()
+  }
+
 }
 
 

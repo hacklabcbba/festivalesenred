@@ -3,6 +3,7 @@ package model
 package festival
 
 import code.lib.RogueMetaRecord
+import net.liftweb.common.Box
 import net.liftweb.mongodb.record.MongoRecord
 import net.liftweb.mongodb.record.field.ObjectIdPk
 import net.liftweb.record.field.StringField
@@ -15,4 +16,6 @@ class ServiceExchange private() extends MongoRecord[ServiceExchange] with Object
 
 }
 
-object ServiceExchange extends ServiceExchange with RogueMetaRecord[ServiceExchange]
+object ServiceExchange extends ServiceExchange with RogueMetaRecord[ServiceExchange] {
+  def findByName(name: String): Box[ServiceExchange] = ServiceExchange.where(_.name eqs name).fetch().headOption
+}

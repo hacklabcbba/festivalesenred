@@ -3,7 +3,7 @@ package snippet
 
 import code.config.Site
 import code.model.{FileRecord, User}
-import code.model.festival.{EquipmentDetail, Festival}
+import code.model.festival._
 import com.foursquare.rogue.LatLong
 import net.liftmodules.extras.SnippetHelper
 import net.liftweb.common._
@@ -20,11 +20,31 @@ object FestivalesSnippet extends SnippetHelper with PaginatorSnippet[Festival] {
 
   override def itemsPerPage = 5
 
-  override def count = Festival.count
+  override def count = {
+    val area = S.param("area").flatMap(Area.findByName(_))
+    val tag = S.param("tag")
+    val equipment = S.param("equipment").flatMap(EquipmentDetail.findByName(_))
+    val service = S.param("service").flatMap(ServiceExchange.findByName(_))
+    val training = S.param("training").flatMap(TrainingActivity.findByName(_))
+    val communication = S.param("communication").flatMap(CommunicationTool.findByName(_))
+    val partnership = S.param("partnership").flatMap(Partnership.findByName(_))
+    val networking = S.param("networking").flatMap(Network.findByName(_))
+    Festival.countFiltered(area, tag, equipment, service, training, communication, partnership, networking)
+  }
 
   def mongoPage = if (curPage < 1) 1 else curPage
 
-  override def page = Festival.findAllByPage(itemsPerPage, mongoPage)
+  override def page = {
+    val area = S.param("area").flatMap(Area.findByName(_))
+    val tag = S.param("tag")
+    val equipment = S.param("equipment").flatMap(EquipmentDetail.findByName(_))
+    val service = S.param("service").flatMap(ServiceExchange.findByName(_))
+    val training = S.param("training").flatMap(TrainingActivity.findByName(_))
+    val communication = S.param("communication").flatMap(CommunicationTool.findByName(_))
+    val partnership = S.param("partnership").flatMap(Partnership.findByName(_))
+    val networking = S.param("networking").flatMap(Network.findByName(_))
+    Festival.findAllFilteredByPage(itemsPerPage, mongoPage, area, tag, equipment, service, training, communication, partnership, networking)
+  }
 
 
   def render: CssSel = {

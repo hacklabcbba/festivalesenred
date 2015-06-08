@@ -3,6 +3,7 @@ package model
 package festival
 
 import code.lib.RogueMetaRecord
+import net.liftweb.common.Box
 import net.liftweb.mongodb.record.MongoRecord
 import net.liftweb.mongodb.record.field.ObjectIdPk
 import net.liftweb.record.field.StringField
@@ -15,4 +16,6 @@ class Network private() extends MongoRecord[Network] with ObjectIdPk[Network] {
 
 }
 
-object Network extends Network with RogueMetaRecord[Network]
+object Network extends Network with RogueMetaRecord[Network] {
+  def findByName(name: String): Box[Network] = Network.where(_.name eqs name).fetch().headOption
+}
