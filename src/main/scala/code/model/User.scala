@@ -11,46 +11,109 @@ import net.liftweb._
 import common._
 import http.{StringField => _, BooleanField => _, _}
 import mongodb.record.field._
-import record.field._
-import net.liftweb.util.{Helpers, FieldContainer}
+import record.field.{PasswordField => _, _}
+import net.liftweb.util.{FieldError, Helpers, FieldContainer}
 
 import net.liftmodules.mongoauth._
 import net.liftmodules.mongoauth.field._
 import net.liftmodules.mongoauth.model._
 
-class User private () extends ProtoAuthUser[User] with ObjectIdPk[User] {
+import scala.xml.Text
+
+class User private () extends MongoAuthUser[User] with ObjectIdPk[User] {
   def meta = User
 
   def userIdAsString: String = id.toString
 
+  import Helpers._
+
+  object username extends StringField(this, 32) {
+    override def displayName = "Nombre de usuario"
+    override def setFilter = trim _ :: super.setFilter
+
+    private def valUnique(msg: => String)(value: String): List[FieldError] = {
+      if (value.length > 0)
+        meta.findAll(name, value).filterNot(_.id.get == owner.id.get).map(u =>
+          FieldError(this, Text(msg))
+        )
+      else
+        Nil
+    }
+
+    override def validations =
+      valUnique(S ? "El nombre de usuario ya esta siendo usado") _ ::
+        valMinLen(3, S ? "El nombre de usuario debe tener al menos 3 caracteres") _ ::
+        valMaxLen(32, S ? "El nombre de usuario debe tener a lo sum 32 caracteres") _ ::
+        super.validations
+  }
+
+  /*
+  * http://www.dominicsayers.com/isemail/
+  */
+  object email extends EmailField(this, 254) {
+    override def displayName = "Correo electrónico"
+    override def setFilter = trim _ :: toLower _ :: super.setFilter
+
+    private def valUnique(msg: => String)(value: String): List[FieldError] = {
+      owner.meta.findAll(name, value).filter(_.id.get != owner.id.get).map(u =>
+        FieldError(this, Text(msg))
+      )
+    }
+
+    override def validations =
+      valUnique("Esta dirección de correo electrónico ya esta registrada") _  ::
+        valMaxLen(254, "La dirección de correo debe tener menos de 254 caracteres") _ ::
+        super.validations
+  }
+
+  // email address has been verified by clicking on a LoginToken link
+  object verified extends BooleanField(this) {
+    override def displayName = "Verificada"
+  }
+
+  object password extends PasswordField(this, 6, 32) {
+    override def displayName = "Contraseña"
+  }
+
+  object permissions extends PermissionListField(this)
+  object roles extends StringRefListField(this, Role) {
+    def permissions: List[Permission] = objs.flatMap(_.permissions.get)
+    def names: List[String] = objs.map(_.id.get)
+  }
+
+  lazy val authPermissions: Set[Permission] = (permissions.get ::: roles.permissions).toSet
+  lazy val authRoles: Set[String] = roles.names.toSet
+
+  lazy val fancyEmail = AuthUtil.fancyEmail(username.get, email.get)
+
   object locale extends LocaleField(this) {
-    override def displayName = "Locale"
+    override def displayName = "Idioma"
     override def defaultValue = "en_US"
   }
   object timezone extends TimeZoneField(this) {
-    override def displayName = "Time Zone"
+    override def displayName = "Zona horaria"
     override def defaultValue = "America/Chicago"
   }
 
   object name extends StringField(this, 64) {
-    override def displayName = "Name"
+    override def displayName = "Nombre"
 
     override def validations =
-      valMaxLen(64, "Name must be 64 characters or less") _ ::
+      valMaxLen(64, "El nombre debe tener menos de 64 caracteres") _ ::
       super.validations
   }
   object location extends StringField(this, 64) {
-    override def displayName = "Location"
+    override def displayName = "Ubicación"
 
     override def validations =
-      valMaxLen(64, "Location must be 64 characters or less") _ ::
+      valMaxLen(64, "La ubicación debe tener menos de 64 caracteres") _ ::
       super.validations
   }
   object bio extends TextareaField(this, 160) {
     override def displayName = "Bio"
 
     override def validations =
-      valMaxLen(160, "Bio must be 160 characters or less") _ ::
+      valMaxLen(160, "Bio debe tener 100 caracteres o menos") _ ::
       super.validations
   }
 
@@ -118,7 +181,7 @@ object User extends User with ProtoAuthUserMeta[User] with RogueMetaRecord[User]
     val resp = S.param("token").flatMap(LoginToken.findByStringId) match {
       case Full(at) if (at.expires.isExpired) => {
         at.delete_!
-        RedirectWithState(indexUrl, RedirectState(() => { S.error("Login token has expired") }))
+        RedirectWithState(indexUrl, RedirectState(() => { S.error("Login token ha expirado") }))
       }
       case Full(at) => find(at.userId.get).map(user => {
         if (user.validate.length == 0) {
@@ -131,10 +194,10 @@ object User extends User with ProtoAuthUserMeta[User] with RogueMetaRecord[User]
         else {
           at.delete_!
           regUser(user)
-          RedirectWithState(registerUrl, RedirectState(() => { S.notice("Please complete the registration form") }))
+          RedirectWithState(registerUrl, RedirectState(() => { S.notice("Por favor termine el formulario de registro") }))
         }
-      }).openOr(RedirectWithState(indexUrl, RedirectState(() => { S.error("User not found") })))
-      case _ => RedirectWithState(indexUrl, RedirectState(() => { S.warning("Login token not provided") }))
+      }).openOr(RedirectWithState(indexUrl, RedirectState(() => { S.error("Usuario no encontrado") })))
+      case _ => RedirectWithState(indexUrl, RedirectState(() => { S.warning("Login token no provisto") }))
     }
 
     Full(resp)
@@ -148,21 +211,21 @@ object User extends User with ProtoAuthUserMeta[User] with RogueMetaRecord[User]
 
       val msgTxt =
         """
-          |Someone requested a link to change your password on the %s website.
+          |Alguien ha solicitado un enlace para cambiar tu contraseña en el sitio web %s .
           |
-          |If you did not request this, you can safely ignore it. It will expire 48 hours from the time this message was sent.
+          |Si tu no solicitaste esto, puedes ignorar este mensaje. Expirará 48 horas despues de que este mensaje ha sido enviado.
           |
-          |Follow the link below or copy and paste it into your internet browser.
+          |Haz click en el siguiente enlace o copia y pega en tu navegador.
           |
           |%s
           |
-          |Thanks,
+          |Gracias,
           |%s
         """.format(siteName, token.url, sysUsername).stripMargin
 
       sendMail(
         From(MongoAuth.systemFancyEmail),
-        Subject("%s Password Help".format(siteName)),
+        Subject("%s Ayuda contraseña".format(siteName)),
         To(user.fancyEmail),
         PlainMailBodyType(msgTxt)
       )

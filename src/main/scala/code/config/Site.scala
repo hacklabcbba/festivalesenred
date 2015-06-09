@@ -17,6 +17,7 @@ object MenuGroups {
   val SettingsGroup = LocGroup("settings")
   val TopBarGroup = LocGroup("topbar")
   val UserGroup = LocGroup("usertopbar")
+  val AccountGroup = LocGroup("account")
 }
 
 /*
@@ -53,15 +54,14 @@ object Site extends Locs {
   ) / "user" >> Loc.CalcValue(() => User.currentUser)
   lazy val profileLoc = profileParamMenu.toLoc
 
-  val password = MenuLoc(Menu.i("Password") / "settings" / "password" >> RequireLoggedIn )
-  val account = MenuLoc(Menu.i("Account") / "settings" / "account" >> RequireLoggedIn)
-  val editProfile = MenuLoc(Menu("EditProfile", "Profile") / "settings" / "profile" >> RequireLoggedIn )
+  val password = MenuLoc(Menu.i("Contraseña") / "settings" / "password" >> RequireLoggedIn >> AccountGroup)
+  val account = MenuLoc(Menu.i("Mi Cuenta") / "settings" / "account" >> RequireLoggedIn >> SettingsGroup >> AccountGroup)
+  val editProfile = MenuLoc(Menu("EditProfile", "Perfil") / "settings" / "profile" >> RequireLoggedIn >> AccountGroup)
   val register = MenuLoc(Menu.i("Registrarse") / "register" >> RequireNotLoggedIn >> UserGroup)
   val enRed = MenuLoc(Menu("EnRed", "En Red") / "en_red" >> TopBarGroup)
-  val misFestivales = MenuLoc(Menu("Mis Festivales", "Mis Festivales") / "admin" / "festivales" >> RequireLoggedIn >> SettingsGroup)
-  val myAccount = MenuLoc(Menu.i("Mi Cuenta") / "myaccount" >> RequireLoggedIn >> SettingsGroup submenus(
-    account.menu, password.menu, editProfile.menu, profileParamMenu
-  ))
+  val misFestivales = MenuLoc(Menu("Mis Festivales", "Mis Festivales") / "admin" / "festivales" >> RequireLoggedIn >> SettingsGroup >> AccountGroup)
+
+
   val queEs = MenuLoc(Menu("Quees", "¿Qué es?") / "que_es" >> TopBarGroup)
   val festivales = MenuLoc(Menu("Festivales", "Festivales") / "festivales" >> TopBarGroup)
   val calendar = MenuLoc(Menu("Calendar", "Calendario") / "calendar" >> TopBarGroup)
@@ -86,7 +86,10 @@ object Site extends Locs {
     calendar.menu,
     festivalEdit,
     festival,
-    myAccount.menu,
+    account.menu,
+    password.menu,
+    editProfile.menu,
+    profileParamMenu,
     misFestivales.menu,
     logout.menu,
     Menu.i("Error") / "error" >> Hidden,
