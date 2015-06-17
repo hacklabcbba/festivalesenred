@@ -7,13 +7,13 @@ import code.model.festival.{EquipmentDetail, Festival}
 import com.foursquare.rogue.LatLong
 import net.liftmodules.extras.SnippetHelper
 import net.liftweb.common._
-import net.liftweb.http.js.JsCmds.{RedirectTo, Noop}
+import net.liftweb.http.js.JsCmds.{Run, SetHtml, RedirectTo, Noop}
 import net.liftweb.http.{SHtml, S}
 import net.liftweb.record.Field
 import net.liftweb.util._
 import net.liftweb.util.Helpers._
 
-import scala.xml.Text
+import scala.xml.{NodeSeq, Text}
 import net.liftweb.util.Mailer._
 
 
@@ -37,14 +37,15 @@ object FestivalForm extends SnippetHelper {
     } yield {
       val generalDataFields = Site.festivalEdit.currentValue.dmap[List[Field[_, _]]](Nil)(s => {
         List(
-          s.logo, s.name, s.responsible, s.productionManagement, s.city, s.places, s.begins, s.ends, s.durationType, s.call, s.areas,
-          s.website, s.responsibleEmail, s.pressResponsibleEmail, s.facebookPage, s.twitter, s.skype, s.spaces, s.equipment,
+          s.logo, s.call, s.callDate, s.name, s.presentation, s.responsible, s.responsibleEmail, s.pressResponsibleEmail,
+          s.productionManagement, s.city, s.places, s.begins, s.ends, s.durationType, s.areas,
+          s.website, s.facebookPage, s.twitter, s.skype, s.spaces, s.equipment,
           s.numberOfAttendees, s.publicKind, s.photo1, s.photo2, s.photo3
         ) ++ (if (User.hasRole("admin") || User.currentUser.dmap(false)(_.email.get.endsWith("genso.com.bo"))) List(s.status) else Nil)
       })
       val aboutFields = Site.festivalEdit.currentValue.dmap[List[Field[_, _]]](Nil)(s =>
         List(
-          s.staff, s.presentation, s.numberEditions, s.serviceExchange, s.trainingActivity, s.communicationTools,
+          s.staff, s.numberEditions, s.serviceExchange, s.trainingActivity, s.communicationTools,
           s.publicInstitutionPartnerships, s.privateInstitutionPartnerships, s.civilOrganizationPartnerships,
           s.networking, s.minimalBudget, s.budget, s.collaborativeEconomyBudget, s.managementDuration, s.tags
         ))

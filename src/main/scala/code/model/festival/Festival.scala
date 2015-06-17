@@ -10,8 +10,9 @@ import net.liftmodules.combobox.ComboItem
 import net.liftmodules.mongoauth.model.Role
 import net.liftweb.common.{Full, Box, Loggable}
 import net.liftweb.http._
+import net.liftweb.http.js.JE.JsRaw
 import net.liftweb.http.js.{HtmlFixer, JsCmd}
-import net.liftweb.http.js.JsCmds.Run
+import net.liftweb.http.js.JsCmds.{SetHtml, Run}
 import net.liftweb.mongodb.record.MongoRecord
 import net.liftweb.mongodb.record.field._
 import net.liftweb.record.LifecycleCallbacks
@@ -23,6 +24,11 @@ import com.foursquare.rogue.LiftRogue._
 import net.liftweb.sitemap.Loc.If
 import net.liftweb.util.Helpers
 import Helpers._
+import scala.xml._
+import net.liftweb.util._
+import net.liftweb.common._
+import net.liftweb.http.{S}
+import S._
 
 import scala.xml.{Text, NodeSeq}
 
@@ -50,7 +56,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   object city extends ComboBoxField(this, City) {
     def toString(in: City) = s"${in.name.get}/${in.country.get}"
     val placeholder = "Seleccione las ciudades donde se realizara el festival"
-    override def displayName = "Ciudad"
+    override def displayName = "Ciudad(es) donde se realiza"
   }
   object places extends BsonRecordListField(this, Place) with HtmlFixer {
     override def displayName = ""
@@ -64,7 +70,6 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
       ".title" #> title &
       "tbody *" #> {
         "tr " #> value.map( p => {
-          "data-name=date *" #> p.date.toString &
           "data-name=name *" #> p.name.get &
           "data-name=edit [onclick]" #> SHtml.ajaxInvoke(() => dialogHtml(body, owner, p, false)) &
           "data-name=remove [onclick]" #> SHtml.ajaxInvoke(() => deletePlace(body, owner, p))
@@ -82,20 +87,22 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
         <div class="panel-heading title"></div>
         <table class="table table-hover table-condensed">
         <thead>
-          <tr><th>Fecha</th><th>Lugar</th><th>&nbsp;</th></tr>
+          <tr><th>Lugar</th><th>&nbsp;</th></tr>
         </thead>
           <tbody data-name="places">
-            <tr><td data-name="date"></td>
-                <td data-name="name"></td>
-                <td><a href="#!" data-name="edit" onclick="#"><i class="fa fa-edit"></i></a>
-                  &nbsp; <a href="#!" data-name="remove" onclick="#"><i class="fa fa-trash"></i></a>
-                </td>
+            <tr>
+              <td data-name="name"></td>
+              <td><a href="#!" data-name="edit" onclick="#"><i class="fa fa-edit"></i></a>
+                &nbsp; <a href="#!" data-name="remove" onclick="#"><i class="fa fa-trash"></i></a>
+              </td>
             </tr>
           </tbody>
           <tfoot>
           <tr>
             <td>
-              <button data-name="add-link" href="#!" data-reveal-id="place-dialog" type="button" class="btn btn-primary btn-xs"><i class="fa fa-search-plus"></i> Agregar lugar</button></td>
+              <button data-name="add-link" href="#!" data-reveal-id="place-dialog" type="button" class="btn btn-primary btn-xs"><i class="fa fa-search-plus"></i> Agregar lugar</button>
+            </td>
+            <td></td>
           </tr>
           </tfoot>
         </table>
@@ -131,31 +138,20 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
           </div>
           <div class="row">
             <div class="large-12 columns" >
-              <label> <span>{place.date.displayName}</span>
-                {place.date.toForm openOr NodeSeq.Empty}
-              </label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="large-12 columns" >
-              <label> <span>{place.city.displayName}</span>
-                {place.city.toForm openOr NodeSeq.Empty}
-              </label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="large-12 columns" >
               <label> <span>{place.geoLatLng.displayName}</span>
                 {place.geoLatLng.toForm openOr NodeSeq.Empty}
               </label>
             </div>
+            <br/>
           </div>
-          <div class="form-actions">
-            <div class="actions">
-              {SHtml.hidden(addPlace)}
-              <button type="submit" tabindex="1" class="btn btn-primary">
-                Agregar
-              </button>
+          <div class="row">
+            <div class="form-actions large-12 columns">
+              <div class="actions">
+                {SHtml.hidden(addPlace)}
+                <button type="submit" tabindex="1" class="btn btn-primary">
+                  Agregar
+                </button>
+              </div>
             </div>
           </div>
         </form>
@@ -198,7 +194,9 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   object call extends FileField(this) {
     override def displayName = "Convocatoria"
   }
-
+  object callDate extends DatepickerField(this) {
+    override def displayName = "Fecha limite convocatoria"
+  }
   object logo extends FileField(this) {
     override def displayName = "Logo"
   }
@@ -282,32 +280,80 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   object presentation extends TextareaField(this, 300) {
     override def displayName = "Breve histórico / presentación"
     override def helpAsHtml = Full(<span>Cuenta sobre la trayectoria del festival (máximo de 300 caracteres)</span>)
+    private def elem =
+      SHtml.textarea(
+        valueBox openOr "",
+        this.set(_),
+        "rows" -> textareaRows.toString,
+        "cols" -> textareaCols.toString,
+        "tabindex" -> tabIndex.toString,
+        "onkeypress" -> SHtml.ajaxCall(JsRaw("$(this).val()"), countCharsLeft _).toJsCmd
+      ) ++ <br/> ++ <div> Caracteres restantes: <span id="presentation-chars-left">{this.maxLength - this.valueBox.dmap(0)(_.length)}</span></div>
+
+    private def countCharsLeft(s: String): JsCmd = {
+      println(s)
+      val res = this.maxLength - s.length
+      SetHtml("presentation-chars-left", Text(res.toString))
+    }
+
+    override def toForm: Box[NodeSeq] = Full(elem)
+
   }
   object numberEditions extends BsonRecordListField(this, FestivalEdition) with HtmlFixer {
     override def displayName = "¿Cuantas ediciones del festival se han realizado y en que años?"
     override def helpAsHtml = Full(<span>Informa cuantas ediciones fueron realizadas y en que años mismo si no han sido sucesivos Ej: Festival del Sol - 5 ediciones 2004 -2006- 2009 - 2010 - 2013. Elegir varias fechas, sólo MES y AÑO. Si es consecutivo "Desde...".</span>)
+    def title = "Datos de la edición"
     override def toForm = Full(
       css.apply(template)
     )
 
     def css = {
       "#editions" #> SHtml.idMemoize(body => {
-        "data-name=editions" #> <ol>{value.foldLeft(NodeSeq.Empty){ case (node, edition) => {
-          node ++ <li>
-            {(edition.name.get ++ " - " ++ edition.date.toString)}
-            <a href="#!" data-name="edit" onclick={SHtml.ajaxInvoke(() => dialogHtml(body, owner, edition, false)).toJsCmd}><i class="fa fa-edit"></i></a>
-            <a href="#!" data-name="remove" onclick={SHtml.ajaxInvoke(() => deleteEdition(body, owner, edition)).toJsCmd}><i class="fa fa-trash"></i></a>
-          </li>}}}</ol> &
-          "data-name=dialog-link [onclick]" #> SHtml.ajaxInvoke(() => dialogHtml(body, owner))
+        ".title" #> title &
+          "tbody *" #> {
+            "tr " #> value.map( p => {
+              "data-name=name *" #> p.name.get &
+              "data-name=date *" #> p.date.toString &
+              "data-name=edit [onclick]" #> SHtml.ajaxInvoke(() => dialogHtml(body, owner, p, false)) &
+              "data-name=remove [onclick]" #> SHtml.ajaxInvoke(() => deleteEdition(body, owner, p))
+            })
+          } &
+          "data-name=add-link [onclick]" #> SHtml.ajaxInvoke(() => dialogHtml(body, owner))
       })
     }
 
+
     def template = {
-      <div id="editions">
-        <span data-name="places"></span>
-        <label><a data-name="dialog-link" href="#!" data-reveal-id="place-dialog"><i class="fa fa-search-plus"></i> Agregar Edición</a></label>
-      </div>
+        <br />
+        <div id="editions" class="panel panel-default">
+
+          <div class="panel-heading title"></div>
+          <table class="table table-hover table-condensed">
+            <thead>
+              <tr><th>Nombre</th><th>Fecha</th><th>&nbsp;</th></tr>
+            </thead>
+            <tbody data-name="editions">
+              <tr>
+                <td data-name="name"></td>
+                <td data-name="date"></td>
+                <td><a href="#!" data-name="edit" onclick="#"><i class="fa fa-edit"></i></a>
+                  &nbsp; <a href="#!" data-name="remove" onclick="#"><i class="fa fa-trash"></i></a>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>
+                  <button data-name="add-link" href="#!" data-reveal-id="edition-dialog" type="button" class="btn btn-primary btn-xs"><i class="fa fa-search-plus"></i> Agregar edición</button>
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
     }
+
 
     def deleteEdition(body: IdMemoizeTransform, festival: Festival, edition: FestivalEdition): JsCmd = {
       festival.numberEditions.set(festival.numberEditions.get.filter(p => p != edition))
@@ -322,6 +368,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
           Run(s"$$('#${modalId}').foundation('reveal', 'close');") &
           Run(s"$$('#${modalId}').remove();")
       }
+
 
       val html =
         <div id={modalId} class="reveal-modal" data-reveal="" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
@@ -341,12 +388,14 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
                 </label>
               </div>
             </div>
-            <div class="form-actions">
-              <div class="actions">
-                {SHtml.hidden(addEdition)}
-                <button type="submit" tabindex="1" class="btn btn-primary">
-                  Agregar
-                </button>
+            <div class="row">
+              <div class="form-actions large-12 columns">
+                <div class="actions">
+                  {SHtml.hidden(addEdition)}
+                  <button type="submit" tabindex="1" class="btn btn-primary">
+                    Agregar
+                  </button>
+                </div>
               </div>
             </div>
           </form>
@@ -440,7 +489,6 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
     def toString(in: Network) = s"${in.name.get}"
     val placeholder = "Seleccione uno o más valores"
     override def beforeValidation(): Unit = {
-      println("VALUES:"+ this.tempItems)
       super.beforeSave
       this.set(
         this.get ++ this.tempItems.map(

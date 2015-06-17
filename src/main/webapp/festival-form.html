@@ -3,12 +3,19 @@
         <title>Festival | Festivales en Red | Telartes</title>
     </lift:head>
     <h1>INGRESA TU FESTIVAL</h1>
+    <div id="errors-modal" class="reveal-modal" data-reveal="" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+        <h2>Por favor revise la siguiente informacion</h2>
+        <div class="row">
+            <div id="errors-modal-body">
+            </div>
+        </div>
+    </div>
     <form data-lift="form.ajax">
         <div data-lift="FestivalForm">
             <fieldset>
                 <legend>DATOS GENERALES</legend>
-                <div class="row">
-                    <div class="large-12 columns form-group" data-name="general-data">
+                <div class="row gs-row" data-name="general-data">
+                    <div class="large-12 columns form-group">
                         <label class="control-label"><span data-name="label">Input Label</span></label>
                         <div class="controls">
                             <input data-name="general-data-field" type="text"  />
@@ -19,8 +26,8 @@
             </fieldset>
             <fieldset>
                 <legend>SOBRE LA ORGANIZACIÓN</legend>
-                <div class="row">
-                    <div class="large-12 columns form-group" data-name="about-data">
+                <div class="row gs-row" data-name="about-data">
+                    <div class="large-12 columns form-group">
                         <label class="control-label"><span data-name="label">Input Label</span></label>
                         <div class="controls">
                             <input data-name="about-data-field" type="text"  />

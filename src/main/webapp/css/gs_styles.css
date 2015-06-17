@@ -688,3 +688,11 @@ body {
   font-size: 13px;
   width: 96px;
 }
+
+.gs-row {
+  padding-top: 10px;
+}
+
+.gs-row  label {
+  font-size: 0.975rem
+}

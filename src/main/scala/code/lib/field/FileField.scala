@@ -36,21 +36,7 @@ class FileField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
   }
 
   override def toForm = {
-
-    S.appendJs(script)
-    Full(
-      <div class={containerFieldId} >
-        <div class={containerInputId} >
-          <input class="fileupload" type="file" name="files" data-url={uploadPath} id={id} />
-        </div>
-        <div class="progress" style="width:20em; border: 1pt solid silver; display: none" >
-          {SHtml.hidden(s => saveFileIds(s), "", "id" -> hiddenId)}
-          {SHtml.hidden(s => setDeletedFileIds(s), "", "id" -> hiddenDeleteId)}
-          <div class="progress-bar" style="background: green; height: 1em; width:0%"></div>
-        </div>
-        <div class="uploadedData" style="display:none;"></div>
-      </div>
-    )
+    toEditForm
   }
 
   def toEditForm = {
@@ -59,11 +45,11 @@ class FileField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
 
     val uploadedData = (
       ".link-item [href]" #> (downloadPath +"/"+  file.fileId.get+ "/"+ file.fileName.get ) &
-        ".preview-item *" #> previewFile &
-        ".link-item *" #> file.fileName.get &
-        ".size-item *" #> file.fileSize.get &
-        ".remove-item [data-file-id]" #>  file.fileId.get
-      ).apply(templateItem)
+      ".preview-item *" #> previewFile &
+      ".link-item *" #> file.fileName.get &
+      ".size-item *" #> file.fileSize.get &
+      ".remove-item [data-file-id]" #>  file.fileId.get
+    ).apply(templateItem)
 
     S.appendJs(onClickRemoveScript)
     S.appendJs(script)
@@ -138,11 +124,8 @@ class FileField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
 
   private def saveFileIds(s: String) = {
     implicit lazy val formats: Formats = DefaultFormats
-    println("RECORDS:"+s)
 
     if (s.trim.nonEmpty){
-
-      println("deberia llegar algo:", s)
       for{
         fileId <- tryo((parse(s) \ "fileId").extract[String])
         fileName <- tryo((parse(s) \ "fileName").extract[String])
@@ -164,20 +147,15 @@ class FileField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
 
   private def setDeletedFileIds(s: String) = {
     implicit lazy val formats: Formats = DefaultFormats
-    println("RECORDS 2 delete:"+s)
     deletedIds = List() // empty each time
 
     if (s.trim.nonEmpty) {
-      println("deberia llegar lista de datos a borrar...", s)
       val fileList = parse(s).extract[List[ItemFiles2Delete]]
-      println("extraido con el case class: "+ fileList )
 
       fileList.map(f => {
-        println("seteando para borrar...", f)
         deletedIds = f.fileId :: deletedIds
       })
 
-      println("lista seteada para borrar.." ,deletedIds)
     }
   }
 
@@ -186,7 +164,6 @@ class FileField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
       db =>
         val fs = new GridFS(db)
         deletedIds.map( fId => {
-          println("aqui se deberia eliminar el file", fId)
           fs.remove(new ObjectId(fId))
         })
     }

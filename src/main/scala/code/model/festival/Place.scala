@@ -24,21 +24,13 @@ class Place extends BsonRecord[Place] {
   object name extends StringField(this, 300) {
     override def displayName = "Nombre"
   }
-  object city extends SingleComboBoxField(this, City) {
-    override def displayName = "Ciudad"
-    def toString(in: City) = s"${in.name.get}/${in.country.get}"
-    val placeholder = "Seleccione la ciudad a la que pertenece el lugar"
-  }
-  object date extends DatepickerField(this) {
-    override def displayName = "Fecha"
-  }
   object geoLatLng extends MongoCaseClassField[Place, LatLong](this) {
     override def displayName = "Ubicación"
     lazy val mapId = Helpers.nextFuncName
 
 		override def defaultValue = new LatLong(-7654865, -1889233)
 
-		def scriptMovableFeature = Run( """
+    def scriptMovableFeature = Run( """
 
 				/**
 				 * Define a namespace for the application.
@@ -212,6 +204,7 @@ class Place extends BsonRecord[Place] {
 
         	var map = new ol.Map({
          		 interactions: ol.interaction.defaults().extend([new app.Drag()]),
+             controls: [],
         	   layers: [
         	   		new ol.layer.Tile({ source: new ol.source.OSM() }),
         		 		vectorLayer
@@ -224,48 +217,6 @@ class Place extends BsonRecord[Place] {
         	   })
         	});
 
-        	//Añadimos un control de zoom
-
-        	map.addControl(new ol.control.ZoomSlider());
-        	var element = document.getElementById('popup');
-        	var popup = new ol.Overlay({
-        	  element: element,
-        	  positioning: 'bottom-center',
-        	  stopEvent: false
-        	});
-        	map.addOverlay(popup);
-
-        	// display popup on click
-        	map.on('click', function(evt) {
-        	  var feature = map.forEachFeatureAtPixel(evt.pixel,
-        		  function(feature, layer) {
-        			return feature;
-        		  });
-        	  if (feature) {
-        		var geometry = feature.getGeometry();
-        		var coord = geometry.getCoordinates();
-        		popup.setPosition(coord);
-        		$(element).popover('destroy');
-        		$(element).popover({
-        		  'placement': 'top',
-        		  'html': true,
-        		  'content': feature.get('name')
-        		});
-        		$(element).popover('show');
-        	  } else {
-        		$(element).popover('destroy');
-        	  }
-        	});
-
-        	map.on('pointermove', function(e) {
-        	  if (e.dragging) {
-        		$(element).popover('destroy');
-        		return;
-        	  }
-        	  var pixel = map.getEventPixel(e.originalEvent);
-        	  var hit = map.hasFeatureAtPixel(pixel);
-        	  map.getTarget().style.cursor = hit ? 'pointer' : '';
-        	});
           $('#""" + mapId + """').data('map', map);
           $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
           	if ( $('#""" + mapId + """').data('map') ){
@@ -274,7 +225,7 @@ class Place extends BsonRecord[Place] {
             	console.log('map in data no exist')
 						}
           });
-      """.stripMargin
+                                """.stripMargin
     )
 
     override def toForm = {
@@ -282,7 +233,7 @@ class Place extends BsonRecord[Place] {
 			S.appendJs(scriptMovableFeature)
 			val node =
 				<div>
-					<div id={mapId} style="height:200px;width:100%;"></div>
+					<div id={mapId} style="height:300px;width:100%;"></div>
 					{/*SHtml.hidden(s => setLatLong(s), compactRender(this.asJValue), "id" -> "latLongField")*/}
 					{SHtml.hidden(s => setLatLong(s), "{}", "id" -> "latLongField")}
 				</div>
