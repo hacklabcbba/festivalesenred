@@ -98,25 +98,25 @@ class FileField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
         Some(<img src={s"/file/preview/${f.fileId.get}"} title={f.fileName.get}/>)
 
       case "application/pdf" =>
-        Some(<i class="fa fa-file-pdf-o fa-3x" title={f.fileName.get}/>)
+        Some(<a href={s"/file/preview/${f.fileId.get}"}><i class="fa fa-file-pdf-o fa-3x" title={f.fileName.get}/> Descargar </a>)
 
       case "application/zip" =>
-        Some(<i class="fa fa-file-zip-o fa-3x" title={f.fileName.get}/>)
+        Some(<a href={s"/file/preview/${f.fileId.get}"}><i class="fa fa-file-zip-o fa-3x" title={f.fileName.get}/> Descargar </a>)
 
       case "application/rar" =>
-        Some(<i class="fa fa-file-pdf-o fa-3x" title={f.fileName.get}/>)
+        Some(<a href={s"/file/preview/${f.fileId.get}"}><i class="fa fa-file-pdf-o fa-3x" title={f.fileName.get}/> Descargar </a>)
 
       case "application/msword" =>
-        Some(<i class="fa fa-file-word-o fa-3x" title={f.fileName.get}/>)
+        Some(<a href={s"/file/preview/${f.fileId.get}"}><i class="fa fa-file-word-o fa-3x" title={f.fileName.get}/> Descargar </a>)
 
       case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" =>
-        Some(<i class="fa fa-file-excel-o fa-3x" title={f.fileName.get}/>)
+        Some(<a href={s"/file/preview/${f.fileId.get}"}><i class="fa fa-file-excel-o fa-3x" title={f.fileName.get}/> Descargar </a>)
 
       case "application/octet-stream" =>
-        Some(<i class="fa fa-file fa-3x" title={f.fileName.get}/>)
+        Some(<a href={s"/file/preview/${f.fileId.get}"}><i class="fa fa-file fa-3x" title={f.fileName.get}/> Descargar </a>)
 
       case _ =>
-        Some(<i class="fa fa-file fa-3x" title={f.fileName.get}/>)
+        Some(<a href={s"/file/preview/${f.fileId.get}"}><i class="fa fa-file fa-3x" title={f.fileName.get}/> Descargar </a>)
     }
 
     previewData

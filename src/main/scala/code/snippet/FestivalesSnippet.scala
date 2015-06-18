@@ -16,7 +16,7 @@ import net.liftweb.record.Field
 import net.liftweb.util._
 import net.liftweb.util.Helpers._
 
-import scala.xml.Text
+import scala.xml.{NodeSeq, Text}
 import net.liftweb.util.Mailer._
 
 object FestivalesSnippet extends SnippetHelper with PaginatorSnippet[Festival] {
@@ -144,6 +144,7 @@ object FestivalView extends SnippetHelper {
         "data-name=twitter *" #> item.skype.get &
         "data-name=responsible *" #> item.responsible.get &
         "data-name=responsibleEmail" #> item.responsibleEmail.get.replace("@", "[a]") &
+        "data-name=call" #> SHtml.link(s"/service/images/${item.call.get.fileId.get}", () => (), <span>Descargar</span>, "class" -> item.callDate.css) &
         "data-name=areas *" #> item.areas.objs.map(s => <a href={s"/festivales?area=${s.name.get}"} >{s.name.get}</a>) &
         "data-name=tags *" #> item.tags.get.map(s => <a href={s"/festivales?tag=${s.tag.get}"} >{s.tag.get}</a>) &
         "data-name=description *" #> item.presentation.get &

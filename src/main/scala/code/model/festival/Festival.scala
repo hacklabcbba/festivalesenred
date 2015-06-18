@@ -199,6 +199,14 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   }
   object callDate extends DatepickerField(this) {
     override def displayName = "Fecha limite convocatoria"
+
+    def css = {
+      val now = DateTime.now()
+      val end = this.valueBox.dmap(DateTime.now())(new DateTime(_))
+      if (now.isAfter(end))
+        "alert label"
+      else "success label"
+    }
   }
   object logo extends FileField(this) {
     override def displayName = "Logo"
