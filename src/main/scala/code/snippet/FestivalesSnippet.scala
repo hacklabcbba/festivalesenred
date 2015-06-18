@@ -23,6 +23,33 @@ object FestivalesSnippet extends SnippetHelper with PaginatorSnippet[Festival] {
 
   override def itemsPerPage = 5
 
+  def filter = {
+    val area = S.param("area")
+    val tag = S.param("tag")
+    val equipment = S.param("equipment")
+    val service = S.param("service")
+    val training = S.param("training")
+    val communication = S.param("communication")
+    val partnership = S.param("partnership")
+    val networking = S.param("networking")
+    (area.toList ++ tag.toList ++ equipment.toList ++ service.toList ++
+      training.toList ++ communication.toList ++ partnership.toList ++ networking.toList).headOption
+  }
+
+  def head = {
+    filter match {
+      case Some(filter) => "title *" #> s"[Búsqueda] | Festivales en Red | Telartes > $filter"
+      case None => "title *" #> "Festivales en Red | Telartes"
+    }
+  }
+
+  def title = {
+    filter match {
+      case Some(filter) => "h1 *" #> s"Festivales en Red: $filter"
+      case None => "h1 *" #> "Festivales en Red"
+    }
+  }
+
   override def count = {
     val area = S.param("area").flatMap(Area.findByName(_))
     val tag = S.param("tag")
