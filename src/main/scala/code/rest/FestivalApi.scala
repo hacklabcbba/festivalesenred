@@ -63,7 +63,11 @@ object FestivalApi extends RestHelper {
       val begins =  (json \\ "begins").extractOpt[String].flatMap(s => Helpers.tryo(dateFormat.parse(s)))
       val ends =  (json \\ "ends").extractOpt[String].flatMap(s => Helpers.tryo(dateFormat.parse(s)))
 
-      val festivales = Festival.findAllForMapByAreasCitiesAndDates(areas, cities, begins, ends)
+      val festivales =
+        if (areas.isEmpty && cities.isEmpty && begins.isEmpty && ends.isEmpty)
+          Festival.fetch()
+        else
+          Festival.findAllForMapByAreasCitiesAndDates(areas, cities, begins, ends)
       val placesJsonList =  "locs" -> festivales.flatMap(
         f => f.places.get.map(Place.asJValue(_, f))
       )

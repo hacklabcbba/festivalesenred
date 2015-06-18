@@ -48,5 +48,17 @@
             </div>
         </div>
     </form>
+    <script>
+        function textCounter(field, maxLimit)
+        {
+         if ( field.value.length > maxLimit ) {
+          field.value = field.value.substring( 0, maxLimit );
+          return false;
+         } else {
+          var res = maxLimit - field.value.length;
+          $('#presentation-chars-left').html(''+res);
+         }
+        }
+    </script>
 </div>
 

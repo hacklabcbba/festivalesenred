@@ -44,9 +44,7 @@ class FileField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
     val file = this.get
 
     val uploadedData = (
-      ".link-item [href]" #> (downloadPath +"/"+  file.fileId.get+ "/"+ file.fileName.get ) &
       ".preview-item *" #> previewFile &
-      ".link-item *" #> file.fileName.get &
       ".size-item *" #> file.fileSize.get &
       ".remove-item [data-file-id]" #>  file.fileId.get
     ).apply(templateItem)
@@ -75,10 +73,7 @@ class FileField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
 
     val file = this.get
     val uploadedData = (
-      ".link-item [href]" #> (downloadPath +"/"+  file.fileId.get) &
         ".preview-item *" #> previewFile &
-        ".link-item *" #> file.fileName.get &
-        ".size-item *" #> file.fileSize.get &
         ".remove-item " #>  ""
       ).apply(templateItem)
 
@@ -89,34 +84,34 @@ class FileField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
     val f = this.get
     val previewData = f.fileType.get match {
       case "image/png" =>
-        Some(<img src={s"/file/preview/${f.fileId.get}"} title={f.fileName.get}/>)
+        Some(<a target="_blank" href={s"/service/images/${f.fileId.get}"}><img src={s"/file/preview/${f.fileId.get}"} title={f.fileName.get}/></a>)
 
       case "image/jpeg" =>
-        Some(<img src={s"/file/preview/${f.fileId.get}"} title={f.fileName.get}/>)
+        Some(<a target="_blank" href={s"/service/images/${f.fileId.get}"}><img src={s"/file/preview/${f.fileId.get}"} title={f.fileName.get}/></a>)
 
       case "image/gif" =>
-        Some(<img src={s"/file/preview/${f.fileId.get}"} title={f.fileName.get}/>)
+        Some(<a target="_blank" href={s"/service/images/${f.fileId.get}"}><img src={s"/file/preview/${f.fileId.get}"} title={f.fileName.get}/></a>)
 
       case "application/pdf" =>
-        Some(<a href={s"/file/preview/${f.fileId.get}"}><i class="fa fa-file-pdf-o fa-3x" title={f.fileName.get}/> Descargar </a>)
+        Some(<a target="_blank" href={s"/service/images/${f.fileId.get}"}><i class="fa fa-file-pdf-o fa-3x" title={f.fileName.get}/> Descargar </a>)
 
       case "application/zip" =>
-        Some(<a href={s"/file/preview/${f.fileId.get}"}><i class="fa fa-file-zip-o fa-3x" title={f.fileName.get}/> Descargar </a>)
+        Some(<a target="_blank" href={s"/service/images/${f.fileId.get}"}><i class="fa fa-file-zip-o fa-3x" title={f.fileName.get}/> Descargar </a>)
 
       case "application/rar" =>
-        Some(<a href={s"/file/preview/${f.fileId.get}"}><i class="fa fa-file-pdf-o fa-3x" title={f.fileName.get}/> Descargar </a>)
+        Some(<a target="_blank" href={s"/service/images/${f.fileId.get}"}><i class="fa fa-file-pdf-o fa-3x" title={f.fileName.get}/> Descargar </a>)
 
       case "application/msword" =>
-        Some(<a href={s"/file/preview/${f.fileId.get}"}><i class="fa fa-file-word-o fa-3x" title={f.fileName.get}/> Descargar </a>)
+        Some(<a target="_blank" href={s"/service/images/${f.fileId.get}"}><i class="fa fa-file-word-o fa-3x" title={f.fileName.get}/> Descargar </a>)
 
       case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" =>
-        Some(<a href={s"/file/preview/${f.fileId.get}"}><i class="fa fa-file-excel-o fa-3x" title={f.fileName.get}/> Descargar </a>)
+        Some(<a target="_blank" href={s"/service/images/${f.fileId.get}"}><i class="fa fa-file-excel-o fa-3x" title={f.fileName.get}/> Descargar </a>)
 
       case "application/octet-stream" =>
-        Some(<a href={s"/file/preview/${f.fileId.get}"}><i class="fa fa-file fa-3x" title={f.fileName.get}/> Descargar </a>)
+        Some(<a target="_blank" href={s"/service/images/${f.fileId.get}"}><i class="fa fa-file fa-3x" title={f.fileName.get}/> Descargar </a>)
 
       case _ =>
-        Some(<a href={s"/file/preview/${f.fileId.get}"}><i class="fa fa-file fa-3x" title={f.fileName.get}/> Descargar </a>)
+        Some(<a target="_blank" href={s"/service/images/${f.fileId.get}"}><i class="fa fa-file fa-3x" title={f.fileName.get}/> Descargar </a>)
     }
 
     previewData
@@ -173,8 +168,6 @@ class FileField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
     <span class="data-item">
       <span class="preview-item"></span>
       <i class="fa fa-cloud-download fa-fw"></i>
-      <a class="link-item" href="#">%fileName</a>
-      <span class="size-item">%fileSize</span>
       <button class="btn btn-danger btn-xs remove-item" data-file-id="%fileId" type="button">
         <i class="fa fa-trash-o fa-fw"></i>&nbsp;Remover
       </button><br/>
@@ -230,14 +223,8 @@ class FileField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
               var $row = $(""" + downloadTemplateItem + """);
               var downloadPath =  '""" + downloadPath + """/' + f.fileId +'/'+ f.fileName
 
-              $row.find(".link-item")
-                .attr("href", downloadPath )
-                .html(f.fileName);
 
               $row.find(".preview-item").html(previewHtml(f))
-
-              $row.find(".size-item")
-                .html("("+ f.fileSize +")("+ f.fileType +")");
 
               $row.find(".remove-item")
                 .attr("data-file-id", f.fileId)
