@@ -2,7 +2,7 @@
     <lift:head>
         <title>Festivales en Red | Telartes</title>
     </lift:head>
-   <div class="inner-wrap">
+   <div class="inner-wrap" data-lift="HomeSnippet.searchForm">
       <div class="gs-right-btn">
       	<a class="right-off-canvas-toggle right gs-open" href="#" ><img src="/img/buscar.png"/></a> <!-- Off Canvas Menu -->
       </div>
@@ -13,76 +13,17 @@
 					<!-- accordion one -->
 				  <li class="accordion-navigation">
 				    <a href="#panel1a">Categorías</a>
-				    <div id="panel1a" class="content active">
-							<ul class="gs-canvas-list">
-								<li><span class="round red label">AE</span>
-								  <input type='checkbox' id="ch1" /><label for="ch1"></label>
-								Artes Escénicas
-								  <ul>
-								    <li>Ej. Teatro, Danza, Performance, Circo, Títeres, etc...</li>
-							      </ul>
-								</li>
-								<li><span class="round green label">AP</span>
-								  <input type='checkbox' id="ch2" /><label for="ch2"></label>
-						         Artes Plásticas
-						         <ul>
-						           <li>Ej. Arte urbano, Pintura, Escultura, Dibujo, Arquitectura, Cerámica, etc...</li>
-					              </ul>
-								</li>
-								<li><span class="round purple label">AT</span>
-								  <input type='checkbox' id="ch3" /><label for="ch3"></label>
-						         Artes Populares y/o Tradicionales
-						         <ul>
-						           <li>Ej. Artesanía, Textiles, etc...</li>
-					              </ul>
-								</li>
-								<li><span class="round red label">AV</span>
-								  <input type='checkbox' id="ch4" /><label for="ch4"></label>
-						         Artes AudioVisuales
-						         <ul>
-						           <li>Ej. Cine, Documental, etc...</li>
-					              </ul>
-								</li>
-								<li><span class="round green label">CD</span>
-								  <input type='checkbox' id="ch5" /><label for="ch5"></label>
-						         Cultura Digital
-						         <ul>
-						           <li>Ej. Software libre, Hackmeeting, Videojuegos,...</li>
-					              </ul>
-								</li>
-								<li><span class="round red label">DI</span>
-								  <input type='checkbox' id="ch6" /><label for="ch6"></label>
-						         Diseño
-						         <ul>
-						           <li>Ej. Gráfico, Moda, Joyas, etc...</li>
-					              </ul>
-								</li>
-								<li><span class="round purple label">FO</span>
-								  <input type='checkbox' id="ch7" /><label for="ch7"></label>
-						         Fotografía</li>
-								<li><span class="round green label">LE</span>
-								  <input type='checkbox' id="ch8" /><label for="ch8"></label>
-						         Letras
-						         <ul>
-						           <li>Ej. Literatura, Poesía, etc...</li>
-					              </ul>
-								</li>
-								<li>
-									<span class="round green label">MU</span>
-  									<input type='checkbox' id="ch9" /><label for="ch9"></label>
-						         	Música
-						           <ul>
-						           <li>Ej. Rock, Pop, Barroco, Clásica,etc...</li>
-					              </ul>
-								</li>
-								<div class="row">
-							    <div class="columns">
-							      <label>Otros
-							        <input type="text" placeholder="" />
-							      </label>
-							    </div>
-							  </div>
-							</ul>
+				    <div id="panel1a" class="content">
+                        <ul class="gs-canvas-list" id="areas">
+                            <li data-name="area"><span class="round label" data-name="code">AE</span>
+                              <input type='checkbox' id="ch1" />
+                              <label for="ch1"></label>
+                              <span data-name="name">Artes Escénicas</span>
+                              <ul>
+                                <li data-name="description">Ej. Teatro, Danza, Performance, Circo, Títeres, etc...</li>
+                              </ul>
+                            </li>
+                        </ul>
 				    </div>
 				  </li>
 
@@ -90,20 +31,13 @@
 				  <li class="accordion-navigation">
 				    <a href="#panel2a">Ciudad</a>
 				    <div id="panel2a" class="content">
-							<div class="row">
-						    <div class="columns">
-						      <label>
-						        <input type="text" placeholder="" />
-						      </label>
-						    </div>
-						  </div>
-								<div class="row">
-							    <div class="columns">
-							      <label>
-							        <input type="text" placeholder="" />
-							      </label>
-							    </div>
-							  </div>
+                        <ul class="gs-canvas-list" id="cities">
+                            <li data-name="city">
+                                <input type='checkbox' id="ch1" />
+                                <label for="ch1"></label>
+                                <span data-name="name">Artes Escénicas</span>
+                            </li>
+                        </ul>
 				    </div>
 				  </li>
 
@@ -115,29 +49,35 @@
 						    <div class="small-9">
 						      <div class="row">
 						        <div class="small-3 columns">
-						          <label for="right-label" class="right">De</label>
+						          <label for="begins" class="right">De</label>
 						        </div>
-						        <div class="small-8 columns">
-						          <input type="text" id="right-label" placeholder="">
+						        <div class="small-6 columns">
+						          <input type="text" id="begins" placeholder="">
 						        </div>
+                                <div class="small-1 columns">
+                                  <i class="fa fa-calendar"></i>
+                                </div>
 						      </div>
 						      <div class="row">
 						        <div class="small-3 columns">
-						          <label for="right-label" class="right">Hasta</label>
+						          <label for="ends" class="right">Hasta</label>
 						        </div>
-						        <div class="small-8 columns">
-						          <input type="text" id="right-label" placeholder="">
+						        <div class="small-6 columns">
+						          <input type="text" id="ends" placeholder="">
 						        </div>
+                                <div class="small-1 columns">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
 						      </div>
 						    </div>
-						  </div>
-						  <div class="row">
-						  	<button class="button expand gs-btn">Buscar</button>
 						  </div>
 				    </div>
 				  </li>
 
 				</ul>
+                <div class="row">
+                  <button class="button expand gs-btn" onclick="updateMap();">Buscar</button>
+                </div>
 				<!-- end accordion -->
       </aside>
       <section>
@@ -149,6 +89,51 @@
    </div>
 
 	<script>
+
+        var search = function(data) {
+            $.ajax({
+                url: "/api/localizations",
+                type: 'post',
+                dataType: 'json',
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                success: function(response) {
+                    vectorSource.clear();
+                    $.each(response.locs, function(i,e){
+                        if (e.geoLatLng){
+                            var marker = new ol.Feature({
+                                name: e.festivalName + "<br/ ><a href='"+ e.url+"'>Detalles</a>",
+                                geometry: new ol.geom.Point([e.geoLatLng.lat, e.geoLatLng.long]),
+                                style: iconStyle
+                            });
+                            marker.setStyle(iconStyle);
+                            marker.on('click', function(){ console.log('over')}, marker);
+                            vectorSource.addFeature(marker);
+                        }
+                    });
+                }
+		    });
+        };
+
+        var updateMap = function() {
+          console.log("MAP");
+          var areas = [];
+          $('#areas input:checked').each(function() {
+            areas.push($(this).attr('id'));
+          });
+          var cities = [];
+          $('#cities input:checked').each(function() {
+            cities.push($(this).attr('id'));
+          });
+          var begins = $('#begins').val();
+          var ends = $('#ends').val();
+          search({ 'areas': areas, 'cities': cities, 'begins': begins, 'ends': ends });
+        };
+
+        $(document).ready(function(){
+          $('#begins').fdatepicker();
+          $('#ends').fdatepicker();
+        });
 
 		var iconStyle = new ol.style.Style({
 			image: new ol.style.Icon(({
@@ -238,26 +223,8 @@
 			map.getTarget().style.cursor = hit ? 'pointer' : '';
 		});
 
+		search({});
 
-		$.ajax({url: "/api/localizations",
-			dataType: "json",
-			success: function(response){
-				console.log("server response:", response);
-				$.each(response.locs, function(i,e){
-					if (e.geoLatLng){
-						console.log(e.geoLatLng);
-						var marker = new ol.Feature({
-							name: e.festivalName + "<br/ ><a href='"+ e.url+"'>Detalles</a>",
-							geometry: new ol.geom.Point([e.geoLatLng.lat, e.geoLatLng.long]),
-							style: iconStyle
-						});
-						marker.setStyle(iconStyle);
-						marker.on('click', function(){ console.log('over')}, marker);
-						vectorSource.addFeature (marker);
-					}
-				});
-			}
-		});
 	</script>
 
 </div>

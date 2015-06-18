@@ -2,6 +2,8 @@ package code
 package model
 package festival
 
+import java.util.Date
+
 import code.lib.RogueMetaRecord
 import code.lib.field._
 import code.model.institution.Institution
@@ -24,6 +26,7 @@ import com.foursquare.rogue.LiftRogue._
 import net.liftweb.sitemap.Loc.If
 import net.liftweb.util.Helpers
 import Helpers._
+import org.joda.time.DateTime
 import scala.xml._
 import net.liftweb.util._
 import net.liftweb.common._
@@ -579,6 +582,15 @@ object Festival extends Festival with RogueMetaRecord[Festival] with Loggable {
                      service: Box[ServiceExchange], training: Box[TrainingActivity], communication: Box[CommunicationTool],
                      partnership: Box[Partnership], networking: Box[Network]): Long = {
     filterQry(area, tag, equipment, service, training, communication, partnership, networking).count()
+  }
+
+  def findAllForMapByAreasCitiesAndDates(areas: List[Area], cities: List[City], begins: Box[Date], ends: Box[Date]): List[Festival] = {
+    Festival
+      .where(_.areas in areas.map(_.id.get))
+      .and(_.city in cities.map(_.id.get))
+      .andOpt(begins)(_.begins gte new DateTime(_))
+      .andOpt(ends)(_.ends lte new DateTime(_))
+      .fetch()
   }
 
 }
