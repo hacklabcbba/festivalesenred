@@ -21,6 +21,10 @@ import Helpers._
 
 object FestivalApi extends RestHelper {
 
+  object AsFestival {
+    def unapply(in: String): Option[Festival] = Festival.find(in)
+  }
+
   serve {
 
     case "api" :: "festivals"  :: Nil Post req => {
@@ -51,6 +55,11 @@ object FestivalApi extends RestHelper {
       )
 
       response(jsonList)
+    }
+
+    case "api" :: "festival" :: "localizations" :: AsFestival(festival) ::  _ JsonGet _ => {
+      val placesJsonList =  "locs" -> festival.places.get.map(Place.asJValue(_, festival))
+      response(placesJsonList)
     }
 
     case "api" :: "localizations" :: Nil JsonPost json -> _ => {
