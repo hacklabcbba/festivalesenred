@@ -225,9 +225,12 @@ header > .navbar .user-options {
 
 header > .navbar .navbar-brand {
     height: auto;
-    background: #fff;
     padding-top: 0;
     padding-bottom: 0;
+}
+
+header > .navbar .navbar-brand > div  {
+    background: #fff;
 }
 
 /*------------------------------------*\
@@ -309,6 +312,10 @@ header > .navbar .navbar-brand {
     border-bottom: none;
 }
 
+.admin.event-list .events .event > div footer {
+    padding-bottom: 10px;
+}
+
 /*--------------------------*\
     $FESTIVAL
 \*--------------------------*/
@@ -368,11 +375,53 @@ header > .navbar .navbar-brand {
 .create-event .upload-images .buttons-image {
     font-size: 25px;
     position: absolute;
-    bottom: 0;
-    right: 10px;
-    margin-bottom: 0;
+    bottom: 5px;
+    right: 15px;
+    margin-bottom: 0px;
 }
 
+/*--------------------------*\
+    $CREAR FESTIVAL
+\*--------------------------*/
+.people-functions {
+    font-size: 13px;
+}
+
+/*--------------------------*\
+    $LOGIN
+\*--------------------------*/
+.login .social-login a {
+    color: #fff;
+    border: none;
+}
+
+.login .social-login .facebook {
+    background: #3A5795;
+
+}
+
+.login .social-login .twitter {
+    background: #55ACEE;
+}
+
+.login .social-login .googleplus {
+    background: #D73D32;
+}
+.login .social-options {
+    margin: 25px 0;
+}
+
+.login .has-feedback .form-control {
+    padding-left: 42px;
+    padding-right: 0;
+}
+
+.login .has-feedback .form-control-feedback {
+    width: 46px;
+    height: 46px;
+    left: 0;
+    font-size: 18px;
+}
 
 /*------------------------------------*\
     $FOOTER
@@ -383,17 +432,16 @@ header > .navbar .navbar-brand {
     /*width: 100%;*/
     /*bottom: 0;*/
 /*}*/
-body > footer .container-fluid {
+body > footer {
     background: #3D4A4A none repeat scroll 0% 0%;
     color: #FFF;
-    height: 30px;
     margin-top: 50px;
     margin-bottom: 0;
     padding-top: 5px;
     padding-bottom: 5px;
 }
 
-body > footer .container-fluid a {
+body > footer .container a {
     color: #fff;
 }
 

@@ -1,27 +1,186 @@
-<div class="info form" data-lift="surround?with=base-wrap;at=content">
-    <h1>FESTIVALES</h1>
-    <div data-lift="FestivalesSnippet" class="row">
-        <table>
-            <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Usuario</th>
-                <th>Responsable</th>
-                <th>Ciudad</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr data-name="row">
-                <td data-name="name">Content Goes Here</td>
-                <td data-name="owner">This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-                <td data-name="responsible">Content Goes Here</td>
-                <td data-name="city">Content Goes Here</td>
-                <td><a href="" data-name="edit"><i class="fa fa-edit"></i></a></td>
-            </tr>
-            </tbody>
-        </table>
-        <a role="button" href="#" class="button" data-name="add">Crear nuevo festival</a>
-    </div>
+<div class="event-list admin" data-lift="surround?with=template;at=content">
+    <lift:head>
+        <title>Qué es | Festivales en Red | Telartes</title>
+    </lift:head>
+    <main role="main">
+        <section>
+            <h1>Festivales</h1>
+            <div class="row events">
+                <div class="col-md-3 col-sm-4 col-xs-12 event" itemscope itemtype="https://schema.org/Event">
+                    <div>
+                        <header>
+                            <h2 ><a itemprop="name" href="#">Festival Internacional De Teatro De La Paz</a></h2>
+                        </header>
+                        <figure>
+                            <a href="#" class="tumbnail-event"><img itemprop="image" class="img-responsive" src="/img/festivales/martadero.png" alt=""/></a>
+                        </figure>
+                        <section class="event-description">
+                            <p itemprop="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In at eros massa. Phasellus a laoreet sem, non varius sem. Maecenas non neque dictum, ultricies turpis vitae, molestie nisi (...)</p>
+                        </section>
+                        <section>
+                            <ul class="list-unstyled list-info-event">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-4 text-bold">
+                                            <span>Ciudades</span>
+                                        </div>
+                                        <div class="col-md-8" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                                            <span itemprop="addressLocality">Cochabamba</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-4 text-bold">
+                                            <span>Fecha Inicio:</span>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <time datetime="2011-09-12" itemprop="startDate">sábado 30 de mayo del 2015</time>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-4 text-bold">
+                                            <span>Fecha Fin:</span>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <time datetime="2011-09-12" itemprop="endDate">sábado 30 de mayo del 2015</time>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-4 text-bold">
+                                            <span>Usuario:</span>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <span>Marcelo Rodríguez Claros</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-4 text-bold">
+                                            <span>Responsable:</span>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <span>Juan Perez</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </section>
+                        <footer class="text-center">
+                            <div aria-label="..." role="group" class="btn-group">
+                                <a class="btn btn-default btn-warning " type="button" href="#"><i class="fa fa-pencil"></i></a>
+                                <a class="btn btn-default btn-danger" type="button" href="#"><i class="fa fa-remove"></i></a>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12 event" itemscope itemtype="https://schema.org/Event">
+                    <div>
+                        <header>
+                            <h2 ><a itemprop="name" href="#">Festival Internacional De Teatro De La Paz</a></h2>
+                        </header>
+                        <section class="event-description">
+                            <p itemprop="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In at eros massa. Phasellus a laoreet sem, non varius sem. Maecenas non neque dictum, ultricies turpis vitae, molestie nisi (...)</p>
+                        </section>
+                        <section>
+                            <ul class="list-unstyled list-info-event">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-4 text-bold">
+                                            <span>Ciudades</span>
+                                        </div>
+                                        <div class="col-md-8" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                                            <span itemprop="addressLocality">Cochabamba</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-4 text-bold">
+                                            <span>Fecha Inicio:</span>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <time datetime="2011-09-12" itemprop="startDate">sábado 30 de mayo del 2015</time>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-4 text-bold">
+                                            <span>Fecha Fin:</span>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <time datetime="2011-09-12" itemprop="endDate">sábado 30 de mayo del 2015</time>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-4 text-bold">
+                                            <span>Usuario:</span>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <span>Marcelo Rodríguez Claros</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-4 text-bold">
+                                            <span>Responsable:</span>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <span>Juan Perez</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </section>
+                        <footer class="text-center">
+                            <div aria-label="..." role="group" class="btn-group">
+                                <a class="btn btn-default btn-warning " type="button" href="#"><i class="fa fa-pencil"></i></a>
+                                <a class="btn btn-default btn-danger" type="button" href="#"><i class="fa fa-remove"></i></a>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!---->
+    <!--<div class="info form" data-lift="surround?with=base-wrap;at=content">-->
+        <h1>FESTIVALES</h1>
+        <div data-lift="FestivalesSnippet" class="row">
+            <table>
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Usuario</th>
+                    <th>Responsable</th>
+                    <th>Ciudad</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-name="row">
+                    <td data-name="name">Content Goes Here</td>
+                    <td data-name="owner">This is longer content Donec id elit non mi porta gravida at eget metus.</td>
+                    <td data-name="responsible">Content Goes Here</td>
+                    <td data-name="city">Content Goes Here</td>
+                    <td><a href="" data-name="edit"><i class="fa fa-edit"></i></a></td>
+                </tr>
+                </tbody>
+            </table>
+            <a role="button" href="#" class="button" data-name="add">Crear nuevo festival</a>
+        </div>
+    <!--</div>-->
+
+    <!---->
 </div>
+
 
