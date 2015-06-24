@@ -93,7 +93,7 @@ class Boot extends Loggable {
     LiftExtras.noticeHtmlHandler.default.set(FoundationHtmlHandler)
     LiftExtras.init()
 
-    LiftRules.localeCalculator = (request: Box[HTTPRequest]) => new Locale("es")
+    LiftRules.localeCalculator =  ((in: Box[HTTPRequest]) => new Locale("es", ""))
 
 
     // don't include the liftAjax.js code. It's served statically.

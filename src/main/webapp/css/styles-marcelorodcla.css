@@ -253,6 +253,10 @@ header > .navbar .navbar-brand > div  {
     margin: 0;
 }
 
+#menu {
+    background:#fff ;
+}
+
 #map {
     background: red;
     height: 635px;

@@ -2,60 +2,72 @@
 	<lift:head>
 		<title>Festivales en Red | Telartes</title>
 	</lift:head>
-	<style>
-		body {
-			width: 100%;
-			height: 100%;
-		}
-
-		.slideout-menu {
-			position: fixed;
-			left: 0;
-			top: 0;
-			bottom: 0;
-			right: 0;
-			z-index: 0;
-			width: 256px;
-			overflow-y: auto;
-			-webkit-overflow-scrolling: touch;
-			display: none;
-		}
-
-		.slideout-panel {
-			position:relative;
-			z-index: 1;
-		}
-
-		.slideout-open,
-		.slideout-open body,
-		.slideout-open .slideout-panel {
-			overflow: hidden;
-		}
-
-		.slideout-open .slideout-menu {
-			display: block;
-		}
-	</style>
 	<main role="main">
 		<div id="map">
 			<div id="popup"></div>
 		</div>
 	</main>
-	<aside class="d">
-		<nav id="menu" class="menu slideout-menu">
+	<aside>
+		<div id="menu">
 			<h2>Menu</h2>
 			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 				<div class="panel panel-default">
 					<div class="panel-heading" role="tab" id="headingOne">
 						<h4 class="panel-title">
 							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-								Collapsible Group Item #1
+								Categorías
 							</a>
 						</h4>
 					</div>
 					<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 						<div class="panel-body">
-							Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+							<ul id="areas" class="list-unstyled">
+								<li data-name="area"><span data-name="code" class="round label"></span>
+									<input id="Artes Escénicas" type="checkbox">
+									<label for="Artes Escénicas">Artes Escénicas</label>
+									<p data-name="description">Ej. Teatro, Danza, Performance, Circo, Títeres, etc.</p>
+								</li>
+								<li data-name="area"><span data-name="code" class="round label"></span>
+									<input id="Artes Plásticas" type="checkbox">
+									<label for="Artes Plásticas">Artes Plásticas</label>
+									<p data-name="description">Ej. Arte urbano, Pintura, Escultura, Dibujo, Arquitectura, Cerámica, etc.</p>
+								</li>
+								<li data-name="area"><span data-name="code" class="round label"></span>
+									<input id="Artes Populares y/o Tradicionales" type="checkbox">
+									<label for="Artes Populares y/o Tradicionales">Artes Populares y/o TradicionalesArtes Populares y/o Tradicionales</label>
+									<p data-name="description">Artesanía, Textiles, etc.</p>
+								</li>
+								<li data-name="area"><span data-name="code" class="round label"></span>
+									<input id="Artes AudioVisuales" type="checkbox">
+									<label for="Artes AudioVisuales">Artes AudioVisuales</label>
+									<p data-name="description">Ej. Cine, Documental, etc.</p>
+								</li>
+								<li data-name="area"><span data-name="code" class="round label"></span>
+									<input id="Cultura Digital" type="checkbox">
+									<label for="Cultura Digital">Cultura Digital</label>
+									<p data-name="description">Ej. Software libre, Hackmeeting, Videojuegos, etc.</p>
+								</li>
+								<li data-name="area"><span data-name="code" class="round label"></span>
+									<input id="Diseño" type="checkbox">
+									<label for="Diseño">Diseño</label>
+									<p data-name="description">Ej. Gráfico, Moda, Joyas, etc.</p>
+								</li>
+								<li data-name="area"><span data-name="code" class="round label"></span>
+									<input id="Fotografía" type="checkbox">
+									<label for="Fotografía">Fotografía</label>
+
+								</li>
+								<li data-name="area"><span data-name="code" class="round label"></span>
+									<input id="Letras" type="checkbox">
+									<label for="Letras">Letras</label>
+									<p data-name="description">Ej. Literatura, Poesía, etc...</p>
+								</li>
+								<li data-name="area"><span data-name="code" class="round label"></span>
+									<input id="Música" type="checkbox">
+									<label for="Música">Música</label>
+									<p data-name="description">Ej. Rock, Pop, Barroco, Clásica,etc.</p>
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -63,13 +75,18 @@
 					<div class="panel-heading" role="tab" id="headingTwo">
 						<h4 class="panel-title">
 							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-								Collapsible Group Item #2
+								Ciudad
 							</a>
 						</h4>
 					</div>
 					<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 						<div class="panel-body">
-							Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+							<ul id="areas" class="list-unstyled">
+								<li data-name="area"><span data-name="code" class="round label"></span>
+									<input id="Artes Escénicas" type="checkbox">
+									<label for="Artes Escénicas">Cochabamba</label>
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -77,18 +94,40 @@
 					<div class="panel-heading" role="tab" id="headingThree">
 						<h4 class="panel-title">
 							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-								Collapsible Group Item #3
+								Fechas
 							</a>
 						</h4>
 					</div>
 					<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-						<div class="panel-body">
-							Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+						<div style="padding: 0 10px">
+							<div class="form-group">
+								<label>Fecha inicial</label>
+								<div class="input-group date">
+									<input id="targetStartDate" class="form-control" type="text">
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default" id="targetStartBtn"><i class="fa fa-calendar"></i></button>
+								</span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label>Fecha inicial</label>
+								<div class="input-group date">
+									<input id="targetStartDate" class="form-control" type="text">
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default" id="targetStartBtn"><i class="fa fa-calendar"></i></button>
+								</span>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</nav>
+			<div class="text-center" style="margin-bottom: 10px">
+				<a class="btn btn-default btn-success" type="button" href="#">
+					<i class="fa fa-plus-circle"></i> Buscar
+				</a>
+			</div>
+		</div>
 
 		<div id="panel">
 			<header>
@@ -118,7 +157,7 @@
     <lift:head>
         <title>Festivales en Red | Telartes</title>
     </lift:head>
-   <div class="inner-wrap">
+   <div class="inner-wrap" data-lift="HomeSnippet.searchForm">
       <div class="gs-right-btn">
       	<a class="right-off-canvas-toggle right gs-open" href="#" ><img src="/img/buscar.png"/></a> <!-- Off Canvas Menu -->
       </div>
@@ -129,76 +168,17 @@
 					<!-- accordion one -->
 				  <li class="accordion-navigation">
 				    <a href="#panel1a">Categorías</a>
-				    <div id="panel1a" class="content active">
-							<ul class="gs-canvas-list">
-								<li><span class="round red label">AE</span>
-								  <input type='checkbox' id="ch1" /><label for="ch1"></label>
-								Artes Escénicas
-								  <ul>
-								    <li>Ej. Teatro, Danza, Performance, Circo, Títeres, etc...</li>
-							      </ul>
-								</li>
-								<li><span class="round green label">AP</span>
-								  <input type='checkbox' id="ch2" /><label for="ch2"></label>
-						         Artes Plásticas
-						         <ul>
-						           <li>Ej. Arte urbano, Pintura, Escultura, Dibujo, Arquitectura, Cerámica, etc...</li>
-					              </ul>
-								</li>
-								<li><span class="round purple label">AT</span>
-								  <input type='checkbox' id="ch3" /><label for="ch3"></label>
-						         Artes Populares y/o Tradicionales
-						         <ul>
-						           <li>Ej. Artesanía, Textiles, etc...</li>
-					              </ul>
-								</li>
-								<li><span class="round red label">AV</span>
-								  <input type='checkbox' id="ch4" /><label for="ch4"></label>
-						         Artes AudioVisuales
-						         <ul>
-						           <li>Ej. Cine, Documental, etc...</li>
-					              </ul>
-								</li>
-								<li><span class="round green label">CD</span>
-								  <input type='checkbox' id="ch5" /><label for="ch5"></label>
-						         Cultura Digital
-						         <ul>
-						           <li>Ej. Software libre, Hackmeeting, Videojuegos,...</li>
-					              </ul>
-								</li>
-								<li><span class="round red label">DI</span>
-								  <input type='checkbox' id="ch6" /><label for="ch6"></label>
-						         Diseño
-						         <ul>
-						           <li>Ej. Gráfico, Moda, Joyas, etc...</li>
-					              </ul>
-								</li>
-								<li><span class="round purple label">FO</span>
-								  <input type='checkbox' id="ch7" /><label for="ch7"></label>
-						         Fotografía</li>
-								<li><span class="round green label">LE</span>
-								  <input type='checkbox' id="ch8" /><label for="ch8"></label>
-						         Letras
-						         <ul>
-						           <li>Ej. Literatura, Poesía, etc...</li>
-					              </ul>
-								</li>
-								<li>
-									<span class="round green label">MU</span>
-  									<input type='checkbox' id="ch9" /><label for="ch9"></label>
-						         	Música
-						           <ul>
-						           <li>Ej. Rock, Pop, Barroco, Clásica,etc...</li>
-					              </ul>
-								</li>
-								<div class="row">
-							    <div class="columns">
-							      <label>Otros
-							        <input type="text" placeholder="" />
-							      </label>
-							    </div>
-							  </div>
-							</ul>
+				    <div id="panel1a" class="content">
+                        <ul class="gs-canvas-list" id="areas">
+                            <li data-name="area"><span class="round label" data-name="code">AE</span>
+                              <input type='checkbox' id="ch1" />
+                              <label for="ch1"></label>
+                              <span data-name="name">Artes Escénicas</span>
+                              <ul>
+                                <li data-name="description">Ej. Teatro, Danza, Performance, Circo, Títeres, etc...</li>
+                              </ul>
+                            </li>
+                        </ul>
 				    </div>
 				  </li>
 
@@ -206,20 +186,13 @@
 				  <li class="accordion-navigation">
 				    <a href="#panel2a">Ciudad</a>
 				    <div id="panel2a" class="content">
-							<div class="row">
-						    <div class="columns">
-						      <label>
-						        <input type="text" placeholder="" />
-						      </label>
-						    </div>
-						  </div>
-								<div class="row">
-							    <div class="columns">
-							      <label>
-							        <input type="text" placeholder="" />
-							      </label>
-							    </div>
-							  </div>
+                        <ul class="gs-canvas-list" id="cities">
+                            <li data-name="city">
+                                <input type='checkbox' id="ch1" />
+                                <label for="ch1"></label>
+                                <span data-name="name">Artes Escénicas</span>
+                            </li>
+                        </ul>
 				    </div>
 				  </li>
 
@@ -231,29 +204,35 @@
 						    <div class="small-9">
 						      <div class="row">
 						        <div class="small-3 columns">
-						          <label for="right-label" class="right">De</label>
+						          <label for="begins" class="right">De</label>
 						        </div>
-						        <div class="small-8 columns">
-						          <input type="text" id="right-label" placeholder="">
+						        <div class="small-6 columns">
+						          <input type="text" id="begins" placeholder="">
 						        </div>
+                                <div class="small-1 columns">
+                                  <i class="fa fa-calendar"></i>
+                                </div>
 						      </div>
 						      <div class="row">
 						        <div class="small-3 columns">
-						          <label for="right-label" class="right">Hasta</label>
+						          <label for="ends" class="right">Hasta</label>
 						        </div>
-						        <div class="small-8 columns">
-						          <input type="text" id="right-label" placeholder="">
+						        <div class="small-6 columns">
+						          <input type="text" id="ends" placeholder="">
 						        </div>
+                                <div class="small-1 columns">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
 						      </div>
 						    </div>
-						  </div>
-						  <div class="row">
-						  	<button class="button expand gs-btn">Buscar</button>
 						  </div>
 				    </div>
 				  </li>
 
 				</ul>
+                <div class="row">
+                  <button class="button expand gs-btn" onclick="updateMap();">Buscar</button>
+                </div>
 				<!-- end accordion -->
       </aside>
       <section>
@@ -265,6 +244,51 @@
    </div>
 
 	<script>
+
+        var search = function(data) {
+            $.ajax({
+                url: "/api/localizations",
+                type: 'post',
+                dataType: 'json',
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                success: function(response) {
+                    vectorSource.clear();
+                    $.each(response.locs, function(i,e){
+                        if (e.geoLatLng){
+                            var marker = new ol.Feature({
+                                name: e.festivalName + "<br/ ><a href='"+ e.url+"'>Detalles</a>",
+                                geometry: new ol.geom.Point([e.geoLatLng.lat, e.geoLatLng.long]),
+                                style: iconStyle
+                            });
+                            marker.setStyle(iconStyle);
+                            marker.on('click', function(){ console.log('over')}, marker);
+                            vectorSource.addFeature(marker);
+                        }
+                    });
+                }
+		    });
+        };
+
+        var updateMap = function() {
+          console.log("MAP");
+          var areas = [];
+          $('#areas input:checked').each(function() {
+            areas.push($(this).attr('id'));
+          });
+          var cities = [];
+          $('#cities input:checked').each(function() {
+            cities.push($(this).attr('id'));
+          });
+          var begins = $('#begins').val();
+          var ends = $('#ends').val();
+          search({ 'areas': areas, 'cities': cities, 'begins': begins, 'ends': ends });
+        };
+
+        $(document).ready(function(){
+          $('#begins').fdatepicker();
+          $('#ends').fdatepicker();
+        });
 
 		var iconStyle = new ol.style.Style({
 			image: new ol.style.Icon(({
@@ -354,26 +378,8 @@
 			map.getTarget().style.cursor = hit ? 'pointer' : '';
 		});
 
+		search({});
 
-		$.ajax({url: "/api/localizations",
-			dataType: "json",
-			success: function(response){
-				console.log("server response:", response);
-				$.each(response.locs, function(i,e){
-					if (e.geoLatLng){
-						console.log(e.geoLatLng);
-						var marker = new ol.Feature({
-							name: e.festivalName + "<br/ ><a href='"+ e.url+"'>Detalles</a>",
-							geometry: new ol.geom.Point([e.geoLatLng.lat, e.geoLatLng.long]),
-							style: iconStyle
-						});
-						marker.setStyle(iconStyle);
-						marker.on('click', function(){ console.log('over')}, marker);
-						vectorSource.addFeature (marker);
-					}
-				});
-			}
-		});
 	</script>
 
 </div>

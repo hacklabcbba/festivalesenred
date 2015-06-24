@@ -1,11 +1,11 @@
 <div class="event" data-lift="surround?with=template;at=content">
     <lift:head>
-        <title>Qué es | Festivales en Red | Telartes</title>
+        <title data-lift="FestivalView.title"> | Festivales en Red | Telartes</title>
     </lift:head>
-    <main role="main" itemscope itemtype="https://schema.org/Event">
+    <main role="main" itemscope itemtype="https://schema.org/Event" data-lift="FestivalView">
         <header>
             <h1 itemprop="name"class="text-center">
-                <span>
+                <span data-name="name">
                     Festival Internacional De Teatro De La Paz
                 </span>
             </h1>
@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-md-7">
                 <figure>
-                    <img class="img-responsive block-center" src="/img/event-image.jpg" alt="" itemprop="image"/>
+                    <img data-name="logo" class="img-responsive block-center" src="/img/event-image.jpg" alt="" itemprop="image"/>
                     <figcaption class="text-center">
                         Festival Internacional De Teatro De La Paz
                     </figcaption>
@@ -31,7 +31,7 @@
                                     <span>Fecha Inicio:</span>
                                 </div>
                                 <div class="col-md-9">
-                                    <time datetime="2011-09-12" itemprop="startDate" content="2011-09-12">sábado 30 de mayo del 2015</time>
+                                    <time datetime="2011-09-12" itemprop="startDate" data-name="begins" content="2011-09-12"></time>
                                 </div>
                             </div>
                         </li>
@@ -41,17 +41,17 @@
                                     <span>Fecha Fin:</span>
                                 </div>
                                 <div class="col-md-9">
-                                    <time datetime="2011-09-12" itemprop="endDate" content="2011-09-12">sábado 30 de mayo del 2015</time>
+                                    <time datetime="2011-09-12" itemprop="endDate" data-name="ends" content="2011-09-12"></time>
                                 </div>
                             </div>
                         </li>
                         <li>
                             <div class="row">
                                 <div class="col-md-3 text-bold">
-                                    <span>Dirección:</span>
+                                    <span>Dirección de la Producción:</span>
                                 </div>
                                 <div class="col-md-9" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                                    <span itemprop="streetAddress">27 de Agosto con Ollantay</span>
+                                    <span itemprop="streetAddress" data-name="production-management">27 de Agosto con Ollantay</span>
                                 </div>
                             </div>
                         </li>
@@ -61,7 +61,7 @@
                                     <span>Ciudades</span>
                                 </div>
                                 <div class="col-md-9" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                                    <span itemprop="addressLocality">Cochabamba</span>
+                                    <span itemprop="addressLocality" data-name="city">Cochabamba</span>
                                 </div>
                             </div>
                         </li>
@@ -71,7 +71,7 @@
                                     <span>Duracion:</span>
                                 </div>
                                 <div class="col-md-9">
-                                    <span itemprop="duration" content="T1M33S" >1 hora</span>
+                                    <span itemprop="duration" data-name="duration" content="T1M33S" >1 hora</span>
                                 </div>
                             </div>
                         </li>
@@ -81,7 +81,7 @@
                                     <span>Responsable:</span>
                                 </div>
                                 <div class="col-md-9">
-                                    <span itemprop="attendee">Nombre y Apellido</span>
+                                    <span itemprop="attendee" data-name="responsible">Nombre y Apellido</span>
                                 </div>
                             </div>
                         </li>
@@ -91,7 +91,7 @@
                                     <span>Email:</span>
                                 </div>
                                 <div class="col-md-9">
-                                    <span>aa</span>
+                                    <span data-name="responsible-email">aa</span>
                                 </div>
                             </div>
                         </li>
@@ -101,7 +101,7 @@
                                     <span>Convocatoria:</span>
                                 </div>
                                 <div class="col-md-9">
-                                    <span>aa</span>
+                                    <span data-name="call">aa</span>
                                 </div>
                             </div>
                         </li>
@@ -111,7 +111,7 @@
                                     <span>Web:</span>
                                 </div>
                                 <div class="col-md-9">
-                                    <a href="#" itemprop="url">http://www.google.com</a>
+                                    <a href="#" itemprop="url" data-name="website">http://www.google.com</a>
                                 </div>
                             </div>
                         </li>
@@ -121,7 +121,17 @@
                                     <span>Facebook:</span>
                                 </div>
                                 <div class="col-md-9">
-                                    <a href="#" itemprop="url">nickname</a>
+                                    <a href="#" itemprop="url" data-name="facebook">nickname</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="row">
+                                <div class="col-md-3 text-bold">
+                                    <span>Twitter:</span>
+                                </div>
+                                <div class="col-md-9">
+                                    <a href="#" itemprop="url" data-name="twitter">nickname</a>
                                 </div>
                             </div>
                         </li>
@@ -131,7 +141,7 @@
                                     <span itemprop="url">Skype</span>
                                 </div>
                                 <div class="col-md-9">
-                                    <span itemprop="url">nickname</span>
+                                    <span itemprop="url" data-name="skype">nickname</span>
                                 </div>
                             </div>
                         </li>
@@ -142,7 +152,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <span>
-                                        <a href="" itemprop="url">Artes escenicas</a>
+                                        <a href="" data-name="areas" itemprop="url">Artes escenicas</a>
                                     </span>
                                 </div>
                             </div>
@@ -153,7 +163,7 @@
                                     <span>Palabras clave</span>
                                 </div>
                                 <div class="col-md-9">
-                                    <span><a href="#" itemprop="url">La paz</a>, <a href="#" itemprop="url">Teatro</a>, <a href="#" itemprop="url">Bolivia</a></span>
+                                    <span><a href="#" itemprop="url" data-name="tags">La paz</a></span>
                                 </div>
                             </div>
                         </li>
@@ -165,7 +175,7 @@
                     <header>
                         <h2><i class="fa fa-home"></i> Sobre el festival</h2>
                     </header>
-                    <p itemprop="description">
+                    <p itemprop="description" data-name="description">
                         El Festival Internacional de Teatro de La Paz (FITAZ) fue creado en 1999 por la actriz Maritza Wilde, con el propósito es promocionar el teatro boliviano y relacionar a sus actores, directores y técnicos con sus similares de otros países.
                     </p>
                 </div>
@@ -176,8 +186,10 @@
                         <header>
                             <h2><i class="fa fa-map-marker"></i> Espacios donde se realiza</h2>
                         </header>
-                        <figure class="overflow-hidden">
-                            <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script><div style="overflow:hidden;height:300px;width:700px;"><div id="gmap_canvas" style="height:600px;width:1000px;"></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style><a class="google-map-code" href="http://premium-wordpress-themes.org" id="get-map-data">http://premium-wordpress-themes.org</a></div><script type="text/javascript"> function init_map(){var myOptions = {zoom:10,center:new google.maps.LatLng(40.805478,-73.96522499999998),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById("gmap_canvas"), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(40.805478, -73.96522499999998)});infowindow = new google.maps.InfoWindow({content:"<b>The Breslin</b><br/>2880 Broadway<br/> New York" });google.maps.event.addListener(marker, "click", function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+                        <figure class="overflow-hidden" data-name="places">
+                            <div id="map">
+                                <div id="popup"></div>
+                            </div>
                         </figure>
                     </div>
                 </div>
@@ -189,17 +201,17 @@
                     </header>
                     <div class="col-md-3">
                         <figure>
-                            <img src="/img/img1.jpeg" class="img-responsive" alt="" itemprop="image"/>
+                            <img data-name="photo1" src="/img/img1.jpeg" class="img-responsive" alt="" itemprop="image"/>
                         </figure>
                     </div>
                     <div class="col-md-3">
                         <figure>
-                            <img src="/img/img2.jpeg" class="img-responsive" alt="" itemprop="image"/>
+                            <img data-name="photo2" src="/img/img2.jpeg" class="img-responsive" alt="" itemprop="image"/>
                         </figure>
                     </div>
                     <div class="col-md-3">
                         <figure>
-                            <img src="/img/img3.jpeg" class="img-responsive" alt="" itemprop="image"/>
+                            <img data-name="photo3" src="/img/img3.jpeg" class="img-responsive" alt="" itemprop="image"/>
                         </figure>
                     </div>
                 </section>
@@ -212,14 +224,8 @@
                             <h2>Equipamientos que posee</h2>
                         </header>
                         <ul class="list-unstyled list-info-event object-list">
-                            <li>
+                            <li data-name="equipment">
                                 <a href="#"><i class="fa fa-check"></i> Estructuras escénicas móviles (Tarimas, piso, paneles)</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-check"></i> Equipo de sonido (consolas, parlantes, micrófonos, pedestales, etc)</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-check"></i> Equipo de luces (especifica) </a>
                             </li>
                         </ul>
                     </div>
@@ -228,7 +234,7 @@
                             <h2>Formación</h2>
                         </header>
                         <ul class="list-unstyled list-info-event object-list">
-                            <li>
+                            <li data-name="item-training">
                                 <a href="#"><i class="fa fa-check"></i>Mensa de diálogo</a>
                             </li>
                         </ul>
@@ -238,14 +244,8 @@
                             <h2>Redes</h2>
                         </header>
                         <ul class="list-unstyled list-info-event object-list">
-                            <li>
+                            <li data-name="item-networking">
                                 <a href="#"><i class="fa fa-check"></i> Red 1</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-check"></i> Red 2</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-check"></i> Red 3</a>
                             </li>
                         </ul>
                     </div>
@@ -257,14 +257,8 @@
                             <h2>Equipo técnico</h2>
                         </header>
                         <ul class="list-unstyled list-info-event object-list">
-                            <li>
-                                <a href="#"><i class="fa fa-check"></i>Técnico 1</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-check"></i>Técnico 2</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-check"></i>Técnico 3</a>
+                            <li data-name="team">
+                                <span data-name="name"></span>
                             </li>
                         </ul>
                     </div>
@@ -273,14 +267,8 @@
                             <h2>Herramientas de comunicacion</h2>
                         </header>
                         <ul class="list-unstyled list-info-event object-list">
-                            <li>
+                            <li data-name="item-tools">
                                 <a href="#"><i class="fa fa-check"></i>Telvisión</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-check"></i>Radio</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-check"></i>Facebook</a>
                             </li>
                         </ul>
                     </div>
@@ -295,7 +283,7 @@
                                         <span>Presupuesto mínimo:</span>
                                     </div>
                                     <div class="col-md-8">
-                                        <span>1000</span><span>Bs.</span>
+                                        <span data-name="minimal-budget">1000</span>
                                     </div>
                                 </div>
                             </li>
@@ -305,7 +293,17 @@
                                         <span>Costo monetario:</span>
                                     </div>
                                     <div class="col-md-8">
-                                        <span>1000</span><span>Bs.</span>
+                                        <span data-name="budget">1000</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-4 text-bold">
+                                        <span>Economía colaborativa:</span>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <span data-name="colaborative-budget">1000</span>
                                     </div>
                                 </div>
                             </li>
@@ -319,7 +317,7 @@
                             <h2>Intercambios</h2>
                         </header>
                         <ul class="list-unstyled list-info-event object-list">
-                            <li>
+                            <li data-name="item-exchange">
                                 <a href="#"><i class="fa fa-check"></i>Trueque</a>
                             </li>
                         </ul>
@@ -334,7 +332,7 @@
                                     <div class="col-md-5 text-bold">
                                         <span>Pública:</span>
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-7" data-name="item-public">
                                         <span>
                                             <a href="#">Convenio</a>
                                         </span>
@@ -346,7 +344,7 @@
                                     <div class="col-md-5 text-bold">
                                         <span>Privada:</span>
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-7" data-name="item-private">
                                         <span>
                                             <a href="#">Convenio</a>
                                         </span>
@@ -358,7 +356,7 @@
                                     <div class="col-md-5 text-bold">
                                         <span>Organizaciones de la sociedad civil:</span>
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-7" data-name="item-civil">
                                         <span>
                                             <a href="#">Convenio</a>
                                         </span>
@@ -373,182 +371,3 @@
         </div>
     </main>
 </div>
-
-<div class="info" data-lift="surround?with=base-wrap;at=content">
-    <lift:head>
-        <title data-lift="FestivalView.title">| Festivales en Red | Telartes</title>
-    </lift:head>
-
-    <div class="info" data-lift="FestivalView">
-        <div class="row">
-            <div class="small-12 large-6 medium-6 columns">
-                <h1 data-name="title"></h1>
-                <h3 data-name="begins"><i class="fa fa-calendar"></i> Fecha Inicio: </h3>
-                <h3 data-name="ends"><i class="fa fa-calendar"></i> Fecha Fin: </h3>
-                <h3><i class="fa fa-link"></i> Web: <a href="#" target="_blank" data-name="website"></a></h3>
-                <h3><i class="fa fa-facebook-official"></i> Facebook: <a href="#" target="_blank" data-name="facebook"></a></h3>
-                <h3><i class="fa fa-twitter"></i> Twitter: <a href="#" target="_blank" data-name="twitter"></a></h3>
-                <h3><i class="fa fa-skype"></i> Skype: <span data-name="skype"></span></h3>
-                <h3><i class="fa fa-map-marker"></i> Lugar: <span data-name="place"></span></h3>
-                <h3><i class="fa fa-map-marker"></i> Ciudades: <span data-name="cities"></span></h3>
-                <h3><i class="fa fa-map-marker"></i> Duración: <span data-name="duration"></span></h3>
-                <h3><i class="fa fa-user"></i> Responsable: <span data-name="responsible"></span></h3>
-                <h3><i class="fa fa-envelope-o"></i> Email: <span data-name="responsibleEmail"></span></h3>
-            </div>
-            <div class="small-12 large-6 medium-6 columns">
-                <div class="row">
-                    <img src="/img/festivales/martadero.png" class=imginfo" align="left" data-name="logo" />
-                </div>
-                <div class="row">
-                    <div class="small-12 large-12 medium-12 columns">Areas:</div>
-                    <div class="small-12 large-12 medium-12 columns"><span class="tm-tag tm-tag-info tm-tag-01" data-name="areas"></span></div>
-                    <div class="small-12 large-12 medium-12 columns">Palabras clave:</div>
-                    <div class="small-12 large-12 medium-12 columns"><span class="tm-tag tm-tag-info tm-tag-01" data-name="tags"></span></div>
-                </div>
-            </div>
-        </div>
-        <br/>
-
-        <div class="row">
-            <div class="small-12 large-4 medium-4 columns">
-                <img src="/img/festivales/martadero.png" class=imginfo" align="left" data-name="photo1" />
-            </div>
-            <div class="small-12 large-4 medium-4 columns">
-                <img src="/img/festivales/martadero.png" class=imginfo" align="left" data-name="photo2" />
-            </div>
-            <div class="small-12 large-4 medium-4 columns">
-                <img src="/img/festivales/martadero.png" class=imginfo" align="left" data-name="photo3" />
-            </div>
-        </div>
-        <br/>
-
-        <div class="row">
-            <div class="small-12 large-12 medium-12 columns">
-                <h2>Sobre el Festival</h2>
-                <p data-name="description">AAAAA</p>
-            </div>
-        </div>
-        <br/>
-
-        <div class="row">
-            <div class="small-12 large-12 medium-12 columns">
-                <h2>Equipamientos que posee</h2>
-                <div class="row">
-                    <span class="tm-tag tm-tag-info tm-tag-01" data-name="equipment"></span>
-                </div>
-            </div>
-        </div>
-        <br/>
-
-        <div class="row">
-            <div class="small-12 large-12 medium-12 columns">
-                <h2>Equipo técnico</h2>
-                <div class="row">
-                    <div class="small-12 medium-4 large-4 columns" data-name="people">
-                        <ul class="no-bullet">
-                            <li data-name="name"><i class="fa fa-user"></i> Nombre</li>
-                            <li data-name="role"><i class="fa fa-wrench"></i> Funcion</li>
-                            <li data-name="email"><i class="fa fa-envelope-o"></i> Mail</li>
-                            <li data-name="cellphone"><i class="fa fa-mobile-phone"></i>  Celular</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br/>
-
-        <div class="row">
-            <div class="small-12 medium-12 large-12 columns">
-                <h2>Espacios donde se realiza</h2>
-                <div class="row">
-                    <div class="small-12 medium-12 large-12 columns" data-name="places">
-                        <img src="/img/festivales/osm.png" width="400" height="201" class=imginfo" align="left" />
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-        <br/>
-
-        <div class="row">
-            <div class="small-12 medium-4 large-4 columns">
-                <h2><i class="fa fa-arrows-h"></i> Intercambios</h2>
-                <div class="row">
-                    <span class="tm-tag tm-tag-info tm-tag-01" data-name="item-exchange"></span>
-                </div>
-            </div>
-
-            <div class="small-12 medium-4 large-4 columns">
-                <h2><i class="fa fa-book"></i> Formación</h2>
-                <div class="row">
-                    <span class="tm-tag tm-tag-info tm-tag-01" data-name="item-training"></span>
-                </div>
-            </div>
-
-            <div class="small-12 medium-4 large-4 columns" data-name="tools">
-                <h2><i class="fa fa-wechat"></i> Herramientas de comunicación</h2>
-                <div class="row">
-                    <span class="tm-tag tm-tag-info tm-tag-01" data-name="item-tools"></span>
-                </div>
-            </div>
-        </div>
-        <br/>
-
-        <div class="row">
-            <div class="small-12 medium-6 large-6 columns">
-                <h2><i class="fa fa-home"></i> Alianzas</h2>
-                <div class="row">
-                    <div class="small-12 medium-12 large-12 columns">
-                        Pública: <span class="tm-tag tm-tag-info tm-tag-01" data-name="item-public"></span>
-                    </div>
-                    <div class="small-12 medium-12 large-12 columns">
-                        Privada: <span class="tm-tag tm-tag-info tm-tag-01" data-name="item-private"></span>
-                    </div>
-                    <div class="small-12 medium-12 large-12 columns">
-                        Organizaciones de la sociedad civil: <span class="tm-tag tm-tag-info tm-tag-01" data-name="item-civil"></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="small-12 medium-6 large-6 columns">
-                <h2><i class="fa fa-users"></i> Redes</h2>
-                <div class="row">
-                    <span class="tm-tag tm-tag-info tm-tag-01" data-name="item-networking"></span>
-                </div>
-            </div>
-        </div>
-        <br/>
-
-        <div class="row">
-            <div class="small-12 medium-4 large-4 columns">
-                <h2><i class="fa fa-calculator"></i> Presupuesto mínimo</h2>
-                <div class="row">
-                    <div class="small-12 medium-12 large-12 columns" data-name="minimal-budget">
-                        item
-                    </div>
-                </div>
-            </div>
-
-            <div class="small-12 medium-4 large-4 columns">
-                <h2><i class="fa fa-usd"></i> Costo monetario</h2>
-                <div class="row">
-                    <div class="small-12 medium-12 large-12 columns" data-name="budget">
-                        item
-                    </div>
-                </div>
-            </div>
-
-            <div class="small-12 medium-4 large-4 columns">
-                <h2><i class="fa fa-bitcoin"></i> Costo economía colaborativa</h2>
-                <div class="row">
-                    <div class="small-12 medium-12 large-12 columns" data-name="colaborative-budget">
-                        item
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br/>
-    </div>
-</div>
-
