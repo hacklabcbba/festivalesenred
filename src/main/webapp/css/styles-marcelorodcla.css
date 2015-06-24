@@ -258,7 +258,6 @@ header > .navbar .navbar-brand > div  {
 }
 
 #map {
-    background: red;
     height: 635px;
     width: 100%;
     position: absolute;
@@ -384,8 +383,20 @@ header > .navbar .navbar-brand > div  {
     left: 0;
 }
 
-.simple-page {
+.event #map {
+    background: #fff;
+    height: 300px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
 
+
+/*--------------------------*\
+    $CREAR FESTIVAL
+\*--------------------------*/
+.people-functions {
+    font-size: 13px;
 }
 
 .create-event .urls .form-group {
@@ -405,12 +416,6 @@ header > .navbar .navbar-brand > div  {
     margin-bottom: 0px;
 }
 
-/*--------------------------*\
-    $CREAR FESTIVAL
-\*--------------------------*/
-.people-functions {
-    font-size: 13px;
-}
 
 /*--------------------------*\
     $LOGIN
