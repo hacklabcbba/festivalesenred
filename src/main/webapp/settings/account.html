@@ -1,3 +1,27 @@
-<div data-lift="surround?with=settings-wrap;at=content">
-  <div data-lift="AccountScreen?ajax=true"></div>
+<div data-lift="surround?with=template;at=content">
+  <h1>Mi cuenta</h1>
+  <div class="row account">
+    <div class="col-md-6">
+      <div class="box-board">
+        <header>
+          <h2>Datos de cuenta</h2>
+        </header>
+        <div data-lift="AccountScreen?ajax=true"></div>
+      </div>
+      <div class="box-board">
+        <header><h2>Contraseña</h2></header>
+        <div data-lift="PasswordScreen?ajax=true"></div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="box-board">
+        <header><h2>Avatar</h2></header>
+        <div lift="ProfileScreen?ajax=true"></div>
+      </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-sm text-center">
+      <button class="btn btn-primary btn-lg btn-success" type="submit">Guardar</button>
+      <button class="btn btn-primary btn-lg btn-danger" type="submit">Cancelar</button>
+    </div>
+  </div>
 </div>
