@@ -24,21 +24,13 @@ class DatepickerField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
 
   private def elem =
     S.fmapFunc(S.SFuncHolder(s=> this.setBox(parse(s)))){funcName => {
-      <div class="row collapse input-append date" data-date="12-02-2012" data-date-format="mm/dd/yyyy">
-        <div class="small-9 columns">
-          <input class="span2"
-                 size="16"
+          <input size="16"
                  id={dateFieldId}
                  type="text"
                  name={funcName}
                  value={valueBox.map(v => dateFormat.format(v)) openOr ""}
                  tabindex={tabIndex.toString}
           />
-        </div>
-        <div class="small-3 columns">
-          <span class="postfix"><i class="fa fa-calendar"></i></span>
-        </div>
-      </div>
     }}
 
   override def toForm = {

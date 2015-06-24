@@ -1,94 +1,116 @@
-<div  data-lift="surround?with=base-wrap;at=content" id="content">
-    <lift:head>
-        <title>Festivales en Red | Telartes</title>
-    </lift:head>
-   <div class="inner-wrap" data-lift="HomeSnippet.searchForm">
-      <div class="gs-right-btn">
-      	<a class="right-off-canvas-toggle right gs-open" href="#" ><img src="/img/buscar.png"/></a> <!-- Off Canvas Menu -->
-      </div>
-      <aside class="right-off-canvas-menu">
-      	<h2>Tipos Festivales</h2>
-      	<!-- start accordion -->
-				<ul class="accordion" data-accordion>
-					<!-- accordion one -->
-				  <li class="accordion-navigation">
-				    <a href="#panel1a">Categorías</a>
-				    <div id="panel1a" class="content">
-                        <ul class="gs-canvas-list" id="areas">
-                            <li data-name="area"><span class="round label" data-name="code">AE</span>
-                              <input type='checkbox' id="ch1" />
-                              <label for="ch1"></label>
-                              <span data-name="name">Artes Escénicas</span>
-                              <ul>
-                                <li data-name="description">Ej. Teatro, Danza, Performance, Circo, Títeres, etc...</li>
-                              </ul>
-                            </li>
-                        </ul>
-				    </div>
-				  </li>
+<div class="simple-page" data-lift="surround?with=template-home;at=content">
+	<lift:head>
+		<title>Festivales en Red | Telartes</title>
+	</lift:head>
+	<main role="main">
+		<div id="map">
+            <div id="popup"></div>
+		</div>
+	</main>
+	<aside class="pull-right" data-lift="HomeSnippet.searchForm">
+		<div id="menu">
+			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab" id="headingOne">
+						<h4 class="panel-title">
+							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+								Categorías
+							</a>
+						</h4>
+					</div>
+					<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+						<div class="panel-body">
+							<ul id="areas" class="list-unstyled">
+								<li data-name="area"><span data-name="code" class="round label"></span>
+									<input id="Artes Escénicas" type="checkbox">
+									<label for="Artes Escénicas">Artes Escénicas</label>
+									<p data-name="description">Ej. Teatro, Danza, Performance, Circo, Títeres, etc.</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab" id="headingTwo">
+						<h4 class="panel-title">
+							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+								Ciudad
+							</a>
+						</h4>
+					</div>
+					<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+						<div class="panel-body">
+							<ul id="cities" class="list-unstyled">
+								<li data-name="city"><span data-name="code" class="round label"></span>
+									<input id="Artes Escénicas" type="checkbox">
+									<label for="Artes Escénicas">Cochabamba</label>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab" id="headingThree">
+						<h4 class="panel-title">
+							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+								Fechas
+							</a>
+						</h4>
+					</div>
+					<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+						<div style="padding: 0 10px">
+							<div class="form-group">
+								<label>Fecha inicial</label>
+								<div class="input-group date">
+									<input id="targetStartDate" class="form-control" type="text">
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default" id="targetStartBtn"><i class="fa fa-calendar"></i></button>
+								</span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label>Fecha inicial</label>
+								<div class="input-group date">
+									<input id="targetStartDate" class="form-control" type="text">
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default" id="targetStartBtn"><i class="fa fa-calendar"></i></button>
+								</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="text-center" style="margin-bottom: 50px">
+				<a onclick="updateMap();" class="btn btn-default btn-success" type="button" href="#">
+					<i class="fa fa-search"></i> Buscar
+				</a>
+			</div>
+		</div>
 
-				  <!-- accordion two -->
-				  <li class="accordion-navigation">
-				    <a href="#panel2a">Ciudad</a>
-				    <div id="panel2a" class="content">
-                        <ul class="gs-canvas-list" id="cities">
-                            <li data-name="city">
-                                <input type='checkbox' id="ch1" />
-                                <label for="ch1"></label>
-                                <span data-name="name">Artes Escénicas</span>
-                            </li>
-                        </ul>
-				    </div>
-				  </li>
-
-				  <!-- accordion three -->
-				  <li class="accordion-navigation">
-				    <a href="#panel3a">Fechas</a>
-				    <div id="panel3a" class="content">
-						  <div class="row">
-						    <div class="small-9">
-						      <div class="row">
-						        <div class="small-3 columns">
-						          <label for="begins" class="right">De</label>
-						        </div>
-						        <div class="small-6 columns">
-						          <input type="text" id="begins" placeholder="">
-						        </div>
-                                <div class="small-1 columns">
-                                  <i class="fa fa-calendar"></i>
-                                </div>
-						      </div>
-						      <div class="row">
-						        <div class="small-3 columns">
-						          <label for="ends" class="right">Hasta</label>
-						        </div>
-						        <div class="small-6 columns">
-						          <input type="text" id="ends" placeholder="">
-						        </div>
-                                <div class="small-1 columns">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-						      </div>
-						    </div>
-						  </div>
-				    </div>
-				  </li>
-
-				</ul>
-                <div class="row">
-                  <button class="button expand gs-btn" onclick="updateMap();">Buscar</button>
-                </div>
-				<!-- end accordion -->
-      </aside>
-      <section>
-      	<!-- map -->
-			  <div id="map">
-				  <div id="popup"></div>
-			  </div>
-      </section>
-   </div>
-
+		<div id="panel" class="button-panel">
+			<a href="#" class="toggle-button">
+				<i class="fa fa-search"></i> <span>Buscar</span>
+			</a>
+		</div>
+	</aside>
+	<script src="/js/slideout.min.js"></script>
 	<script>
+		var slideout = new Slideout({
+			'panel': document.getElementById('panel'),
+			'menu': document.getElementById('menu'),
+			'padding': 256,
+			'tolerance': 70,
+			'side': 'right'
+		});
+
+		// Toggle button
+		// vanilla js
+		document.querySelector('.toggle-button').addEventListener('click', function() {
+			slideout.toggle();
+		});
+	</script>
+    <script>
 
         var search = function(data) {
             $.ajax({
@@ -129,11 +151,6 @@
           var ends = $('#ends').val();
           search({ 'areas': areas, 'cities': cities, 'begins': begins, 'ends': ends });
         };
-
-        $(document).ready(function(){
-          $('#begins').fdatepicker();
-          $('#ends').fdatepicker();
-        });
 
 		var iconStyle = new ol.style.Style({
 			image: new ol.style.Icon(({
@@ -226,5 +243,4 @@
 		search({});
 
 	</script>
-
 </div>

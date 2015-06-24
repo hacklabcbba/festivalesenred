@@ -1,4 +1,4 @@
-<div class="form-horizontal">
+<div>
   <wizard:screen_info><div>Page <wizard:screen_number/> of <wizard:total_screens/></div></wizard:screen_info>
   <wizard:wizard_top> <div> <wizard:bind/> </div> </wizard:wizard_top>
   <wizard:screen_top> <div> <wizard:bind/> </div> </wizard:screen_top>
@@ -24,8 +24,8 @@
   <div class="form-actions">
     <div class="actions">
       <!-- <wizard:prev></wizard:prev> -->
-      <wizard:next></wizard:next>
-      <wizard:cancel></wizard:cancel>
+      <wizard:next class="btn btn-primary btn-lg btn-success"></wizard:next>
+      <wizard:cancel class="btn btn-primary btn-lg btn-danger"></wizard:cancel>
     </div>
   </div>
   <wizard:screen_bottom><div><wizard:bind></wizard:bind></div></wizard:screen_bottom>

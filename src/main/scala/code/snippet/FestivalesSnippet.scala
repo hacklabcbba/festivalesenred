@@ -83,20 +83,35 @@ object FestivalesSnippet extends SnippetHelper with PaginatorSnippet[Festival] {
     } yield ({
       "data-name=row *" #> Festival.findAllByUser(user).map(festival => {
         "data-name=name *" #> festival.name.get &
+        "data-name=name [href]" #> Site.festival.calcHref(festival) &
+        "data-name=logo" #> (festival.logo.get match {
+          case p: FileRecord => <img src={"/service/images/"+ p.fileId.get} />
+          case _ => <br />
+        }) &
+        "data-name=description *" #> festival.presentation.get &
+        "data-name=city *" #> festival.city.objs.map(_.name.get).mkString(", ") &
         "data-name=owner *" #> festival.owner.obj.dmap("")(_.name.get) &
         "data-name=responsible *" #> festival.responsible.get &
-        "data-name=city *" #> festival.city.objs.map(_.name.get).mkString(",") &
+        "data-name=begins *" #> festival.begins.literalDate &
+        "data-name=ends *" #> festival.ends.literalDate &
         "data-name=edit [href]" #> Site.festivalEdit.calcHref(festival)
       }) &
-        "data-name=add [href]" #> "/festival-form/new"
+      "data-name=add [href]" #> "/festival-form/new"
     }): CssSel
   }
 
   def list = {
-    "data-name=list" #> page.map(festival => {
-      "data-name=festival-link [href]" #> Site.festival.calcHref(festival) &
-      "data-name=name" #> festival.name.get &
-      "data-name=cities *" #> festival.city.objs.map(_.name.get).mkString(", ") &
+    "data-name=row *" #> page.map(festival => {
+      "data-name=name *" #> festival.name.get &
+      "data-name=name [href]" #> Site.festival.calcHref(festival) &
+      "data-name=logo" #> (festival.logo.get match {
+        case p: FileRecord => <img src={"/service/images/"+ p.fileId.get} />
+        case _ => <br />
+      }) &
+      "data-name=description *" #> festival.presentation.get &
+      "data-name=city *" #> festival.city.objs.map(_.name.get).mkString(", ") &
+      "data-name=owner *" #> festival.owner.obj.dmap("")(_.name.get) &
+      "data-name=responsible *" #> festival.responsible.get &
       "data-name=begins *" #> festival.begins.literalDate &
       "data-name=ends *" #> festival.ends.literalDate
     })
@@ -249,11 +264,12 @@ object FestivalView extends SnippetHelper {
 
       S.appendJs(mapScript(item))
 
-      "data-name=title *+" #> item.name.get &
-      "data-name=begins *+" #> item.begins.literalDate &
-      "data-name=ends *+" #> item.ends.literalDate &
+      "data-name=name *" #> item.name.get &
+      "data-name=begins *" #> item.begins.literalDate &
+      "data-name=ends *" #> item.ends.literalDate &
+      "data-name=production-manangement *" #> item.productionManagement.get &
       "data-name=place" #> item.productionManagement.get &
-      "data-name=cities" #> item.city.objs.map(_.name.get).mkString(",") &
+      "data-name=cities" #> item.city.objs.map(_.name.get).mkString(", ") &
       "data-name=duration" #> (item.duration.get + " " + item.durationType.get) &
       "data-name=website *" #> item.website.get &
       "data-name=website [href]" #> item.website.get &
@@ -264,25 +280,25 @@ object FestivalView extends SnippetHelper {
       "data-name=skype [href]" #> item.skype.get &
       "data-name=twitter *" #> item.skype.get &
       "data-name=responsible *" #> item.responsible.get &
-      "data-name=responsibleEmail" #> item.responsibleEmail.get.replace("@", "[a]") &
+      "data-name=responsible-email" #> item.responsibleEmail.get.replace("@", "[a]") &
       "data-name=call" #> SHtml.link(s"/service/images/${item.call.get.fileId.get}", () => (), <span>Descargar (hasta el {item.callDate.literalDate})</span>, "class" -> item.callDate.css) &
-      "data-name=areas" #> item.areas.objs.map(s => <a href={s"/festivales?area=${s.name.get}"} >{s.name.get}</a>) &
-      "data-name=tags" #> item.tags.get.map(s => <a href={s"/festivales?tag=${s.tag.get}"} >{s.tag.get}</a>) &
+      "data-name=areas" #> item.areas.objs.zipWithIndex.map(s => <a href={s"/festivales?area=${s._1.name.get}"} itemprop="url">{s._1.name.get}</a> ++ (if (s._2 == item.areas.objs.size - 1) Text("") else Text(", "))) &
+      "data-name=tags" #> item.tags.get.zipWithIndex.map(s => <a href={s"/festivales?tag=${s._1.tag.get}"} itemprop="url">{s._1.tag.get}</a> ++ (if (s._2 == item.areas.objs.size - 1) Text("") else Text(", "))) &
       "data-name=description *" #> item.presentation.get &
-      "data-name=equipment" #> item.equipment.objs.map(s => <a href={s"/festivales?equipment=${s.name.get}"} >{s.name.get}</a>) &
+      "data-name=equipment" #> item.equipment.objs.map(s => "a" #> <a href={s"/festivales?equipment=${s.name.get}"} itemprop="url"><i class="fa fa-check"></i> {s.name.get}</a>) &
       "data-name=team" #> item.staff.get.map(tm => {
         "data-name=name *+" #> tm.name.get &
         "data-name=role *+" #> tm.function.get &
         "data-name=email *+" #> tm.email.get &
         "data-name=cellphone *+" #> tm.cellphone.get
       }) &
-      "data-name=item-exchange" #> item.serviceExchange.objs.map(s => <a href={s"/festivales?service=${s.name.get}"} >{s.name.get}</a>) &
-      "data-name=item-training" #> item.trainingActivity.objs.map(s => <a href={s"/festivales?training=${s.name.get}"} >{s.name.get}</a>) &
-      "data-name=item-tools" #> item.communicationTools.objs.map(s => <a href={s"/festivales?communication=${s.name.get}"} >{s.name.get}</a>) &
-      "data-name=item-public" #> item.publicInstitutionPartnerships.objs.map(s => <a href={s"/festivales?partnership=${s.name.get}"} >{s.name.get}</a>) &
-      "data-name=item-private" #> item.privateInstitutionPartnerships.objs.map(s => <a href={s"/festivales?partnership=${s.name.get}"} >{s.name.get}</a>) &
-      "data-name=item-civil" #> item.civilOrganizationPartnerships.objs.map(s => <a href={s"/festivales?partnership=${s.name.get}"} >{s.name.get}</a>) &
-      "data-name=item-networking" #> item.networking.objs.map(s => <a href={s"/festivales?networking=${s.name.get}"} >{s.name.get}</a>) &
+      "data-name=item-exchange" #> item.serviceExchange.objs.map(s => "a" #> <a href={s"/festivales?service=${s.name.get}"}><i class="fa fa-check"></i> {s.name.get}</a>) &
+      "data-name=item-training" #> item.trainingActivity.objs.map(s => "a" #> <a href={s"/festivales?training=${s.name.get}"} ><i class="fa fa-check"></i> {s.name.get}</a>) &
+      "data-name=item-tools" #> item.communicationTools.objs.map(s => "a" #> <a href={s"/festivales?communication=${s.name.get}"} ><i class="fa fa-check"></i> {s.name.get}</a>) &
+      "data-name=item-public" #> item.publicInstitutionPartnerships.objs.map(s => "a" #> <a href={s"/festivales?partnership=${s.name.get}"} >{s.name.get}</a>) &
+      "data-name=item-private" #> item.privateInstitutionPartnerships.objs.map(s => "a" #> <a href={s"/festivales?partnership=${s.name.get}"} >{s.name.get}</a>) &
+      "data-name=item-civil" #> item.civilOrganizationPartnerships.objs.map(s => "a" #> <a href={s"/festivales?partnership=${s.name.get}"} >{s.name.get}</a>) &
+      "data-name=item-networking" #> item.networking.objs.map(s => "a" #> <a href={s"/festivales?networking=${s.name.get}"} ><i class="fa fa-check"></i> {s.name.get}</a>) &
       "data-name=minimal-budget *" #> item.minimalBudget.toString &
       "data-name=budget *" #> item.budget.toString &
       "data-name=colaborative-budget *" #> item.collaborativeEconomyBudget.toString &
