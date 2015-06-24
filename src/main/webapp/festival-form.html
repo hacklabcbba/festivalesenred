@@ -12,24 +12,24 @@
                     <header>
                         <h2>Datos del Evento</h2>
                     </header>
-                    <div class="row upload-images form-group">
+                    <div class="row upload-images form-group" data-name="logo-container-field-id">
                         <div class="col-md-12">
                             <label for="">
                                 Imagen del evento
                             </label>
                         </div>
-                        <div class="col-md-4">
-                            <figure>
-                                <img src="/img/avatar.jpg" alt="" class="img-responsive"/>
+                        <div class="col-md-4 uploadedData">
+                            <figure data-name="logo-container-input-id">
+                                <img data-name="logo-preview" src="/img/avatar.jpg" alt="" class="img-responsive preview-item"/>
                             </figure>
                             <div class="btn-group buttons-image" role="group" aria-label="...">
-                                <a href="#" type="button" class="btn btn-default btn-info "><i class="fa fa-download"></i></a>
-                                <a href="#" type="button" class="btn btn-default btn-danger"><i class="fa fa-remove"></i></a>
+                                <a href="#" data-name="logo-url" type="button" class="btn btn-default btn-info item-url" target="_blank"><i class="fa fa-download"></i></a>
+                                <a href="#" data-name="remove-logo"  type="button" class="remove-item btn btn-default btn-danger"><i class="fa fa-remove"></i></a>
                             </div>
                         </div>
                         <div class="col-md-8">
                             <div class="form-group">
-                                <input type="file" id="exampleInputFile">
+                                <input type="file" data-name="logo" id="exampleInputFile">
                                 <p class="help-block">Imagen de portada</p>
                             </div>
                         </div>

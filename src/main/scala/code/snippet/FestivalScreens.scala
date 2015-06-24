@@ -35,6 +35,12 @@ object FestivalForm extends SnippetHelper {
     for {
       inst <- Site.festivalEdit.currentValue ?~ "Opción no válida"
     } yield {
+      "data-name=logo-preview [src]" #> inst.logo.previewUrl &
+      "data-name=logo-url [href]" #> inst.logo.fileUrl &
+      "data-name=logo" #> inst.logo.toForm &
+      "data-name=remove-logo [data-file-id]" #> inst.logo.get.fileId.get &
+      "data-name=logo-container-field-id [class+]" #> inst.logo.containerFieldId &
+      "data-name=logo-container-input-id [class+]" #> inst.logo.containerInputId &
       "data-name=name" #> inst.name.toForm &
       "data-name=name-error [data-alertid]" #> inst.name.uniqueFieldId.openOr(nextFuncName) &
       "data-name=description" #> inst.presentation.toForm &

@@ -34,7 +34,7 @@ class DatepickerField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
     }}
 
   override def toForm = {
-    S.appendJs(Run(s"$$('#${dateFieldId}').fdatepicker();"))
+    //S.appendJs(Run(s"$$('#${dateFieldId}').fdatepicker();"))
     Full(elem)
   }
 
