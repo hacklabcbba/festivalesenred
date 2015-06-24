@@ -241,23 +241,23 @@
                         <label for="">
                             Convocatoria
                         </label>
-                        <table class="table table-striped">
+                        <table class="table table-striped" data-name="call-container-field-id">
                             <tbody>
-                            <tr>
-                                <td>
-                                    <a href="#">Nombre archivo 1</a>
+                            <tr class="uploadedData">
+                                <td data-name="call-container-input-id">
+                                    <a href="#"><span class="preview-item" data-name="call-preview">Seleccione un archivo</span></a>
                                 </td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="...">
-                                        <a class="btn btn-default btn-info " type="button" href="#"><i class="fa fa-download"></i></a>
-                                        <a href="#" type="button" class="btn btn-default btn-danger"><i class="fa fa-remove"></i></a>
+                                        <a data-name="call-url" class="btn btn-default btn-info item-url" type="button" href="#"><i class="fa fa-download"></i></a>
+                                        <a data-name="remove-call" href="#" type="button" class="btn btn-default btn-danger remove-item"><i class="fa fa-remove"></i></a>
                                     </div>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
                         <div class="form-group">
-                            <input type="file" id="exampleInputFile">
+                            <input data-name="call" type="file" id="exampleInputFile">
                         </div>
                     </div>
                     <div class="form-group">
