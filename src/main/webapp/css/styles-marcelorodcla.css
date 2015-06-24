@@ -263,6 +263,23 @@ header > .navbar .navbar-brand > div  {
     position: absolute;
     z-index: -1;
 }
+
+
+.button-panel a {
+    background: #EE8F00;
+    border-radius:10px 0 0 10px ;
+    padding: 10px;
+    color: #fff;
+    font-size: 18px;
+    /*writing-mode:vertical-rl;*/
+}
+
+.button-panel a i {
+    border-radius: 100%;
+    display: inline-block;
+    padding: 5px;
+}
+
 /*------------------------------*\
     $FESTIVALES
 \*------------------------------*/
@@ -505,7 +522,7 @@ body {
 
 .slideout-menu {
     position: fixed;
-    left: 0;
+    left: auto;
     top: 75px;
     bottom: 0;
     right: 0;
@@ -529,4 +546,8 @@ body {
 
 .slideout-open .slideout-menu {
     display: block;
+}
+
+.slideout-open .slideout-panel {
+    height: 100px;
 }

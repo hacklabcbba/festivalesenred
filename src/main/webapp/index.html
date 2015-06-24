@@ -7,7 +7,7 @@
             <div id="popup"></div>
 		</div>
 	</main>
-	<aside>
+	<aside class="pull-right">
 		<div id="menu">
 			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 				<div class="panel panel-default">
@@ -128,10 +128,10 @@
 			</div>
 		</div>
 
-		<div id="panel">
-			<header>
-				<button class="toggle-button">☰</button>
-			</header>
+		<div id="panel" class="button-panel">
+			<a href="#" class="toggle-button">
+				<i class="fa fa-search"></i> <span>Buscar</span>
+			</a>
 		</div>
 	</aside>
 	<script src="/js/slideout.min.js"></script>
@@ -141,7 +141,7 @@
 			'menu': document.getElementById('menu'),
 			'padding': 256,
 			'tolerance': 70,
-//			'side': 'right'
+			'side': 'right'
 		});
 
 		// Toggle button
