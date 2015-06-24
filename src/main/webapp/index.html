@@ -4,10 +4,10 @@
 	</lift:head>
 	<main role="main">
 		<div id="map">
-			<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script><div style="overflow:hidden;height:700px;width:100%;"><div id="gmap_canvas" style="height:700px;width:100%;"></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style><a class="google-map-code" href="http://wordpress-hosting.me" id="get-map-data">http://wordpress-hosting.me</a></div><script type="text/javascript"> function init_map(){var myOptions = {zoom:14,center:new google.maps.LatLng(40.805478,-73.96522499999998),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById("gmap_canvas"), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(40.805478, -73.96522499999998)});infowindow = new google.maps.InfoWindow({content:"<b>The Breslin</b><br/>2880 Broadway<br/> New York" });google.maps.event.addListener(marker, "click", function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+            <div id="popup"></div>
 		</div>
 	</main>
-	<aside class="pull-right">
+	<aside class="pull-right" data-lift="HomeSnippet.searchForm">
 		<div id="menu">
 			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 				<div class="panel panel-default">
@@ -18,53 +18,13 @@
 							</a>
 						</h4>
 					</div>
-					<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+					<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 						<div class="panel-body">
 							<ul id="areas" class="list-unstyled">
 								<li data-name="area"><span data-name="code" class="round label"></span>
 									<input id="Artes Escénicas" type="checkbox">
 									<label for="Artes Escénicas">Artes Escénicas</label>
 									<p data-name="description">Ej. Teatro, Danza, Performance, Circo, Títeres, etc.</p>
-								</li>
-								<li data-name="area"><span data-name="code" class="round label"></span>
-									<input id="Artes Plásticas" type="checkbox">
-									<label for="Artes Plásticas">Artes Plásticas</label>
-									<p data-name="description">Ej. Arte urbano, Pintura, Escultura, Dibujo, Arquitectura, Cerámica, etc.</p>
-								</li>
-								<li data-name="area"><span data-name="code" class="round label"></span>
-									<input id="Artes Populares y/o Tradicionales" type="checkbox">
-									<label for="Artes Populares y/o Tradicionales">Artes Populares y/o TradicionalesArtes Populares y/o Tradicionales</label>
-									<p data-name="description">Artesanía, Textiles, etc.</p>
-								</li>
-								<li data-name="area"><span data-name="code" class="round label"></span>
-									<input id="Artes AudioVisuales" type="checkbox">
-									<label for="Artes AudioVisuales">Artes AudioVisuales</label>
-									<p data-name="description">Ej. Cine, Documental, etc.</p>
-								</li>
-								<li data-name="area"><span data-name="code" class="round label"></span>
-									<input id="Cultura Digital" type="checkbox">
-									<label for="Cultura Digital">Cultura Digital</label>
-									<p data-name="description">Ej. Software libre, Hackmeeting, Videojuegos, etc.</p>
-								</li>
-								<li data-name="area"><span data-name="code" class="round label"></span>
-									<input id="Diseño" type="checkbox">
-									<label for="Diseño">Diseño</label>
-									<p data-name="description">Ej. Gráfico, Moda, Joyas, etc.</p>
-								</li>
-								<li data-name="area"><span data-name="code" class="round label"></span>
-									<input id="Fotografía" type="checkbox">
-									<label for="Fotografía">Fotografía</label>
-
-								</li>
-								<li data-name="area"><span data-name="code" class="round label"></span>
-									<input id="Letras" type="checkbox">
-									<label for="Letras">Letras</label>
-									<p data-name="description">Ej. Literatura, Poesía, etc...</p>
-								</li>
-								<li data-name="area"><span data-name="code" class="round label"></span>
-									<input id="Música" type="checkbox">
-									<label for="Música">Música</label>
-									<p data-name="description">Ej. Rock, Pop, Barroco, Clásica,etc.</p>
 								</li>
 							</ul>
 						</div>
@@ -80,8 +40,8 @@
 					</div>
 					<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 						<div class="panel-body">
-							<ul id="areas" class="list-unstyled">
-								<li data-name="area"><span data-name="code" class="round label"></span>
+							<ul id="cities" class="list-unstyled">
+								<li data-name="city"><span data-name="code" class="round label"></span>
 									<input id="Artes Escénicas" type="checkbox">
 									<label for="Artes Escénicas">Cochabamba</label>
 								</li>
@@ -122,7 +82,7 @@
 				</div>
 			</div>
 			<div class="text-center" style="margin-bottom: 50px">
-				<a class="btn btn-default btn-success" type="button" href="#">
+				<a onclick="updateMap();" class="btn btn-default btn-success" type="button" href="#">
 					<i class="fa fa-search"></i> Buscar
 				</a>
 			</div>
@@ -150,99 +110,7 @@
 			slideout.toggle();
 		});
 	</script>
-</div>
-
-<div  data-lift="surround?with=base-wrap;at=content" id="content">
-    <lift:head>
-        <title>Festivales en Red | Telartes</title>
-    </lift:head>
-   <div class="inner-wrap" data-lift="HomeSnippet.searchForm">
-      <div class="gs-right-btn">
-      	<a class="right-off-canvas-toggle right gs-open" href="#" ><img src="/img/buscar.png"/></a> <!-- Off Canvas Menu -->
-      </div>
-      <aside class="right-off-canvas-menu">
-      	<h2>Tipos Festivales</h2>
-      	<!-- start accordion -->
-				<ul class="accordion" data-accordion>
-					<!-- accordion one -->
-				  <li class="accordion-navigation">
-				    <a href="#panel1a">Categorías</a>
-				    <div id="panel1a" class="content">
-                        <ul class="gs-canvas-list" id="areas">
-                            <li data-name="area"><span class="round label" data-name="code">AE</span>
-                              <input type='checkbox' id="ch1" />
-                              <label for="ch1"></label>
-                              <span data-name="name">Artes Escénicas</span>
-                              <ul>
-                                <li data-name="description">Ej. Teatro, Danza, Performance, Circo, Títeres, etc...</li>
-                              </ul>
-                            </li>
-                        </ul>
-				    </div>
-				  </li>
-
-				  <!-- accordion two -->
-				  <li class="accordion-navigation">
-				    <a href="#panel2a">Ciudad</a>
-				    <div id="panel2a" class="content">
-                        <ul class="gs-canvas-list" id="cities">
-                            <li data-name="city">
-                                <input type='checkbox' id="ch1" />
-                                <label for="ch1"></label>
-                                <span data-name="name">Artes Escénicas</span>
-                            </li>
-                        </ul>
-				    </div>
-				  </li>
-
-				  <!-- accordion three -->
-				  <li class="accordion-navigation">
-				    <a href="#panel3a">Fechas</a>
-				    <div id="panel3a" class="content">
-						  <div class="row">
-						    <div class="small-9">
-						      <div class="row">
-						        <div class="small-3 columns">
-						          <label for="begins" class="right">De</label>
-						        </div>
-						        <div class="small-6 columns">
-						          <input type="text" id="begins" placeholder="">
-						        </div>
-                                <div class="small-1 columns">
-                                  <i class="fa fa-calendar"></i>
-                                </div>
-						      </div>
-						      <div class="row">
-						        <div class="small-3 columns">
-						          <label for="ends" class="right">Hasta</label>
-						        </div>
-						        <div class="small-6 columns">
-						          <input type="text" id="ends" placeholder="">
-						        </div>
-                                <div class="small-1 columns">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-						      </div>
-						    </div>
-						  </div>
-				    </div>
-				  </li>
-
-				</ul>
-                <div class="row">
-                  <button class="button expand gs-btn" onclick="updateMap();">Buscar</button>
-                </div>
-				<!-- end accordion -->
-      </aside>
-      <section>
-      	<!-- map -->
-			  <div id="map">
-				  <div id="popup"></div>
-			  </div>
-      </section>
-   </div>
-
-	<script>
+    <script>
 
         var search = function(data) {
             $.ajax({
@@ -283,11 +151,6 @@
           var ends = $('#ends').val();
           search({ 'areas': areas, 'cities': cities, 'begins': begins, 'ends': ends });
         };
-
-        $(document).ready(function(){
-          $('#begins').fdatepicker();
-          $('#ends').fdatepicker();
-        });
 
 		var iconStyle = new ol.style.Style({
 			image: new ol.style.Icon(({
@@ -380,5 +243,4 @@
 		search({});
 
 	</script>
-
 </div>

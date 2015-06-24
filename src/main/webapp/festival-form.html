@@ -1,12 +1,12 @@
 <div class="create-event" data-lift="surround?with=template;at=content">
     <lift:head>
-        <title>Qué es | Festivales en Red | Telartes</title>
+        <title>Festival | Festivales en Red | Telartes</title>
     </lift:head>
     <header>
-        <h1>Crear festival</h1>
+        <h1>INGRESA TU FESTIVAL</h1>
     </header>
-    <main role="main">
-        <form action="" class="row">
+    <main role="main" data-lift="FestivalForm">
+        <form data-lift="form.ajax" class="row">
             <div class="col-md-6">
                 <div class="box-board">
                     <header>
@@ -36,32 +36,37 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nombre del festival</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Nombre del festival">
+                        <input data-name="name" type="text" class="form-control" id="name" placeholder="Nombre del festival">
+                        <span data-alertid="ajaxerr" form-alert="" data-name="name-error"></span>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Breve historico / presentacion</label>
-                        <textarea class="form-control" rows="5"></textarea>
-                        <p>Caracteres restantes: <span>300</span> </p>
+                        <textarea data-name="description" class="form-control" rows="5"></textarea>
+                        <p>Caracteres restantes: <span id="presentation-chars-left">300</span> </p>
+                        <span data-alertid="ajaxerr" form-alert="" data-name="description-error"></span>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Responsable del festival</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Responsable del festival">
+                        <input data-name="responsible" class="form-control" id="exampleInputEmail1" placeholder="Responsable del festival">
+                        <span data-alertid="ajaxerr" form-alert="" data-name="responsible-error"></span>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email del/la responsable</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email del/la responsable">
+                        <input data-name="responsible-email" class="form-control" id="exampleInputEmail1" placeholder="Email del/la responsable">
+                        <span data-alertid="ajaxerr" form-alert="" data-name="responsible-email-error"></span>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email de contacto del/la responsable de comunicación o prensa</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email de contacto del/la responsable de comunicación o prensa">
+                        <input data-name="responsible-press-email" class="form-control" id="exampleInputEmail1" placeholder="Email de contacto del/la responsable de comunicación o prensa">
+                        <span data-alertid="ajaxerr" form-alert="" data-name="responsible-press-email-error"></span>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Dirección de la Producción</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Dirección de la Producción">
+                        <input data-name="production-management" type="text" class="form-control" id="exampleInputEmail1" placeholder="Dirección de la Producción">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Ciudad(es) donde se realiza</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Ciudad(es) donde se realiza">
+                        <input data-name="cities" id="exampleInputEmail1" placeholder="Ciudad(es) donde se realiza">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Lugar donde se desarrolla el Festival </label>
@@ -133,7 +138,7 @@
                             <div class="form-group">
                                 <label>Fecha inicial</label>
                                 <div class="input-group date">
-                                    <input class="form-control" id="targetStartDate" type="text">
+                                    <input data-name="begins" class="form-control" id="targetStartDate" type="text">
                                     <span class="input-group-btn">
                                         <button id="targetStartBtn" class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
                                     </span>
@@ -144,7 +149,7 @@
                             <div class="form-group">
                                 <label>Fecha final</label>
                                 <div class="input-group date">
-                                    <input class="form-control" id="targetStartDate" type="text">
+                                    <input data-name="ends" class="form-control" id="targetStartDate" type="text">
                                     <span class="input-group-btn">
                                         <button id="targetStartBtn" class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
                                     </span>
@@ -158,23 +163,22 @@
                                 <label>Duración</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="inputEmail3" placeholder="Duración">
+                                <input type="text" data-name="duration" class="form-control" id="inputEmail3" placeholder="Duración">
                             </div>
                             <div class="col-md-3">
-                                <select name="" id="" class="form-control" >
+                                <select data-name="duration-type" class="form-control" >
                                     <option value="">Horas</option>
-                                    <option value="">Días</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">¿En qué área actúa?</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="¿En qué área actúa?">
+                        <input data-name="areas" id="exampleInputEmail1" placeholder="¿En qué área actúa?">
                     </div>
                     <div class="urls form-group">
                         <label for="exampleInputAmount">Sitio web</label>
-                        <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+                        <input type="text" data-name="website" class="form-control" id="exampleInputAmount" placeholder="Nombre de usuario en sitio web">
                     </div>
                     <div class="form-inline urls overflow-hidden form-group">
                         <div>
@@ -183,7 +187,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-addon text-left">https://wwww.facebook.com/</div>
-                                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+                                <input type="text" data-name="facebook" class="form-control" id="exampleInputAmount" placeholder="Nombre de usuario en Facebook">
                             </div>
                         </div>
                     </div>
@@ -194,32 +198,32 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-addon text-left">https://wwww.twitter.com/</div>
-                                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+                                <input type="text" data-name="facebook" class="form-control" id="exampleInputAmount" placeholder="Nombre de usuario en Twitter">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nombre de usuario en Skype</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre de usuario en Skype">
+                        <input type="text" class="form-control" data-name="skype" id="exampleInputEmail1" placeholder="Nombre de usuario en Skype">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Espacios donde se realiza</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Espacios donde se realiza">
+                        <input type="text" data-name="spaces" id="exampleInputEmail1" placeholder="Espacios donde se realiza">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Equipamientos que posees</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Equipamientos que posees">
+                        <input type="text" data-name="equipment" id="exampleInputEmail1" placeholder="Equipamientos que posees">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">¿Qué cantidad de público convoca y moviliza tu festival? </label>
-                        <select name="" id="" class="form-control" >
+                        <select name="" data-name="number-of-attendees" class="form-control" >
                             <option value="">1-50</option>
                             <option value="">50-100</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">¿A qué tipo de público se dirige tu festival?</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="¿A qué tipo de público se dirige tu festival?">
+                        <input data-name="public-kind" id="exampleInputEmail1" placeholder="¿A qué tipo de público se dirige tu festival?">
                     </div>
                     <div class="row upload-images">
                         <div class="col-md-12">
@@ -262,9 +266,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" data-name="status-div">
                         <label for="exampleInputEmail1">Estado</label>
-                        <select name="" id="" class="form-control" >
+                        <select name="" data-name="status" class="form-control" >
                             <option value="">Publicado</option>
                             <option value="">Despublicado</option>
                         </select>
@@ -466,31 +470,38 @@
                     </div>
                     <div class="form-group">
                         <label>¿Realizas intercambio de servicios, productos o conocimiento con otras organizaciones? En caso que tu respuesta sea Si, por favor especifica</label>
-                        <input id="" class="form-control" type="text">
+                        <input data-name="service-exchange" type="text">
+                        <span data-alertid="ajaxerr" form-alert="" data-name="service-exchange-error"></span>
                     </div>
                     <div class="form-group">
                         <label>¿Desarrollas alguna acción de formación?</label>
-                        <input id="" class="form-control" type="text">
+                        <input data-name="training" type="text">
+                        <span data-alertid="ajaxerr" form-alert="" data-name="training-error"></span>
                     </div>
                     <div class="form-group">
                         <label>¿Especificar que herramientas de comunicación utilizas?</label>
-                        <input id="" class="form-control" type="text">
+                        <input data-name="tools" type="text">
+                        <span data-alertid="ajaxerr" form-alert="" data-name="tools-error"></span>
                     </div>
                     <div class="form-group">
                         <label>¿Tienes alguna alianza con instituciones públicas?</label>
-                        <input id="" class="form-control" type="text">
+                        <input data-name="public-partnership" type="text">
+                        <span data-alertid="ajaxerr" form-alert="" data-name="public-partnership-error"></span>
                     </div>
                     <div class="form-group">
                         <label>¿Tienes alguna alianza con alguna entidad privada?</label>
-                        <input id="" class="form-control" type="text">
+                        <input data-name="private-partnership" type="text">
+                        <span data-alertid="ajaxerr" form-alert="" data-name="private-partnership-error"></span>
                     </div>
                     <div class="form-group">
                         <label>¿Tienes alguna alianza con una organización social?</label>
-                        <input id="" class="form-control" type="text">
+                        <input data-name="civil-partnership" type="text">
+                        <span data-alertid="ajaxerr" form-alert="" data-name="civil-partnership-error"></span>
                     </div>
                     <div class="form-group">
                         <label>¿Participa de alguna red?</label>
-                        <input id="" class="form-control" type="text">
+                        <input data-name="networking" type="text">
+                        <span data-alertid="ajaxerr" form-alert="" data-name="networking-error"></span>
                     </div>
                     <div class="row">
                         <div class="form-group overflow-hidden">
@@ -558,60 +569,19 @@
                 <button type="submit" class="btn btn-primary btn-lg btn-danger"><i class="fa fa-times-circle"></i> Cancelar</button>
             </div>
         </form>
+        <script>
+            function textCounter(field, maxLimit)
+            {
+             if ( field.value.length > maxLimit ) {
+              field.value = field.value.substring( 0, maxLimit );
+              return false;
+             } else {
+              var res = maxLimit - field.value.length;
+              $('#presentation-chars-left').html(''+res);
+             }
+            }
+        </script>
     </main>
-    <!---->
-    <!--<div class="info form" data-lift="surround?with=base-wrap;at=content">-->
-        <lift:head>
-            <title>Festival | Festivales en Red | Telartes</title>
-        </lift:head>
-        <h1>INGRESA TU FESTIVAL</h1>
-        <div id="errors-modal" class="reveal-modal" data-reveal="" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-            <h2>Por favor revise la siguiente informacion</h2>
-            <div class="row">
-                <div id="errors-modal-body">
-                </div>
-            </div>
-        </div>
-        <form data-lift="form.ajax">
-            <div data-lift="FestivalForm">
-                <fieldset>
-                    <legend>DATOS GENERALES</legend>
-                    <div class="row gs-row" data-name="general-data">
-                        <div class="large-12 columns form-group">
-                            <label class="control-label"><span data-name="label">Input Label</span></label>
-                            <div class="controls">
-                                <input data-name="general-data-field" type="text"  />
-                                <span data-alertid="ajaxerr" form-alert=""></span>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <legend>SOBRE LA ORGANIZACIÓN</legend>
-                    <div class="row gs-row" data-name="about-data">
-                        <div class="large-12 columns form-group">
-                            <label class="control-label"><span data-name="label">Input Label</span></label>
-                            <div class="controls">
-                                <input data-name="about-data-field" type="text"  />
-                                <span data-alertid="ajaxerr" form-alert=""></span>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-                <div class="form-actions">
-                    <div class="actions">
-                        <button data-name="submit" type="submit" tabindex="1" class="btn btn-primary">
-                            Guardar
-                        </button>
-                        <button data-name="cancel" tabindex="1" class="btn btn-default">
-                            Cancelar
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    <!--</div>-->
-    <!---->
 </div>
 
 

@@ -92,7 +92,7 @@ object ProfileScreen extends BaseCurrentUserScreen {
       </div>
     </span>
 
-  val gravatar = displayOnly("Imágen", gravatarHtml)
+  //val gravatar = displayOnly("Imágen", gravatarHtml)
 
   addFields(() => userVar.is.profileScreenFields)
 
