@@ -178,9 +178,13 @@ header .navbar-nav.nav-option {
 }
 header > .navbar a:hover,
 header > .navbar a:focus,
-header .navbar-nav.nav-option span {
+header .navbar span {
     border-bottom: 2px solid #333;
     line-height: 20px;
+}
+
+header .powered span {
+    border-bottom: none;
 }
 
 header > .navbar .nav-option a,
