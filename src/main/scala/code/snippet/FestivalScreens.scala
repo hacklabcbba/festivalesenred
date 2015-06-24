@@ -76,10 +76,24 @@ object FestivalForm extends SnippetHelper {
       "data-name=number-of-attendees-error [data-alertid]" #> inst.numberOfAttendees.uniqueFieldId.openOr(nextFuncName) &
       "data-name=public-kind" #> inst.publicKind.toForm &
       "data-name=public-kind-error [data-alertid]" #> inst.publicKind.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=service-exchange" #> inst.serviceExchange.toForm &
+      "data-name=service-exchange-error [data-alertid]" #> inst.serviceExchange.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=training" #> inst.trainingActivity.toForm &
+      "data-name=training-error [data-alertid]" #> inst.trainingActivity.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=tools" #> inst.communicationTools.toForm &
+      "data-name=tools-error [data-alertid]" #> inst.communicationTools.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=public-partnership" #> inst.publicInstitutionPartnerships.toForm &
+      "data-name=public-partnership-error [data-alertid]" #> inst.publicInstitutionPartnerships.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=private-partnership" #> inst.privateInstitutionPartnerships.toForm &
+      "data-name=private-partnership-error [data-alertid]" #> inst.privateInstitutionPartnerships.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=civil-partnership" #> inst.civilOrganizationPartnerships.toForm &
+      "data-name=civil-partnership-error [data-alertid]" #> inst.civilOrganizationPartnerships.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=networking" #> inst.networking.toForm &
+      "data-name=networking-error [data-alertid]" #> inst.networking.uniqueFieldId.openOr(nextFuncName) &
       {
         if (inst.status.shouldDisplay_?) {
           "data-name=status" #> inst.status.toForm &
-          "data-name=status-error [data-alertid]" #> inst.status.uniqueFieldId.openOr(nextFuncName) 
+          "data-name=status-error [data-alertid]" #> inst.status.uniqueFieldId.openOr(nextFuncName)
         } else {
           "data-name=status-div" #> NodeSeq.Empty
         }
