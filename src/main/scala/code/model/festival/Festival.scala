@@ -173,26 +173,11 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   }
 
   object duration extends IntField(this, 1) {
-    override def shouldDisplay_? = false
+    override def displayName = "Duración"
   }
 
   object durationType extends EnumNameField(this, FestivalDuration) {
     override def displayName = "Duración"
-    override def toForm = {
-      for {
-        f1 <- duration.toForm
-        f2 <- super.toForm
-      } yield {
-        <div class="row collapse">
-          <div class="small-6 large-6 columns">
-            {f1}
-          </div>
-          <div class="small-6 large-6 columns">
-            {f2}
-          </div>
-        </div>
-      }
-    }
   }
   object call extends FileField(this) {
     override def displayName = "Convocatoria"
@@ -209,7 +194,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
     }
   }
   object logo extends FileField(this) {
-    override def displayName = "Logo"
+    override def displayName = "Imagén del evento"
   }
 
   object photo1 extends FileField(this) {
@@ -412,12 +397,14 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
       SHtml.textarea(
         valueBox openOr "",
         this.set(_),
-        "rows" -> textareaRows.toString,
-        "cols" -> textareaCols.toString,
+        "rows" -> "5",
         "tabindex" -> tabIndex.toString,
+        "class" -> "form-control",
         "onkeyup" -> "textCounter(this, 300);"
-      ) ++ <br/> ++ <div> Caracteres restantes: <span id="presentation-chars-left">{this.maxLength - this.valueBox.dmap(0)(_.length)}</span></div>
+      )
     }
+
+    def charsLeft = this.maxLength - this.valueBox.dmap(0)(_.length)
 
     override def toForm: Box[NodeSeq] = Full(elem)
 

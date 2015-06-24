@@ -35,32 +35,55 @@ object FestivalForm extends SnippetHelper {
     for {
       inst <- Site.festivalEdit.currentValue ?~ "Opción no válida"
     } yield {
-      val generalDataFields = Site.festivalEdit.currentValue.dmap[List[Field[_, _]]](Nil)(s => {
-        List(
-          s.logo, s.call, s.callDate, s.name, s.presentation, s.responsible, s.responsibleEmail, s.pressResponsibleEmail,
-          s.productionManagement, s.city, s.places, s.begins, s.ends, s.durationType, s.areas,
-          s.website, s.facebookPage, s.twitter, s.skype, s.spaces, s.equipment,
-          s.numberOfAttendees, s.publicKind, s.photo1, s.photo2, s.photo3
-        ) ++ (if (User.hasRole("admin") || User.currentUser.dmap(false)(_.email.get.endsWith("genso.com.bo"))) List(s.status) else Nil)
-      })
-      val aboutFields = Site.festivalEdit.currentValue.dmap[List[Field[_, _]]](Nil)(s =>
-        List(
-          s.staff, s.numberEditions, s.serviceExchange, s.trainingActivity, s.communicationTools,
-          s.publicInstitutionPartnerships, s.privateInstitutionPartnerships, s.civilOrganizationPartnerships,
-          s.networking, s.minimalBudget, s.budget, s.collaborativeEconomyBudget, s.managementDuration, s.tags
-        ))
-      "data-name=general-data" #> generalDataFields.map(field => {
-        ".control-label [for]" #> field.uniqueFieldId.openOr(nextFuncName) &
-        "data-name=label" #> field.displayName &
-        "data-name=general-data-field" #> field.toForm &
-        "data-alertid=ajaxerr [data-alertid]" #> field.uniqueFieldId.openOr(nextFuncName)
-      }) &
-      "data-name=about-data" #> aboutFields.map(field => {
-        ".control-label [for]" #> field.uniqueFieldId.openOr(nextFuncName) &
-        "data-name=label" #> field.displayName &
-        "data-name=about-data-field" #> field.toForm &
-        "data-alertid=ajaxerr [data-alertid]" #> field.uniqueFieldId.openOr(nextFuncName)
-      }) &
+      "data-name=name" #> inst.name.toForm &
+      "data-name=name-error [data-alertid]" #> inst.name.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=description" #> inst.presentation.toForm &
+      "data-name=description-error [data-alertid]" #> inst.presentation.uniqueFieldId.openOr(nextFuncName) &
+      "#presentation-chars-left *" #> inst.presentation.charsLeft &
+      "data-name=responsible" #> inst.responsible.toForm &
+      "data-name=responsible-error [data-alertid]" #> inst.responsible.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=responsible-email" #> inst.responsibleEmail.toForm &
+      "data-name=responsible-email-error [data-alertid]" #> inst.responsibleEmail.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=responsible-press-email" #> inst.pressResponsibleEmail.toForm &
+      "data-name=responsible-press-email-error [data-alertid]" #> inst.pressResponsibleEmail.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=production-management" #> inst.productionManagement.toForm &
+      "data-name=production-management-error [data-alertid]" #> inst.productionManagement.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=cities" #> inst.city.toForm &
+      "data-name=cities-error [data-alertid]" #> inst.city.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=begins" #> inst.begins.toForm &
+      "data-name=begins-error [data-alertid]" #> inst.begins.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=ends" #> inst.ends.toForm &
+      "data-name=ends-error [data-alertid]" #> inst.ends.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=duration" #> inst.duration.toForm &
+      "data-name=duration-error [data-alertid]" #> inst.duration.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=duration-type" #> inst.durationType.toForm &
+      "data-name=duration-type-error [data-alertid]" #> inst.durationType.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=areas" #> inst.areas.toForm &
+      "data-name=areas-error [data-alertid]" #> inst.areas.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=website" #> inst.website.toForm &
+      "data-name=website-error [data-alertid]" #> inst.website.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=facebook" #> inst.facebookPage.toForm &
+      "data-name=facebook-error [data-alertid]" #> inst.facebookPage.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=twitter" #> inst.twitter.toForm &
+      "data-name=twitter-error [data-alertid]" #> inst.twitter.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=skype" #> inst.skype.toForm &
+      "data-name=skype-error [data-alertid]" #> inst.skype.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=spaces" #> inst.spaces.toForm &
+      "data-name=spaces-error [data-alertid]" #> inst.spaces.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=equipment" #> inst.equipment.toForm &
+      "data-name=equipment-error [data-alertid]" #> inst.equipment.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=number-of-attendees" #> inst.numberOfAttendees.toForm &
+      "data-name=number-of-attendees-error [data-alertid]" #> inst.numberOfAttendees.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=public-kind" #> inst.publicKind.toForm &
+      "data-name=public-kind-error [data-alertid]" #> inst.publicKind.uniqueFieldId.openOr(nextFuncName) &
+      {
+        if (inst.status.shouldDisplay_?) {
+          "data-name=status" #> inst.status.toForm &
+          "data-name=status-error [data-alertid]" #> inst.status.uniqueFieldId.openOr(nextFuncName) 
+        } else {
+          "data-name=status-div" #> NodeSeq.Empty
+        }
+      } &
       "data-name=cancel [onclick]" #>  SHtml.ajaxInvoke(() => RedirectTo("/")) &
       "data-name=submit" #> SHtml.ajaxOnSubmit(() => inst.validate match {
         case Nil =>
