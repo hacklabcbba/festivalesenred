@@ -452,6 +452,12 @@ header > .navbar .navbar-brand > div  {
     left: 0;
     font-size: 18px;
 }
+/*--------------------------*\
+    $ACCOUNT
+\*--------------------------*/
+.account .box-board > div {
+    display: block !important;
+}
 
 /*------------------------------------*\
     $FOOTER
