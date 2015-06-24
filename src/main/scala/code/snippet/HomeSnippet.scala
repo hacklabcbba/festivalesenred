@@ -19,11 +19,11 @@ object HomeSnippet extends SnippetHelper {
       "data-name=code *" #> area.code.get &
       "input [id]" #> area.name.get &
       "label [for]" #> area.name.get &
-      "data-name=name" #> area.name.get &
+      "label *" #> area.name.get &
       "data-name=description *" #> area.description.get
     }) &
     "data-name=city" #> City.findAll.map(city => {
-      "data-name=name" #> city.name.get &
+      "label *" #> city.name.get &
       "input [id]" #> city.name.get &
       "label [for]" #> city.name.get
     })
