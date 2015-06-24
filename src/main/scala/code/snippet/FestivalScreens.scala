@@ -96,6 +96,24 @@ object FestivalForm extends SnippetHelper {
       "data-name=civil-partnership-error [data-alertid]" #> inst.civilOrganizationPartnerships.uniqueFieldId.openOr(nextFuncName) &
       "data-name=networking" #> inst.networking.toForm &
       "data-name=networking-error [data-alertid]" #> inst.networking.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=photo1-preview [src]" #> inst.photo1.previewUrl &
+      "data-name=photo1-url [href]" #> inst.photo1.fileUrl &
+      "data-name=photo1" #> inst.photo1.toForm &
+      "data-name=remove-photo1 [data-file-id]" #> inst.photo1.get.fileId.get &
+      "data-name=photo1-container-field-id [class+]" #> inst.photo1.containerFieldId &
+      "data-name=photo1-container-input-id [class+]" #> inst.photo1.containerInputId &
+      "data-name=photo2-preview [src]" #> inst.photo2.previewUrl &
+      "data-name=photo2-url [href]" #> inst.photo2.fileUrl &
+      "data-name=photo2" #> inst.photo2.toForm &
+      "data-name=remove-photo2 [data-file-id]" #> inst.photo2.get.fileId.get &
+      "data-name=photo2-container-field-id [class+]" #> inst.photo2.containerFieldId &
+      "data-name=photo2-container-input-id [class+]" #> inst.photo2.containerInputId &
+      "data-name=photo3-preview [src]" #> inst.photo3.previewUrl &
+      "data-name=photo3-url [href]" #> inst.photo3.fileUrl &
+      "data-name=photo3" #> inst.photo3.toForm &
+      "data-name=remove-photo3 [data-file-id]" #> inst.photo3.get.fileId.get &
+      "data-name=photo3-container-field-id [class+]" #> inst.photo3.containerFieldId &
+      "data-name=photo3-container-input-id [class+]" #> inst.photo3.containerInputId &
       {
         if (inst.status.shouldDisplay_?) {
           "data-name=status" #> inst.status.toForm &
