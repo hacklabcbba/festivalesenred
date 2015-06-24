@@ -285,20 +285,20 @@ object FestivalView extends SnippetHelper {
       "data-name=areas" #> item.areas.objs.zipWithIndex.map(s => <a href={s"/festivales?area=${s._1.name.get}"} itemprop="url">{s._1.name.get}</a> ++ (if (s._2 == item.areas.objs.size - 1) Text("") else Text(", "))) &
       "data-name=tags" #> item.tags.get.zipWithIndex.map(s => <a href={s"/festivales?tag=${s._1.tag.get}"} itemprop="url">{s._1.tag.get}</a> ++ (if (s._2 == item.areas.objs.size - 1) Text("") else Text(", "))) &
       "data-name=description *" #> item.presentation.get &
-      "data-name=equipment" #> item.equipment.objs.map(s => <i class="fa fa-check"></i> ++ <a href={s"/festivales?equipment=${s.name.get}"} itemprop="url">{s.name.get}</a>) &
+      "data-name=equipment" #> item.equipment.objs.map(s => "a" #> <a href={s"/festivales?equipment=${s.name.get}"} itemprop="url"><i class="fa fa-check"></i> {s.name.get}</a>) &
       "data-name=team" #> item.staff.get.map(tm => {
         "data-name=name *+" #> tm.name.get &
         "data-name=role *+" #> tm.function.get &
         "data-name=email *+" #> tm.email.get &
         "data-name=cellphone *+" #> tm.cellphone.get
       }) &
-      "data-name=item-exchange" #> item.serviceExchange.objs.map(s => <i class="fa fa-check"></i> ++ <a href={s"/festivales?service=${s.name.get}"} >{s.name.get}</a>) &
-      "data-name=item-training" #> item.trainingActivity.objs.map(s => <i class="fa fa-check"></i> ++ <a href={s"/festivales?training=${s.name.get}"} >{s.name.get}</a>) &
-      "data-name=item-tools" #> item.communicationTools.objs.map(s => <i class="fa fa-check"></i> ++ <a href={s"/festivales?communication=${s.name.get}"} >{s.name.get}</a>) &
-      "data-name=item-public" #> item.publicInstitutionPartnerships.objs.map(s => <i class="fa fa-check"></i> ++ <a href={s"/festivales?partnership=${s.name.get}"} >{s.name.get}</a>) &
-      "data-name=item-private" #> item.privateInstitutionPartnerships.objs.map(s => <i class="fa fa-check"></i> ++ <a href={s"/festivales?partnership=${s.name.get}"} >{s.name.get}</a>) &
-      "data-name=item-civil" #> item.civilOrganizationPartnerships.objs.map(s => <i class="fa fa-check"></i> ++ <a href={s"/festivales?partnership=${s.name.get}"} >{s.name.get}</a>) &
-      "data-name=item-networking" #> item.networking.objs.map(s => <i class="fa fa-check"></i> ++ <a href={s"/festivales?networking=${s.name.get}"} >{s.name.get}</a>) &
+      "data-name=item-exchange" #> item.serviceExchange.objs.map(s => "a" #> <a href={s"/festivales?service=${s.name.get}"}><i class="fa fa-check"></i> {s.name.get}</a>) &
+      "data-name=item-training" #> item.trainingActivity.objs.map(s => "a" #> <a href={s"/festivales?training=${s.name.get}"} ><i class="fa fa-check"></i> {s.name.get}</a>) &
+      "data-name=item-tools" #> item.communicationTools.objs.map(s => "a" #> <a href={s"/festivales?communication=${s.name.get}"} ><i class="fa fa-check"></i> {s.name.get}</a>) &
+      "data-name=item-public" #> item.publicInstitutionPartnerships.objs.map(s => "a" #> <a href={s"/festivales?partnership=${s.name.get}"} >{s.name.get}</a>) &
+      "data-name=item-private" #> item.privateInstitutionPartnerships.objs.map(s => "a" #> <a href={s"/festivales?partnership=${s.name.get}"} >{s.name.get}</a>) &
+      "data-name=item-civil" #> item.civilOrganizationPartnerships.objs.map(s => "a" #> <a href={s"/festivales?partnership=${s.name.get}"} >{s.name.get}</a>) &
+      "data-name=item-networking" #> item.networking.objs.map(s => "a" #> <a href={s"/festivales?networking=${s.name.get}"} ><i class="fa fa-check"></i> {s.name.get}</a>) &
       "data-name=minimal-budget *" #> item.minimalBudget.toString &
       "data-name=budget *" #> item.budget.toString &
       "data-name=colaborative-budget *" #> item.collaborativeEconomyBudget.toString &

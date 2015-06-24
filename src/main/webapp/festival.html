@@ -224,7 +224,7 @@
                             <h2>Equipamientos que posee</h2>
                         </header>
                         <ul class="list-unstyled list-info-event object-list">
-                            <li>
+                            <li data-name="equipment">
                                 <a href="#"><i class="fa fa-check"></i> Estructuras escénicas móviles (Tarimas, piso, paneles)</a>
                             </li>
                         </ul>
@@ -234,7 +234,7 @@
                             <h2>Formación</h2>
                         </header>
                         <ul class="list-unstyled list-info-event object-list">
-                            <li>
+                            <li data-name="item-training">
                                 <a href="#"><i class="fa fa-check"></i>Mensa de diálogo</a>
                             </li>
                         </ul>
@@ -244,7 +244,7 @@
                             <h2>Redes</h2>
                         </header>
                         <ul class="list-unstyled list-info-event object-list">
-                            <li>
+                            <li data-name="item-networking">
                                 <a href="#"><i class="fa fa-check"></i> Red 1</a>
                             </li>
                         </ul>
@@ -257,8 +257,8 @@
                             <h2>Equipo técnico</h2>
                         </header>
                         <ul class="list-unstyled list-info-event object-list">
-                            <li>
-                                <a href="#"><i class="fa fa-check"></i>Técnico 1</a>
+                            <li data-name="team">
+                                <span data-name="name"></span>
                             </li>
                         </ul>
                     </div>
@@ -267,7 +267,7 @@
                             <h2>Herramientas de comunicacion</h2>
                         </header>
                         <ul class="list-unstyled list-info-event object-list">
-                            <li>
+                            <li data-name="item-tools">
                                 <a href="#"><i class="fa fa-check"></i>Telvisión</a>
                             </li>
                         </ul>
@@ -283,7 +283,7 @@
                                         <span>Presupuesto mínimo:</span>
                                     </div>
                                     <div class="col-md-8">
-                                        <span>1000</span><span>Bs.</span>
+                                        <span data-name="minimal-budget">1000</span>
                                     </div>
                                 </div>
                             </li>
@@ -293,7 +293,17 @@
                                         <span>Costo monetario:</span>
                                     </div>
                                     <div class="col-md-8">
-                                        <span>1000</span><span>Bs.</span>
+                                        <span data-name="budget">1000</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-4 text-bold">
+                                        <span>Economía colaborativa:</span>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <span data-name="colaborative-budget">1000</span>
                                     </div>
                                 </div>
                             </li>
@@ -307,7 +317,7 @@
                             <h2>Intercambios</h2>
                         </header>
                         <ul class="list-unstyled list-info-event object-list">
-                            <li>
+                            <li data-name="item-exchange">
                                 <a href="#"><i class="fa fa-check"></i>Trueque</a>
                             </li>
                         </ul>
@@ -322,7 +332,7 @@
                                     <div class="col-md-5 text-bold">
                                         <span>Pública:</span>
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-7" data-name="item-public">
                                         <span>
                                             <a href="#">Convenio</a>
                                         </span>
@@ -334,7 +344,7 @@
                                     <div class="col-md-5 text-bold">
                                         <span>Privada:</span>
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-7" data-name="item-private">
                                         <span>
                                             <a href="#">Convenio</a>
                                         </span>
@@ -346,7 +356,7 @@
                                     <div class="col-md-5 text-bold">
                                         <span>Organizaciones de la sociedad civil:</span>
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-7" data-name="item-civil">
                                         <span>
                                             <a href="#">Convenio</a>
                                         </span>
