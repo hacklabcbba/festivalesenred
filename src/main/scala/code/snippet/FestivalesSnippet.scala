@@ -56,20 +56,35 @@ object FestivalesSnippet extends SnippetHelper with PaginatorSnippet[Festival] {
     } yield ({
       "data-name=row *" #> Festival.findAllByUser(user).map(festival => {
         "data-name=name *" #> festival.name.get &
+        "data-name=name [href]" #> Site.festival.calcHref(festival) &
+        "data-name=logo" #> (festival.logo.get match {
+          case p: FileRecord => <img src={"/service/images/"+ p.fileId.get} />
+          case _ => <br />
+        }) &
+        "data-name=description *" #> festival.presentation.get &
+        "data-name=city *" #> festival.city.objs.map(_.name.get).mkString(", ") &
         "data-name=owner *" #> festival.owner.obj.dmap("")(_.name.get) &
         "data-name=responsible *" #> festival.responsible.get &
-        "data-name=city *" #> festival.city.objs.map(_.name.get).mkString(",") &
+        "data-name=begins *" #> festival.begins.literalDate &
+        "data-name=ends *" #> festival.ends.literalDate &
         "data-name=edit [href]" #> Site.festivalEdit.calcHref(festival)
       }) &
-        "data-name=add [href]" #> "/festival-form/new"
+      "data-name=add [href]" #> "/festival-form/new"
     }): CssSel
   }
 
   def list = {
-    "data-name=list" #> page.map(festival => {
-      "data-name=festival-link [href]" #> Site.festival.calcHref(festival) &
-      "data-name=name" #> festival.name.get &
-      "data-name=cities *" #> festival.city.objs.map(_.name.get).mkString(", ") &
+    "data-name=row *" #> page.map(festival => {
+      "data-name=name *" #> festival.name.get &
+      "data-name=name [href]" #> Site.festival.calcHref(festival) &
+      "data-name=logo" #> (festival.logo.get match {
+        case p: FileRecord => <img src={"/service/images/"+ p.fileId.get} />
+        case _ => <br />
+      }) &
+      "data-name=description *" #> festival.presentation.get &
+      "data-name=city *" #> festival.city.objs.map(_.name.get).mkString(", ") &
+      "data-name=owner *" #> festival.owner.obj.dmap("")(_.name.get) &
+      "data-name=responsible *" #> festival.responsible.get &
       "data-name=begins *" #> festival.begins.literalDate &
       "data-name=ends *" #> festival.ends.literalDate
     })
@@ -101,68 +116,69 @@ object FestivalView extends SnippetHelper {
           s.networking, s.minimalBudget, s.budget, s.collaborativeEconomyBudget, s.managementDuration, s.tags
         ))
 
-      "data-name=title *+" #> item.name.get &
-        "data-name=begins *+" #> item.begins.literalDate &
-        "data-name=ends *+" #> item.ends.literalDate &
-        "data-name=place" #> item.productionManagement.get &
-        "data-name=cities" #> item.city.objs.map(_.name.get).mkString(",") &
-        "data-name=duration" #> (item.duration.get + " " + item.durationType.get) &
-        "data-name=website *" #> item.website.get &
-        "data-name=website [href]" #> item.website.get &
-        "data-name=facebook [href]" #> item.facebookPage.get &
-        "data-name=facebook *" #> item.facebookPage.get &
-        "data-name=twitter [href]" #> item.twitter.get &
-        "data-name=skype *" #> item.twitter.get &
-        "data-name=skype [href]" #> item.skype.get &
-        "data-name=twitter *" #> item.skype.get &
-        "data-name=responsible *" #> item.responsible.get &
-        "data-name=responsibleEmail" #> item.responsibleEmail.get.replace("@", "[a]") &
-        "data-name=areas *" #> item.areas.objs.map(s => <a href={s"/festivales?area=${s.name.get}"} >{s.name.get}</a>) &
-        "data-name=tags *" #> item.tags.get.map(s => <a href={s"/festivales?tag=${s.tag.get}"} >{s.tag.get}</a>) &
-        "data-name=description *" #> item.presentation.get &
-        "data-name=equipment *" #> item.equipment.objs.map(s => <a href={s"/festivales?equipment=${s.name.get}"} >{s.name.get}</a>) &
-        "data-name=item-exchange *" #> item.serviceExchange.objs.map(s => <a href={s"/festivales?service=${s.name.get}"} >{s.name.get}</a>) &
-        "data-name=item-training *" #> item.trainingActivity.objs.map(s => <a href={s"/festivales?training=${s.name.get}"} >{s.name.get}</a>) &
-        "data-name=item-tools *" #> item.communicationTools.objs.map(s => <a href={s"/festivales?communication=${s.name.get}"} >{s.name.get}</a>) &
-        "data-name=item-public" #> item.publicInstitutionPartnerships.objs.map(s => <a href={s"/festivales?partnership=${s.name.get}"} >{s.name.get}</a>) &
-        "data-name=item-private" #> item.privateInstitutionPartnerships.objs.map(s => <a href={s"/festivales?partnership=${s.name.get}"} >{s.name.get}</a>) &
-        "data-name=item-civil" #> item.civilOrganizationPartnerships.objs.map(s => <a href={s"/festivales?partnership=${s.name.get}"} >{s.name.get}</a>) &
-        "data-name=item-networking" #> item.networking.objs.map(s => <a href={s"/festivales?networking=${s.name.get}"} >{s.name.get}</a>) &
-        "data-name=minimal-budget *" #> item.minimalBudget.toString &
-        "data-name=budget *" #> item.budget.toString &
-        "data-name=colaborative-budget *" #> item.collaborativeEconomyBudget.toString &
-        "data-name=logo-link [href]" #> (item.logo.get match {
-          case p: FileRecord => "/service/images/"+ p.fileId.get
-          case _ => "#"
-        }) &
-        "data-name=logo" #> (item.logo.get match {
-          case p: FileRecord => <img src={"/service/images/"+ p.fileId.get} />
-          case _ => <br />
-        }) &
-        "data-name=photo1-link [href]" #> (item.photo1.get match {
-          case p: FileRecord => "/service/images/"+ p.fileId.get
-          case _ => "#"
-        }) &
-        "data-name=photo1" #> (item.photo1.get match {
-          case p: FileRecord => <img src={"/service/images/"+ p.fileId.get} />
-          case _ => <br />
-        }) &
-        "data-name=photo2-link [href]" #> (item.photo2.get match {
-          case p: FileRecord => "/service/images/"+ p.fileId.get
-          case _ => "#"
-        }) &
-        "data-name=photo2" #> (item.photo2.get match {
-          case p: FileRecord => <img src={"/service/images/"+ p.fileId.get} />
-          case _ => <br />
-        }) &
-        "data-name=photo3-link [href]" #> (item.photo3.get match {
-          case p: FileRecord => "/service/images/"+ p.fileId.get
-          case _ => "#"
-        }) &
-        "data-name=photo3" #> (item.photo3.get match {
-          case p: FileRecord => <img src={"/service/images/"+ p.fileId.get} />
-          case _ => <br />
-        })
+      "data-name=name *" #> item.name.get &
+      "data-name=begins *" #> item.begins.literalDate &
+      "data-name=ends *" #> item.ends.literalDate &
+      "data-name=production-manangement *" #> item.productionManagement.get &
+      "data-name=place" #> item.productionManagement.get &
+      "data-name=cities" #> item.city.objs.map(_.name.get).mkString(", ") &
+      "data-name=duration" #> (item.duration.get + " " + item.durationType.get) &
+      "data-name=website *" #> item.website.get &
+      "data-name=website [href]" #> item.website.get &
+      "data-name=facebook [href]" #> item.facebookPage.get &
+      "data-name=facebook *" #> item.facebookPage.get &
+      "data-name=twitter [href]" #> item.twitter.get &
+      "data-name=skype *" #> item.twitter.get &
+      "data-name=skype [href]" #> item.skype.get &
+      "data-name=twitter *" #> item.skype.get &
+      "data-name=responsible *" #> item.responsible.get &
+      "data-name=responsible-email" #> item.responsibleEmail.get.replace("@", "[a]") &
+      "data-name=areas *" #> item.areas.objs.map(s => <a href={s"/festivales?area=${s.name.get}"} >{s.name.get}</a>) &
+      "data-name=tags *" #> item.tags.get.map(s => <a href={s"/festivales?tag=${s.tag.get}"} >{s.tag.get}</a>) &
+      "data-name=description *" #> item.presentation.get &
+      "data-name=equipment *" #> item.equipment.objs.map(s => <a href={s"/festivales?equipment=${s.name.get}"} >{s.name.get}</a>) &
+      "data-name=item-exchange *" #> item.serviceExchange.objs.map(s => <a href={s"/festivales?service=${s.name.get}"} >{s.name.get}</a>) &
+      "data-name=item-training *" #> item.trainingActivity.objs.map(s => <a href={s"/festivales?training=${s.name.get}"} >{s.name.get}</a>) &
+      "data-name=item-tools *" #> item.communicationTools.objs.map(s => <a href={s"/festivales?communication=${s.name.get}"} >{s.name.get}</a>) &
+      "data-name=item-public" #> item.publicInstitutionPartnerships.objs.map(s => <a href={s"/festivales?partnership=${s.name.get}"} >{s.name.get}</a>) &
+      "data-name=item-private" #> item.privateInstitutionPartnerships.objs.map(s => <a href={s"/festivales?partnership=${s.name.get}"} >{s.name.get}</a>) &
+      "data-name=item-civil" #> item.civilOrganizationPartnerships.objs.map(s => <a href={s"/festivales?partnership=${s.name.get}"} >{s.name.get}</a>) &
+      "data-name=item-networking" #> item.networking.objs.map(s => <a href={s"/festivales?networking=${s.name.get}"} >{s.name.get}</a>) &
+      "data-name=minimal-budget *" #> item.minimalBudget.toString &
+      "data-name=budget *" #> item.budget.toString &
+      "data-name=colaborative-budget *" #> item.collaborativeEconomyBudget.toString &
+      "data-name=logo-link [href]" #> (item.logo.get match {
+        case p: FileRecord => "/service/images/"+ p.fileId.get
+        case _ => "#"
+      }) &
+      "data-name=logo" #> (item.logo.get match {
+        case p: FileRecord => <img src={"/service/images/"+ p.fileId.get} />
+        case _ => <br />
+      }) &
+      "data-name=photo1-link [href]" #> (item.photo1.get match {
+        case p: FileRecord => "/service/images/"+ p.fileId.get
+        case _ => "#"
+      }) &
+      "data-name=photo1" #> (item.photo1.get match {
+        case p: FileRecord => <img src={"/service/images/"+ p.fileId.get} />
+        case _ => <br />
+      }) &
+      "data-name=photo2-link [href]" #> (item.photo2.get match {
+        case p: FileRecord => "/service/images/"+ p.fileId.get
+        case _ => "#"
+      }) &
+      "data-name=photo2" #> (item.photo2.get match {
+        case p: FileRecord => <img src={"/service/images/"+ p.fileId.get} />
+        case _ => <br />
+      }) &
+      "data-name=photo3-link [href]" #> (item.photo3.get match {
+        case p: FileRecord => "/service/images/"+ p.fileId.get
+        case _ => "#"
+      }) &
+      "data-name=photo3" #> (item.photo3.get match {
+        case p: FileRecord => <img src={"/service/images/"+ p.fileId.get} />
+        case _ => <br />
+      })
     }: CssSel
   }
 }

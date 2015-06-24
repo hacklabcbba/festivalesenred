@@ -1,21 +1,21 @@
 <div class="event-list" data-lift="surround?with=template;at=content">
     <lift:head>
-        <title>Qué es | Festivales en Red | Telartes</title>
+        <title>Festivales en Red | Telartes</title>
     </lift:head>
     <main role="main">
-        <section>
+        <section data-lift="FestivalesSnippet.list">
             <h1>Festivales</h1>
             <div class="row events">
-                <div class="col-md-3 col-sm-4 col-xs-12 event" itemscope itemtype="https://schema.org/Event">
+                <div class="col-md-3 col-sm-4 col-xs-12 event" itemscope data-name="row" itemtype="https://schema.org/Event">
                     <div>
                         <header>
-                            <h2 ><a itemprop="name" href="#">Festival Internacional De Teatro De La Paz</a></h2>
+                            <h2 ><a itemprop="name" data-name="name" href="#">Festival Internacional De Teatro De La Paz</a></h2>
                         </header>
                         <figure>
-                            <a href="#" class="tumbnail-event"><img itemprop="image" class="img-responsive" src="/img/festivales/martadero.png" alt=""/></a>
+                            <a href="#" class="tumbnail-event"><img data-name="logo" itemprop="image" class="img-responsive" src="/img/festivales/martadero.png" alt=""/></a>
                         </figure>
                         <section class="event-description">
-                            <p itemprop="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In at eros massa. Phasellus a laoreet sem, non varius sem. Maecenas non neque dictum, ultricies turpis vitae, molestie nisi (...)</p>
+                            <p itemprop="description" data-name="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In at eros massa. Phasellus a laoreet sem, non varius sem. Maecenas non neque dictum, ultricies turpis vitae, molestie nisi (...)</p>
                         </section>
                         <section>
                             <ul class="list-unstyled list-info-event">
@@ -25,7 +25,7 @@
                                             <span>Ciudades</span>
                                         </div>
                                         <div class="col-md-9" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                                            <span itemprop="addressLocality">Cochabamba</span>
+                                            <span itemprop="addressLocality" data-name="city">Cochabamba</span>
                                         </div>
                                     </div>
                                 </li>
@@ -35,7 +35,7 @@
                                             <span>Fecha Inicio:</span>
                                         </div>
                                         <div class="col-md-9">
-                                            <time datetime="2011-09-12" itemprop="startDate">sábado 30 de mayo del 2015</time>
+                                            <time datetime="2011-09-12" data-name="begins" itemprop="startDate">sábado 30 de mayo del 2015</time>
                                         </div>
                                     </div>
                                 </li>
@@ -45,7 +45,7 @@
                                             <span>Fecha Fin:</span>
                                         </div>
                                         <div class="col-md-9">
-                                            <time datetime="2011-09-12" itemprop="endDate">sábado 30 de mayo del 2015</time>
+                                            <time datetime="2011-09-12" data-name="ends" itemprop="endDate">sábado 30 de mayo del 2015</time>
                                         </div>
                                     </div>
                                 </li>
@@ -59,107 +59,25 @@
                                 <li>
                                     <a href="#"><i class="fa fa-twitter-square"></i></a>
                                 </li>
-                                <li>
+                                <!--<li>
                                     <a href="#"><i class="fa fa fa-envelope-square"></i></a>
-                                </li>
+                                </li>-->
                             </ul>
                         </footer>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-4 col-xs-12 event" itemscope itemtype="https://schema.org/Event">
-                    <div>
-                        <header>
-                            <h2 ><a itemprop="name" href="#">Festival Internacional De Teatro De La Paz</a></h2>
-                        </header>
-                        <section class="event-description">
-                            <p itemprop="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In at eros massa. Phasellus a laoreet sem, non varius sem. Maecenas non neque dictum, ultricies turpis vitae, molestie nisi (...)</p>
-                        </section>
-                        <section>
-                            <ul class="list-unstyled list-info-event">
-                                <li>
-                                    <div class="row">
-                                        <div class="col-md-3 text-bold">
-                                            <span>Ciudades</span>
-                                        </div>
-                                        <div class="col-md-9" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                                            <span itemprop="addressLocality">Cochabamba</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-md-3 text-bold">
-                                            <span>Fecha Inicio:</span>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <time datetime="2011-09-12" itemprop="startDate">sábado 30 de mayo del 2015</time>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-md-3 text-bold">
-                                            <span>Fecha Fin:</span>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <time datetime="2011-09-12" itemprop="endDate">sábado 30 de mayo del 2015</time>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </section>
-                        <footer>
-                            <ul class="list-unstyled list-inline share">
-                                <li>
-                                    <a href="#"><i class="fa fa-facebook-square"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-twitter-square"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa fa-envelope-square"></i></a>
-                                </li>
-                            </ul>
-                        </footer>
+            </div>
+            <div class="row">
+                <div class="small-12 large-12 medium-12">
+                    <div data-lift="FestivalesSnippet.paginate">
+                        <p>
+                            <nav:records></nav:records>
+                        </p>
+                        <nav:first></nav:first> | <nav:prev></nav:prev> | <nav:allpages></nav:allpages> |   <nav:next>     </nav:next> | <nav:last></nav:last>
                     </div>
                 </div>
             </div>
         </section>
     </main>
-<!---->
-    <div class="info">
-        <h1>Festivales</h1>
-        <div class="row">
-            <div class="small-12 large-12 medium-12" data-lift="FestivalesSnippet.list">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Ciudades</th>
-                        <th>Fecha Inicio</th>
-                        <th>Fecha Fecha Fin</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr data-name="list">
-                        <td><a href="" data-name="festival-link"><span data-name="name">Content Goes Here</span></td>
-                        <td data-name="cities">This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-                        <td data-name="begins">Content Goes Here</td>
-                        <td data-name="ends">Content Goes Here</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="small-12 large-12 medium-12">
-                <div data-lift="FestivalesSnippet.paginate">
-                        <p>
-                            <nav:records></nav:records>
-                        </p>
-                        <nav:first></nav:first> | <nav:prev></nav:prev> | <nav:allpages></nav:allpages> |   <nav:next>     </nav:next> | <nav:last></nav:last>
-                </div>
-            </div>
-        </div>
-    </div>
-<!---->
 </div>
 

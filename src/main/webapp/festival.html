@@ -1,11 +1,11 @@
 <div class="event" data-lift="surround?with=template;at=content">
     <lift:head>
-        <title>Qué es | Festivales en Red | Telartes</title>
+        <title data-lift="FestivalView.title">Qué es | Festivales en Red | Telartes</title>
     </lift:head>
-    <main role="main" itemscope itemtype="https://schema.org/Event">
+    <main role="main" itemscope itemtype="https://schema.org/Event" data-lift="FestivalView">
         <header>
             <h1 itemprop="name"class="text-center">
-                <span>
+                <span data-name="name">
                     Festival Internacional De Teatro De La Paz
                 </span>
             </h1>
@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-md-7">
                 <figure>
-                    <img class="img-responsive block-center" src="/img/event-image.jpg" alt="" itemprop="image"/>
+                    <img data-name="logo" class="img-responsive block-center" src="/img/event-image.jpg" alt="" itemprop="image"/>
                     <figcaption class="text-center">
                         Festival Internacional De Teatro De La Paz
                     </figcaption>
@@ -31,7 +31,7 @@
                                     <span>Fecha Inicio:</span>
                                 </div>
                                 <div class="col-md-9">
-                                    <time datetime="2011-09-12" itemprop="startDate" content="2011-09-12">sábado 30 de mayo del 2015</time>
+                                    <time datetime="2011-09-12" itemprop="startDate" data-name="begins" content="2011-09-12"></time>
                                 </div>
                             </div>
                         </li>
@@ -41,17 +41,17 @@
                                     <span>Fecha Fin:</span>
                                 </div>
                                 <div class="col-md-9">
-                                    <time datetime="2011-09-12" itemprop="endDate" content="2011-09-12">sábado 30 de mayo del 2015</time>
+                                    <time datetime="2011-09-12" itemprop="endDate" data-name="ends" content="2011-09-12"></time>
                                 </div>
                             </div>
                         </li>
                         <li>
                             <div class="row">
                                 <div class="col-md-3 text-bold">
-                                    <span>Dirección:</span>
+                                    <span>Dirección de la Producción:</span>
                                 </div>
                                 <div class="col-md-9" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                                    <span itemprop="streetAddress">27 de Agosto con Ollantay</span>
+                                    <span itemprop="streetAddress" data-name="production-management">27 de Agosto con Ollantay</span>
                                 </div>
                             </div>
                         </li>
@@ -61,7 +61,7 @@
                                     <span>Ciudades</span>
                                 </div>
                                 <div class="col-md-9" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                                    <span itemprop="addressLocality">Cochabamba</span>
+                                    <span itemprop="addressLocality" data-name="city">Cochabamba</span>
                                 </div>
                             </div>
                         </li>
@@ -71,7 +71,7 @@
                                     <span>Duracion:</span>
                                 </div>
                                 <div class="col-md-9">
-                                    <span itemprop="duration" content="T1M33S" >1 hora</span>
+                                    <span itemprop="duration" data-name="duration" content="T1M33S" >1 hora</span>
                                 </div>
                             </div>
                         </li>
@@ -81,7 +81,7 @@
                                     <span>Responsable:</span>
                                 </div>
                                 <div class="col-md-9">
-                                    <span itemprop="attendee">Nombre y Apellido</span>
+                                    <span itemprop="attendee" data-name="responsible">Nombre y Apellido</span>
                                 </div>
                             </div>
                         </li>
@@ -91,7 +91,7 @@
                                     <span>Email:</span>
                                 </div>
                                 <div class="col-md-9">
-                                    <span>aa</span>
+                                    <span data-name="responsible-email">aa</span>
                                 </div>
                             </div>
                         </li>
