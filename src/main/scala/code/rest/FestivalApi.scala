@@ -2,8 +2,10 @@ package code
 package rest
 
 
+import java.text.SimpleDateFormat
+
 import code.config.Site
-import code.model.festival.{Festival, Place}
+import code.model.festival.{City, Area, Festival, Place}
 import net.liftweb.http.rest.RestHelper
 import net.liftweb.http._
 import net.liftweb.json.JsonAST.JValue
@@ -18,6 +20,10 @@ import org.joda.time.format._
 import Helpers._
 
 object FestivalApi extends RestHelper {
+
+  object AsFestival {
+    def unapply(in: String): Option[Festival] = Festival.find(in)
+  }
 
   serve {
 
@@ -51,9 +57,26 @@ object FestivalApi extends RestHelper {
       response(jsonList)
     }
 
-    case "api" :: "localizations" :: Nil Get req => {
+    case "api" :: "festival" :: "localizations" :: AsFestival(festival) ::  _ JsonGet _ => {
+      val placesJsonList =  "locs" -> festival.places.get.map(Place.asJValue(_, festival))
+      response(placesJsonList)
+    }
 
-      val festivales = Festival.fetch()
+    case "api" :: "localizations" :: Nil JsonPost json -> _ => {
+      val dateFormat = new SimpleDateFormat("MM/dd/yyyy")
+
+      val areas: List[Area] =  (json \\ "areas").extractOpt[List[String]].getOrElse(Nil)
+        .flatMap(s => Area.findByName(s))
+      val cities: List[City] =  (json \\ "cities").extractOpt[List[String]].getOrElse(Nil)
+        .flatMap(City.findByName(_))
+      val begins =  (json \\ "begins").extractOpt[String].flatMap(s => Helpers.tryo(dateFormat.parse(s)))
+      val ends =  (json \\ "ends").extractOpt[String].flatMap(s => Helpers.tryo(dateFormat.parse(s)))
+
+      val festivales =
+        if (areas.isEmpty && cities.isEmpty && begins.isEmpty && ends.isEmpty)
+          Festival.fetch()
+        else
+          Festival.findAllForMapByAreasCitiesAndDates(areas, cities, begins, ends)
       val placesJsonList =  "locs" -> festivales.flatMap(
         f => f.places.get.map(Place.asJValue(_, f))
       )

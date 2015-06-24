@@ -3,7 +3,7 @@ package lib
 package field
 
 import java.text.SimpleDateFormat
-import java.util.Date
+import java.util.{Locale, Date}
 
 import net.liftweb.common.Full
 import net.liftweb.http.S
@@ -16,7 +16,7 @@ import Helpers._
 class DatepickerField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
   extends DateField[OwnerType](rec) {
 
-  protected val dateFormat = new SimpleDateFormat("MM/dd/yyyy")
+  protected val dateFormat = new SimpleDateFormat("MM/dd/yyyy", new Locale("es", ""))
 
   val dateFieldId = nextFuncName
 

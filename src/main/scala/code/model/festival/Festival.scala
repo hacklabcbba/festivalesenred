@@ -2,6 +2,8 @@ package code
 package model
 package festival
 
+import java.util.Date
+
 import code.lib.RogueMetaRecord
 import code.lib.field._
 import code.model.institution.Institution
@@ -24,6 +26,7 @@ import com.foursquare.rogue.LiftRogue._
 import net.liftweb.sitemap.Loc.If
 import net.liftweb.util.Helpers
 import Helpers._
+import org.joda.time.DateTime
 import scala.xml._
 import net.liftweb.util._
 import net.liftweb.common._
@@ -53,7 +56,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   object productionManagement extends CustomStringField(this, 300) {
     override def displayName = "Dirección de la Producción"
   }
-  object city extends ComboBoxField(this, City) {
+  object city extends OpenComboBoxField(this, City) {
     def toString(in: City) = s"${in.name.get}/${in.country.get}"
     val placeholder = "Seleccione las ciudades donde se realizara el festival"
     override def displayName = "Ciudad(es) donde se realiza"
@@ -196,6 +199,14 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   }
   object callDate extends DatepickerField(this) {
     override def displayName = "Fecha limite convocatoria"
+
+    def css = {
+      val now = DateTime.now()
+      val end = this.valueBox.dmap(DateTime.now())(new DateTime(_))
+      if (now.isAfter(end))
+        "label label-danger"
+      else "label label-success"
+    }
   }
   object logo extends FileField(this) {
     override def displayName = "Logo"
@@ -273,27 +284,139 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
     val placeholder = ""
     override def displayName = "¿A qué tipo de público se dirige tu festival?"
   }
-  object staff extends BsonRecordListField(this, Staff) {
+  object staff extends BsonRecordListField(this, TeamMember) with HtmlFixer {
     override def displayName = "¿Cuantas personas componen el equipo y que funciones cumplen?"
     override def helpAsHtml = Full(<span>Informa el número de personas aumentar una columna para numero que actuan regularmente junto a tu colectivo o grupo y en que funciones se desempeñan, inclusive sin son varias funciones por persona</span>)
+    def title = "Datos de la persona"
+    override def toForm = Full(
+      css.apply(template)
+    )
+
+    def css = {
+      "#staff" #> SHtml.idMemoize(body => {
+        ".title" #> title &
+          "tbody *" #> {
+            "tr " #> value.map( p => {
+              "data-name=name *" #> p.name.get &
+              "data-name=email *" #> p.email.get &
+              "data-name=edit [onclick]" #> SHtml.ajaxInvoke(() => dialogHtml(body, owner, p, false)) &
+              "data-name=remove [onclick]" #> SHtml.ajaxInvoke(() => deleteTeamMember(body, owner, p))
+            })
+          } &
+          "data-name=add-link [onclick]" #> SHtml.ajaxInvoke(() => dialogHtml(body, owner))
+      })
+    }
+
+
+    def template = {
+        <br />
+        <div id="staff" class="panel panel-default">
+
+          <div class="panel-heading title"></div>
+          <table class="table table-hover table-condensed">
+            <thead>
+              <tr><th>Nombre</th><th>Email</th><th>&nbsp;</th></tr>
+            </thead>
+            <tbody data-name="staff">
+              <tr>
+                <td data-name="name"></td>
+                <td data-name="email"></td>
+                <td><a href="#!" data-name="edit" onclick="#"><i class="fa fa-edit"></i></a>
+                  &nbsp; <a href="#!" data-name="remove" onclick="#"><i class="fa fa-trash"></i></a>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>
+                  <button data-name="add-link" href="#!" data-reveal-id="edition-dialog" type="button" class="btn btn-primary btn-xs"><i class="fa fa-search-plus"></i> Agregar edición</button>
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+    }
+
+
+    def deleteTeamMember(body: IdMemoizeTransform, festival: Festival, teamMember: TeamMember): JsCmd = {
+      festival.staff.set(festival.staff.get.filter(p => p != teamMember))
+      body.setHtml()
+    }
+
+    def dialogHtml(body: IdMemoizeTransform, festival: Festival, teamMember: TeamMember= TeamMember.createRecord, isNew: Boolean = true): JsCmd = {
+      val modalId = nextFuncName
+      val addTeamMember = () => {
+        if (isNew) festival.staff.set(festival.staff.get ++ List(teamMember))
+        body.setHtml() &
+          Run(s"$$('#${modalId}').foundation('reveal', 'close');") &
+          Run(s"$$('#${modalId}').remove();")
+      }
+
+
+      val html =
+        <div id={modalId} class="reveal-modal" data-reveal="" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+          <h2 id="modalTitle">Agregar Persona</h2>
+          <form data-lift="form.ajax">
+            <div class="row">
+              <div class="large-12 columns" >
+                <label> <span>{teamMember.name.displayName}</span>
+                  {teamMember.name.toForm openOr NodeSeq.Empty}
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-12 columns" >
+                <label> <span>{teamMember.email.displayName}</span>
+                  {teamMember.email.toForm openOr NodeSeq.Empty}
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-12 columns" >
+                <label> <span>{teamMember.function.displayName}</span>
+                  {teamMember.function.toForm openOr NodeSeq.Empty}
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-12 columns" >
+                <label> <span>{teamMember.cellphone.displayName}</span>
+                  {teamMember.cellphone.toForm openOr NodeSeq.Empty}
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-actions large-12 columns">
+                <div class="actions">
+                  {SHtml.hidden(addTeamMember)}
+                  <button type="submit" tabindex="1" class="btn btn-primary">
+                    Agregar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <a class="close-reveal-modal" aria-label="Cerrar">&#215;</a>
+        </div>
+
+      val (xml, js) = fixHtmlAndJs("modal", html)
+      Run("$(" + xml + ").foundation('reveal', 'open');")
+    }
   }
   object presentation extends TextareaField(this, 300) {
     override def displayName = "Breve histórico / presentación"
     override def helpAsHtml = Full(<span>Cuenta sobre la trayectoria del festival (máximo de 300 caracteres)</span>)
-    private def elem =
+    private def elem = {
       SHtml.textarea(
         valueBox openOr "",
         this.set(_),
         "rows" -> textareaRows.toString,
         "cols" -> textareaCols.toString,
         "tabindex" -> tabIndex.toString,
-        "onkeypress" -> SHtml.ajaxCall(JsRaw("$(this).val()"), countCharsLeft _).toJsCmd
+        "onkeyup" -> "textCounter(this, 300);"
       ) ++ <br/> ++ <div> Caracteres restantes: <span id="presentation-chars-left">{this.maxLength - this.valueBox.dmap(0)(_.length)}</span></div>
-
-    private def countCharsLeft(s: String): JsCmd = {
-      println(s)
-      val res = this.maxLength - s.length
-      SetHtml("presentation-chars-left", Text(res.toString))
     }
 
     override def toForm: Box[NodeSeq] = Full(elem)
@@ -579,6 +702,24 @@ object Festival extends Festival with RogueMetaRecord[Festival] with Loggable {
                      service: Box[ServiceExchange], training: Box[TrainingActivity], communication: Box[CommunicationTool],
                      partnership: Box[Partnership], networking: Box[Network]): Long = {
     filterQry(area, tag, equipment, service, training, communication, partnership, networking).count()
+  }
+
+  def findAllForMapByAreasCitiesAndDates(areas: List[Area], cities: List[City], begins: Box[Date], ends: Box[Date]): List[Festival] = {
+    val qry = Festival
+      .andOpt(begins)(_.begins gte new DateTime(_))
+      .andOpt(ends)(_.ends lte new DateTime(_))
+
+    val areasQry = areas match {
+      case Nil => qry
+      case other => qry.where(_.areas in areas.map(_.id.get))
+    }
+
+    val citiesQry = cities match {
+      case Nil => areasQry
+      case other => areasQry.where(_.city in cities.map(_.id.get))
+    }
+
+    citiesQry.fetch()
   }
 
 }
