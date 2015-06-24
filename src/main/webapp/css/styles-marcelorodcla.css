@@ -475,6 +475,16 @@ footer .container-fluid .logos a {
     line-height: 0;
 }
 
+.home {
+    overflow: hidden;
+}
+
+.home footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
 
 /**/
 body {
@@ -485,7 +495,7 @@ body {
 .slideout-menu {
     position: fixed;
     left: 0;
-    top: 0;
+    top: 75px;
     bottom: 0;
     right: 0;
     z-index: 0;
