@@ -5,6 +5,7 @@ import code.config.Site
 import code.model.{FileRecord, User}
 import code.model.festival.{EquipmentDetail, Festival}
 import com.foursquare.rogue.LatLong
+import net.liftmodules.FoBoBs.lib.BootstrapSH
 import net.liftmodules.extras.SnippetHelper
 import net.liftweb.common._
 import net.liftweb.http.js.JsCmds.{Run, SetHtml, RedirectTo, Noop}
@@ -120,6 +121,15 @@ object FestivalForm extends SnippetHelper {
       "data-name=remove-call [data-file-id]" #> inst.call.get.fileId.get &
       "data-name=call-container-field-id [class+]" #> inst.call.containerFieldId &
       "data-name=call-container-input-id [class+]" #> inst.call.containerInputId &
+      "data-name=places" #> SHtml.idMemoize(body => {
+        "data-name=place" #> inst.places.get.zipWithIndex.map{ case (place, index) => {
+          "data-name=number *" #> (index + 1) &
+          "data-name=name *" #> place.name.get &
+          "data-name=edit [onclick]" #> SHtml.ajaxInvoke(() => inst.places.dialogHtml(body, inst, place, false)) &
+          "data-name=delete [onclick]" #> SHtml.ajaxInvoke(() => inst.places.deletePlace(body, inst, place))
+        }} &
+        "data-name=add [onclick]" #> SHtml.ajaxInvoke(() => inst.places.dialogHtml(body, inst))
+      }) &
       {
         if (inst.status.shouldDisplay_?) {
           "data-name=status" #> inst.status.toForm &

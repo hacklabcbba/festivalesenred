@@ -218,19 +218,19 @@ class Place extends BsonRecord[Place] {
         	});
 
           $('#""" + mapId + """').data('map', map);
-          $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
-          	if ( $('#""" + mapId + """').data('map') ){
-            	$('#""" + mapId + """').data('map').updateSize();
-						}else{
-            	console.log('map in data no exist')
-						}
+          $('.modal').on('hidden.bs.modal', function (e) {
+            if ( $('#""" + mapId + """').data('map') ) {
+              $('#""" + mapId + """').data('map').updateSize();
+            } else {
+              console.log('map in data no exist')
+            }
           });
                                 """.stripMargin
     )
 
     override def toForm = {
 			//this.set(position)
-			S.appendJs(scriptMovableFeature)
+      S.appendJs(scriptMovableFeature)
 			val node =
 				<div>
 					<div id={mapId} style="height:300px;width:100%;"></div>
