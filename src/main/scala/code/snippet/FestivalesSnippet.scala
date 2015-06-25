@@ -288,7 +288,7 @@ object FestivalView extends SnippetHelper {
       "data-name=equipment" #> item.equipment.objs.map(s => "a" #> <a href={s"/festivales?equipment=${s.name.get}"} itemprop="url"><i class="fa fa-check"></i> {s.name.get}</a>) &
       "data-name=team" #> item.staff.get.map(tm => {
         "data-name=name *+" #> tm.name.get &
-        "data-name=role *+" #> tm.function.get &
+        "data-name=role *+" #> tm.role.get &
         "data-name=email *+" #> tm.email.get &
         "data-name=cellphone *+" #> tm.cellphone.get
       }) &

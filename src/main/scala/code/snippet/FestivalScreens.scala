@@ -121,6 +121,8 @@ object FestivalForm extends SnippetHelper {
       "data-name=remove-call [data-file-id]" #> inst.call.get.fileId.get &
       "data-name=call-container-field-id [class+]" #> inst.call.containerFieldId &
       "data-name=call-container-input-id [class+]" #> inst.call.containerInputId &
+      "data-name=call-date" #> inst.callDate.toForm &
+      "data-name=call-date-error [data-alertid]" #> inst.callDate.uniqueFieldId.openOr(nextFuncName) &
       "data-name=places" #> SHtml.idMemoize(body => {
         "data-name=place" #> inst.places.get.zipWithIndex.map{ case (place, index) => {
           "data-name=number *" #> (index + 1) &
@@ -129,6 +131,28 @@ object FestivalForm extends SnippetHelper {
           "data-name=delete [onclick]" #> SHtml.ajaxInvoke(() => inst.places.deletePlace(body, inst, place))
         }} &
         "data-name=add [onclick]" #> SHtml.ajaxInvoke(() => inst.places.dialogHtml(body, inst))
+      }) &
+      "data-name=persons" #> SHtml.idMemoize(body => {
+        "data-name=person" #> inst.staff.get.zipWithIndex.map{ case (person, index) => {
+          "data-name=number *" #> (index + 1) &
+          "data-name=name *" #> person.name.get &
+          "data-name=email *" #> person.email.get &
+          "data-name=role *" #> person.role.get &
+          "data-name=cellphone *" #> person.cellphone.get &
+          "data-name=edit [onclick]" #> SHtml.ajaxInvoke(() => inst.staff.dialogHtml(body, inst, person, false)) &
+          "data-name=delete [onclick]" #> SHtml.ajaxInvoke(() => inst.staff.deleteTeamMember(body, inst, person))
+        }} &
+        "data-name=add [onclick]" #> SHtml.ajaxInvoke(() => inst.staff.dialogHtml(body, inst))
+      }) &
+      "data-name=editions" #> SHtml.idMemoize(body => {
+        "data-name=edition" #> inst.numberEditions.get.zipWithIndex.map{ case (edition, index) => {
+          "data-name=number *" #> (index + 1) &
+          "data-name=name *" #> edition.name.get &
+          "data-name=date *" #> edition.date.literalDate &
+          "data-name=edit [onclick]" #> SHtml.ajaxInvoke(() => inst.numberEditions.dialogHtml(body, inst, edition, false)) &
+          "data-name=delete [onclick]" #> SHtml.ajaxInvoke(() => inst.numberEditions.deleteEdition(body, inst, edition))
+        }} &
+        "data-name=add [onclick]" #> SHtml.ajaxInvoke(() => inst.numberEditions.dialogHtml(body, inst))
       }) &
       {
         if (inst.status.shouldDisplay_?) {

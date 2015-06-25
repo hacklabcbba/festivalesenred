@@ -218,7 +218,7 @@ class Place extends BsonRecord[Place] {
         	});
 
           $('#""" + mapId + """').data('map', map);
-          $('.modal').on('hidden.bs.modal', function (e) {
+          $('.modal').on('show.bs.modal', function (e) {
             if ( $('#""" + mapId + """').data('map') ) {
               $('#""" + mapId + """').data('map').updateSize();
             } else {

@@ -103,8 +103,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Fecha inicial</label>
-                                <div class="input-group date">
-                                    <input data-name="begins" class="form-control" id="targetStartDate" type="text">
+                                <div class="input-group date" data-name="begins">
+                                    <input class="form-control" id="targetStartDate" type="text">
                                     <span class="input-group-btn">
                                         <button id="targetStartBtn" class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
                                     </span>
@@ -114,8 +114,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Fecha final</label>
-                                <div class="input-group date">
-                                    <input data-name="ends" class="form-control" id="targetStartDate" type="text">
+                                <div class="input-group date" data-name="ends">
+                                    <input class="form-control" id="targetStartDate" type="text">
                                     <span class="input-group-btn">
                                         <button id="targetStartBtn" class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
                                     </span>
@@ -228,7 +228,7 @@
                     </div>
                     <div class="form-group">
                         <label>Fecha límite de la convocatoía</label>
-                        <div class="input-group date">
+                        <div class="input-group date" data-name="call-date">
                             <input id="targetStartDate" class="form-control" type="text">
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" id="targetStartBtn"><i class="fa fa-calendar"></i></button>
@@ -240,7 +240,7 @@
                     <header>
                         <h2>Sobre la organizacion</h2>
                     </header>
-                    <div class="form-group people-functions">
+                    <div class="form-group people-functions" data-name="persons">
                         <label>¿Cuantas personas componen el equipo y que funciones cumplen?</label>
                         <div class="table-responsive">
                             <table class="table table-striped">
@@ -255,29 +255,16 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Nombre y apellido</td>
-                                    <td>email@email.com</td>
-                                    <td>Funcion</td>
-                                    <td>666666</td>
+                                <tr data-name="person">
+                                    <th scope="row" data-name="number">1</th>
+                                    <td data-name="name">Nombre y apellido</td>
+                                    <td data-name="email">email@email.com</td>
+                                    <td data-name="role">Funcion</td>
+                                    <td data-name="cellphone">666666</td>
                                     <td>
                                         <div aria-label="..." role="group" class="btn-group">
-                                            <a class="btn btn-default btn-warning " type="button" href="#"><i class="fa fa-pencil"></i></a>
-                                            <a class="btn btn-default btn-danger" type="button" href="#"><i class="fa fa-remove"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Nombre y apellido</td>
-                                    <td>email@email.com</td>
-                                    <td>Funcion</td>
-                                    <td>666666</td>
-                                    <td>
-                                        <div aria-label="..." role="group" class="btn-group">
-                                            <a class="btn btn-default btn-warning " type="button" href="#"><i class="fa fa-pencil"></i></a>
-                                            <a class="btn btn-default btn-danger" type="button" href="#"><i class="fa fa-remove"></i></a>
+                                            <a data-name="edit" class="btn btn-default btn-warning " type="button" href="#!"><i class="fa fa-pencil"></i></a>
+                                            <a data-name="delete" class="btn btn-default btn-danger" type="button" href="#!"><i class="fa fa-remove"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -285,45 +272,12 @@
                             </table>
                         </div>
                         <div>
-                            <a data-target="#modal-people-functions" data-toggle="modal" class="btn btn-default btn-success" type="button" href="#">
+                            <a data-name="add" data-target="#modal-people-functions" data-toggle="modal" class="btn btn-default btn-success" type="button" href="#">
                                 <i class="fa fa-plus-circle"></i> Agregar persona
                             </a>
                         </div>
-                        <div aria-labelledby="modal-place" role="dialog" tabindex="-1" id="modal-people-functions" class="modal fade">
-                            <div role="document" class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
-                                        <h4 class="modal-title">Agregar persona</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label for="">Nombre</label>
-                                            <input placeholder="Nombre" class="form-control" type="text">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">e-mail</label>
-                                            <input placeholder="Nombre" class="form-control" type="email">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Función</label>
-                                            <input placeholder="Función" class="form-control" type="text">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Teléfono celular</label>
-                                            <input placeholder="Teléfono celular" class="form-control" type="text">
-                                        </div>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button data-dismiss="modal" class="btn btn-default" type="button">Cerrar</button>
-                                        <button class="btn btn-primary" type="button">Agregar persona</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" data-name="editions">
                         <label>¿Cuantas ediciones del festival se han realizado y en que años?</label>
                         <div class="table-responsive">
                             <table class="table table-striped">
@@ -336,25 +290,14 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Nombre del festival</td>
-                                    <td>19/05/2015</td>
+                                <tr data-name="edition">
+                                    <th scope="row" data-name="number">1</th>
+                                    <td data-name="name">Nombre del festival</td>
+                                    <td data-name="date">19/05/2015</td>
                                     <td>
                                         <div aria-label="..." role="group" class="btn-group">
-                                            <a class="btn btn-default btn-warning " type="button" href="#"><i class="fa fa-pencil"></i></a>
-                                            <a class="btn btn-default btn-danger" type="button" href="#"><i class="fa fa-remove"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Nombre del festival</td>
-                                    <td>19/05/2015</td>
-                                    <td>
-                                        <div aria-label="..." role="group" class="btn-group">
-                                            <a class="btn btn-default btn-warning " type="button" href="#"><i class="fa fa-pencil"></i></a>
-                                            <a class="btn btn-default btn-danger" type="button" href="#"><i class="fa fa-remove"></i></a>
+                                            <a data-name="edit" class="btn btn-default btn-warning " type="button" href="#!"><i class="fa fa-pencil"></i></a>
+                                            <a data-name="delete" class="btn btn-default btn-danger" type="button" href="#!"><i class="fa fa-remove"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -362,35 +305,9 @@
                             </table>
                         </div>
                         <div>
-                            <a data-target="#modal-editions" data-toggle="modal" class="btn btn-default btn-success" type="button" href="#">
+                            <a data-name="add" data-target="#modal-editions" data-toggle="modal" class="btn btn-default btn-success" type="button" href="#">
                                 <i class="fa fa-plus-circle"></i> Agregar edición
                             </a>
-                        </div>
-                        <div aria-labelledby="modal-place" role="dialog" tabindex="-1" id="modal-editions" class="modal fade">
-                            <div role="document" class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
-                                        <h4 class="modal-title">Agregar edición</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label for="">Nombre</label>
-                                            <input placeholder="Nombre" class="form-control" type="text">
-                                        </div>
-                                        <div class="input-group date">
-                                            <input id="" class="form-control" type="text">
-                                            <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button data-dismiss="modal" class="btn btn-default" type="button">Cerrar</button>
-                                        <button class="btn btn-primary" type="button">Agregar edicion</button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -559,8 +476,8 @@
                 </div>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-sm text-center">
-                <button type="submit" class="btn btn-primary btn-lg btn-success"><i class="fa fa-plus-circle"></i> Crear festival</button>
-                <button type="submit" class="btn btn-primary btn-lg btn-danger"><i class="fa fa-times-circle"></i> Cancelar</button>
+                <button data-name="submit" type="submit" class="btn btn-primary btn-lg btn-success"><i class="fa fa-plus-circle"></i> Guardar festival</button>
+                <button data-name="cancel" type="button" class="btn btn-primary btn-lg btn-danger"><i class="fa fa-times-circle"></i> Cancelar</button>
             </div>
         </form>
         <script>
