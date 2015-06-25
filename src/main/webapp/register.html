@@ -7,16 +7,16 @@
 			<h1>Únete</h1>
 			<p>Regístrate y suma tu Festival</p>
 		</header>
-		<div class="col-md-4 col-md-offset-4" data-lift="UserLogin">
+		<div class="col-md-4 col-md-offset-4" data-lift="UserRegister">
 			<form data-lift="form.ajax">
 				<div class="text-center">
 					<div class="form-group form-group">
-						<label class="control-label sr-only" for="username">Nombre de usuario</label>
-						<input id="username" name="email" type="text" placeholder="Nombre de usuario" class="form-control input-lg" />
+						<label class="control-label sr-only" for="id_username">Nombre de usuario</label>
+						<input id="id_username" name="email" type="text" placeholder="Nombre de usuario" class="form-control input-lg" />
 					</div>
 					<div class="form-group form-group">
-						<label class="control-label sr-only" for="name">Nombre completo</label>
-						<input id="name" name="email" type="text" placeholder="Nombre completo" class="form-control input-lg" />
+						<label class="control-label sr-only" for="id_name">Nombre completo</label>
+						<input id="id_name" name="email" type="text" placeholder="Nombre completo" class="form-control input-lg" />
 					</div>
 					<div class="form-group">
 						<label class="control-label sr-only" for="id_email">Correo electronico</label>
@@ -34,15 +34,15 @@
 						<p>O a través de</p>
 					</div>
 					<div class="row">
-						<div class="col-md-4">
+						<div class="col-md-12">
 							<a class="btn btn-default facebook form-control" href="/auth/facebook/signin"><i class="fa fa-facebook"></i> facebook</a>
 						</div>
-						<div class="col-md-4">
+						<!--<div class="col-md-4">
 							<a class="btn btn-default twitter form-control" href="/auth/twitter/signin"><i class="fa fa-twitter"></i> twitter</a>
 						</div>
 						<div class="col-md-4">
 							<a class="btn btn-default googleplus form-control" href="/auth/google/signin"><i class="fa fa-google-plus"></i> google+</a>
-						</div>
+						</div>-->
 					</div>
 				</div>
 
@@ -51,73 +51,3 @@
 
 	</main>
 </div>
-
-<div class="login register" data-lift="surround?with=base-wrap;at=content">
-    <lift:head>
-        <title>Únete | Festivales en Red | Telartes</title>
-    </lift:head>
-	<div class="large-4 large-centered columns medium-7 small-12 small-centered" >
-	  <div class="gs-login-box text-center">
-	  <h2>Únete</h2>
-	  <h3>Regístrate y suma tu Festival</h3>
-          <div class="row" data-lift="UserRegister">
-			  <div class="large-12  columns">
-				<form data-lift="form.ajax">
-                        <div class="row collapse">
-                            <div class="large-12 columns">
-                                <i class="fi-torso"></i>
-                                <input id="id_username" type="text" placeholder="Nombre de usuario">
-                            </div>
-                        </div>
-						<div class="row collapse">
-						  <div class="large-12 columns">
-							<i class="fi-torso"></i>
-							<input id="id_name" type="text" placeholder="Nombre completo">
-						  </div>
-						</div>
-						<div class="row collapse">
-						  <div class="large-12 columns">
-							<i class="fi-mail"></i>
-							<input id="id_email" type="text" placeholder="Correo electrónico">
-						  </div>
-						</div>
-						<div class="row collapse">
-						  <div class="large-12 columns">
-							<i class="fi-lock"></i>
-							<input id="id_password" type="text" placeholder="Contraseña">
-						  </div>
-						</div>
-						<div class="row collapse">
-						  <div class="large-12 columns">
-                            <input type="hidden" id="id_submit">
-                            <button type="submit"  class="button gs-login-btn large-12 columns">Registrarse</button>
-						  </div>
-						</div>
-
-						<!-- SOCIAL -->
-						<div class="row collapse">
-							<div class="large-12 colummns">
-								<div class="gs-social">O a través de</div>
-								<span class="gs-line"></span>
-							</div>
-						</div>
-						<div class="row collapse">
-							<div class="large-12 colummns">
-								<a class="button gs-social-btn gs-facebook-btn large-12 columns" href="/auth/facebook/signin">Iniciar sesión con Facebook</a>
-							</div>
-						</div>
-						<!--<div class="row collapse">
-							<div class="large-5 left columns small-12">
-								<a class="button gs-social-btn gs-twitter-btn large-12 columns" href="/auth/twitter/signin">twitter</a>
-							</div>
-							<div class="large-5 right columns small-12">
-								<a class="button gs-social-btn gs-google-plus-btn large-12 columns" href="/auth/google/signin">google+</a>
-							</div>
-						</div>-->
-				</form>
-			  </div>
-		</div>
-	  </div>
-	</div>
-</div>
-
