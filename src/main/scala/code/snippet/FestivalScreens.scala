@@ -154,6 +154,22 @@ object FestivalForm extends SnippetHelper {
         }} &
         "data-name=add [onclick]" #> SHtml.ajaxInvoke(() => inst.numberEditions.dialogHtml(body, inst))
       }) &
+      "data-name=minimal-budget" #> inst.minimalBudget.get.amount.toForm &
+      "data-name=minimal-budget-error [data-alertid]" #> inst.minimalBudget.get.amount.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=budget" #> inst.budget.get.amount.toForm &
+      "data-name=budget-error [data-alertid]" #> inst.budget.get.amount.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=collaborative-budget" #> inst.collaborativeEconomyBudget.get.amount.toForm &
+      "data-name=collaborative-budget-error [data-alertid]" #> inst.collaborativeEconomyBudget.get.amount.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=minimal-budget-currency" #> inst.minimalBudget.get.currency.toForm &
+      "data-name=minimal-budget-currency-error [data-alertid]" #> inst.minimalBudget.get.currency.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=budget-currency" #> inst.budget.get.currency.toForm &
+      "data-name=budget-currency-error [data-alertid]" #> inst.budget.get.currency.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=collaborative-budget-currency" #> inst.collaborativeEconomyBudget.get.currency.toForm &
+      "data-name=collaborative-budget-currency-error [data-alertid]" #> inst.collaborativeEconomyBudget.get.currency.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=management-duration" #> inst.managementDuration.toForm &
+      "data-name=management-duration-error [data-alertid]" #> inst.managementDuration.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=tags" #> inst.tags.toForm &
+      "data-name=tags [data-alertid]" #> inst.tags.uniqueFieldId.openOr(nextFuncName) &
       {
         if (inst.status.shouldDisplay_?) {
           "data-name=status" #> inst.status.toForm &
