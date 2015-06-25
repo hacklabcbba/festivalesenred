@@ -51,7 +51,7 @@ class FileField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
     )
   }
 
-  def previewUrl = s"/file/preview/${this.get.fileId.get}"
+  def previewUrl = if (value.fileId.get != "" ) s"/file/preview/${this.get.fileId.get}" else "/img/logo_festivalesenred.png"
 
   def fileUrl = s"/service/images/${this.get.fileId.get}"
 
