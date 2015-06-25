@@ -46,6 +46,10 @@
 /*------------------------------*\
     $TAGS
 \*------------------------------*/
+html {
+    height: 100%;
+}
+
 body {
     background: #FBFBFB;
     color: #666;
@@ -55,6 +59,10 @@ body {
 
 a {
     color: #F60;
+}
+
+a:hover {
+    color:#FFC400;
 }
 
 a:hover {
@@ -69,6 +77,21 @@ a:hover {
     /*margin-left: auto;*/
     /*margin-right: auto;*/
 /*}*/
+
+#content-body {
+    min-height: 100%;
+    margin-bottom: -3rem;/*Variación opcional*/
+    padding-bottom: 50px;
+}
+
+#content-body:after {
+    content: "";
+    display: block;
+}
+
+#content-body:after, body > footer {
+    height: 3rem;/*Variación opcional*/
+}
 
 .container,
 [class*="col-"] {
@@ -241,9 +264,6 @@ header > .navbar .navbar-brand {
     height: auto;
     padding-top: 0;
     padding-bottom: 0;
-}
-
-header > .navbar .navbar-brand > div  {
     background: #fff;
 }
 
@@ -384,12 +404,30 @@ header > .navbar .navbar-brand > div  {
     padding-bottom: 5px;
 }
 
+.event .main-img {
+    height: 600px;
+    overflow: hidden;
+}
+
+.event .main-img img {
+    width: 100%;
+}
+
 .event .box-board li:last-child {
     border-bottom: none;
 }
 
 .event .images-gallery {
     margin: 10px 0;
+}
+
+.event .images-gallery .text-center > div {
+    float: none;
+    display: inline-block;
+}
+
+.event .images-gallery .text-center > div img {
+    width: 100%;
 }
 
 .event .object-list a {
@@ -484,21 +522,15 @@ header > .navbar .navbar-brand > div  {
     $FOOTER
 \*------------------------------------*/
 
-/*body > footer {*/
-    /*position: absolute;*/
-    /*width: 100%;*/
-    /*bottom: 0;*/
-/*}*/
 body > footer {
     background: #3D4A4A none repeat scroll 0% 0%;
     color: #FFF;
-    margin-top: 50px;
     margin-bottom: 0;
     padding-top: 5px;
     padding-bottom: 5px;
 }
 
-body > footer .container a {
+body > footer a {
     color: #fff;
 }
 
