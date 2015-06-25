@@ -64,54 +64,6 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   object places extends BsonRecordListField(this, Place) with HtmlFixer {
     override def displayName = ""
     def title = "Lugar donde se desarrolla el Festival"
-    override def toForm = Full(
-      css.apply(template)
-    )
-
-    def css = {
-      "#places" #> SHtml.idMemoize(body => {
-      ".title" #> title &
-      "tbody *" #> {
-        "tr " #> value.map( p => {
-          "data-name=name *" #> p.name.get &
-          "data-name=edit [onclick]" #> SHtml.ajaxInvoke(() => dialogHtml(body, owner, p, false)) &
-          "data-name=remove [onclick]" #> SHtml.ajaxInvoke(() => deletePlace(body, owner, p))
-          })
-      } &
-      "data-name=add-link [onclick]" #> SHtml.ajaxInvoke(() => dialogHtml(body, owner))
-      })
-    }
-
-
-    def template = {
-      <br />
-      <div id="places" class="panel panel-default">
-
-        <div class="panel-heading title"></div>
-        <table class="table table-hover table-condensed">
-        <thead>
-          <tr><th>Lugar</th><th>&nbsp;</th></tr>
-        </thead>
-          <tbody data-name="places">
-            <tr>
-              <td data-name="name"></td>
-              <td><a href="#!" data-name="edit" onclick="#"><i class="fa fa-edit"></i></a>
-                &nbsp; <a href="#!" data-name="remove" onclick="#"><i class="fa fa-trash"></i></a>
-              </td>
-            </tr>
-          </tbody>
-          <tfoot>
-          <tr>
-            <td>
-              <button data-name="add-link" href="#!" data-reveal-id="place-dialog" type="button" class="btn btn-primary btn-xs"><i class="fa fa-search-plus"></i> Agregar lugar</button>
-            </td>
-            <td></td>
-          </tr>
-          </tfoot>
-        </table>
-      </div>
-    }
-
 
     def deletePlace(body: IdMemoizeTransform, festival: Festival, place: Place): JsCmd = {
       festival.places.set(festival.places.get.filter(p => p != place))
@@ -122,47 +74,20 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
       val modalId = nextFuncName
       val addPlace = () => {
         if (isNew) festival.places.set(festival.places.get ++ List(place))
-        body.setHtml() &
-          Run(s"$$('#${modalId}').foundation('reveal', 'close');") &
-          Run(s"$$('#${modalId}').remove();")
+        Run("$('#" + modalId + "').modal('hide');") &
+        body.setHtml()
      }
 
 
-      val html =
-      <div id={modalId} class="reveal-modal" data-reveal="" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-        <h2 id="modalTitle">Agregar Lugar</h2>
-        <form data-lift="form.ajax">
-          <div class="row">
-            <div class="large-12 columns" >
-              <label> <span>{place.name.displayName}</span>
-                {place.name.toForm openOr NodeSeq.Empty}
-              </label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="large-12 columns" >
-              <label> <span>{place.geoLatLng.displayName}</span>
-                {place.geoLatLng.toForm openOr NodeSeq.Empty}
-              </label>
-            </div>
-            <br/>
-          </div>
-          <div class="row">
-            <div class="form-actions large-12 columns">
-              <div class="actions">
-                {SHtml.hidden(addPlace)}
-                <button type="submit" tabindex="1" class="btn btn-primary">
-                  Agregar
-                </button>
-              </div>
-            </div>
-          </div>
-        </form>
-        <a class="close-reveal-modal" aria-label="Cerrar">&#215;</a>
-      </div>
-
+      val template = S.runTemplate(List("templates-hidden", "_place-modal")) openOr Text("template not found")
+      val html = {
+        "data-name=modal [id]" #> modalId &
+        "data-name=name" #> place.name.toForm &
+        "data-name=map *" #> place.geoLatLng.toForm &
+        "data-name=hidden" #> SHtml.hidden(addPlace)
+      }.apply(template)
       val (xml, js) = fixHtmlAndJs("modal", html)
-      Run("$(" + xml + ").foundation('reveal', 'open');")
+      Run("$(" + xml + ").modal();")
     }
   }
   object begins extends DatepickerField(this) {

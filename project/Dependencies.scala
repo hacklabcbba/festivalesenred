@@ -24,6 +24,8 @@ object Dependencies {
   val liftMongodb = "net.liftweb" %% "lift-mongodb-record" % Ver.lift
   val liftFacebook = "net.liftmodules" %% "facebook_2.6" % "1.3-SNAPSHOT"
   val liftOmniauth = "net.liftmodules" % "omniauth_2.6_2.11" % "0.17"
+  val liftFobo = "net.liftmodules" %% "fobo_2.6" % "1.3"
+
 
   // Lift modules
   val liftExtras = "net.liftmodules" %% ("extras_"+Ver.lift_edition) % "0.4-SNAPSHOT"

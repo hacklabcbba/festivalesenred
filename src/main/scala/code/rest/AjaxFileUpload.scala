@@ -131,7 +131,7 @@ object AjaxFileUpload extends RestHelper {
                   ("Date" -> nowAsInternetDate) :: Nil
 
               val img = ImageIO.read(file.getInputStream)
-              val im: BufferedImage = ImageResizer.max(Empty, img, 75, 75)
+              val im: BufferedImage = ImageResizer.max(Empty, img, 500, 500)
               val baos: ByteArrayOutputStream = new ByteArrayOutputStream()
               ImageIO.write(im, file.getContentType.split("/")(1), baos)
               val b = baos.toByteArray
