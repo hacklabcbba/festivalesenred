@@ -52,7 +52,7 @@ class TagField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType) extends BsonR
     S.appendJs(script)
 
 
-    <div class="col-sm-12 col-xs-12 col-lg-12">
+    <div class="tag-container">
       <input type="text" autocomplete="off" name="tags" placeholder="Tags" class="form-control tm-input tm-input-info tm-input-01" data-original-title="" hvkeyboarddefined="true"/>
       {SHtml.hidden(s => toTags(s), this.value.map(t => "'" + t.tag.get + "'").mkString(","), "id" -> hiddenTagListId)}
     </div>
