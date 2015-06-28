@@ -72,11 +72,15 @@ a:hover {
 /*------------------------------*\
     $CLASSES
 \*------------------------------*/
-/*.container{*/
-    /*width: 920px;*/
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
-/*}*/
+#ajax-spinner {
+    background: rgba(255, 255, 255, 0.8) none repeat scroll 0% 0%;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    z-index: 2000;
+    text-align: center;
+    padding-top: 100px;
+}
 
 #content-body {
     min-height: 100%;
@@ -191,6 +195,10 @@ header > .navbar span {
     text-transform: uppercase;
 }
 
+header .powered span {
+    font-size: 10px;
+}
+
 header > .navbar .powered+.btn-group .btn-default:last-child span {
     color: #fff;
 }
@@ -213,6 +221,7 @@ header .powered span {
 header > .navbar .nav-option a,
 header > .navbar .nav-register li:first-child a {
     padding-top: 0px;
+    padding-left: 0px;
 }
 
 header > .navbar .nav-register {
@@ -279,6 +288,14 @@ header > .navbar .navbar-brand {
 
 #menu {
     background:#fff ;
+}
+
+#menu p[data-name="description"]  {
+    font-size: 12px;
+}
+
+#menu .panel-group .panel {
+    border-radius: 0;
 }
 
 #map {
