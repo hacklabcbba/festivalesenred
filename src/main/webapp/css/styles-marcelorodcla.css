@@ -46,6 +46,10 @@
 /*------------------------------*\
     $TAGS
 \*------------------------------*/
+html {
+    height: 100%;
+}
+
 body {
     background: #FBFBFB;
     color: #666;
@@ -58,17 +62,40 @@ a {
 }
 
 a:hover {
+    color:#FFC400;
+}
+
+a:hover {
     text-decoration: none;
 }
 
 /*------------------------------*\
     $CLASSES
 \*------------------------------*/
-/*.container{*/
-    /*width: 920px;*/
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
-/*}*/
+#ajax-spinner {
+    background: rgba(255, 255, 255, 0.8) none repeat scroll 0% 0%;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    z-index: 2000;
+    text-align: center;
+    padding-top: 100px;
+}
+
+#content-body {
+    min-height: 100%;
+    margin-bottom: -3rem;/*Variación opcional*/
+    padding-bottom: 50px;
+}
+
+#content-body:after {
+    content: "";
+    display: block;
+}
+
+#content-body:after, body > footer {
+    height: 3rem;/*Variación opcional*/
+}
 
 .container,
 [class*="col-"] {
@@ -168,6 +195,10 @@ header > .navbar span {
     text-transform: uppercase;
 }
 
+header .powered span {
+    font-size: 10px;
+}
+
 header > .navbar .powered+.btn-group .btn-default:last-child span {
     color: #fff;
 }
@@ -178,14 +209,19 @@ header .navbar-nav.nav-option {
 }
 header > .navbar a:hover,
 header > .navbar a:focus,
-header .navbar-nav.nav-option span {
+header .navbar span {
     border-bottom: 2px solid #333;
     line-height: 20px;
+}
+
+header .powered span {
+    border-bottom: none;
 }
 
 header > .navbar .nav-option a,
 header > .navbar .nav-register li:first-child a {
     padding-top: 0px;
+    padding-left: 0px;
 }
 
 header > .navbar .nav-register {
@@ -237,9 +273,6 @@ header > .navbar .navbar-brand {
     height: auto;
     padding-top: 0;
     padding-bottom: 0;
-}
-
-header > .navbar .navbar-brand > div  {
     background: #fff;
 }
 
@@ -255,6 +288,14 @@ header > .navbar .navbar-brand > div  {
 
 #menu {
     background:#fff ;
+}
+
+#menu p[data-name="description"]  {
+    font-size: 12px;
+}
+
+#menu .panel-group .panel {
+    border-radius: 0;
 }
 
 #map {
@@ -380,12 +421,30 @@ header > .navbar .navbar-brand > div  {
     padding-bottom: 5px;
 }
 
+.event .main-img {
+    height: 600px;
+    overflow: hidden;
+}
+
+.event .main-img img {
+    width: 100%;
+}
+
 .event .box-board li:last-child {
     border-bottom: none;
 }
 
 .event .images-gallery {
     margin: 10px 0;
+}
+
+.event .images-gallery .text-center > div {
+    float: none;
+    display: inline-block;
+}
+
+.event .images-gallery .text-center > div img {
+    width: 100%;
 }
 
 .event .object-list a {
@@ -480,21 +539,15 @@ header > .navbar .navbar-brand > div  {
     $FOOTER
 \*------------------------------------*/
 
-/*body > footer {*/
-    /*position: absolute;*/
-    /*width: 100%;*/
-    /*bottom: 0;*/
-/*}*/
 body > footer {
     background: #3D4A4A none repeat scroll 0% 0%;
     color: #FFF;
-    margin-top: 50px;
     margin-bottom: 0;
     padding-top: 5px;
     padding-bottom: 5px;
 }
 
-body > footer .container a {
+body > footer a {
     color: #fff;
 }
 

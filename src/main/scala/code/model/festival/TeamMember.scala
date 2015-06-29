@@ -13,7 +13,7 @@ class TeamMember private() extends MongoRecord[TeamMember] with ObjectIdPk[TeamM
   object name extends StringField(this, 200) {
     override def displayName = "Nombre"
   }
-  object function extends StringField(this, 200) {
+  object role extends StringField(this, 200) {
     override def displayName = "Función"
   }
   object email extends EmailField(this, 200) {

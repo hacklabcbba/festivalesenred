@@ -5,6 +5,7 @@ import code.config.Site
 import code.model.{FileRecord, User}
 import code.model.festival.{EquipmentDetail, Festival}
 import com.foursquare.rogue.LatLong
+import net.liftmodules.FoBoBs.lib.BootstrapSH
 import net.liftmodules.extras.SnippetHelper
 import net.liftweb.common._
 import net.liftweb.http.js.JsCmds.{Run, SetHtml, RedirectTo, Noop}
@@ -35,6 +36,12 @@ object FestivalForm extends SnippetHelper {
     for {
       inst <- Site.festivalEdit.currentValue ?~ "Opción no válida"
     } yield {
+      "data-name=logo-preview [src]" #> inst.logo.previewUrl &
+      "data-name=logo-url [href]" #> inst.logo.fileUrl &
+      "data-name=logo" #> inst.logo.toForm &
+      "data-name=remove-logo [data-file-id]" #> inst.logo.get.fileId.get &
+      "data-name=logo-container-field-id [class+]" #> inst.logo.containerFieldId &
+      "data-name=logo-container-input-id [class+]" #> inst.logo.containerInputId &
       "data-name=name" #> inst.name.toForm &
       "data-name=name-error [data-alertid]" #> inst.name.uniqueFieldId.openOr(nextFuncName) &
       "data-name=description" #> inst.presentation.toForm &
@@ -90,6 +97,79 @@ object FestivalForm extends SnippetHelper {
       "data-name=civil-partnership-error [data-alertid]" #> inst.civilOrganizationPartnerships.uniqueFieldId.openOr(nextFuncName) &
       "data-name=networking" #> inst.networking.toForm &
       "data-name=networking-error [data-alertid]" #> inst.networking.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=photo1-preview [src]" #> inst.photo1.previewUrl &
+      "data-name=photo1-url [href]" #> inst.photo1.fileUrl &
+      "data-name=photo1" #> inst.photo1.toForm &
+      "data-name=remove-photo1 [data-file-id]" #> inst.photo1.get.fileId.get &
+      "data-name=photo1-container-field-id [class+]" #> inst.photo1.containerFieldId &
+      "data-name=photo1-container-input-id [class+]" #> inst.photo1.containerInputId &
+      "data-name=photo2-preview [src]" #> inst.photo2.previewUrl &
+      "data-name=photo2-url [href]" #> inst.photo2.fileUrl &
+      "data-name=photo2" #> inst.photo2.toForm &
+      "data-name=remove-photo2 [data-file-id]" #> inst.photo2.get.fileId.get &
+      "data-name=photo2-container-field-id [class+]" #> inst.photo2.containerFieldId &
+      "data-name=photo2-container-input-id [class+]" #> inst.photo2.containerInputId &
+      "data-name=photo3-preview [src]" #> inst.photo3.previewUrl &
+      "data-name=photo3-url [href]" #> inst.photo3.fileUrl &
+      "data-name=photo3" #> inst.photo3.toForm &
+      "data-name=remove-photo3 [data-file-id]" #> inst.photo3.get.fileId.get &
+      "data-name=photo3-container-field-id [class+]" #> inst.photo3.containerFieldId &
+      "data-name=photo3-container-input-id [class+]" #> inst.photo3.containerInputId &
+      "data-name=call-preview [src]" #> inst.call.previewUrl &
+      "data-name=call-url [href]" #> inst.call.fileUrl &
+      "data-name=call" #> inst.call.toForm &
+      "data-name=remove-call [data-file-id]" #> inst.call.get.fileId.get &
+      "data-name=call-container-field-id [class+]" #> inst.call.containerFieldId &
+      "data-name=call-container-input-id [class+]" #> inst.call.containerInputId &
+      "data-name=call-date" #> inst.callDate.toForm &
+      "data-name=call-date-error [data-alertid]" #> inst.callDate.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=places" #> SHtml.idMemoize(body => {
+        "data-name=place" #> inst.places.get.zipWithIndex.map{ case (place, index) => {
+          "data-name=number *" #> (index + 1) &
+          "data-name=name *" #> place.name.get &
+          "data-name=edit [onclick]" #> SHtml.ajaxInvoke(() => inst.places.dialogHtml(body, inst, place, false)) &
+          "data-name=delete [onclick]" #> SHtml.ajaxInvoke(() => inst.places.deletePlace(body, inst, place))
+        }} &
+        "data-name=add [onclick]" #> SHtml.ajaxInvoke(() => inst.places.dialogHtml(body, inst))
+      }) &
+      "data-name=persons" #> SHtml.idMemoize(body => {
+        "data-name=person" #> inst.staff.get.zipWithIndex.map{ case (person, index) => {
+          "data-name=number *" #> (index + 1) &
+          "data-name=name *" #> person.name.get &
+          "data-name=email *" #> person.email.get &
+          "data-name=role *" #> person.role.get &
+          "data-name=cellphone *" #> person.cellphone.get &
+          "data-name=edit [onclick]" #> SHtml.ajaxInvoke(() => inst.staff.dialogHtml(body, inst, person, false)) &
+          "data-name=delete [onclick]" #> SHtml.ajaxInvoke(() => inst.staff.deleteTeamMember(body, inst, person))
+        }} &
+        "data-name=add [onclick]" #> SHtml.ajaxInvoke(() => inst.staff.dialogHtml(body, inst))
+      }) &
+      "data-name=editions" #> SHtml.idMemoize(body => {
+        "data-name=edition" #> inst.numberEditions.get.zipWithIndex.map{ case (edition, index) => {
+          "data-name=number *" #> (index + 1) &
+          "data-name=name *" #> edition.name.get &
+          "data-name=date *" #> edition.date.literalDate &
+          "data-name=edit [onclick]" #> SHtml.ajaxInvoke(() => inst.numberEditions.dialogHtml(body, inst, edition, false)) &
+          "data-name=delete [onclick]" #> SHtml.ajaxInvoke(() => inst.numberEditions.deleteEdition(body, inst, edition))
+        }} &
+        "data-name=add [onclick]" #> SHtml.ajaxInvoke(() => inst.numberEditions.dialogHtml(body, inst))
+      }) &
+      "data-name=minimal-budget" #> inst.minimalBudget.get.amount.toForm &
+      "data-name=minimal-budget-error [data-alertid]" #> inst.minimalBudget.get.amount.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=budget" #> inst.budget.get.amount.toForm &
+      "data-name=budget-error [data-alertid]" #> inst.budget.get.amount.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=collaborative-budget" #> inst.collaborativeEconomyBudget.get.amount.toForm &
+      "data-name=collaborative-budget-error [data-alertid]" #> inst.collaborativeEconomyBudget.get.amount.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=minimal-budget-currency" #> inst.minimalBudget.get.currency.toForm &
+      "data-name=minimal-budget-currency-error [data-alertid]" #> inst.minimalBudget.get.currency.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=budget-currency" #> inst.budget.get.currency.toForm &
+      "data-name=budget-currency-error [data-alertid]" #> inst.budget.get.currency.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=collaborative-budget-currency" #> inst.collaborativeEconomyBudget.get.currency.toForm &
+      "data-name=collaborative-budget-currency-error [data-alertid]" #> inst.collaborativeEconomyBudget.get.currency.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=management-duration" #> inst.managementDuration.toForm &
+      "data-name=management-duration-error [data-alertid]" #> inst.managementDuration.uniqueFieldId.openOr(nextFuncName) &
+      "data-name=tags" #> inst.tags.toForm &
+      "data-name=tags [data-alertid]" #> inst.tags.uniqueFieldId.openOr(nextFuncName) &
       {
         if (inst.status.shouldDisplay_?) {
           "data-name=status" #> inst.status.toForm &

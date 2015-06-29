@@ -1,0 +1,284 @@
+/*------------------------------------*\
+* Company: Genso S.R.L.
+* Project: ChocMo
+* Version: 1.0
+* Author: Marcelo Rodríguez Claros
+\*------------------------------------*/
+
+/*------------------------------------*\
+    $TABLE OF CONTENTS
+\*------------------------------------*/
+/*
+ * TABLE OF CONTENTS
+ * GENERAL ELEMENTS
+ ** NOTICES
+ * HEADER
+ ** MENUBAR
+ * BODY
+ ** DISTRIBUTION PAGE
+ ** SLIDER
+ ** LEFT
+ ** RIGHT
+ * FOOTER
+ * ALERTS
+ */
+
+
+
+
+
+
+
+
+/*------------------------------*\
+    $NOTICES
+\*------------------------------*/
+
+/*------------------------------------*\
+    $HEADER
+\*------------------------------------*/
+
+/*------------------------------*\
+    $HOME
+\*------------------------------*/
+/*------------------------------------*\
+    $BODY
+\*------------------------------------*/
+/*------------------------------*\
+    $HOME
+\*------------------------------*/
+
+/*------------------------------*\
+    $STORE
+\*------------------------------*/
+
+/*------------------------------------*\
+    $FOOTER
+\*------------------------------------*/
+
+@media (min-width:1024px) and (max-width: 1175px) {
+/*------------------------------------*\
+    $HEADER
+\*------------------------------------*/
+    header > .navbar a,
+    header > .navbar span {
+        font-size:11px
+    }
+    header .navbar-nav > li,
+    header > .navbar .user-options li {
+        padding-left: 11px;
+        padding-right: 11px;
+    }
+    header .powered span {
+        display: inline-block;
+        font-size: 10px;
+        padding-top: 7px;
+    }
+    /*------------------------------------*\
+        $BODY
+    \*------------------------------------*/
+
+
+}
+
+@media (max-width: 1023px) {
+    .table-responsive {
+        border: none;
+        padding: 0;
+        width: 100%;
+        margin-bottom: 15px;
+        overflow-x: auto;
+        overflow-y: hidden
+    }
+    /*------------------------------------*\
+        $HEADER
+    \*------------------------------------*/
+    header #logolink img {
+        height: 70px;
+    }
+    .nav.navbar-nav li {
+        padding-top: 0px;
+    }
+    .nav > li > a {
+        padding: 15px 10px;
+    }
+    .navbar-collapse .cart-container {
+        margin: 10px 15px 0px 0px;
+    }
+    .collapse.navbar-collapse .btn.navbar-right {
+        margin-top: 13px;
+    }
+    .navbar-header {
+        float: none;
+    }
+    .navbar-left,.navbar-right {
+        float: none !important;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin-top: 7.5px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .collapse.in{
+        display:block !important;
+    }
+    .nav.navbar-nav li:first-child {
+        padding-top: 0;
+    }
+    .nav.navbar-nav li {
+        padding-top: 15px;
+    }
+    .navbar-header {
+        padding-bottom: 0px;
+    }
+    .navbar-header .navbar-toggle {
+        border: 1px solid #333;
+        margin:10px 10px 0 0;
+        padding: 10px 8px;
+    }
+
+    .nav.navbar-nav .active {
+        padding-top: 0;
+        margin-top: 20px;
+    }
+    .nav.navbar-nav .active a {
+        background: #FFF300 none repeat scroll 0% 0%;
+    }
+    .navbar-collapse {
+        border: none;
+        box-shadow: none;
+    }
+    .navbar-fixed-top {
+        position: relative;
+    }
+    .dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-menu {
+        position: relative;
+        border: none;
+        width: 100%;
+        text-align: center;
+    }
+    .viewAll,
+    .btnLoc {
+        margin-top: 13px;
+    }
+    .navbar-collapse .cart-container {
+        margin-top: 1px ;
+    }
+    header .pull-right.nav-register {
+        width: 100%;
+        text-align: center;
+    }
+    header .powered {
+        width: 100%;
+        margin-bottom: 25px;
+    }
+
+    header .pull-right.nav-register .btn-group {
+        padding: 0;
+    }
+
+    header > .navbar .user-options {
+        margin: 0;
+        width: 100%;
+    }
+
+    header > .navbar .user-options li {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    header .navbar-collapse {
+        padding-bottom: 10px;
+    }
+
+}
+/*------------------------------------*\
+        $FOOTER
+\*------------------------------------*/
+.home footer {
+    display: none;
+}
+
+footer {
+    text-align: center;
+    height: auto;
+}
+
+#content-body:after,
+body > footer {
+    height: auto;
+}
+
+body > footer div.logos div.pull-right {
+    float: none !important;
+    margin-top: 15px;
+}
+
+@media (max-width: 992px) {
+    /*------------------------------------*\
+        $GENERAL
+    \*------------------------------------*/
+
+
+
+    /*------------------------------------*\
+        $FOOTER
+    \*------------------------------------*/
+
+}
+
+@media (max-width: 767px) {
+    /*------------------------------------*\
+    $GENERAL ELEMENTS
+    \*------------------------------------*/
+
+
+    /*------------------------------------*\
+        $HEADER
+    \*------------------------------------*/
+
+
+
+    /*------------------------------------*\
+    $BODY
+    \*------------------------------------*/
+
+
+
+    /*------------------------------------*\
+        $FOOTER
+    \*------------------------------------*/
+
+}
+
+
+@media (max-width: 650px) {
+    /*------------------------------------*\
+        $HEADER
+    \*------------------------------------*/
+
+
+}

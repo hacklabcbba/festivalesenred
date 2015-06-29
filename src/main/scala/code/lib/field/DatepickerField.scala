@@ -7,11 +7,13 @@ import java.util.{Locale, Date}
 
 import net.liftweb.common.Full
 import net.liftweb.http.S
-import net.liftweb.http.js.JsCmds.Run
+import net.liftweb.http.js.JsCmds.{Script, Run}
 import net.liftweb.mongodb.record.BsonRecord
 import net.liftweb.mongodb.record.field.DateField
 import net.liftweb.util.Helpers
 import Helpers._
+
+import scala.xml.NodeSeq
 
 class DatepickerField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
   extends DateField[OwnerType](rec) {
@@ -22,20 +24,47 @@ class DatepickerField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
 
   protected def parse(s: String) = tryo(dateFormat.parse(s))
 
-  private def elem =
-    S.fmapFunc(S.SFuncHolder(s=> this.setBox(parse(s)))){funcName => {
-          <input size="16"
-                 id={dateFieldId}
-                 type="text"
-                 name={funcName}
-                 value={valueBox.map(v => dateFormat.format(v)) openOr ""}
-                 tabindex={tabIndex.toString}
-          />
-    }}
-
   override def toForm = {
-    S.appendJs(Run(s"$$('#${dateFieldId}').fdatepicker();"))
     Full(elem)
+  }
+
+  private def elem: NodeSeq = {
+    val dateButtonId: String = randomString(12)
+    val dateId: String = uniqueFieldId.map(id => s"${id}_date").openOr(randomString(12))
+    val date: NodeSeq = {
+
+
+      S.fmapFunc((s: String) => setBox(parse(s))) { funcName =>
+        <div class="input-group date">
+          <input
+            class="form-control"
+            id={dateId}
+            type="text"
+            name={funcName}
+            value={valueBox.map(v => dateFormat.format(v)).openOr("")}
+            tabindex={tabIndex toString}
+            readonly=""
+          />
+          <span class="input-group-btn">
+            <button id={dateButtonId} class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
+          </span>
+        </div>
+      }
+    }
+
+    val script = Script(
+      Run(
+        "$(function(){" +
+          "$('#" + dateId + "').datepicker().on('changeDate', function(ev) {" +
+          "$('#"+ dateId + "').datepicker('hide')" +
+          "});" +
+          s"$$('#"+ dateButtonId + "').on('click', function(ev) { $('#"+ dateId + "').datepicker('show')});" +
+          "})"
+      )
+    )
+
+    date ++ script
+
   }
 
   override def toString = dateFormat.format(this.value)

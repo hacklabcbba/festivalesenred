@@ -1,0 +1,36 @@
+<div aria-labelledby="modal-person" data-name="modal" role="dialog" tabindex="-1" id="modal-people-functions" class="modal fade">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" data-name="title">Agregar persona</h4>
+            </div>
+            <form data-lift="form.ajax">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="">Nombre</label>
+                        <input placeholder="Nombre" data-name="name" class="form-control" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="">e-mail</label>
+                        <input placeholder="Nombre" data-name="email" class="form-control" type="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Función</label>
+                        <input placeholder="Función" data-name="role" class="form-control" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Teléfono celular</label>
+                        <input placeholder="Teléfono celular" data-name="cellphone" class="form-control" type="text">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" data-name="hidden"/>
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Cerrar</button>
+                    <button class="btn btn-primary" type="submit">Agregar persona</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

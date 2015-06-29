@@ -23,7 +23,7 @@ class FileField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
   with LifecycleCallbacks with HtmlFixer {
 
   val uploadPath = "/upload"
-  val downloadPath = "/files"
+  val downloadPath = "/service/images"
   val id = nextFuncName
   val hiddenId = "hidden-" + id
   val hiddenDeleteId = "hiddenDelete-" + id
@@ -41,77 +41,52 @@ class FileField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
 
   def toEditForm = {
 
-    val file = this.get
-
-    val uploadedData = (
-      ".preview-item *" #> previewFile &
-      ".size-item *" #> file.fileSize.get &
-      ".remove-item [data-file-id]" #>  file.fileId.get
-    ).apply(templateItem)
-
     S.appendJs(onClickRemoveScript)
     S.appendJs(script)
 
     Full(
-      <div class={containerFieldId} >
-        <div class={containerInputId} style="display: none" >
-          <input class="fileupload" type="file" name="files" data-url={uploadPath} id={id} />
-        </div>
-        <div class="progress" style="width:20em; border: 1pt solid silver; display: none" >
-          {SHtml.hidden(s => saveFileIds(s), "", "id" -> hiddenId)}
-          {SHtml.hidden(s => setDeletedFileIds(s), "", "id" -> hiddenDeleteId)}
-          <div class="progress-bar" style="background: green; height: 1em; width:0%" ></div>
-        </div>
-        <div class="uploadedData" >
-          {uploadedData}
-        </div>
-      </div>
+      <input class="fileupload" type="file" name="files" data-url={uploadPath} id={id} /> ++
+      {SHtml.hidden(s => saveFileIds(s), "", "id" -> hiddenId)} ++
+      {SHtml.hidden(s => setDeletedFileIds(s), "", "id" -> hiddenDeleteId)}
     )
   }
 
-  def toListElement = {
+  def previewUrl = if (value.fileId.get != "" ) s"/file/preview/${this.get.fileId.get}" else "/img/logo_festivalesenred.png"
 
-    val file = this.get
-    val uploadedData = (
-        ".preview-item *" #> previewFile &
-        ".remove-item " #>  ""
-      ).apply(templateItem)
-
-    Full(uploadedData)
-  }
+  def fileUrl = s"/service/images/${this.get.fileId.get}"
 
   def previewFile = {
     val f = this.get
     val previewData = f.fileType.get match {
       case "image/png" =>
-        Some(<a target="_blank" href={s"/service/images/${f.fileId.get}"}><img src={s"/file/preview/${f.fileId.get}"} title={f.fileName.get}/></a>)
+        Some(<a target="_blank" href={fileUrl}><img src={previewUrl} title={f.fileName.get}/></a>)
 
       case "image/jpeg" =>
-        Some(<a target="_blank" href={s"/service/images/${f.fileId.get}"}><img src={s"/file/preview/${f.fileId.get}"} title={f.fileName.get}/></a>)
+        Some(<a target="_blank" href={fileUrl}><img src={previewUrl} title={f.fileName.get}/></a>)
 
       case "image/gif" =>
-        Some(<a target="_blank" href={s"/service/images/${f.fileId.get}"}><img src={s"/file/preview/${f.fileId.get}"} title={f.fileName.get}/></a>)
+        Some(<a target="_blank" href={fileUrl}><img src={previewUrl} title={f.fileName.get}/></a>)
 
       case "application/pdf" =>
-        Some(<a target="_blank" href={s"/service/images/${f.fileId.get}"}><i class="fa fa-file-pdf-o fa-3x" title={f.fileName.get}/> Descargar </a>)
+        Some(<a target="_blank" href={fileUrl}><i class="fa fa-file-pdf-o fa-3x" title={f.fileName.get}/> Descargar </a>)
 
       case "application/zip" =>
-        Some(<a target="_blank" href={s"/service/images/${f.fileId.get}"}><i class="fa fa-file-zip-o fa-3x" title={f.fileName.get}/> Descargar </a>)
+        Some(<a target="_blank" href={fileUrl}><i class="fa fa-file-zip-o fa-3x" title={f.fileName.get}/> Descargar </a>)
 
       case "application/rar" =>
-        Some(<a target="_blank" href={s"/service/images/${f.fileId.get}"}><i class="fa fa-file-pdf-o fa-3x" title={f.fileName.get}/> Descargar </a>)
+        Some(<a target="_blank" href={fileUrl}><i class="fa fa-file-pdf-o fa-3x" title={f.fileName.get}/> Descargar </a>)
 
       case "application/msword" =>
-        Some(<a target="_blank" href={s"/service/images/${f.fileId.get}"}><i class="fa fa-file-word-o fa-3x" title={f.fileName.get}/> Descargar </a>)
+        Some(<a target="_blank" href={fileUrl}><i class="fa fa-file-word-o fa-3x" title={f.fileName.get}/> Descargar </a>)
 
       case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" =>
-        Some(<a target="_blank" href={s"/service/images/${f.fileId.get}"}><i class="fa fa-file-excel-o fa-3x" title={f.fileName.get}/> Descargar </a>)
+        Some(<a target="_blank" href={fileUrl}><i class="fa fa-file-excel-o fa-3x" title={f.fileName.get}/> Descargar </a>)
 
       case "application/octet-stream" =>
-        Some(<a target="_blank" href={s"/service/images/${f.fileId.get}"}><i class="fa fa-file fa-3x" title={f.fileName.get}/> Descargar </a>)
+        Some(<a target="_blank" href={fileUrl}><i class="fa fa-file fa-3x" title={f.fileName.get}/> Descargar </a>)
 
       case _ =>
-        Some(<a target="_blank" href={s"/service/images/${f.fileId.get}"}><i class="fa fa-file fa-3x" title={f.fileName.get}/> Descargar </a>)
+        Some(<a target="_blank" href={fileUrl}><i class="fa fa-file fa-3x" title={f.fileName.get}/> Descargar </a>)
     }
 
     previewData
@@ -164,19 +139,7 @@ class FileField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
     }
   }
 
-  def templateItem = {
-    <span class="data-item">
-      <span class="preview-item"></span>
-      <i class="fa fa-cloud-download fa-fw"></i>
-      <button class="btn btn-danger btn-xs remove-item" data-file-id="%fileId" type="button">
-        <i class="fa fa-trash-o fa-fw"></i>&nbsp;Remover
-      </button><br/>
-    </span>
-  }
-
   private def script = Run{
-
-    val (downloadTemplateItem, _) = fixHtmlAndJs("temp", templateItem)
     """
       $(function () {
           var $uploadInput = $('#""" + id + """'),
@@ -206,9 +169,7 @@ class FileField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
               console.log("respuesta server: ", data.response().result.files);
               $itemsToSave.val(JSON.stringify(data.response().result.files));
               $progress.hide();
-              $containerInfo.html('');
-              var rows = showInfoFiles(data.response().result.files);
-              $containerInfo.html(rows);
+              showInfoFiles(data.response().result.files);
               $inputContainer.fadeOut(function(){
                 $containerInfo.show();
               });
@@ -220,13 +181,13 @@ class FileField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
             var $rows = $();
             $.each(files, function(i, f){
 
-              var $row = $(""" + downloadTemplateItem + """);
-              var downloadPath =  '""" + downloadPath + """/' + f.fileId +'/'+ f.fileName
+              var downloadPath =  '""" + downloadPath + """/' + f.fileId;
 
 
-              $row.find(".preview-item").html(previewHtml(f))
+              $('.""" + containerFieldId + """ .preview-item').replaceWith(previewHtml(f));
+              $('.""" + containerFieldId + """ .item-url').attr('href', downloadPath);
 
-              $row.find(".remove-item")
+              $('.""" + containerFieldId + """ .remove-item')
                 .attr("data-file-id", f.fileId)
                 .click(function(e){
                     e.preventDefault();
@@ -238,16 +199,12 @@ class FileField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
                     lastList.push({fileId: idToDelete});
                     $itemsToDelete.val(JSON.stringify(lastList));
                     $itemsToSave.val('');
+                    $('.""" + containerFieldId + """ .preview-item').replaceWith('<i class="fa fa-upload fa-5x preview-item" title="" />');
                     $currentLink2Delete.parents("span.data-item").fadeOut(function(){
                       $inputContainer.show();
                     });
-                    console.log("remove..", idToDelete);
                 });
-
-              $rows = $rows.add($row);
-
             });
-            return $rows;
           }
 
           function previewHtml(f){
@@ -256,35 +213,35 @@ class FileField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
               case "image/png":
               case "image/jpeg":
               case "image/gif":
-              html = '<img src="/file/preview/'+ f.fileId+ '" title="'+ f.fileName +'" />';
+              html = '<img src="/file/preview/'+ f.fileId+ '" title="'+ f.fileName +'" class="img-responsive preview-item" />';
               break;
 
               case "application/pdf":
-                html = '<i class="fa fa-file-pdf-o fa-3x" title="" />';
+                html = '<i class="fa fa-file-pdf-o fa-3x preview-item" title="" />';
                 break;
 
               case "application/zip":
-                html = '<i class="fa fa-file-zip-o fa-3x" title="" />';
+                html = '<i class="fa fa-file-zip-o fa-3x preview-item" title="" />';
                 break;
 
               case "application/rar":
-                html = '<i class="fa fa-file-zip-o fa-3x" title="" />';
+                html = '<i class="fa fa-file-zip-o fa-3x preview-item" title="" />';
                 break;
 
               case "application/msword":
-                html = '<i class="fa fa-file-word-o fa-3x" title="" />';
+                html = '<i class="fa fa-file-word-o fa-3x preview-item" title="" />';
                 break;
 
               case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
-                html = '<i class="fa fa-file-excel-o fa-3x" title="" />';
+                html = '<i class="fa fa-file-excel-o fa-3x preview-item" title="" />';
                 break;
 
               case "application/octet-stream":
-                html = '<i class="fa fa-file fa-3x" title="" />';
+                html = '<i class="fa fa-file fa-3x preview-item" title="" />';
                 break;
 
               default:
-                html = '<i class="fa fa-file fa-3x" title="" />';
+                html = '<i class="fa fa-file fa-3x preview-item" title="" />';
                 break;
             }
             return html;

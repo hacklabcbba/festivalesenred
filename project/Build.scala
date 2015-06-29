@@ -16,6 +16,7 @@ object LiftProjectBuild extends Build {
         liftFacebook,
         liftMongoauth,
         liftOmniauth,
+        liftFobo,
         logback,
         rogueField,
         rogueCore,
