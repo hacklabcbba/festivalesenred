@@ -604,3 +604,7 @@ body {
 .slideout-open .slideout-panel {
     height: 100px;
 }
+
+.datepicker.dropdown-menu {
+  z-index: 10000;
+}

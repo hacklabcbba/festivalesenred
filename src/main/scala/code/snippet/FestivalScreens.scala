@@ -115,6 +115,12 @@ object FestivalForm extends SnippetHelper {
       "data-name=remove-photo3 [data-file-id]" #> inst.photo3.get.fileId.get &
       "data-name=photo3-container-field-id [class+]" #> inst.photo3.containerFieldId &
       "data-name=photo3-container-input-id [class+]" #> inst.photo3.containerInputId &
+      "data-name=photo4-preview [src]" #> inst.photo4.previewUrl &
+      "data-name=photo4-url [href]" #> inst.photo4.fileUrl &
+      "data-name=photo4" #> inst.photo4.toForm &
+      "data-name=remove-photo4 [data-file-id]" #> inst.photo4.get.fileId.get &
+      "data-name=photo4-container-field-id [class+]" #> inst.photo4.containerFieldId &
+      "data-name=photo4-container-input-id [class+]" #> inst.photo4.containerInputId &
       "data-name=call-preview [src]" #> inst.call.previewUrl &
       "data-name=call-url [href]" #> inst.call.fileUrl &
       "data-name=call" #> inst.call.toForm &

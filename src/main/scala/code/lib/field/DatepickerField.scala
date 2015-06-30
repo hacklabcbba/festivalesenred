@@ -52,18 +52,17 @@ class DatepickerField[OwnerType <: BsonRecord[OwnerType]](rec: OwnerType)
       }
     }
 
-    val script = Script(
+    val script =
       Run(
-        "$(function(){" +
           "$('#" + dateId + "').datepicker().on('changeDate', function(ev) {" +
           "$('#"+ dateId + "').datepicker('hide')" +
           "});" +
-          s"$$('#"+ dateButtonId + "').on('click', function(ev) { $('#"+ dateId + "').datepicker('show')});" +
-          "})"
+          s"$$('#"+ dateButtonId + "').on('click', function(ev) { $('#"+ dateId + "').datepicker('show')});"
       )
-    )
 
-    date ++ script
+    S.appendJs(script)
+
+    date
 
   }
 

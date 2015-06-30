@@ -139,6 +139,10 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
     override def displayName = "Foto 3"
   }
 
+  object photo4 extends FileField(this) {
+    override def displayName = "Foto 4"
+  }
+
   object areas extends OpenComboBoxField(this, Area) {
     def toString(in: Area) = s"${in.name.get}${if (in.description.get.isEmpty) "" else s"(${in.description.get})"}"
     val placeholder = ""
@@ -292,7 +296,8 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
           "type=submit *" #> action
       }.apply(template)
       val (xml, js) = fixHtmlAndJs("modal", html)
-      Run("$(" + xml + ").modal();")
+      Run("$(" + xml + ").modal();") &
+      Run("$('#edition_date_id_date').datepicker().on('changeDate', function(ev) {$('#edition_date_id_date').datepicker('hide')});$('#edition_date_button').on('click', function(ev) { $('#edition_date_id_date').datepicker('show')});")
     }
   }
   object serviceExchange extends OpenComboBoxField(this, ServiceExchange) {
