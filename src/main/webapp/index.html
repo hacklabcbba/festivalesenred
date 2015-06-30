@@ -13,7 +13,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading" role="tab" id="headingOne">
 						<h4 class="panel-title">
-							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class>
 								Categorías
 							</a>
 						</h4>
@@ -62,18 +62,18 @@
 							<div class="form-group">
 								<label>Fecha inicial</label>
 								<div class="input-group date">
-									<input id="targetStartDate" class="form-control" type="text">
+									<input id="begins" class="form-control" type="text">
 								<span class="input-group-btn">
-									<button type="button" class="btn btn-default" id="targetStartBtn"><i class="fa fa-calendar"></i></button>
+									<button type="button" class="btn btn-default" id="begins-button"><i class="fa fa-calendar"></i></button>
 								</span>
 								</div>
 							</div>
 							<div class="form-group">
 								<label>Fecha final</label>
 								<div class="input-group date">
-									<input id="targetStartDate" class="form-control" type="text">
+									<input id="ends" class="form-control" type="text">
 								<span class="input-group-btn">
-									<button type="button" class="btn btn-default" id="targetStartBtn"><i class="fa fa-calendar"></i></button>
+									<button type="button" class="btn btn-default" id="ends-button"><i class="fa fa-calendar"></i></button>
 								</span>
 								</div>
 							</div>
@@ -108,6 +108,20 @@
 		// vanilla js
 		document.querySelector('.toggle-button').addEventListener('click', function() {
 			slideout.toggle();
+		});
+
+		//Date filter
+		$('#begins').datepicker().on('changeDate', function(ev) {
+		  $('#begins').datepicker('hide')
+		});
+		$('#begins-button').on('click', function(ev) {
+		  $('#begins').datepicker('show');
+		});
+		$('#ends').datepicker().on('changeDate', function(ev) {
+		  $('#ends').datepicker('hide')
+		});
+		$('#ends-button').on('click', function(ev) {
+		  $('#ends').datepicker('show');
 		});
 	</script>
     <script>
