@@ -68,13 +68,18 @@
                 </div>
             </div>
             <div class="row">
-                <div class="small-12 large-12 medium-12">
-                    <div data-lift="FestivalesSnippet.paginate">
-                        <p>
-                            <nav:records></nav:records>
-                        </p>
-                        <nav:first></nav:first> | <nav:prev></nav:prev> | <nav:allpages></nav:allpages> |   <nav:next>     </nav:next> | <nav:last></nav:last>
-                    </div>
+                <div class="small-12 large-12 medium-12" data-lift="FestivalesSnippet.paginate">
+                    <ul data-name="pagination" class="pagination pagination-lg">
+                        <li data-name="prev" class="prev"><a href="#">&laquo;</a></li>
+                        <li data-name="first" class="first"><a href="#">First</a></li>
+                        <li class="zoompagesleft disabled"><a href="#">...</a></li>
+                        <li data-name="prevpages" class="prevpages"><a data-name="page" class="page" href="#">2</a></li>
+                        <li class="active"><a data-name="records" href="#">1</a> </li>
+                        <li data-name="nextpages" class="nextpages"><a data-name="page" class="page" href="#">2</a></li>
+                        <li class="zoompagesright disabled"><a href="#">...</a></li>
+                        <li data-name="last" class="last"><a href="#">Last</a></li>
+                        <li data-name="next" class="next"><a href="#">&raquo;</a></li>
+                    </ul>
                 </div>
             </div>
         </section>

@@ -5,13 +5,14 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 import code.config.Site
+import code.lib.snippet.PaginatorSnippet
 import code.model.{FileRecord, User}
 import code.model.festival._
 import com.foursquare.rogue.LatLong
 import net.liftmodules.extras.SnippetHelper
 import net.liftweb.common._
 import net.liftweb.http.js.JsCmds.{Run, RedirectTo, Noop}
-import net.liftweb.http.{PaginatorSnippet, SHtml, S}
+import net.liftweb.http.{SHtml, S}
 import net.liftweb.record.Field
 import net.liftweb.util._
 import net.liftweb.util.Helpers._
@@ -331,6 +332,14 @@ object FestivalView extends SnippetHelper {
         case _ => "#"
       }) &
       "data-name=photo3" #> (item.photo3.get match {
+        case p: FileRecord => <img src={"/service/images/"+ p.fileId.get} />
+        case _ => <br />
+      }) &
+      "data-name=photo4-link [href]" #> (item.photo4.get match {
+        case p: FileRecord => "/service/images/"+ p.fileId.get
+        case _ => "#"
+      }) &
+      "data-name=photo4" #> (item.photo4.get match {
         case p: FileRecord => <img src={"/service/images/"+ p.fileId.get} />
         case _ => <br />
       })
