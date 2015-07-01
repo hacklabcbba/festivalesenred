@@ -291,7 +291,12 @@ header > .navbar .navbar-brand {
 }
 
 #menu p[data-name="description"]  {
-    font-size: 12px;
+    font-size: 10px;
+    padding-top:0px;
+}
+
+#menu label {
+    margin: 0px;
 }
 
 #menu .panel-group .panel {
@@ -580,7 +585,7 @@ body {
     bottom: 0;
     right: 0;
     z-index: 0;
-    width: 256px;
+    width: 300px;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     display: none;

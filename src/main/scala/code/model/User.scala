@@ -88,11 +88,11 @@ class User private () extends MongoAuthUser[User] with ObjectIdPk[User] {
 
   object locale extends LocaleField(this) {
     override def displayName = "Idioma"
-    override def defaultValue = "en_US"
+    override def defaultValue = "es_BO"
   }
   object timezone extends TimeZoneField(this) {
     override def displayName = "Zona horaria"
-    override def defaultValue = "America/Chicago"
+    override def defaultValue = "America/La_Paz"
   }
 
   object name extends StringField(this, 64) {

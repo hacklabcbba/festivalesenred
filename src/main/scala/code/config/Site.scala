@@ -46,6 +46,7 @@ object Site extends Locs {
 
   // locations (menu entries)
   val home = MenuLoc(Menu.i("Inicio") / "index")
+  val creditos = MenuLoc(Menu.i("Créditos") / "creditos")
   val loginToken = MenuLoc(buildLoginTokenMenu)
   val logout = MenuLoc(buildLogoutMenu )
   private val profileParamMenu = Menu.param[User]("User", "Profile",
@@ -78,6 +79,7 @@ object Site extends Locs {
 
   private def menus = List(
     home.menu,
+    creditos.menu,
     Menu.i("Iniciar Sesion") / "login" >> RequireNotLoggedIn >> UserGroup,
     register.menu,
     loginToken.menu,
