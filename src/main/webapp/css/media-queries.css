@@ -218,24 +218,7 @@
 /*------------------------------------*\
         $FOOTER
 \*------------------------------------*/
-.home footer {
-    display: none;
-}
 
-footer {
-    text-align: center;
-    height: auto;
-}
-
-#content-body:after,
-body > footer {
-    height: auto;
-}
-
-body > footer div.logos div.pull-right {
-    float: none !important;
-    margin-top: 15px;
-}
 
 @media (max-width: 992px) {
     /*------------------------------------*\
@@ -248,6 +231,20 @@ body > footer div.logos div.pull-right {
         $FOOTER
     \*------------------------------------*/
 
+    footer {
+        text-align: center;
+        height: auto;
+    }
+
+    #content-body:after,
+    body > footer {
+        height: auto;
+    }
+
+    body > footer div.logos div.pull-right {
+        float: none !important;
+        margin-top: 15px;
+    }
 }
 
 @media (max-width: 767px) {
