@@ -3,5 +3,26 @@
         <title>Calendario | Festivales en Red | Telartes</title>
     </lift:head>
     <div id='calendar'></div>
+    <lift:tail>
+        <script>
+        $(document).ready(function(){
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,basicWeek,basicDay'
+                },
+                defaultDate: (new Date).toDateString(),
+                editable: true,
+                lang: "es",
+                eventLimit: true,
+                eventRender: function (event, element) {
+                    element.attr('href', event.url);
+                },
+                events: '/api/feeds'
+            });
+        });
+        </script>
+    </lift:tail>
 </div>
 
