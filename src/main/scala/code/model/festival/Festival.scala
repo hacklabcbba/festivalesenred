@@ -146,7 +146,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
   object areas extends OpenComboBoxField(this, Area) {
     def toString(in: Area) = s"${in.name.get}${if (in.description.get.isEmpty) "" else s"(${in.description.get})"}"
     val placeholder = ""
-    override def displayName = "¿En qué área actúa?"
+    override def displayName = "En qué área actúa"
     override def beforeSave() {
       super.beforeSave
       this.set(this.get ++ this.tempItems.map(s => Area.createRecord.name(s.text).save(true).id.get))
@@ -195,16 +195,16 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
     override def helpAsHtml = Full(<span>Informa con que equipamientos propios cuentas para realizar el festival, haz clic en las opciones y especifica en el ítem "otros"</span>)
   }
   object numberOfAttendees extends EnumNameField(this, NumberOfAttendees) {
-    override def displayName = "¿Qué cantidad de público convoca y moviliza tu festival? "
+    override def displayName = "Qué cantidad de público convoca y moviliza tu festival"
     override def helpAsHtml = Full(<span>poner un número estimado</span>)
   }
   object publicKind extends OpenComboBoxField(this, PublicKind) {
     def toString(in: PublicKind) = s"${in.name.get}"
     val placeholder = ""
-    override def displayName = "¿A qué tipo de público se dirige tu festival?"
+    override def displayName = "A qué tipo de público se dirige tu festival"
   }
   object staff extends BsonRecordListField(this, TeamMember) with HtmlFixer {
-    override def displayName = "¿Cuantas personas componen el equipo y que funciones cumplen?"
+    override def displayName = "Cuantas personas componen el equipo y que funciones cumplen"
     override def helpAsHtml = Full(<span>Informa el número de personas aumentar una columna para numero que actuan regularmente junto a tu colectivo o grupo y en que funciones se desempeñan, inclusive sin son varias funciones por persona</span>)
     def title = "Datos de la persona"
 
@@ -262,7 +262,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
 
   }
   object numberEditions extends BsonRecordListField(this, FestivalEdition) with HtmlFixer {
-    override def displayName = "¿Cuantas ediciones del festival se han realizado y en que años?"
+    override def displayName = "Cuantas ediciones del festival se han realizado y en que años"
     override def helpAsHtml = Full(<span>Informa cuantas ediciones fueron realizadas y en que años mismo si no han sido sucesivos Ej: Festival del Sol - 5 ediciones 2004 -2006- 2009 - 2010 - 2013. Elegir varias fechas, sólo MES y AÑO. Si es consecutivo "Desde...".</span>)
 
     def title = "Datos de la edición"
@@ -307,7 +307,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
       super.beforeSave
       this.set(this.get ++ this.tempItems.map(s => ServiceExchange.createRecord.name(s.text).save(true).id.get))
     }
-    override def displayName = "¿Realizas intercambio de servicios, productos o conocimiento con otras organizaciones? En caso que tu respuesta sea Si, por favor especifica"
+    override def displayName = "Realizas intercambio de servicios, productos o conocimiento con otras organizaciones. En caso que tu respuesta sea Si, por favor especifica"
     override def optional_? = true
     override def helpAsHtml = Full(<span>A través de trueques, fondos y/o otros</span>)
   }
@@ -318,7 +318,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
       super.beforeSave
       this.set(this.get ++ this.tempItems.map(s => TrainingActivity.createRecord.name(s.text).save(true).id.get))
     }
-    override def displayName = "¿Desarrollas alguna acción de formación?"
+    override def displayName = "Desarrollas alguna acción de formación"
     override def optional_? = true
     override def helpAsHtml = Full(<span>Debates, talleres, conferencias y/o otros</span>)
   }
@@ -329,7 +329,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
       super.beforeSave
       this.set(this.get ++ this.tempItems.map(s => CommunicationTool.createRecord.name(s.text).save(true).id.get))
     }
-    override def displayName = "¿Especificar que herramientas de comunicación utilizas?"
+    override def displayName = "Especificar que herramientas de comunicación utilizas"
   }
   object publicInstitutionPartnerships extends OpenComboBoxField(this, Partnership) {
     def toString(in: Partnership) = s"${in.name.get}"
@@ -344,7 +344,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
         )
       )
     }
-    override def displayName = "¿Tienes alguna alianza con instituciones públicas?"
+    override def displayName = "Tienes alguna alianza con instituciones públicas"
     override def optional_? = true
   }
   object privateInstitutionPartnerships extends OpenComboBoxField(this, Partnership) {
@@ -360,7 +360,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
         )
       )
     }
-    override def displayName = "¿Tienes alguna alianza con alguna entidad privada?"
+    override def displayName = "Tienes alguna alianza con alguna entidad privada"
     override def optional_? = true
   }
   object civilOrganizationPartnerships extends OpenComboBoxField(this, Partnership) {
@@ -376,7 +376,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
         )
       )
     }
-    override def displayName = "¿Tienes alguna alianza con una organización social?"
+    override def displayName = "Tienes alguna alianza con una organización social"
     override def optional_? = true
   }
   object networking extends OpenComboBoxField(this, Network) {
@@ -390,7 +390,7 @@ class Festival private () extends MongoRecord[Festival] with ObjectIdPk[Festival
         )
       )
     }
-    override def displayName = "¿Participa de alguna red?"
+    override def displayName = "Participa de alguna red"
     override def optional_? = true
   }
   object minimalBudget extends AmountField(this) {
